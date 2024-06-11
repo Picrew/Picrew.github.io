@@ -1,0 +1,2235 @@
+<!DOCTYPE html>
+<html>
+  <!-- meta/link... -->
+  
+
+
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+  <title>On_a_Moreau_Envelope_Wirelength_Model_for_Analytical_Global_Placement | null</title>
+
+  <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
+  <link href="https://unpkg.com/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="/js/swiper/swiper@5.4.1.min.css" rel="stylesheet">
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/animate.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+    <link href="https://unpkg.com/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" rel="stylesheet">
+  
+  
+    
+<link rel="stylesheet" href="/js/shareJs/share.min.css">
+
+  
+  <style>
+        @media (max-width: 992px) {
+            #waifu {
+                display: none;
+            }
+        }
+    </style>
+    <script defer src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+    
+        <script src="/js/valine/index.js"></script>
+    
+    
+    <!-- 依赖于jquery和vue -->
+    <script src="https://unpkg.com/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.min.js"></script>
+
+    <!-- import link -->
+    
+        
+            
+        
+            
+        
+    
+    <!-- import script -->
+    
+        
+            
+        
+            
+        
+    
+
+<meta name="generator" content="Hexo 7.2.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+  
+  <!-- 预加载动画 -->
+  
+  
+  <div class="preloader_6" id="loader">
+  <div class="loader"></div>
+</div>
+  <script>
+    var endLoading = function () {
+      document.body.style.overflow = 'auto';
+      document.getElementById('loader').classList.add("loaded");
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+  </script>
+
+
+  <body>
+    <!-- 判断是否为暗黑风格 -->
+    <!-- 判断是否为黑夜模式 -->
+<script defer>
+  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+
+  if (isDark) {
+    $(document.body).addClass('darkModel');
+  }
+</script>
+
+    <!-- 需要在上面加载的js -->
+    <script>
+  function loadScript(src, cb) {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var HEAD = document.getElementsByTagName("head")[0] || document.documentElement;
+        var script = document.createElement("script");
+        script.setAttribute("type", "text/javascript");
+        if (cb) {
+          if (JSON.stringify(cb)) {
+            for (let p in cb) {
+              if (p == "onload") {
+                script[p] = () => {
+                  cb[p]()
+                  resolve()
+                }
+              } else {
+                script[p] = cb[p]
+                script.onload = resolve
+              }
+            }
+          } else {
+            script.onload = () => {
+              cb()
+              resolve()
+            };
+          }
+        } else {
+          script.onload = resolve
+        }
+        script.setAttribute("src", src);
+        HEAD.appendChild(script);
+      });
+    });
+  }
+
+  //https://github.com/filamentgroup/loadCSS
+  var loadCSS = function (src) {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var link = document.createElement('link');
+        link.rel = "stylesheet";
+        link.href = src;
+        link.onload = resolve;
+        document.getElementsByTagName("head")[0].appendChild(link);
+      });
+    });
+  };
+
+</script> 
+
+<!-- 轮播图所需要的js -->
+<script src="/js/swiper/swiper.min.js"></script>
+<script src="/js/swiper/vue-awesome-swiper.js"></script>
+<script src="/js/swiper/swiper.animate1.0.3.min.js"></script>
+
+<script type="text/javascript">
+  Vue.use(window.VueAwesomeSwiper)
+</script>
+
+
+  <script src="/js/vue-typed-js/index.js"></script>
+
+
+<!-- 首页的公告滚动插件的js需要重新加载 -->
+<script src="/js/vue-seamless-scroll/index.js"></script>
+
+<!-- 打字机效果js -->
+<script src="https://unpkg.com/typed.js@2.0.11"></script>
+
+
+    <div id="safearea">
+      <main class="main" id="pjax-container">
+        <!-- 头部导航 -->
+        
+<header class="header  " 
+  id="navHeader"
+  style="position: fixed;
+  left: 0; top: 0; z-index: 10;width: 100%;"
+>
+  <div class="header-content">
+    <div class="bars">
+      <div id="appDrawer" class="sidebar-image">
+  <div class="drawer-box-icon">
+    <i class="fas fa-bars" aria-hidden="true" @click="showDialogDrawer"></i>
+  </div>
+  
+  <transition name="fade">
+    <div class="drawer-box_mask" v-cloak style="display: none;" v-show="visible" @click.self="cancelDialogDrawer">
+    </div>
+  </transition>
+  <div class="drawer-box" :class="{'active': visible}">
+    <div class="drawer-box-head bg-color">
+      <img class="drawer-box-head_logo lazyload placeholder" src="/medias/avatar.jpg" class="lazyload placeholder" data-srcset="/medias/avatar.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+      <h3 class="drawer-box-head_title"></h3>
+      <h5 class="drawer-box-head_desc"></h5>
+    </div>
+    
+    <div class="drawer-box-content">
+      <ul class="drawer-box-content_menu">
+        
+        
+          <li class="drawer-box-content_item">
+            <a target="_blank" rel="noopener" href="https://github.com/Picrew">
+              <i class="fas fa-github" aria-hidden="true"></i>
+              <span>Github</span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appDrawer',
+    data: {
+      visible: false,
+      top: 0,
+      openArr: [],
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      isOpen(index) {
+        if (this.openArr.includes(index)) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+      openOrCloseMenu(curIndex) {
+        const index = this.openArr.indexOf(curIndex);
+        if (index !== -1) {
+          this.openArr.splice(index, 1);
+        } else {
+          this.openArr.push(curIndex);
+        }
+      },
+      showDialogDrawer() {
+        this.visible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'width: 100%; height: 100%;overflow: hidden;';
+      },
+      cancelDialogDrawer() {
+        this.visible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      }
+    },
+    created() {}
+  })
+</script>
+
+    </div>
+    <div class="blog-title" id="author-avatar">
+      
+        <div class="avatar">
+          <img src="/medias/avatar.jpg" class="lazyload placeholder" data-srcset="/medias/avatar.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+        </div>
+      
+      <a href="/" class="logo"></a>
+    </div>
+    <nav class="navbar">
+      <ul class="menu">
+        
+      </ul>
+      
+      
+        <div id="appSearch">
+  <div class="search"  @click="showDialog()"><i class="fas fa-search" aria-hidden="true"></i></div>
+  <transition name="fade">
+    <div class="message-box_wrapper" style="display: none;" v-cloak v-show="dialogVisible" @click.self="cancelDialogVisible()">
+      <div class="message-box animated bounceInDown">
+        <h2>
+          <span>
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <span class="title">Search</span>
+          </span>
+          <i class="fas fa-times close" pointer style="float:right;" aria-hidden="true" @click.self="cancelDialogVisible()"></i>
+        </h2>
+        <form class="site-search-form">
+          <input type="text"
+            placeholder="Please enter keywords"
+            id="local-search-input" 
+            @click="getSearchFile()"
+            class="st-search-input"
+            v-model="searchInput"
+          />
+        </form>
+        <div class="result-wrapper">
+          <div id="local-search-result" class="local-search-result-cls"></div>
+        </div>
+      </div>
+    </div>
+  </transition>
+</div>
+<script src="/js/local_search.js"></script>
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appSearch',
+    data: {
+      dialogVisible: false,
+      searchInput: '',
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+      window.addEventListener('pjax:complete', () => {
+        this.cancelDialogVisible();
+      })
+    },
+    methods: {
+      showDialog() {
+        this.dialogVisible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'overflow: hidden;';
+      },
+      getSearchFile() {
+        if (!this.searchInput) {
+          getSearchFile("/search.xml");
+        }
+      },
+      cancelDialogVisible() {
+        this.dialogVisible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      },
+    },
+    created() {}
+  })
+</script>
+<!-- 解决刷新页面闪烁问题，可以在元素上添加display: none, 或者用vue.extend方法，详情：https://blog.csdn.net/qq_31393401/article/details/81017912 -->
+<!-- 下面是搜索基本写法 -->
+<!-- <script type="text/javascript" id="local.search.active">
+  var inputArea = document.querySelector("#local-search-input");
+  inputArea.onclick   = function(){ getSearchFile(); this.onclick = null }
+  inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
+</script> -->
+
+      
+
+    </nav>
+  </div>
+  
+    <a target="_blank" rel="noopener" href="https://github.com/Picrew" class="github-corner color-primary" aria-label="View source on GitHub"><svg width="60" height="60" viewBox="0 0 250 250" style="fill:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+  
+  
+</header>
+        <!-- 内容区域 -->
+        
+<!-- prismjs 代码高亮 -->
+
+
+
+
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
+
+
+  <!-- 文章详情页顶部图片和标题 -->
+
+
+
+
+<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
+  background-position: center center;position: relative;background-image:url('https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp')">
+  <div class="post-detail-header-mask"></div>
+  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
+  
+  <div class="post-detail-header_info-box">
+    <div class="title-box">
+      <span class="title">
+        On_a_Moreau_Envelope_Wirelength_Model_for_Analytical_Global_Placement
+      </span>
+    </div>
+    
+    
+      
+        <span class="post-detail-header_date">
+          <i class="fas fa-calendar"></i> Published in：2024-03-25 |
+        </span>
+      
+
+      
+
+      
+    
+  </div>
+  
+  
+    <script defer src="/js/bubble/bubble.js"></script>
+  
+</div>
+
+
+
+
+
+<div class="post-detail-content post-row" 
+  style="padding-top: 0px;">
+  <div class="main-content">
+    <article class="post post-detail">
+      <div class="post-content">
+        <h1 id="On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement"><a href="#On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement" class="headerlink" title="On a Moreau Envelope Wirelength Model for Analytical Global Placement"></a>On a Moreau Envelope Wirelength Model for Analytical Global Placement</h1><p>题外话：Peiyu 这篇文章 Bei Yu 自称是 DAC 2023 最强论文 —&gt; With Yibo Lin —&gt; Moreau Envelope Wirelength Model</p>
+<p>References —<a href="[Design Automation Conference (DAC">zhihu</a>2023 现在进展如何? - 知乎](<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/579615273/answer/3124602071">https://www.zhihu.com/question/579615273/answer/3124602071</a>))</p>
+<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VJQpbweAjoDUuqxsLETc5vQtnvb-1716629216534.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VJQpbweAjoDUuqxsLETc5vQtnvb-1716629216534.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>​        广泛采用的策略是线长驱动的全局布局，使整个电路线长最小化。分析型布局方法讲布局问题表达为一定合法约束的布线问题。</p>
+<p>​        计算能力和神经网络发展，数值优化方法(numerical optimization approaches)得到了极大关注。要求线长模型处处可微(differentiable)。但是由最大最小坐标的 HPWL 半周线长模型不是处处可微分的。所以，当代布局算法严重依赖于可微分的 HPWL 模型。主要有两种区别 —&gt; 二次近似(quadratic approximations)和非线性近似(nonlinear approximations)。</p>
+<ul>
+<li>二次近似模型：用平方长度近似每个边的成本，给出了一个严格凸的目标，方便我们优化。二次近似模型一般具有封闭形式的最小值，可通过求解线性系统找到。<ul>
+<li>二次近似模型为了更好近似HPWL参数，提出线性化技术，与某些净长度成反比的权重做积分，使得加权平方项更接近HPWL  eg. —&gt; <em>Bound2Bound</em> (B2B) model。eg:</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Z7yPbpdVooqP5xxRcFdc36HmnBe-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Z7yPbpdVooqP5xxRcFdc36HmnBe-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<ul>
+<li><p>非线性近似模型：通常非线性模型采用可微函数，比如对数、指数(log-sum-exp)，或者加权平均(weighted-average)。通过控制超参数 r 近似 HPWL 任意精度。</p>
+<ul>
+<li>eg. DREAMplace 等采用这种方法。</li>
+</ul>
+</li>
+<li><p>新的模型：</p>
+<ul>
+<li>eg.Bivariate-Gradient-Based (BiG) model 双变量梯度模型 ：用近似双变量最大值或者最小值的双变量函数来计算相对于坐标的梯度。提高数值稳定性和 CPU 运行时间。</li>
+<li>eg.Subgradient-based approaches 基于次梯度方法：直接优化 B2B 模型。</li>
+</ul>
+</li>
+</ul>
+<p>Sum up：</p>
+<p>​         WA（weighted average）模型比LSE（log-sum-exp）模型有更低的逼近误差值，但仍然面临数值稳定性和非凸问题。对比之下，BiG模型有数值稳定性和廉价计算优点，但是依赖于指定的双变量线长模型。非光滑优化方(Non-smooth optimization approaches)不需要任何的近似可微，但是可能遇到收敛速度慢和收敛性差问题。</p>
+<hr>
+<p>​         我们提出一种新的可微线长模型，使用 <em>Moreau envelope</em> 来近似HPWL。该模型在数值稳定性，凸性和逼近误差方面都好于以往模型。</p>
+<p>​         贡献如下：</p>
+<ul>
+<li>推导了非光滑HPWL函数的近似算子(proximal mapping)显式表示。提出了类似通信系统的注水算法解决近似算子(proximal mapping)和Moreau envelope问题。</li>
+<li>提供了理论和实验分析，比较以往算法，验证可行性。</li>
+<li>实验表明，提出模型可实现在ISPD06数据高达5.4%的HPWL改进，ISPD06竞赛benchmark超过1%；ISPD19数据高达3.0%的HPWL改进，ISPD19竞赛benchmark超过1.5%。</li>
+</ul>
+<hr>
+<h1 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h1><h2 id="Analytical-Global-Placement（分析全局布局）"><a href="#Analytical-Global-Placement（分析全局布局）" class="headerlink" title="Analytical Global Placement（分析全局布局）"></a>Analytical Global Placement（分析全局布局）</h2><p>​        电路布局一般包括三部分，global placement（全局布局），legalization（合法化），detailed placement（详细布局）。在全局布局 GP 阶段，目标找到总线长最小的放置位置，并且重叠控制在最低水平，典型的非线性全局布局表示为：</p>
+<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/NHeGbs2avoOi2ZxJJT9cJgq2ncg-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/NHeGbs2avoOi2ZxJJT9cJgq2ncg-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>​        HPWL 模型定义为 We,表示为：</p>
+<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VGtgbgf8UoxqArxZ7sGcELl2nkb-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VGtgbgf8UoxqArxZ7sGcELl2nkb-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>​        定义 HPWL 函数是凸和连续，但不是处处可微。</p>
+<h2 id="Nonlinear-Differentiable-Models（非线性微分模型）"><a href="#Nonlinear-Differentiable-Models（非线性微分模型）" class="headerlink" title="Nonlinear Differentiable Models（非线性微分模型）"></a>Nonlinear Differentiable Models（非线性微分模型）</h2><h3 id="log-sum-exp-LSE-model"><a href="#log-sum-exp-LSE-model" class="headerlink" title="log-sum-exp (LSE) model"></a>log-sum-exp (LSE) model</h3><p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZL3Ibal08ojE6xxopp6c9RV9nXb-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZL3Ibal08ojE6xxopp6c9RV9nXb-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h3 id="weighted-average-WA-model"><a href="#weighted-average-WA-model" class="headerlink" title="weighted average (WA) model"></a>weighted average (WA) model</h3><p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Z5zPbr7PRoTbq8xBT3Vcr4QLnxh-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Z5zPbr7PRoTbq8xBT3Vcr4QLnxh-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>​        参数 r 是控制精度和可微性权衡的超参数。r —&gt; 0+ ，近似任意接近于真实的 HPWL。通常在全局布局 GP 早期阶段，r 设置成一个比较大的值，使得目标变得平滑，随着迭代 step 增多而减小。</p>
+<h2 id="Moreau-Envelope"><a href="#Moreau-Envelope" class="headerlink" title="Moreau Envelope"></a>Moreau Envelope</h2><p>（os：此处需要凸优化数学基础）</p>
+<p>一般的Moreau Envelope定义满足真实Hilbert空间上特定约束的函数。在布局应用中，我们只需考虑定义Rn中下界闭凸函数<em>h(x):</em></p>
+<p>Any t &gt; 0，</p>
+<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/1.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/1.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p> 其中Moreau Envelope的ht定义为：</p>
+<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/2.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/2.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p> 不要求ht为光滑函数。</p>
+<p> 近似算子定义为：</p>
+<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/3.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/3.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p> 由上公式得，Moreau Envelope的ht是自然可微，梯度是全局Lipschitz连续的。envelope theorem指出：</p>
+<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/4.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/4.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>Since </p>
+<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/5.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/5.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>t被认为是近似精度，类似LSE和WA中的r。</p>
+<hr>
+<p>在全局布线中，HPWL 中的 We 是一个干净直接公式。我们提出一种算法计算 Moreau Envelope 中的 We，使用 We + t 作为近似线长模型，使整个目标处处可微。</p>
+<h2 id="Comparison-between-WA-and-the-Moreau-Envelope-models（对比）"><a href="#Comparison-between-WA-and-the-Moreau-Envelope-models（对比）" class="headerlink" title="Comparison between WA and the Moreau Envelope models（对比）"></a>Comparison between WA and the Moreau Envelope models（对比）</h2><p>比较 WA 和 Moreau Envelope 模型。</p>
+<h3 id="Numerical-Stability（数值稳定性）"><a href="#Numerical-Stability（数值稳定性）" class="headerlink" title="Numerical Stability（数值稳定性）"></a>Numerical Stability（数值稳定性）</h3><p>指数项对 x 坐标敏感，小的 r 导致数值溢出，LSE 和 WA 模型都必须面对这样问题。</p>
+<h3 id="Non-Convexity（非凸性）"><a href="#Non-Convexity（非凸性）" class="headerlink" title="Non-Convexity（非凸性）"></a>Non-Convexity（非凸性）</h3><p>没有理论和实验保证 WA 模型凸性。以一个 3pin 网表为例，水平轴（横轴）代表 pin 坐标，调整 r 参数绘制函数曲线。eg.图 1(a):</p>
+<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/GE2BbOIvXoodfxxC5yycNcTznCf-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/GE2BbOIvXoodfxxC5yycNcTznCf-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>验证在不同 r 下，WA 模型函数凹凸性难保证。</p>
+<h2 id="Approximation-Error（近似误差）"><a href="#Approximation-Error（近似误差）" class="headerlink" title="Approximation Error（近似误差）"></a>Approximation Error（近似误差）</h2><p>线长模型可能是高维，比较难分析。因此对平滑参数 r 和 t 进行实验。给定 X = Xmax - Xmin = 200，随机生成 3000 次不同平滑参数的水平坐标 x ，使用不同线长模型计算近似 x，取平均值。eg.图 1(b):</p>
+<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Kdtpbx0GCoSUefx9kqocyModnRz-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Kdtpbx0GCoSUefx9kqocyModnRz-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>我们提出的模型在近似误差上取得了较好的效果。但是并不是说较低的近似误差就意味着更好的放置质量，这是个比较复杂的因素。除了误差，还有梯度也应该仔细考虑，详细见第四节。</p>
+<hr>
+<h1 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h1><p>采用 Moreau Envelope 模型比作 HPWL 近似可微，使用 Relu 作为激活函数。</p>
+<h2 id="The-Gradient-of-the-Moreau-Envelope（Moreau-Envelope-梯度）"><a href="#The-Gradient-of-the-Moreau-Envelope（Moreau-Envelope-梯度）" class="headerlink" title="The Gradient of the Moreau Envelope（Moreau Envelope 梯度）"></a>The Gradient of the Moreau Envelope（Moreau Envelope 梯度）</h2><p>HPWL 函数水平部分表示为</p>
+<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/QkdbbMa0xoIAb9xNRHQcXK3bnDe-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/QkdbbMa0xoIAb9xNRHQcXK3bnDe-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>水平和垂直方向都是对称，我们只需要关注水平方向分析。</p>
+<p>Theorem 1 定理 1 陈述了近似算子的表示。Corollary 1 推论 1 推广了定理 1，告诉我们如何在给定参数 τ1 和 τ2 情况下计算梯度。</p>
+<h3 id="Theorem-1"><a href="#Theorem-1" class="headerlink" title="Theorem 1"></a>Theorem 1</h3><p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VkDXbd8iQoyQ5Wxglh1cfR48nPf-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VkDXbd8iQoyQ5Wxglh1cfR48nPf-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h3 id="Corollary-1"><a href="#Corollary-1" class="headerlink" title="Corollary 1"></a>Corollary 1</h3><p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/GU7sbXo4wo3D1RxXAQDcCEBxnWh-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/GU7sbXo4wo3D1RxXAQDcCEBxnWh-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h2 id="Water-filling-Algorithm（注水算法）"><a href="#Water-filling-Algorithm（注水算法）" class="headerlink" title="Water-filling Algorithm（注水算法）"></a>Water-filling Algorithm（注水算法）</h2><p>（os：参考通信信道中关于注水算法解释</p>
+<ul>
+<li><a href="[注水算法进行功率分配](https://zhuanlan.zhihu.com/p/502453127">zhihu</a>)</li>
+<li><a href="[(Water Filling">CSDN</a>注水算法原理与实现-CSDN博客](<a target="_blank" rel="noopener" href="https://blog.csdn.net/stay_alive_13/article/details/112846063">https://blog.csdn.net/stay_alive_13/article/details/112846063</a>))</li>
+</ul>
+<p>公式 7 和公式 8 给了近似算子的显示表示，其中 τ1 和 τ2 不以封闭形式表示。所以需要先求出公式 8 中方程，获得 proxWe 的精确值。</p>
+<p>以 τ1 为例子，我们要求解方程：</p>
+<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZS9GbiYdQoeCUFxbWOdcfJQjnhc-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZS9GbiYdQoeCUFxbWOdcfJQjnhc-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>假设有一个 4 pin 的网络，引脚坐标为 X1、X2、X3、X4，eg.图 2(a)：</p>
+<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Zlz2b5GGioGrg1xBmdEcO0L0nle-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Zlz2b5GGioGrg1xBmdEcO0L0nle-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>我们需要找到一个 τ1 值，使得蓝色面积为 t。—&gt; 获得 τ1 值的过程 —&gt; 通信中的 Water-filling 注水算法。eg.图 2(b)：</p>
+<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ACYGbtYojoc1WwxA0tEcetVVnPd-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ACYGbtYojoc1WwxA0tEcetVVnPd-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>eg.算法 2：</p>
+<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/AOd7b5i7qoy4A8xKm5Icw6Ecnwh-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/AOd7b5i7qoy4A8xKm5Icw6Ecnwh-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>​        Water-filling 算法是一个直观且高效的方法，解决近似算子中参数 τ1 和 τ2 计算问题，通过对引脚坐标进行排序，这个算法可以迅速地确定所需的参数，进而允许优化算法继续进行。</p>
+<h2 id="Nonlinear-Optimization（非线性优化）"><a href="#Nonlinear-Optimization（非线性优化）" class="headerlink" title="Nonlinear Optimization（非线性优化）"></a>Nonlinear Optimization（非线性优化）</h2><p>​        r 在 WA 方法和 t 在我们方法对解的质量是重要的。</p>
+<p>​        eg.ePlace 方法中使用溢出(overflow)ϕ 来更新参数 r：</p>
+<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/WRgqbpsr7o1zj7xr8mmcO0qcn8e-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/WRgqbpsr7o1zj7xr8mmcO0qcn8e-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>​        更高的溢出 ϕ 需要更大的 r 牺牲精度来保证可微性。为了更好适应线长模型，使用基于切线的更新方法：</p>
+<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/6.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/6.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<ul>
+<li>t0是初始值 —&gt; fix t0 = 4</li>
+<li>ϕ是密度溢出</li>
+<li>w(x)是水平bin大小</li>
+<li>w(y)是垂直bin大小</li>
+<li>δ是很小正数 —&gt; 避免数值溢出 —&gt; fix δ = 0.0001</li>
+</ul>
+<hr>
+<p>对于起初的全局布局表示:</p>
+<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/SlD7bBdZEo6wTuxTvJOcFq1enff-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/SlD7bBdZEo6wTuxTvJOcFq1enff-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>我们遵循 DREAMPlace3.0 和 elfPlace 中温和方案来迭代更新上述方程中的权重密度 λ：</p>
+<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/7.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/7.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<ul>
+<li>Dk表示第k次迭代的密度</li>
+<li>αH ≥ αL &gt; 1 表示密度权重增加速度 —&gt; fix (αH , αL) = (1.01 , 1.02)</li>
+<li>β = 2000</li>
+</ul>
+<hr>
+<h1 id="Wirelength-Model-Analysis"><a href="#Wirelength-Model-Analysis" class="headerlink" title="Wirelength Model Analysis"></a>Wirelength Model Analysis</h1><h2 id="Approximation-Bound（近似界）"><a href="#Approximation-Bound（近似界）" class="headerlink" title="Approximation Bound（近似界）"></a>Approximation Bound（近似界）</h2><h3 id="Theorem-2"><a href="#Theorem-2" class="headerlink" title="Theorem 2"></a>Theorem 2</h3><p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/UefCbwnmnopJw6xDNw1ceh5qnBb-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/UefCbwnmnopJw6xDNw1ceh5qnBb-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>​        描述 Moreau Envelope 函数如何逼近原始函数，与 LSE 和 WA 类似，这里使用的 Moreau Envelope 也可以任意精度近似 HPWL，证明未给出。</p>
+<h2 id="Gradient-Properties（梯度属性）"><a href="#Gradient-Properties（梯度属性）" class="headerlink" title="Gradient Properties（梯度属性）"></a>Gradient Properties（梯度属性）</h2><p>​        理想情况下，平滑参数趋于 0，任何可微分模型梯度都应趋于 We。</p>
+<h3 id="Theorem-3"><a href="#Theorem-3" class="headerlink" title="Theorem 3"></a>Theorem 3</h3><p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZCnAb3E1joe08CxfFrYcdJL9nCc-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZCnAb3E1joe08CxfFrYcdJL9nCc-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h3 id="Theorem-4"><a href="#Theorem-4" class="headerlink" title="Theorem 4"></a>Theorem 4</h3><p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/K5l9bHQOdof27ixhdkDcVXfnnFg-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/K5l9bHQOdof27ixhdkDcVXfnnFg-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h3 id="Theorem-5"><a href="#Theorem-5" class="headerlink" title="Theorem 5"></a>Theorem 5</h3><p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/KN3xb4ZoRo9wZpx8NmScWD2unig-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/KN3xb4ZoRo9wZpx8NmScWD2unig-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h3 id="Corollary-2"><a href="#Corollary-2" class="headerlink" title="Corollary 2"></a>Corollary 2</h3><p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/OgCWb4grco6FAuxxZb2cbVIkngx-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/OgCWb4grco6FAuxxZb2cbVIkngx-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h3 id="Theorem-6"><a href="#Theorem-6" class="headerlink" title="Theorem 6"></a>Theorem 6</h3><p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/F2hXbqVmcohLiKxiEQOceJ4Bncd-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/F2hXbqVmcohLiKxiEQOceJ4Bncd-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h3 id="Corollary-3"><a href="#Corollary-3" class="headerlink" title="Corollary 3"></a>Corollary 3</h3><p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/CS6LbQOI6oKHmExADCncUjHSnlg-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/CS6LbQOI6oKHmExADCncUjHSnlg-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<hr>
+<h1 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h1><h2 id="Benchmark"><a href="#Benchmark" class="headerlink" title="Benchmark"></a>Benchmark</h2><p>​        ISPD 2006 、ISPD 2019，eg.表 1：</p>
+<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/AaJrbaN39oIa4Xx8OISctUsmnwe-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/AaJrbaN39oIa4Xx8OISctUsmnwe-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>​        Base on CUDA/C++ —&gt; DREAMPlace</p>
+<p>​        CPU: Intel Xeon 2.90GHz CPUs ; GPU: NVIDIA GeForce RTX 3090 GPU</p>
+<h2 id="HPWL-amp-Runtime-in-ISPD-2006-and-ISPD-2019"><a href="#HPWL-amp-Runtime-in-ISPD-2006-and-ISPD-2019" class="headerlink" title="HPWL & Runtime in ISPD 2006 and ISPD 2019"></a>HPWL &amp; Runtime in ISPD 2006 and ISPD 2019</h2><p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VOAJbL8Tuoo8Kwx73O4cwqaTnQb-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VOAJbL8Tuoo8Kwx73O4cwqaTnQb-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZJogbBEbIoncUpxv1JJcREzvnIf-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZJogbBEbIoncUpxv1JJcREzvnIf-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/UULcb5CufowmxoxWHhqcXX3Jncb-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/UULcb5CufowmxoxWHhqcXX3Jncb-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/RnCwbIrawoYmCdxRYCwcW4mQn5b-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/RnCwbIrawoYmCdxRYCwcW4mQn5b-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>​        表格 II 显示了在 ISPD2006 基准测试后详细放置的线长改进超过 1%，特别是在具有大量可移动宏的 newblue1 上改进超过了 5%。</p>
+<p>​        表格 III 显示了在最新的 ISPD2019 基准测试上的线长改进超过了 1.5% 到接近 2%。</p>
+<h2 id="Wirelength-during-Global-placement（线长趋势）—-gt-Ablation-Study（消融实验）"><a href="#Wirelength-during-Global-placement（线长趋势）—-gt-Ablation-Study（消融实验）" class="headerlink" title="Wirelength during Global placement（线长趋势）—> Ablation Study（消融实验）"></a>Wirelength during Global placement（线长趋势）—&gt; Ablation Study（消融实验）</h2><p>​        选用 ISPD06 中 newblue1 &amp; ISPD2019 中 ispd19_test10。</p>
+<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/SZaJbNTKEop0jUx8ba5cCaoKntd-1716629216536.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/SZaJbNTKEop0jUx8ba5cCaoKntd-1716629216536.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>​        与 WA 相比，在详细放置后，我们可以分别实现约 5.4% 和 1.6% 的改善。</p>
+<p>​        我们的模型获得的线长结果在相同密度溢出时更好。(密度溢出大致反映了整个单元格重叠) —&gt; 相同的密度溢出下，较小的线长意味着更好的布局质量。</p>
+
+      </div>
+      <div class="post-tags-categories">
+        
+      </div>
+      
+        <div class="copyright">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+    <strong>author:  </strong>Jayden Lee</a>
+    </li>
+    <li class="post-copyright-link">
+    <strong>link:  </strong>
+    <a href="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/" target="_blank" title="On_a_Moreau_Envelope_Wirelength_Model_for_Analytical_Global_Placement">https://picrew.github.io/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>Copyright notice:   </strong>
+      All articles on this website, unless otherwise stated, adopt <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+      reprint policy. If reproduced, please indicate source!
+    </li>
+  </ul>
+<div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      <!-- 文章详情页的上一页和下一页 -->
+<div class="post-nav">
+
+
+
+  
+  <div class="post-nav-prev post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload lazyload placeholder" src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+    </div>
+    <a href="/2024/03/28/AutoDMP/" class="post-nav-link">
+      <div class="title">
+        <i class="fas fa-angle-left"></i> Prev:
+        <div class="title-text">AutoDMP</div>
+      </div>
+      
+      <!-- <div class="content">
+        AutoDMP: Automated DREAMPlace-based Macro Placement
+Introduc
+      </div> -->
+    </a>
+  </div>
+
+
+
+  
+  <div class="post-nav-next post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload lazyload placeholder" src="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+    </div>
+    <a href="/2024/03/10/HubRouter/" class="post-nav-link">
+      <div class="title">
+        Next: <i class="fas fa-angle-right"></i>
+        <div class="title-text">HubRouter</div>
+      </div>
+      <!-- <div class="content">
+        HubRouter: Learning Global Routing via Hub Generation and Pi
+      </div> -->
+    </a>
+  </div>
+
+</div>
+
+    
+    
+
+    <!-- 打赏 -->
+    
+
+    <!-- 分享 -->
+    
+      <!-- https://github.com/overtrue/share.js -->
+<!-- 文章详情页的分享 -->
+<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+
+<script defer src="/js/shareJs/social-share.min.js"></script>
+</script>
+
+<style>
+  .social-share {
+    margin: 20px 0;
+  }
+</style>
+
+
+    
+    
+    <!-- 评论 -->
+    <!-- 评论 -->
+
+  <div id="myComment">
+    
+      
+<section id="comments" style="padding: 1em;">
+	<div id="vcomment" class="comment"></div>
+</section>
+<style>
+	#comments {
+		background: rgba(255,255,255,1);
+		border-radius: 8px;
+	}
+	#veditor {
+		background-image: url('https://img.zcool.cn/community/01a253594c71cfa8012193a329a77f.gif');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: right;
+		background-color: rgba(255, 255, 255, 0);
+		resize: vertical;
+	}
+	#veditor:focus{
+		background-position-y: 200px;
+		transition: all 0.2s ease-in-out 0s;
+	}
+	
+	#vcomment .vcards .vcard .vhead .vsys i {
+		display: none;
+	}
+	/* 底部valine链接 */
+	#vcomment .vpower {
+		display: none;
+	}
+	
+	/* 底下注释是修改 名称和邮箱和网址输入框的样式 */
+	/* #vcomment .vheader {
+		display: flex;
+		justify-content: space-around;
+	}
+	
+	#vcomment .vheader .vnick {
+		width: 31%;
+		border: 2px solid #dedede;
+		padding-left: 10px;
+		padding-right: 10px;
+		border-radius: 5px
+	}
+
+	#vcomment .vheader .vmail {
+		width: 31%;
+		border: 2px solid #dedede;
+		padding-left: 10px;
+		padding-right: 10px;
+		border-radius: 5px
+	}
+
+	#vcomment .vheader .vlink {
+		width: 31%;
+		border: 2px solid #dedede;
+		padding-left: 10px;
+		padding-right: 10px;
+		border-radius: 5px
+	} */
+
+	img.vimg {
+		transition: all 1s;
+		/* 头像旋转时间为 1s */
+	}
+
+	img.vimg:hover {
+		transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+		-moz-transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+		-ms-transform: rotate(360deg);
+	}
+
+	#vcomment .vcards .vcard {
+		padding: 15px 20px 0 20px;
+		border-radius: 10px;
+		margin-bottom: 15px;
+		box-shadow: 0 0 4px 1px rgba(0, 0, 0, .12);
+		transition: all .3s
+	}
+
+	#vcomment .vcards .vcard:hover {
+		box-shadow: 0 0 8px 3px rgba(0, 0, 0, .12)
+	}
+
+	#vcomment .vcards .vcard .vh .vcard {
+		border: none;
+		box-shadow: none;
+	}
+</style>
+    
+  </div>
+
+
+<!-- 还需要在后面这个地址里设置script, comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
+
+
+  </div>
+
+  <!-- 目录 -->
+  <aside id='l_side'>
+  
+    
+      <section class="widget side_blogger">
+  <div class='content'>
+    
+      
+        <a class='avatar flat-box rectangle' href='/about/'>
+          <img src='https://i.postimg.cc/0NZhx9v1/avatar.jpg'/>
+        </a>
+      
+    
+    
+      <div class='text'>
+        
+          <h2>Jayden</h2>
+        
+        
+          <p>What can l not create ,l do not understand</p>
+
+        
+        
+          <p><span id="jinrishici-sentence"></span></p>
+          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="mailto:1839697295@qq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="https://github.com/Picrew"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=1839697295"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+    
+  
+  
+  
+
+  <div class="layout_sticky">    
+    
+      
+<section class="widget side_toc">
+  
+  <header>
+    
+      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
+    
+  </header>
+
+
+  <div class='content'>
+    <div class="toc-main">
+      <div class="toc-content">
+        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement"><span class="toc-text">On a Moreau Envelope Wirelength Model for Analytical Global Placement</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Preliminaries"><span class="toc-text">Preliminaries</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Analytical-Global-Placement%EF%BC%88%E5%88%86%E6%9E%90%E5%85%A8%E5%B1%80%E5%B8%83%E5%B1%80%EF%BC%89"><span class="toc-text">Analytical Global Placement（分析全局布局）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nonlinear-Differentiable-Models%EF%BC%88%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%A8%A1%E5%9E%8B%EF%BC%89"><span class="toc-text">Nonlinear Differentiable Models（非线性微分模型）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#log-sum-exp-LSE-model"><span class="toc-text">log-sum-exp (LSE) model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#weighted-average-WA-model"><span class="toc-text">weighted average (WA) model</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Moreau-Envelope"><span class="toc-text">Moreau Envelope</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Comparison-between-WA-and-the-Moreau-Envelope-models%EF%BC%88%E5%AF%B9%E6%AF%94%EF%BC%89"><span class="toc-text">Comparison between WA and the Moreau Envelope models（对比）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Numerical-Stability%EF%BC%88%E6%95%B0%E5%80%BC%E7%A8%B3%E5%AE%9A%E6%80%A7%EF%BC%89"><span class="toc-text">Numerical Stability（数值稳定性）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Non-Convexity%EF%BC%88%E9%9D%9E%E5%87%B8%E6%80%A7%EF%BC%89"><span class="toc-text">Non-Convexity（非凸性）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Approximation-Error%EF%BC%88%E8%BF%91%E4%BC%BC%E8%AF%AF%E5%B7%AE%EF%BC%89"><span class="toc-text">Approximation Error（近似误差）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Algorithm"><span class="toc-text">Algorithm</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Gradient-of-the-Moreau-Envelope%EF%BC%88Moreau-Envelope-%E6%A2%AF%E5%BA%A6%EF%BC%89"><span class="toc-text">The Gradient of the Moreau Envelope（Moreau Envelope 梯度）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Theorem-1"><span class="toc-text">Theorem 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Corollary-1"><span class="toc-text">Corollary 1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Water-filling-Algorithm%EF%BC%88%E6%B3%A8%E6%B0%B4%E7%AE%97%E6%B3%95%EF%BC%89"><span class="toc-text">Water-filling Algorithm（注水算法）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nonlinear-Optimization%EF%BC%88%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96%EF%BC%89"><span class="toc-text">Nonlinear Optimization（非线性优化）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Wirelength-Model-Analysis"><span class="toc-text">Wirelength Model Analysis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Approximation-Bound%EF%BC%88%E8%BF%91%E4%BC%BC%E7%95%8C%EF%BC%89"><span class="toc-text">Approximation Bound（近似界）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Theorem-2"><span class="toc-text">Theorem 2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gradient-Properties%EF%BC%88%E6%A2%AF%E5%BA%A6%E5%B1%9E%E6%80%A7%EF%BC%89"><span class="toc-text">Gradient Properties（梯度属性）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Theorem-3"><span class="toc-text">Theorem 3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Theorem-4"><span class="toc-text">Theorem 4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Theorem-5"><span class="toc-text">Theorem 5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Corollary-2"><span class="toc-text">Corollary 2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Theorem-6"><span class="toc-text">Theorem 6</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Corollary-3"><span class="toc-text">Corollary 3</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Result"><span class="toc-text">Result</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Benchmark"><span class="toc-text">Benchmark</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HPWL-amp-Runtime-in-ISPD-2006-and-ISPD-2019"><span class="toc-text">HPWL &amp; Runtime in ISPD 2006 and ISPD 2019</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Wirelength-during-Global-placement%EF%BC%88%E7%BA%BF%E9%95%BF%E8%B6%8B%E5%8A%BF%EF%BC%89%E2%80%94-gt-Ablation-Study%EF%BC%88%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C%EF%BC%89"><span class="toc-text">Wirelength during Global placement（线长趋势）—&gt; Ablation Study（消融实验）</span></a></li></ol></li></ol> -->
+        <div class="toc"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 手机端目录按钮 -->
+<div id="toc-mobile-btn">
+  <i class="fas fa-list-ul" aria-hidden="true"></i>
+</div>
+
+      
+  <section class="widget side_recent_post">
+    
+  <header>
+    
+      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      
+      <!-- hash算法 -->
+      
+      <div class="aside-list">
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/06/05/AnalogCoder/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">06-05</span>
+                
+              </div>
+              <a class="post-title" href="/2024/06/05/AnalogCoder/">AnalogCoder</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/05/22/about/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">05-22</span>
+                
+              </div>
+              <a class="post-title" href="/2024/05/22/about/">关于我</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/03/28/AutoDMP/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">03-28</span>
+                
+              </div>
+              <a class="post-title" href="/2024/03/28/AutoDMP/">AutoDMP</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">03-25</span>
+                
+              </div>
+              <a class="post-title" href="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/">On_a_Moreau_Envelope_Wirelength_Model_for_Analytical_Global_Placement</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/03/10/HubRouter/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">03-10</span>
+                
+              </div>
+              <a class="post-title" href="/2024/03/10/HubRouter/">HubRouter</a>
+            </div>
+          </div>
+        
+      </div>
+    </div>
+  </section>
+
+    
+  </div>
+</aside>
+
+  <!-- 图片放大 Wrap images with fancybox support -->
+  <script defer src="/js/wrapImage.js"></script>
+</div>
+
+<!-- 文章详情页背景图 -->
+<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
+	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
+	<transition-group tag="ul" :name="names">
+		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
+			<img :src="image" class="bg-swiper-img no-lazy">
+		</li>
+	</transition-group>
+</div>
+<script>
+	var vm = new Vue({
+		el: '#appBgSwiper',
+		data: {
+			names: '' || 'fade' || 'fade', // translate-fade fade
+			mark: 0,
+			img: [],
+			bgColor: '',
+			time: null
+		},
+		methods: {   //添加方法
+			change(i, m) {
+				if (i > m) {
+					// this.names = 'fade';
+				} else if (i < m) {
+					// this.names = 'fade';
+				} else {
+					return;
+				}
+				this.mark = i;
+			},
+			prev() {
+				// this.names = 'fade';
+				this.mark--;
+				if (this.mark === -1) {
+					this.mark = 3;
+					return
+				}
+			},
+			next() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			autoPlay() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			play() {
+				let bgImgDelay = '' || '180000'
+				let delay = parseInt(bgImgDelay) || 180000;
+				this.time = setInterval(this.autoPlay, delay);
+			},
+			enter() {
+				clearInterval(this.time);
+			},
+			leave() {
+				this.play();
+			}
+		},
+		created() {
+			this.play()
+		},
+		beforeDestroy() {
+			clearInterval(this.time);
+		},
+		mounted() {
+			let prop = '' || '';
+			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
+			if (isImg) {
+				let img = prop.split(',');
+				let configRoot = '/'
+				let arrImg = [];
+				img.forEach(el => {
+					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+					var objExp = new RegExp(Expression);
+
+					if (objExp.test(el)) {
+						// http or https
+						arrImg.push(el);
+					} else {
+						// 非http or https开头
+						// 本地文件
+						let firstStr = el.charAt(0);
+						if (firstStr == '/') {
+							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
+						}
+						el = configRoot + el;
+						arrImg.push(el);
+					}
+				})
+				this.img = arrImg;
+			} else {
+				this.bgColor = prop;
+			}
+		}
+	})
+</script>
+
+<style>
+	.bg-swiper-box {
+		position: absolute;
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.bg-swiper-img {
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+	}
+</style>
+
+
+  <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://unpkg.com/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+
+  <script>
+  function loadMermaid() {
+    if (document.getElementsByClassName('mermaid').length) {
+      if (window.mermaidJsLoad) mermaid.init()
+      else {
+        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
+          window.mermaidJsLoad = true
+          mermaid.initialize({
+            theme: 'default',
+          })
+          if ('true') {
+            mermaid.init();
+          }
+        })
+      }
+    }
+  };
+  document.addEventListener("DOMContentLoaded", function () {
+    loadMermaid();
+  })
+
+  document.addEventListener('pjax:complete', function () {
+    loadMermaid();
+  })
+  
+</script>
+
+
+      </main>
+    </div>
+
+    <!-- 页脚 -->
+    
+  
+  
+    <!-- 底部鱼儿跳动效果，依赖于jquery-->
+<div id="j-fish-skip" style=" position: relative;height: 153px;width: auto;"></div>
+<script defer>
+  var RENDERER = {
+    POINT_INTERVAL: 5,
+    FISH_COUNT: 3,
+    MAX_INTERVAL_COUNT: 50,
+    INIT_HEIGHT_RATE: .5,
+    THRESHOLD: 50,
+    FISH_COLOR: '',
+    init: function () {
+      this.setFishColor(); this.setParameters(), this.reconstructMethods(), this.setup(), this.bindEvent(), this.render()
+    },
+    setFishColor: function () {
+      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+      if (isDark) {
+        this.FISH_COLOR = '#222'; // 暗黑色，有时间把这整成一个变量
+      } else {
+        this.FISH_COLOR = '' || 'rgba(66, 185, 133, 0.8)';
+      }
+    },
+    setParameters: function () {
+      this.$window = $(window), this.$container = $("#j-fish-skip"), this.$canvas = $("<canvas />"), this.context = this.$canvas.appendTo(this.$container).get(0).getContext("2d"), this.points = [], this.fishes = [], this.watchIds = []
+    },
+    createSurfacePoints: function () {
+      var t = Math.round(this.width / this.POINT_INTERVAL);
+      this.pointInterval = this.width / (t - 1), this.points.push(new SURFACE_POINT(this, 0));
+      for (var i = 1; i < t; i++) {
+        var e = new SURFACE_POINT(this, i * this.pointInterval),
+          h = this.points[i - 1];
+        e.setPreviousPoint(h), h.setNextPoint(e), this.points.push(e)
+      }
+    },
+    reconstructMethods: function () {
+      this.watchWindowSize = this.watchWindowSize.bind(this), this.jdugeToStopResize = this.jdugeToStopResize.bind(this), this.startEpicenter = this.startEpicenter.bind(this), this.moveEpicenter = this.moveEpicenter.bind(this), this.reverseVertical = this.reverseVertical.bind(this), this.render = this.render.bind(this)
+    },
+    setup: function () {
+      this.points.length = 0, this.fishes.length = 0, this.watchIds.length = 0, this.intervalCount = this.MAX_INTERVAL_COUNT, this.width = this.$container.width(), this.height = this.$container.height(), this.fishCount = this.FISH_COUNT * this.width / 500 * this.height / 500, this.$canvas.attr({
+        width: this.width,
+        height: this.height
+      }), this.reverse = !1, this.fishes.push(new FISH(this)), this.createSurfacePoints()
+    },
+    watchWindowSize: function () {
+      this.clearTimer(), this.tmpWidth = this.$window.width(), this.tmpHeight = this.$window.height(), this.watchIds.push(setTimeout(this.jdugeToStopResize, this.WATCH_INTERVAL))
+    },
+    clearTimer: function () {
+      for (; this.watchIds.length > 0;) clearTimeout(this.watchIds.pop())
+    },
+    jdugeToStopResize: function () {
+      var t = this.$window.width(),
+        i = this.$window.height(),
+        e = t == this.tmpWidth && i == this.tmpHeight;
+      this.tmpWidth = t, this.tmpHeight = i, e && this.setup()
+    },
+    bindEvent: function () {
+      this.$window.on("resize", this.watchWindowSize), this.$container.on("mouseenter", this.startEpicenter), this.$container.on("mousemove", this.moveEpicenter)
+    },
+    getAxis: function (t) {
+      var i = this.$container.offset();
+      return {
+        x: t.clientX - i.left + this.$window.scrollLeft(),
+        y: t.clientY - i.top + this.$window.scrollTop()
+      }
+    },
+    startEpicenter: function (t) {
+      this.axis = this.getAxis(t)
+    },
+    moveEpicenter: function (t) {
+      var i = this.getAxis(t);
+      this.axis || (this.axis = i), this.generateEpicenter(i.x, i.y, i.y - this.axis.y), this.axis = i
+    },
+    generateEpicenter: function (t, i, e) {
+      if (!(i < this.height / 2 - this.THRESHOLD || i > this.height / 2 + this.THRESHOLD)) {
+        var h = Math.round(t / this.pointInterval);
+        h < 0 || h >= this.points.length || this.points[h].interfere(i, e)
+      }
+    },
+    reverseVertical: function () {
+      this.reverse = !this.reverse;
+      for (var t = 0, i = this.fishes.length; t < i; t++) this.fishes[t].reverseVertical()
+    },
+    controlStatus: function () {
+      for (var t = 0, i = this.points.length; t < i; t++) this.points[t].updateSelf();
+      for (t = 0, i = this.points.length; t < i; t++) this.points[t].updateNeighbors();
+      this.fishes.length < this.fishCount && 0 == --this.intervalCount && (this.intervalCount = this.MAX_INTERVAL_COUNT, this.fishes.push(new FISH(this)))
+    },
+    render: function () {
+      requestAnimationFrame(this.render), this.controlStatus(), this.context.clearRect(0, 0, this.width, this.height), this.context.fillStyle = this.FISH_COLOR;
+      for (var t = 0, i = this.fishes.length; t < i; t++) this.fishes[t].render(this.context);
+      this.context.save(), this.context.globalCompositeOperation = "xor", this.context.beginPath(), this.context.moveTo(0, this.reverse ? 0 : this.height);
+      for (t = 0, i = this.points.length; t < i; t++) this.points[t].render(this.context);
+      this.context.lineTo(this.width, this.reverse ? 0 : this.height), this.context.closePath(), this.context.fill(), this.context.restore()
+    }
+  },
+  SURFACE_POINT = function (t, i) {
+    this.renderer = t, this.x = i, this.init()
+  };
+  SURFACE_POINT.prototype = {
+    SPRING_CONSTANT: .03,
+    SPRING_FRICTION: .9,
+    WAVE_SPREAD: .3,
+    ACCELARATION_RATE: .01,
+    init: function () {
+      this.initHeight = this.renderer.height * this.renderer.INIT_HEIGHT_RATE, this.height = this.initHeight, this.fy = 0, this.force = {
+        previous: 0,
+        next: 0
+      }
+    },
+    setPreviousPoint: function (t) {
+      this.previous = t
+    },
+    setNextPoint: function (t) {
+      this.next = t
+    },
+    interfere: function (t, i) {
+      this.fy = this.renderer.height * this.ACCELARATION_RATE * (this.renderer.height - this.height - t >= 0 ? -1 : 1) * Math.abs(i)
+    },
+    updateSelf: function () {
+      this.fy += this.SPRING_CONSTANT * (this.initHeight - this.height), this.fy *= this.SPRING_FRICTION, this.height += this.fy
+    },
+    updateNeighbors: function () {
+      this.previous && (this.force.previous = this.WAVE_SPREAD * (this.height - this.previous.height)), this.next && (this.force.next = this.WAVE_SPREAD * (this.height - this.next.height))
+    },
+    render: function (t) {
+      this.previous && (this.previous.height += this.force.previous, this.previous.fy += this.force.previous), this.next && (this.next.height += this.force.next, this.next.fy += this.force.next), t.lineTo(this.x, this.renderer.height - this.height)
+    }
+  };
+  var FISH = function (t) {
+    this.renderer = t, this.init()
+  };
+  FISH.prototype = {
+    GRAVITY: .4,
+    init: function () {
+      this.direction = Math.random() < .5, this.x = this.direction ? this.renderer.width + this.renderer.THRESHOLD : -this.renderer.THRESHOLD, this.previousY = this.y, this.vx = this.getRandomValue(4, 10) * (this.direction ? -1 : 1), this.renderer.reverse ? (this.y = this.getRandomValue(1 * this.renderer.height / 10, 4 * this.renderer.height / 10), this.vy = this.getRandomValue(2, 5), this.ay = this.getRandomValue(.05, .2)) : (this.y = this.getRandomValue(6 * this.renderer.height / 10, 9 * this.renderer.height / 10), this.vy = this.getRandomValue(-5, -2), this.ay = this.getRandomValue(-.2, -.05)), this.isOut = !1, this.theta = 0, this.phi = 0
+    },
+    getRandomValue: function (t, i) {
+      return t + (i - t) * Math.random()
+    },
+    reverseVertical: function () {
+      this.isOut = !this.isOut, this.ay *= -1
+    },
+    controlStatus: function (t) {
+      this.previousY = this.y, this.x += this.vx, this.y += this.vy, this.vy += this.ay, this.renderer.reverse ? this.y > this.renderer.height * this.renderer.INIT_HEIGHT_RATE ? (this.vy -= this.GRAVITY, this.isOut = !0) : (this.isOut && (this.ay = this.getRandomValue(.05, .2)), this.isOut = !1) : this.y < this.renderer.height * this.renderer.INIT_HEIGHT_RATE ? (this.vy += this.GRAVITY, this.isOut = !0) : (this.isOut && (this.ay = this.getRandomValue(-.2, -.05)), this.isOut = !1), this.isOut || (this.theta += Math.PI / 20, this.theta %= 2 * Math.PI, this.phi += Math.PI / 30, this.phi %= 2 * Math.PI), this.renderer.generateEpicenter(this.x + (this.direction ? -1 : 1) * this.renderer.THRESHOLD, this.y, this.y - this.previousY), (this.vx > 0 && this.x > this.renderer.width + this.renderer.THRESHOLD || this.vx < 0 && this.x < -this.renderer.THRESHOLD) && this.init()
+    },
+    render: function (t) {
+      t.save(), t.translate(this.x, this.y), t.rotate(Math.PI + Math.atan2(this.vy, this.vx)), t.scale(1, this.direction ? 1 : -1), t.beginPath(), t.moveTo(-30, 0), t.bezierCurveTo(-20, 15, 15, 10, 40, 0), t.bezierCurveTo(15, -10, -20, -15, -30, 0), t.fill(), t.save(), t.translate(40, 0), t.scale(.9 + .2 * Math.sin(this.theta), 1), t.beginPath(), t.moveTo(0, 0), t.quadraticCurveTo(5, 10, 20, 8), t.quadraticCurveTo(12, 5, 10, 0), t.quadraticCurveTo(12, -5, 20, -8), t.quadraticCurveTo(5, -10, 0, 0), t.fill(), t.restore(), t.save(), t.translate(-3, 0), t.rotate((Math.PI / 3 + Math.PI / 10 * Math.sin(this.phi)) * (this.renderer.reverse ? -1 : 1)), t.beginPath(), this.renderer.reverse ? (t.moveTo(5, 0), t.bezierCurveTo(10, 10, 10, 30, 0, 40), t.bezierCurveTo(-12, 25, -8, 10, 0, 0)) : (t.moveTo(-5, 0), t.bezierCurveTo(-10, -10, -10, -30, 0, -40), t.bezierCurveTo(12, -25, 8, -10, 0, 0)), t.closePath(), t.fill(), t.restore(), t.restore(), this.controlStatus(t)
+    }
+  }, $(function () {
+    RENDERER.init()
+    $('.dark').click(function () {
+      setTimeout(() => {
+        RENDERER.setFishColor();
+        RENDERER.context.fill();
+      });
+    })
+  });
+</script>
+  
+  <div class="footer bg-color">
+    <div class="footer-main">
+      
+        
+          <div class="link">
+            
+          </div>
+        
+      
+        
+          <div class="footer-copyright">
+            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> </p>
+
+          </div>
+        
+      
+        
+          <div class="footer-custom">
+            
+          </div>
+        
+      
+    </div>
+  </div>
+
+
+
+    <!-- 渲染暗黑按钮 -->
+    
+      <div class="dark" onclick="toggleDarkMode()">
+  <div class="dark-content">
+    <i class="fas" id="darkIcon" aria-hidden="true"></i>
+  </div>
+</div>
+
+<script defer>
+  $(function() {
+    // 初始化暗黑模式状态
+    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+    updateDarkModeIcon(isDark);
+  });
+
+  function toggleDarkMode() {
+    const isDark = $(document.body).hasClass('darkModel');
+    $(document.body).toggleClass('darkModel');
+    localStorage.setItem('dark', !isDark);
+    updateDarkModeIcon(!isDark);
+  }
+
+  function updateDarkModeIcon(isDark) {
+    const iconElement = document.getElementById('darkIcon');
+    if (isDark) {
+      iconElement.classList.remove('fa-moon');
+      iconElement.classList.add('fa-lightbulb');
+    } else {
+      iconElement.classList.remove('fa-lightbulb');
+      iconElement.classList.add('fa-moon');
+    }
+  }
+</script>
+
+    
+    <!-- 渲染回到顶部按钮 -->
+    
+      <div class="goTop top-btn-color" pointer>
+  <i class="fas fa-arrow-up" aria-hidden="true"></i>
+</div>
+<script defer src="/js/goTop.js"></script>
+
+    
+    <!-- 渲染左下角音乐播放器 -->
+    
+
+    <!-- 图片放大 -->
+    
+      <script src="https://unpkg.com/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    
+
+    <!-- 百度解析 -->
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script async>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <!-- 背景彩带 -->
+    
+      <script async type="text/javascript" size="100" alpha='0.4' zIndex="-1" src="/js/ribbon.min.js"></script>
+    
+
+    <script src="/js/utils/index.js"></script>
+    <script src="/js/app.js"></script>
+    
+    <!-- 文章目录所需js -->
+<!-- <link href="/js/tocbot/tocbot.css" rel="stylesheet">
+<script src="/js/tocbot/tocbot.min.js"></script> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.min.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.css">
+
+<script>
+  var headerEl = 'h2, h3, h4',  //headers 
+    content = '.post-detail',//文章容器
+    idArr = {};  //标题数组以确定是否增加索引id
+  //add #id
+  var option = {
+    // Where to render the table of contents.
+    tocSelector: '.toc',
+    // Where to grab the headings to build the table of contents.
+    contentSelector: content,
+    // Which headings to grab inside of the contentSelector element.
+    headingSelector: headerEl,
+    scrollSmooth: true,
+    scrollSmoothOffset: -70,
+    // headingsOffset: -($(window).height() * 0.4 - 45),
+    headingsOffset: -($(window).height() * 0.4 - 70),
+    // positionFixedSelector: '.toc-main',
+    // positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    activeLinkClass: 'is-active-link',
+    orderedList: true,
+    collapseDepth: 20,
+    // onClick: function (e) {},
+  }
+  if ($('.toc').length > 0) {
+
+    $(content).children(headerEl).each(function () {
+      //去除空格以及多余标点
+      var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
+
+      headerId = headerId.toLowerCase();
+      if (idArr[headerId]) {
+        //id已经存在
+        $(this).attr('id', headerId + '-' + idArr[headerId]);
+        idArr[headerId]++;
+      }
+      else {
+        //id未存在
+        idArr[headerId] = 1;
+        $(this).attr('id', headerId);
+      }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      tocbot.init(option);
+      mobileTocClick();
+    });
+
+  }
+
+  window.tocScrollFn = function () {
+    return bamboo.throttle(function () {
+      findHeadPosition();
+    }, 100)()
+  }
+  window.addEventListener('scroll', tocScrollFn);
+
+  const findHeadPosition = function (top) {
+    if ($('.toc-list').length <= 0) {
+      return false;
+    }
+    setTimeout(() => {  // or DOMContentLoaded 
+      autoScrollToc();
+    }, 0);
+  }
+
+  const autoScrollToc = function () {
+    const $activeItem = document.querySelector('.is-active-link');
+    const $cardToc = document.querySelector('.toc-content');
+    const activePosition = $activeItem.getBoundingClientRect().top
+    const sidebarScrollTop = $cardToc.scrollTop
+    if (activePosition > (document.documentElement.clientHeight - 100)) {
+      $cardToc.scrollTop = sidebarScrollTop + 150
+    }
+    if (activePosition < 150) {
+      $cardToc.scrollTop = sidebarScrollTop - 150
+    }
+  }
+
+  document.addEventListener('pjax:send', function () {
+    if ($('.toc').length) {
+      tocbot.destroy();
+    }
+  });
+
+  document.addEventListener('pjax:complete', function () {
+    if ($('.toc').length) {
+      tocbot.init(option);
+      mobileTocClick();
+    }
+  });
+  
+  // 手机端toc按钮点击出现目录
+  const mobileTocClick = function () {
+    const $cardTocLayout = document.getElementsByClassName('side_toc')[0];
+    const $cardToc = $cardTocLayout.getElementsByClassName('toc-content')[0];
+    let right = '45px';
+    if (window.innerWidth >= 551 && window.innerWidth <= 992) {
+      right = '100px'
+    }
+    const mobileToc = {
+      open: () => {
+        $cardTocLayout.style.cssText = 'animation: toc-open .3s; opacity: 1; right: ' + right
+      },
+
+      close: () => {
+        $cardTocLayout.style.animation = 'toc-close .2s'
+        setTimeout(() => {
+          $cardTocLayout.style.cssText = "opacity:''; animation: ''; right: ''"
+        }, 100)
+      }
+    }
+    document.getElementById('toc-mobile-btn').addEventListener('click', () => {
+      if (window.getComputedStyle($cardTocLayout).getPropertyValue('opacity') === '0') mobileToc.open()
+      else mobileToc.close()
+    })
+
+    $cardToc.addEventListener('click', (e) => {
+      if (window.innerWidth < 992) { // 小于992px的时候
+        mobileToc.close()
+      }
+    })
+  }
+</script>
+
+<style>
+  /* .is-position-fixed {
+    position: sticky !important;
+    top: 74px;
+  }
+
+  .toc-main ul {
+    counter-reset: show-list;
+  }
+
+  .toc-main ul li::before {
+    content: counter(item)".";
+    display: block;
+    position: absolute;
+    left: 12px;
+    top: 0;
+  } */
+</style>
+ 
+
+<!-- 设置导航背景 -->
+<script>
+  let setHeaderClass = () => {
+    const nav = $('#navHeader');
+    const navTop = nav.outerHeight();
+    const winTop = $(window).scrollTop();
+    if(winTop > navTop) {
+      nav.addClass('header-bg-color');
+    }
+    else {
+      nav.removeClass('header-bg-color');
+    }
+  };
+
+  let scrollCollect = () => {
+    return bamboo.throttle(function (e) {
+      setHeaderClass();
+    }, 200)()
+  }
+
+  let initHeaderBg = () => {
+    setHeaderClass();
+  }
+
+  setHeaderClass();
+  window.addEventListener('scroll', scrollCollect);
+
+  document.addEventListener('pjax:send', function () {
+    window.removeEventListener('scroll', scrollCollect)
+  })
+  document.addEventListener('pjax:complete', function () {
+    window.addEventListener('scroll', scrollCollect);
+    setHeaderClass();
+  })
+</script> 
+
+<!-- 渲染issues标签里的内容 -->
+<script>
+  function loadIssuesJS() {
+    if ($(".post-detail").find(".issues-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/issues/index.js');
+  };
+  $(function () {
+    loadIssuesJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof IssuesAPI == "undefined") {
+      loadIssuesJS();
+    }
+  })
+</script>
+
+<!-- 渲染远程json加载的图片标签(getPhotoOnline)里的内容 -->
+<script>
+  function loadPhotoOnlineJS() {
+    if ($(".post-detail").find(".getJsonPhoto-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/getPhotoOnline/index.js');
+  };
+  $(function () {
+    loadPhotoOnlineJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof getPhotoJson == "undefined") {
+      loadPhotoOnlineJS();
+    }
+  })
+</script>
+
+<!-- 渲染远程json加载的talk标签(getTalkOnline)里的内容 -->
+<script>
+  function loadTalkOnlineJS() {
+    if ($(".post-detail").find(".getJsonTalk-api").length == 0) {
+      return;
+    } 
+    loadScript('https://cdnjs.cloudflare.com/ajax/libs/waterfall.js/1.0.2/waterfall.min.js'); // 瀑布流插件，https://raphamorim.io/waterfall.js/
+    loadScript('/js/getTalkOnline/index.js');
+  };
+  $(function () {
+    loadTalkOnlineJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof getTalkJson == "undefined") {
+      loadTalkOnlineJS();
+    }
+  })
+</script>
+
+<!-- 渲染远程json加载的site-card标签(getSiteOnline)里的内容 -->
+<script>
+  function loadSiteOnlineJS() {
+    if ($(".post-detail").find(".getJsonSite-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/getSiteOnline/index.js');
+  };
+  $(function () {
+    loadSiteOnlineJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof getSiteJson == "undefined") {
+      loadSiteOnlineJS();
+    }
+  })
+</script>
+
+<!-- 输入框打字特效 -->
+<!-- 输入框打字特效 -->
+
+  <script src="/js/activate-power-mode.js"></script>
+  <script>
+    POWERMODE.colorful = true;  // 打开随机颜色特效
+    POWERMODE.shake = false;    // 关闭输入框抖动
+    document.body.addEventListener('input', POWERMODE);//监听打字事件
+  </script>
+
+
+<!-- markdown代码一键复制功能 -->
+
+  <link rel="stylesheet" href="https://unpkg.com/v-plugs-ayu/lib/ayu.css">
+  <script src="https://unpkg.com/v-plugs-ayu/lib/ayu.umd.min.js"></script>
+  <script src="/js/clipboard/clipboard.min.js"></script>
+  <div id="appCopy">
+  </div>
+  <script data-pjax>
+    var vm = new Vue({
+      el: '#appCopy',
+      data: {
+      },
+      computed: {
+      },
+      mounted() {
+        const that = this;
+        var copy = 'copy';
+        /* code */
+        var initCopyCode = function () {
+          var copyHtml = '';
+          copyHtml += '<button class="btn-copy" data-clipboard-snippet="" style="position:absolute;top:0;right:0;z-index:1;">';
+          copyHtml += '<i class="fas fa-copy"></i><span>' + copy + '</span>';
+          copyHtml += '</button>';
+          $(".post-detail pre").not('.gutter pre').wrap("<div class='codeBox' style='position:relative;width:100%;'></div>")
+          $(".post-detail pre").not('.gutter pre').before(copyHtml);
+          new ClipboardJS('.btn-copy', {
+            target: function (trigger) {
+              return trigger.nextElementSibling;
+            }
+          });
+        }
+        initCopyCode();
+        $('.btn-copy').unbind('click').bind('click', function () {
+          doSomething();
+        })
+        $(document).unbind('keypress').bind('keypress', function (e) {
+          if (e.ctrlKey && e.keyCode == 67) {
+            doSomething();
+          }
+        })
+
+        function doSomething() {
+          that.$notify({
+            title: "成功",
+            content: "代码已复制，请遵守相关授权协议。",
+            type: 'success'
+          })
+        }
+      },
+      methods: {
+      },
+      created() { }
+    })
+  </script>
+  
+
+<!-- 图片懒加载 -->
+<script defer src="https://unpkg.com/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
+</script>
+
+
+<!-- 卡片滚动动画 -->
+   
+
+<!-- 评论所需js -->
+
+  
+        
+<!-- 具体js，请前往valine/script.ejs查看 -->
+
+      
+        <script>
+  var requiredFields = '';
+  requiredFields = requiredFields.split(',');
+  comment_el = '.comment';
+  let looperValine = null;
+  load_valine = function () {
+    if ($(comment_el).length) {
+      var valine = new Valine({
+        el: '#vcomment',
+        path: window.location.pathname,
+        notify: false,
+        verify: false,
+        app_id: "mptvHjNei9tLgoh91VHoyXI3-gzGzoHsz",
+        app_key: "4GFQ3SvPkglZ7djLOOY0Zwd8",
+        placeholder: "客官，说点什么吧",
+        avatar: "",
+        master: "",   //博主邮箱md5
+        tagMeta: ["博主","小伙伴","访客"],     //标识字段名
+        friends: "",
+        metaPlaceholder: { "nick": "昵称/QQ号", "mail": "邮箱" },
+        requiredFields: requiredFields,
+        enableQQ: true,
+      });
+      function debounce(fn) {
+        var timerID = null
+        return function () {
+          var arg = arguments[0]   //获取事件
+          if (timerID) {
+            clearTimeout(timerID)
+          }
+          timerID = setTimeout(function () {
+            fn(arg)              //事件传入函数
+          }, 200)
+        }
+      }
+      //查询评论 valine.Q('*').limit(7) -- 查询所有，限制7条, 下面的的代码是查询当前页面
+      var themeDanmu = eval('false');
+      var themeLoop = eval('false');
+      var themeLooperTime = '5000' || 5000;
+      var speed = '40' || 20;
+      var isBarrager = true;
+      if (themeDanmu == true) {
+        do_barrager();
+        if ($('.danmuBox').length <= 0) {
+          $('.navbar').append('<div class="danmuBox"><div class="danmuBtn open"><span class="danmuCircle"></span><span class="danmuText">弹幕</span></div></div>');
+        }
+        $('.danmuBtn').on('click', debounce(
+          function () {
+            if ($('.danmuBtn').hasClass('open')) {
+              $('.danmuBtn').removeClass('open')
+              clearInterval(looperValine);
+              $.fn.barrager.removeAll();
+            } else {
+              $('.danmuBtn').addClass("open");
+              do_barrager();
+            }
+          }
+        ))
+      }
+      function do_barrager() {
+        isBarrager && valine.Q(window.location.pathname).find().then(function (comments) {
+          // var num = 0; // 可以记录条数，循环调用的时候只取最新的评论放入弹幕中
+          var run_once = true;
+          var looper_time = themeLooperTime;
+          var total = comments.length;
+          // var looper = null;
+          var index = 0;
+          if (total > 0) {
+            barrager();
+          } else {
+            // 当评论数为0的时候，自动关闭弹幕
+            // $('.danmuBtn').removeClass('open');
+          }
+          function barrager() {
+            if (run_once) {
+              //如果是首次执行,则设置一个定时器,并且把首次执行置为false
+              looperValine = setInterval(barrager, looper_time);
+              run_once = false;
+            }
+            var content = comments[index]._serverData.comment;
+            var email = comments[index]._serverData.mail;
+            var link = comments[index]._serverData.link;
+            var newcontent = content.substring(0, 50).replace(/<[^>]+>/g, "");
+            //发布一个弹幕
+            const item = {
+              img: `https://q1.qlogo.cn/g?b=qq&nk=${email}&s=640`, //图片 
+              info: newcontent, //文字 
+              href: link, //链接 
+              close: true, //显示关闭按钮 
+              speed: speed, //延迟,单位秒,默认6 
+              color: '#fff', //颜色,默认白色 
+              old_ie_color: '#000000', //ie低版兼容色,不能与网页背景相同,默认黑色
+            }
+            $('body').barrager(item);
+            //索引自增
+            index++;
+            //所有弹幕发布完毕，清除计时器。
+            if (index == total) {
+              clearInterval(looperValine);
+              if (themeLoop === true) {
+                setTimeout(function () {
+                  do_barrager();
+                }, 5000);
+              } else {
+                $('.danmuBtn').removeClass('open');
+              }
+              return false;
+            }
+
+          }
+        })
+      }
+    }
+  };
+  $(document).ready(load_valine);
+  document.addEventListener('pjax:send', function (e) {
+    
+  })
+  document.addEventListener('pjax:complete', function () {
+    load_valine();
+  });
+</script>
+
+      
+
+
+<!-- 鼠标点击特效 -->
+<!-- 爱心点击 -->
+
+  
+    <script async src="/js/cursor/fireworks.js"></script>
+  
+
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" data-pjax></script>
+
+
+<!-- 轮播图标签 -->
+<script>
+  var bambooSwiperTag = {};
+  function load_swiper() {
+    if (!document.querySelectorAll(".post-swiper-container")[0]) return;
+    loadCSS("https://unpkg.com/swiper@6/swiper-bundle.min.css")
+    loadScript("https://unpkg.com/swiper@6/swiper-bundle.min.js").then(() => {
+      pjax_swiper();
+    });
+  }
+
+  load_swiper();
+
+  function pjax_swiper() {
+    bambooSwiperTag.swiper = new Swiper('.post-swiper-container', {
+      slidesPerView: 'auto',
+      spaceBetween: 8,
+      centeredSlides: true,
+      loop: true,
+      autoplay: true ? {
+        delay: 3000,
+        stopOnLastSlide: false,
+        disableOnInteraction: false,
+      } : false,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      on:{
+        init: function(){
+          swiperAnimateCache(this); //隐藏动画元素 
+          swiperAnimate(this); //初始化完成开始动画
+        }, 
+        slideChangeTransitionEnd: function(){ 
+          swiperAnimate(this); //每个slide切换结束时也运行当前slide动画
+          //this.slides.eq(this.activeIndex).find('.ani').removeClass('ani'); 动画只展现一次，去除ani类名
+        } 
+      }
+    });
+  }
+
+  document.addEventListener('pjax:complete', function () {
+    if (!document.querySelectorAll(".post-swiper-container")[0]) return;
+    if (typeof bambooSwiperTag.swiper === "undefined") {
+      load_swiper();
+    } else {
+      pjax_swiper();
+    }
+  });
+</script>
+    <!-- pjax -->
+    
+
+<!-- pjax -->
+
+
+  <script src="/js/pjax@0.2.8/index.js"></script>
+  
+    <div class="pjax-animate">
+  
+    <div class="loading-circle"><div id="loader-circle"></div></div>
+    <script>
+      window.ShowLoading = function() {
+        $(".loading-circle").css("display", "block");
+      };
+      window.HideLoading = function() {
+        $(".loading-circle").css("display", "none");
+      }
+    </script>
+  
+	<script>
+    document.addEventListener('pjax:complete', function () {
+      window.HideLoading();
+    })
+    document.addEventListener('pjax:send', function () {
+      window.ShowLoading();
+    })
+    document.addEventListener('pjax:error', function () {
+      window.HideLoading();
+    })
+	</script>
+</div>
+
+  
+
+  <script>
+    var pjax = new Pjax({
+      elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([no-pjax])',   // 拦截正常带链接的 a 标签
+      selectors: ["#pjax-container","title"],                                   // 根据实际需要确认重载区域
+      cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+      timeout: 5000
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+
+    })
+    
+    document.addEventListener('pjax:complete', function () {
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+      window.location.href = e.triggerElement.href;
+    })
+    
+    // 刷新不从顶部开始
+    document.addEventListener("DOMContentLoaded", function () {
+      history.scrollRestoration = 'auto';
+    })
+  </script>
+
+
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="//cdn.bootcss.com/mathjax/0.6.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+</html>

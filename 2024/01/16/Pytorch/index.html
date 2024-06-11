@@ -1,0 +1,1960 @@
+<!DOCTYPE html>
+<html>
+  <!-- meta/link... -->
+  
+
+
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+  <title>PyTorch常见用法 | null</title>
+
+  <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
+  <link href="https://unpkg.com/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="/js/swiper/swiper@5.4.1.min.css" rel="stylesheet">
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/animate.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+    <link href="https://unpkg.com/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" rel="stylesheet">
+  
+  
+    
+<link rel="stylesheet" href="/js/shareJs/share.min.css">
+
+  
+  <style>
+        @media (max-width: 992px) {
+            #waifu {
+                display: none;
+            }
+        }
+    </style>
+    <script defer src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+    
+        <script src="/js/valine/index.js"></script>
+    
+    
+    <!-- 依赖于jquery和vue -->
+    <script src="https://unpkg.com/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.min.js"></script>
+
+    <!-- import link -->
+    
+        
+            
+        
+            
+        
+    
+    <!-- import script -->
+    
+        
+            
+        
+            
+        
+    
+
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+  
+  <!-- 预加载动画 -->
+  
+  
+  <div class="preloader_6" id="loader">
+  <div class="loader"></div>
+</div>
+  <script>
+    var endLoading = function () {
+      document.body.style.overflow = 'auto';
+      document.getElementById('loader').classList.add("loaded");
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+  </script>
+
+
+  <body>
+    <!-- 判断是否为暗黑风格 -->
+    <!-- 判断是否为黑夜模式 -->
+<script defer>
+  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+
+  if (isDark) {
+    $(document.body).addClass('darkModel');
+  }
+</script>
+
+    <!-- 需要在上面加载的js -->
+    <script>
+  function loadScript(src, cb) {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var HEAD = document.getElementsByTagName("head")[0] || document.documentElement;
+        var script = document.createElement("script");
+        script.setAttribute("type", "text/javascript");
+        if (cb) {
+          if (JSON.stringify(cb)) {
+            for (let p in cb) {
+              if (p == "onload") {
+                script[p] = () => {
+                  cb[p]()
+                  resolve()
+                }
+              } else {
+                script[p] = cb[p]
+                script.onload = resolve
+              }
+            }
+          } else {
+            script.onload = () => {
+              cb()
+              resolve()
+            };
+          }
+        } else {
+          script.onload = resolve
+        }
+        script.setAttribute("src", src);
+        HEAD.appendChild(script);
+      });
+    });
+  }
+
+  //https://github.com/filamentgroup/loadCSS
+  var loadCSS = function (src) {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var link = document.createElement('link');
+        link.rel = "stylesheet";
+        link.href = src;
+        link.onload = resolve;
+        document.getElementsByTagName("head")[0].appendChild(link);
+      });
+    });
+  };
+
+</script> 
+
+<!-- 轮播图所需要的js -->
+<script src="/js/swiper/swiper.min.js"></script>
+<script src="/js/swiper/vue-awesome-swiper.js"></script>
+<script src="/js/swiper/swiper.animate1.0.3.min.js"></script>
+
+<script type="text/javascript">
+  Vue.use(window.VueAwesomeSwiper)
+</script>
+
+
+  <script src="/js/vue-typed-js/index.js"></script>
+
+
+<!-- 首页的公告滚动插件的js需要重新加载 -->
+<script src="/js/vue-seamless-scroll/index.js"></script>
+
+<!-- 打字机效果js -->
+<script src="https://unpkg.com/typed.js@2.0.11"></script>
+
+
+    <div id="safearea">
+      <main class="main" id="pjax-container">
+        <!-- 头部导航 -->
+        
+<header class="header  " 
+  id="navHeader"
+  style="position: fixed;
+  left: 0; top: 0; z-index: 10;width: 100%;"
+>
+  <div class="header-content">
+    <div class="bars">
+      <div id="appDrawer" class="sidebar-image">
+  <div class="drawer-box-icon">
+    <i class="fas fa-bars" aria-hidden="true" @click="showDialogDrawer"></i>
+  </div>
+  
+  <transition name="fade">
+    <div class="drawer-box_mask" v-cloak style="display: none;" v-show="visible" @click.self="cancelDialogDrawer">
+    </div>
+  </transition>
+  <div class="drawer-box" :class="{'active': visible}">
+    <div class="drawer-box-head bg-color">
+      <img class="drawer-box-head_logo lazyload placeholder" src="/medias/avatar.jpg" class="lazyload placeholder" data-srcset="/medias/avatar.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+      <h3 class="drawer-box-head_title"></h3>
+      <h5 class="drawer-box-head_desc"></h5>
+    </div>
+    
+    <div class="drawer-box-content">
+      <ul class="drawer-box-content_menu">
+        
+        
+          <li class="drawer-box-content_item">
+            <a target="_blank" rel="noopener" href="https://github.com/Picrew">
+              <i class="fas fa-github" aria-hidden="true"></i>
+              <span>Github</span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appDrawer',
+    data: {
+      visible: false,
+      top: 0,
+      openArr: [],
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      isOpen(index) {
+        if (this.openArr.includes(index)) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+      openOrCloseMenu(curIndex) {
+        const index = this.openArr.indexOf(curIndex);
+        if (index !== -1) {
+          this.openArr.splice(index, 1);
+        } else {
+          this.openArr.push(curIndex);
+        }
+      },
+      showDialogDrawer() {
+        this.visible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'width: 100%; height: 100%;overflow: hidden;';
+      },
+      cancelDialogDrawer() {
+        this.visible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      }
+    },
+    created() {}
+  })
+</script>
+
+    </div>
+    <div class="blog-title" id="author-avatar">
+      
+        <div class="avatar">
+          <img src="/medias/avatar.jpg" class="lazyload placeholder" data-srcset="/medias/avatar.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+        </div>
+      
+      <a href="/" class="logo"></a>
+    </div>
+    <nav class="navbar">
+      <ul class="menu">
+        
+      </ul>
+      
+      
+        <div id="appSearch">
+  <div class="search"  @click="showDialog()"><i class="fas fa-search" aria-hidden="true"></i></div>
+  <transition name="fade">
+    <div class="message-box_wrapper" style="display: none;" v-cloak v-show="dialogVisible" @click.self="cancelDialogVisible()">
+      <div class="message-box animated bounceInDown">
+        <h2>
+          <span>
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <span class="title">Search</span>
+          </span>
+          <i class="fas fa-times close" pointer style="float:right;" aria-hidden="true" @click.self="cancelDialogVisible()"></i>
+        </h2>
+        <form class="site-search-form">
+          <input type="text"
+            placeholder="Please enter keywords"
+            id="local-search-input" 
+            @click="getSearchFile()"
+            class="st-search-input"
+            v-model="searchInput"
+          />
+        </form>
+        <div class="result-wrapper">
+          <div id="local-search-result" class="local-search-result-cls"></div>
+        </div>
+      </div>
+    </div>
+  </transition>
+</div>
+<script src="/js/local_search.js"></script>
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appSearch',
+    data: {
+      dialogVisible: false,
+      searchInput: '',
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+      window.addEventListener('pjax:complete', () => {
+        this.cancelDialogVisible();
+      })
+    },
+    methods: {
+      showDialog() {
+        this.dialogVisible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'overflow: hidden;';
+      },
+      getSearchFile() {
+        if (!this.searchInput) {
+          getSearchFile("/search.xml");
+        }
+      },
+      cancelDialogVisible() {
+        this.dialogVisible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      },
+    },
+    created() {}
+  })
+</script>
+<!-- 解决刷新页面闪烁问题，可以在元素上添加display: none, 或者用vue.extend方法，详情：https://blog.csdn.net/qq_31393401/article/details/81017912 -->
+<!-- 下面是搜索基本写法 -->
+<!-- <script type="text/javascript" id="local.search.active">
+  var inputArea = document.querySelector("#local-search-input");
+  inputArea.onclick   = function(){ getSearchFile(); this.onclick = null }
+  inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
+</script> -->
+
+      
+
+    </nav>
+  </div>
+  
+    <a target="_blank" rel="noopener" href="https://github.com/Picrew" class="github-corner color-primary" aria-label="View source on GitHub"><svg width="60" height="60" viewBox="0 0 250 250" style="fill:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+  
+  
+</header>
+        <!-- 内容区域 -->
+        
+<!-- prismjs 代码高亮 -->
+
+
+
+
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
+
+
+  <!-- 文章详情页顶部图片和标题 -->
+
+
+
+
+<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
+  background-position: center center;position: relative;background-image:url('https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp')">
+  <div class="post-detail-header-mask"></div>
+  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
+  
+  <div class="post-detail-header_info-box">
+    <div class="title-box">
+      <span class="title">
+        PyTorch常见用法
+      </span>
+    </div>
+    
+    
+      
+        <span class="post-detail-header_date">
+          <i class="fas fa-calendar"></i> Published in：2024-01-16 |
+        </span>
+      
+
+      
+
+      
+    
+  </div>
+  
+  
+    <script defer src="/js/bubble/bubble.js"></script>
+  
+</div>
+
+
+
+
+
+<div class="post-detail-content post-row" 
+  style="padding-top: 0px;">
+  <div class="main-content">
+    <article class="post post-detail">
+      <div class="post-content">
+        <center><h1>PyTorch常见用法</h1></center>
+
+<h3 id="1-导入-PyTorch-库"><a href="#1-导入-PyTorch-库" class="headerlink" title="1. 导入 PyTorch 库"></a>1. 导入 PyTorch 库</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch  </span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn  </span><br><span class="line"><span class="keyword">import</span> torch.optim <span class="keyword">as</span> optim  </span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F  </span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> DataLoader, Dataset  </span><br><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> transforms</span><br></pre></td></tr></table></figure>
+<h3 id="2-检查-GPU-支持"><a href="#2-检查-GPU-支持" class="headerlink" title="2. 检查 GPU 支持"></a>2. 检查 GPU 支持</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">device = torch.device(<span class="string">&quot;cuda&quot;</span> <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> <span class="string">&quot;cpu&quot;</span>)  </span><br></pre></td></tr></table></figure>
+<h3 id="3-创建自定义数据集"><a href="#3-创建自定义数据集" class="headerlink" title="3. 创建自定义数据集"></a>3. 创建自定义数据集</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">CustomDataset</span>(<span class="title class_ inherited__">Dataset</span>):  </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, data, labels, transform=<span class="literal">None</span></span>):  </span><br><span class="line">        self.data = data  </span><br><span class="line">        self.labels = labels  </span><br><span class="line">        self.transform = transform  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__len__</span>(<span class="params">self</span>):  </span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(self.data)  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__getitem__</span>(<span class="params">self, index</span>):  </span><br><span class="line">        x = self.data[index]  </span><br><span class="line">        y = self.labels[index]  </span><br><span class="line">  </span><br><span class="line">        <span class="keyword">if</span> self.transform:  </span><br><span class="line">            x = self.transform(x)  </span><br><span class="line">  </span><br><span class="line">        <span class="keyword">return</span> x, y  </span><br></pre></td></tr></table></figure>
+<h3 id="4-使用数据增强"><a href="#4-使用数据增强" class="headerlink" title="4. 使用数据增强"></a>4. 使用数据增强</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">transform = transforms.Compose([  </span><br><span class="line">    transforms.RandomHorizontalFlip(),  </span><br><span class="line">    transforms.RandomRotation(<span class="number">10</span>),  </span><br><span class="line">    transforms.ToTensor(),  </span><br><span class="line">])  </span><br></pre></td></tr></table></figure>
+<h3 id="5-数据加载"><a href="#5-数据加载" class="headerlink" title="5. 数据加载"></a>5. 数据加载</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">train_dataset = CustomDataset(train_data, train_labels, transform=transform)</span><br><span class="line">train_loader = DataLoader(train_dataset, batch_size=<span class="number">64</span>, shuffle=<span class="literal">True</span>)  </span><br></pre></td></tr></table></figure>
+<h3 id="6-定义神经网络模型"><a href="#6-定义神经网络模型" class="headerlink" title="6. 定义神经网络模型"></a>6. 定义神经网络模型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Net</span>(nn.Module):  </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):  </span><br><span class="line">        <span class="built_in">super</span>(Net, self).__init__()  </span><br><span class="line">        self.conv1 = nn.Conv2d(<span class="number">1</span>, <span class="number">32</span>, kernel_size=<span class="number">3</span>)  </span><br><span class="line">        self.fc1 = nn.Linear(<span class="number">32</span> * <span class="number">28</span> * <span class="number">28</span>, <span class="number">128</span>)  </span><br><span class="line">        self.fc2 = nn.Linear(<span class="number">128</span>, <span class="number">10</span>)  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):  </span><br><span class="line">        x = F.relu(self.conv1(x))  </span><br><span class="line">        x = x.view(x.size(<span class="number">0</span>), -<span class="number">1</span>)  <span class="comment"># Flatten the tensor  </span></span><br><span class="line">        x = F.relu(self.fc1(x))  </span><br><span class="line">        x = self.fc2(x)  </span><br><span class="line">        <span class="keyword">return</span> x  </span><br></pre></td></tr></table></figure>
+<h3 id="7-实例化模型和优化器"><a href="#7-实例化模型和优化器" class="headerlink" title="7. 实例化模型和优化器"></a>7. 实例化模型和优化器</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">model = Net().to(device)  </span><br><span class="line">optimizer = optim.Adam(model.parameters(), lr=<span class="number">0.001</span>)  </span><br></pre></td></tr></table></figure>
+<h3 id="8-定义损失函数"><a href="#8-定义损失函数" class="headerlink" title="8. 定义损失函数"></a>8. 定义损失函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">criterion = nn.CrossEntropyLoss()  </span><br></pre></td></tr></table></figure>
+<h3 id="9-训练模型"><a href="#9-训练模型" class="headerlink" title="9. 训练模型"></a>9. 训练模型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(num_epochs):  </span><br><span class="line">    <span class="keyword">for</span> batch_idx, (data, target) <span class="keyword">in</span> <span class="built_in">enumerate</span>(train_loader):  </span><br><span class="line">        data, target = data.to(device), target.to(device)  </span><br><span class="line">  </span><br><span class="line">        optimizer.zero_grad()  <span class="comment"># 清空梯度  </span></span><br><span class="line">        output = model(data)  <span class="comment"># 前向传播  </span></span><br><span class="line">        loss = criterion(output, target)  <span class="comment"># 计算损失  </span></span><br><span class="line">        loss.backward()  <span class="comment"># 反向传播  </span></span><br><span class="line">        optimizer.step()  <span class="comment"># 更新权重  </span></span><br><span class="line">  </span><br><span class="line">        <span class="keyword">if</span> batch_idx % log_interval == <span class="number">0</span>:  </span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;Train Epoch: <span class="subst">&#123;epoch&#125;</span> [<span class="subst">&#123;batch_idx * <span class="built_in">len</span>(data)&#125;</span>/<span class="subst">&#123;<span class="built_in">len</span>(train_loader.dataset)&#125;</span> (<span class="subst">&#123;<span class="number">100.</span> * batch_idx / <span class="built_in">len</span>(train_loader):<span class="number">.0</span>f&#125;</span>%)]\tLoss: <span class="subst">&#123;loss.item():<span class="number">.6</span>f&#125;</span>&quot;</span>)  </span><br></pre></td></tr></table></figure>
+<h3 id="10-评估模型"><a href="#10-评估模型" class="headerlink" title="10. 评估模型"></a>10. 评估模型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">model.<span class="built_in">eval</span>()  <span class="comment"># 设置为评估模式  </span></span><br><span class="line">test_loss = <span class="number">0</span>  </span><br><span class="line">correct = <span class="number">0</span>  </span><br><span class="line"><span class="keyword">with</span> torch.no_grad():  <span class="comment"># 禁用梯度计算  </span></span><br><span class="line">    <span class="keyword">for</span> data, target <span class="keyword">in</span> test_loader:  </span><br><span class="line">        data, target = data.to(device), target.to(device)  </span><br><span class="line">        output = model(data)  </span><br><span class="line">        test_loss += criterion(output, target).item() <span class="comment"># 累加测试集的损失</span></span><br><span class="line">pred = output.argmax(dim=<span class="number">1</span>, keepdim=<span class="literal">True</span>) <span class="comment"># 获取概率最高的预测结果</span></span><br><span class="line">correct += pred.eq(target.view_as(pred)).<span class="built_in">sum</span>().item()</span><br><span class="line"></span><br><span class="line">test_loss /= <span class="built_in">len</span>(test_loader.dataset)</span><br><span class="line">test_accuracy = <span class="number">100.</span> * correct / <span class="built_in">len</span>(test_loader.dataset)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;Test set: Average loss: <span class="subst">&#123;test_loss:<span class="number">.4</span>f&#125;</span>, Accuracy: <span class="subst">&#123;correct&#125;</span>/<span class="subst">&#123;<span class="built_in">len</span>(test_loader.dataset)&#125;</span> (<span class="subst">&#123;test_accuracy:<span class="number">.0</span>f&#125;</span>%)&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="11-保存和加载模型"><a href="#11-保存和加载模型" class="headerlink" title="11. 保存和加载模型"></a>11. 保存和加载模型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 保存模型  </span></span><br><span class="line">torch.save(model.state_dict(), <span class="string">&#x27;model.pth&#x27;</span>)  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 加载模型  </span></span><br><span class="line">model = Net()  </span><br><span class="line">model.load_state_dict(torch.load(<span class="string">&#x27;model.pth&#x27;</span>))  </span><br><span class="line">model.to(device)  </span><br></pre></td></tr></table></figure>
+<h3 id="12-使用-GPU-加速"><a href="#12-使用-GPU-加速" class="headerlink" title="12. 使用 GPU 加速"></a>12. 使用 GPU 加速</h3><p>如果有 NVIDIA GPU，并且已经安装了 CUDA，那么 PyTorch 可以利用它来加速训练过程。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">model = model.to(device)  </span><br><span class="line">data = data.to(device)  </span><br><span class="line">target = target.to(device)  </span><br></pre></td></tr></table></figure>
+<h3 id="13-使用-TensorBoard-进行可视化"><a href="#13-使用-TensorBoard-进行可视化" class="headerlink" title="13. 使用 TensorBoard 进行可视化"></a>13. 使用 TensorBoard 进行可视化</h3><p>TensorBoard 是 TensorFlow 的一个可视化工具，但 PyTorch 用户也可以通过 <code>torch.utils.tensorboard</code> 使用它。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.utils.tensorboard <span class="keyword">import</span> SummaryWriter  </span><br><span class="line">  </span><br><span class="line">writer = SummaryWriter()  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(num_epochs):  </span><br><span class="line">    <span class="comment"># 进行训练和记录...  </span></span><br><span class="line">    writer.add_scalar(<span class="string">&#x27;Loss/train&#x27;</span>, loss.item(), epoch)  </span><br><span class="line">    writer.add_scalar(<span class="string">&#x27;Accuracy/train&#x27;</span>, accuracy, epoch)  </span><br><span class="line">    <span class="comment"># ...  </span></span><br><span class="line">  </span><br><span class="line">writer.close()  </span><br></pre></td></tr></table></figure>
+<h3 id="14-调整学习率"><a href="#14-调整学习率" class="headerlink" title="14. 调整学习率"></a>14. 调整学习率</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=<span class="number">10</span>, gamma=<span class="number">0.1</span>)  </span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(num_epochs):  </span><br><span class="line">    scheduler.step()  <span class="comment"># 更新学习率  </span></span><br><span class="line">    <span class="comment"># 进行训练...  </span></span><br></pre></td></tr></table></figure>
+<h3 id="15-使用预训练模型"><a href="#15-使用预训练模型" class="headerlink" title="15. 使用预训练模型"></a>15. 使用预训练模型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torchvision.models <span class="keyword">as</span> models  </span><br><span class="line">  </span><br><span class="line">model = models.resnet18(pretrained=<span class="literal">True</span>)   </span><br></pre></td></tr></table></figure>
+<h3 id="16-迁移学习"><a href="#16-迁移学习" class="headerlink" title="16. 迁移学习"></a>16. 迁移学习</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> param <span class="keyword">in</span> model.parameters():  </span><br><span class="line">    param.requires_grad = <span class="literal">False</span>  <span class="comment"># 冻结模型参数  </span></span><br><span class="line">  </span><br><span class="line"><span class="comment"># 替换最后的全连接层以适应新的类别数  </span></span><br><span class="line">model.fc = nn.Linear(model.fc.in_features, num_classes)  </span><br></pre></td></tr></table></figure>
+<center><h1>PyTorch 高频用法 (1)</h1></center>
+
+<h3 id="数学运算"><a href="#数学运算" class="headerlink" title="数学运算"></a>数学运算</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">torch.add, torch.sub, torch.mul, torch.div <span class="comment"># 张量加法，减法，乘法，除法</span></span><br><span class="line"></span><br><span class="line">torch.mul, torch.dot <span class="comment"># 数乘、点积</span></span><br><span class="line"></span><br><span class="line">torch.mm, torch.matmul <span class="comment"># 矩阵乘法</span></span><br><span class="line"></span><br><span class="line">torch.<span class="built_in">pow</span>, torch.exp, torch.sqrt <span class="comment"># 幂运算、e的指数、平方根</span></span><br><span class="line"></span><br><span class="line">torch.<span class="built_in">sum</span>, torch.mean, torch.std <span class="comment"># 分别计算张量的和，均值以及标准差</span></span><br><span class="line"></span><br><span class="line">torch.<span class="built_in">max</span>, torch.<span class="built_in">min</span> <span class="comment"># 最大值，最小值</span></span><br><span class="line"></span><br><span class="line">torch.cumsum, torch.cumprod <span class="comment"># 分别计算张量的累积和和累积积</span></span><br><span class="line"></span><br><span class="line">torch.clamp <span class="comment"># 将输入张量的每个元素限制在[min, max]范围内</span></span><br><span class="line"></span><br><span class="line">torch.einsum <span class="comment"># 提供了一种计算多线性代数方程的方式</span></span><br><span class="line"></span><br><span class="line">torch.bmm, torch.batch_matmul <span class="comment"># 批量矩阵乘法</span></span><br><span class="line"></span><br><span class="line">torch.scatter, torch.scatter_add <span class="comment"># 将源张量的值沿指定轴散布到指定的索引处</span></span><br><span class="line"></span><br><span class="line">torch.gather <span class="comment"># 根据索引从输入张量中取值</span></span><br><span class="line"></span><br><span class="line">torch.index_select <span class="comment"># 根据给定的索引从输入张量中选择元素</span></span><br><span class="line"></span><br><span class="line">torch.masked_select <span class="comment"># 根据布尔掩码从输入张量中选择元素</span></span><br><span class="line"></span><br><span class="line">torch.split, torch.chunk <span class="comment"># 将张量分割成多个块</span></span><br><span class="line"></span><br><span class="line">torch.sort, torch.topk <span class="comment"># 排序以及返回给定维度上最大的k个元素</span></span><br><span class="line"></span><br><span class="line">torch.view_as_real, torch.view_as_complex <span class="comment"># 把复数张量视作实数张量、把实数张量视作复数张量</span></span><br><span class="line"></span><br><span class="line">torch.eig, torch.svd, torch.qr <span class="comment"># 特征分解，奇异值分解，QR分解</span></span><br><span class="line"></span><br><span class="line">torch.inverse <span class="comment"># 计算方阵的逆矩阵</span></span><br><span class="line"></span><br><span class="line">tensor.t, tensor.transpose <span class="comment"># 转置，前者只能用于二维张量，后者可以转置任意两个维度</span></span><br></pre></td></tr></table></figure>
+<h3 id="张量操作"><a href="#张量操作" class="headerlink" title="张量操作"></a>张量操作</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">torch.tensor <span class="comment"># 创建一个张量</span></span><br><span class="line"></span><br><span class="line">torch.from_numpy, torch.as_tensor <span class="comment"># 从 NumPy 数组创建张量</span></span><br><span class="line"></span><br><span class="line">torch.zeros, torch.ones, torch.eye <span class="comment"># 创建一个全零或全一的张量或二维单位矩阵</span></span><br><span class="line"></span><br><span class="line">torch.zeros_like, torch.ones_like <span class="comment"># 创建与给定张量形状和类型相同的全零或全一张量</span></span><br><span class="line"></span><br><span class="line">torch.empty, torch.clone <span class="comment"># 创建一个未初始化的张量，克隆一个张量</span></span><br><span class="line"></span><br><span class="line">torch.rand, torch.randn, torch.normal <span class="comment"># 创建一个填充了均匀分布、标准正态分布以及指定均值方差正态分布随机数的张量</span></span><br><span class="line"></span><br><span class="line">torch.randint <span class="comment"># 生成一个给定形状的整数张量，其元素从指定的区间[low, high)内随机采样</span></span><br><span class="line"></span><br><span class="line">torch.full <span class="comment"># 生成一个给定形状的张量，所有元素初始化为指定的值</span></span><br><span class="line"></span><br><span class="line">torch.arange <span class="comment"># 创建一个按指定范围和步长的一维张量</span></span><br><span class="line"></span><br><span class="line">torch.linspace, torch.logspace <span class="comment"># 创建包含在指定范围内均匀分布以及对数尺度分布的指定数量的点的一维张量</span></span><br><span class="line"></span><br><span class="line">torch.randperm <span class="comment"># 生成一个随机排列的张量</span></span><br><span class="line"></span><br><span class="line">torch.cat <span class="comment"># 将张量在指定维度上拼接</span></span><br><span class="line"></span><br><span class="line">torch.stack <span class="comment"># 在新的维度上堆叠张量序列</span></span><br><span class="line"></span><br><span class="line">tensor.view, tensor.reshape <span class="comment"># 重塑张量，但后者能自动处理不连续的张量</span></span><br><span class="line"></span><br><span class="line">tensor.squeeze, tensor.unsqueeze <span class="comment"># 去除或添加维度为1的维度</span></span><br><span class="line"></span><br><span class="line">tensor.permute <span class="comment"># 重新排列张量的维度</span></span><br><span class="line"></span><br><span class="line">tensor.expand_as, tensor.repeat, torch.tile <span class="comment"># 扩展和重复张量</span></span><br><span class="line"></span><br><span class="line">torch.where <span class="comment"># 一个条件选择操作，它接受三个参数：一个条件张量和两个张量（或标量）作为选项</span></span><br><span class="line"></span><br><span class="line">torch.<span class="built_in">any</span>, torch.<span class="built_in">all</span> <span class="comment"># 测试一个张量中是否至少有一个元素是非零，测试张量中的所有元素是否都是非零</span></span><br><span class="line"></span><br><span class="line">torch.nonzero <span class="comment"># 返回一个包含输入张量中所有非零元素索引的张量</span></span><br><span class="line"></span><br><span class="line">torch.bernoulli, torch.multinomial, torch.normal, torch.poisson <span class="comment"># 从伯努利分布、多项分布、正态分布、泊松分布中抽取样本</span></span><br></pre></td></tr></table></figure>
+<h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">torch.nn.Module <span class="comment"># 所有神经网络模块的基类</span></span><br><span class="line"></span><br><span class="line">torch.nn.Linear <span class="comment"># 全连接层</span></span><br><span class="line"></span><br><span class="line">torch.nn.Embedding <span class="comment"># 用于创建词嵌入</span></span><br><span class="line"></span><br><span class="line">torch.nn.Identity <span class="comment"># 一个占位层，输出与输入相同</span></span><br><span class="line"></span><br><span class="line">torch.nn.Conv1d, torch.nn.Conv2d, torch.nn.Conv3d <span class="comment"># 一维卷积、二维卷积、三维卷积</span></span><br><span class="line"></span><br><span class="line">torch.nn.ConvTranspose2d <span class="comment"># 转置卷积层（有时也称为反卷积），用于从低分辨率特征图生成更高分辨率的特征图</span></span><br><span class="line"></span><br><span class="line">torch.nn.BatchNorm1d, torch.nn.BatchNorm2d, torch.nn.BatchNorm3d <span class="comment"># 对小批量的一维、二维、三维数据进行批标准化处理</span></span><br><span class="line"></span><br><span class="line">torch.nn.GroupNorm, torch.nn.LayerNorm <span class="comment"># 分组归一化和层归一化</span></span><br><span class="line"></span><br><span class="line">torch.nn.SyncBatchNorm, torch.nn.LocalResponseNorm <span class="comment"># 跨多个 GPU 设备同步的批量归一化，局部响应归一化</span></span><br><span class="line"></span><br><span class="line">torch.nn.ReLU, torch.nn.Sigmoid, torch.nn.Tanh <span class="comment"># 修正线性单元 ReLU 激活函数、Sigmoid 激活函数、双曲正切 Tanh 激活函数</span></span><br><span class="line"></span><br><span class="line">torch.nn.MaxPool2d, torch.nn.AvgPool2d <span class="comment"># 二维最大池化层、二维平均池化层</span></span><br><span class="line"></span><br><span class="line">torch.nn.AdaptiveMaxPool2d, torch.nn.AdaptiveAvgPool2d <span class="comment"># 二维自适应最大池化层、二维自适应平均池化层</span></span><br><span class="line"></span><br><span class="line">torch.nn.Dropout, torch.nn.Dropout2d, torch.nn.Dropout3d <span class="comment"># 在训练过程中随机使神经元失活，防止过拟合</span></span><br><span class="line"></span><br><span class="line">torch.nn.Parameter <span class="comment"># 一种特殊的张量，被视为模块的参数</span></span><br><span class="line"></span><br><span class="line">torch.nn.ParameterList, torch.nn.ParameterDict <span class="comment"># 包含参数的列表、字典，参数可以是 torch.nn.Parameter</span></span><br><span class="line"></span><br><span class="line">torch.nn.Unfold, torch.nn.Fold <span class="comment"># 用于实现卷积的滑动窗口和其逆操作</span></span><br><span class="line"></span><br><span class="line">torch.nn.Sequential <span class="comment"># 一个时序容器，模块将按照它们在构造函数中传递的顺序添加到容器中</span></span><br><span class="line"></span><br><span class="line">torch.nn.ModuleList, torch.nn.ModuleDict <span class="comment"># 包含子模块的列表、字典，类似普通列表和字典</span></span><br><span class="line"></span><br><span class="line">torch.nn.RNN, torch.nn.LSTM, torch.nn.GRU <span class="comment"># 循环神经网络，长短期记忆网络层和门控循环单元层</span></span><br><span class="line"></span><br><span class="line">torch.nn.LSTMCell, torch.nn.GRUCell <span class="comment"># LSTM单元和GRU单元</span></span><br><span class="line"></span><br><span class="line">torch.nn.MultiheadAttention, torch.nn.Transformer <span class="comment"># 多头注意力机制和 Transformer 模型</span></span><br></pre></td></tr></table></figure>
+<center><h1>PyTorch 高频用法 (2)</h1></center>
+
+<h3 id="数据加载"><a href="#数据加载" class="headerlink" title="数据加载"></a>数据加载</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">torch.utils.data.Dataset <span class="comment"># 用于创建自定义数据集的抽象类</span></span><br><span class="line"></span><br><span class="line">torch.utils.data.TensorDataset <span class="comment"># 当数据已经是 Tensor 时，可以直接使用 TensorDataset 将数据包装成 Dataset 对象</span></span><br><span class="line"></span><br><span class="line">torch.utils.data.Subset <span class="comment"># 从一个大的数据集中选择一个子集</span></span><br><span class="line"></span><br><span class="line">torch.utils.data.DataLoader <span class="comment"># 封装了数据集，并提供批量处理、打乱数据、多线程加载等功能</span></span><br><span class="line"></span><br><span class="line">torch.utils.data.IterableDataset <span class="comment"># 用于创建基于迭代器的数据集，适用于大规模数据集或流式数据</span></span><br><span class="line"></span><br><span class="line">torch.utils.data.SequentialSampler <span class="comment"># 按顺序依次抽取样本，不进行打乱</span></span><br><span class="line"></span><br><span class="line">torch.utils.data.RandomSampler <span class="comment"># 随机抽取样本，每个 epoch 数据的顺序都会被打乱</span></span><br><span class="line"></span><br><span class="line">torch.utils.data.SubsetRandomSampler <span class="comment"># 随机抽取数据集的一个子集，通常用于分割训练 / 验证集</span></span><br><span class="line"></span><br><span class="line">torch.utils.data.WeightedRandomSampler <span class="comment"># 根据每个样本的权重进行随机抽取，用于处理不均衡数据集</span></span><br><span class="line"></span><br><span class="line">torch.utils.data.BatchSampler <span class="comment"># 将sampler抽取的样本分组成批次</span></span><br><span class="line"></span><br><span class="line">torch.utils.data.distributed.DistributedSampler <span class="comment"># 采样器，用于分布式训练，确保每个进程得到不同部分的数据集</span></span><br></pre></td></tr></table></figure>
+<h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">torch.nn.MSELoss, torch.nn.BCELoss, torch.nn.NLLLoss <span class="comment"># 均方误差损失，二元交叉熵损失，负对数似然损失</span></span><br><span class="line"></span><br><span class="line">torch.nn.L1Loss, torch.nn.SmoothL1Loss <span class="comment"># 绝对误差损失和平滑L1损失</span></span><br><span class="line"></span><br><span class="line">torch.nn.CrossEntropyLoss <span class="comment"># 交叉熵损失，结合了 LogSoftmax 和 NLLLoss</span></span><br><span class="line"></span><br><span class="line">torch.nn.GaussianNLLLoss <span class="comment"># 用于基于高斯分布的不确定性估计的回归任务</span></span><br><span class="line"></span><br><span class="line">torch.nn.PoissonNLLLoss <span class="comment"># 泊松负对数似然损失，用于回归任务，特别是当目标值是计数或事件率时</span></span><br><span class="line"></span><br><span class="line">torch.nn.BCEWithLogitsLoss <span class="comment"># 结合了 Sigmoid 层和 BCELoss 的损失函数</span></span><br><span class="line"></span><br><span class="line">torch.nn.KLDivLoss <span class="comment"># KL散度损失，用于计算预测概率分布和目标概率分布之间的 Kullback-Leibler 散度</span></span><br><span class="line"></span><br><span class="line">torch.nn.CosineEmbeddingLoss <span class="comment"># 计算余弦相似度的损失函数，用于学习嵌入表示</span></span><br><span class="line"></span><br><span class="line">torch.nn.HingeEmbeddingLoss <span class="comment"># 合页嵌入损失，用于学习基于距离的损失</span></span><br><span class="line"></span><br><span class="line">torch.nn.MarginRankingLoss <span class="comment"># 间隔排序损失，用于排序任务</span></span><br><span class="line"></span><br><span class="line">torch.nn.TripletMarginLoss <span class="comment"># 三元组间隔损失，用于度量学习，目标是使相似的样本距离近，不相似的样本距离远</span></span><br><span class="line"></span><br><span class="line">torch.nn.CTCLoss <span class="comment"># 连续时间分类损失，用于序列到序列的学习任务，如语音识别</span></span><br><span class="line"></span><br><span class="line">torch.nn.MultiLabelSoftMarginLoss, torch.nn.MultiLabelMarginLoss <span class="comment"># 多标签分类问题的损失</span></span><br><span class="line"></span><br><span class="line">torch.nn.SoftMarginLoss, torch.nn.MultiMarginLoss <span class="comment"># 用于二分类和多分类的合页损失版本</span></span><br></pre></td></tr></table></figure>
+<h3 id="梯度管理"><a href="#梯度管理" class="headerlink" title="梯度管理"></a>梯度管理</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">tensor.grad <span class="comment"># 获取张量的梯度</span></span><br><span class="line"></span><br><span class="line">tensor.retain_grad <span class="comment"># 保留梯度</span></span><br><span class="line"></span><br><span class="line">torch.no_grad, tensor.detach <span class="comment"># 禁用张量的梯度</span></span><br><span class="line"></span><br><span class="line">tensor.requires_grad_ <span class="comment"># 设置张量的 requires_grad 属性，以确定是否需要计算梯度</span></span><br><span class="line"></span><br><span class="line">tensor.backward <span class="comment"># 在张量上执行反向传播，计算梯度</span></span><br><span class="line"></span><br><span class="line">torch.autograd <span class="comment"># 提供自动微分的功能，用于计算梯度</span></span><br><span class="line"></span><br><span class="line">torch.autograd.grad <span class="comment"># 计算和返回给定张量的梯度</span></span><br><span class="line"></span><br><span class="line">torch.autograd.gradcheck <span class="comment"># 用于检查自定义autograd运算的梯度正确性</span></span><br><span class="line"></span><br><span class="line">torch.autograd.Variable <span class="comment"># 包装了张量并记录了梯度计算历史的变量</span></span><br><span class="line"></span><br><span class="line">torch.autograd.backward <span class="comment"># 给定张量和梯度，计算并回传梯度</span></span><br><span class="line"></span><br><span class="line">torch.autograd.Function <span class="comment"># 通过定义 forward 和 backward 方法来创建自定义的梯度计算功能</span></span><br><span class="line"></span><br><span class="line">torch.autograd.functional <span class="comment"># 计算更复杂的梯度操作，如高阶导数和雅可比矩阵</span></span><br><span class="line"></span><br><span class="line">optimizer.zero_grad, tensor.grad.zero_ <span class="comment"># 梯度清零</span></span><br><span class="line"></span><br><span class="line">torch.nn.utils.clip_grad_norm_, torch.nn.utils.clip_grad_value_ <span class="comment"># 对梯度进行裁剪，对梯度的每个值进行裁剪</span></span><br><span class="line"></span><br><span class="line">torch.set_grad_enabled(<span class="literal">False</span>), torch.set_grad_enabled(<span class="literal">True</span>) <span class="comment"># 禁用或启用梯度计算</span></span><br></pre></td></tr></table></figure>
+<h3 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">torch.jit <span class="comment"># 提供 Just-In-Time 编译功能，将 PyTorch 代码转换为更高效的 TorchScript 代码</span></span><br><span class="line"></span><br><span class="line">torch.jit.trace <span class="comment"># 通过运行函数来跟踪模型，捕获其结构</span></span><br><span class="line"></span><br><span class="line">torch.jit.script <span class="comment"># 将 Python 函数转换为 TorchScript 代码</span></span><br><span class="line"></span><br><span class="line">torch.jit.fork, torch.jit.wait <span class="comment"># 用于并行执行任务和同步等待结果，有助于优化执行性能</span></span><br><span class="line"></span><br><span class="line">torch.onnx <span class="comment"># 导出 PyTorch 模型到 ONNX（Open Neural Network Exchange）格式</span></span><br><span class="line"></span><br><span class="line">torch.backends.cudnn.benchmark <span class="comment"># 让cuDNN自动寻找最适合当前配置的高效算法，对于固定输入大小可提高运行性能</span></span><br><span class="line"></span><br><span class="line">torch.backends.cudnn.deterministic <span class="comment"># 当设置为True时，可以确保得到确定性的计算结果，但可能会影响性能</span></span><br><span class="line"></span><br><span class="line">torch.backends.cudnn.enabled <span class="comment"># 指示cuDNN是否可用</span></span><br><span class="line"></span><br><span class="line">torch.nn.utils.fusion <span class="comment"># 将多个线性层或卷积层融合成一个层，以提高效率</span></span><br><span class="line"></span><br><span class="line">torch.nn.utils.prune <span class="comment"># 提供模型修剪技术，可以移除不重要的参数</span></span><br><span class="line"></span><br><span class="line">prune.random_unstructured(module, name=<span class="string">&#x27;weight&#x27;</span>, amount=<span class="number">0.3</span>) <span class="comment"># 随机无结构剪枝</span></span><br><span class="line"></span><br><span class="line">prune.l1_unstructured(module, name=<span class="string">&#x27;weight&#x27;</span>, amount=<span class="number">0.3</span>) <span class="comment"># L1范数无结构剪枝，剪去权重矩阵中绝对值最小的部分</span></span><br><span class="line"></span><br><span class="line">prune.ln_structured(module, name=<span class="string">&#x27;weight&#x27;</span>, amount=<span class="number">0.5</span>, n=<span class="number">2</span>, dim=<span class="number">0</span>) <span class="comment"># LN范数结构剪枝，根据权重矩阵的LN范数</span></span><br><span class="line"></span><br><span class="line">prune.random_structured(module, name=<span class="string">&#x27;weight&#x27;</span>, amount=<span class="number">0.3</span>, dim=<span class="number">0</span>) <span class="comment"># 随机结构剪枝</span></span><br><span class="line"></span><br><span class="line">prune.global_unstructured(parameters_to_prune, pruning_method, amount) <span class="comment"># 全局无结构剪枝</span></span><br><span class="line"></span><br><span class="line">prune.BasePruningMethod <span class="comment"># 继承该类并实现 compute_mask 方法，决定哪些权重会被剪枝</span></span><br><span class="line"></span><br><span class="line">prune.remove(module, <span class="string">&#x27;weight&#x27;</span>) <span class="comment"># 使剪枝永久生效</span></span><br><span class="line"></span><br><span class="line">torch.nn.utils.convert_parameters <span class="comment"># 在向量形式和参数形式之间转换模型参数</span></span><br><span class="line"></span><br><span class="line">torch.quantization <span class="comment"># 用于模型量化的工具，减少模型大小和提高推理速度</span></span><br><span class="line"></span><br><span class="line">torch.utils.checkpoint <span class="comment"># 通过 checkpointing 技术来减少运行时内存消耗</span></span><br><span class="line"></span><br><span class="line">torch.cuda.amp <span class="comment"># 提供自动混合精度训练的功能，可以减少内存使用并提高训练速度</span></span><br><span class="line"></span><br><span class="line">torch.autograd.profiler <span class="comment"># 上下文管理器，用于分析 CPU 和 CUDA 性能</span></span><br></pre></td></tr></table></figure>
+<center><h1>PyTorch 高频用法 (3)</h1></center>
+
+<h3 id="优化器"><a href="#优化器" class="headerlink" title="优化器"></a>优化器</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">torch.optim.SGD <span class="comment"># 随机梯度下降优化器</span></span><br><span class="line"></span><br><span class="line">torch.optim.ASGD <span class="comment"># 平均随机梯度下降，ASGD 是 SGD 的一个变种，它在优化过程中维护一个参数的运行平均值</span></span><br><span class="line"></span><br><span class="line">torch.optim.Adam <span class="comment"># 自适应矩估计，结合了 AdaGrad 和 RMSProp 优化器的特点，通常对超参数的选择不是特别敏感</span></span><br><span class="line"></span><br><span class="line">torch.optim.AdamW <span class="comment"># 对 Adam 的改进版本，加入了权重衰减，通常在某些任务中会取得更好的泛化性能</span></span><br><span class="line"></span><br><span class="line">torch.optim.Adamax <span class="comment"># Adam 的一个变种，它使用无穷范数来计算梯度的规模，有时在某些任务上比 Adam 更稳定</span></span><br><span class="line"></span><br><span class="line">torch.optim.SparseAdam <span class="comment"># 专为稀疏张量设计的 Adam 算法的变种</span></span><br><span class="line"></span><br><span class="line">torch.optim.Adagrad <span class="comment"># 自适应梯度算法，调整每个参数的学习率</span></span><br><span class="line"></span><br><span class="line">torch.optim.Adadelta <span class="comment"># Adagrad 的一个扩展，试图减少其激进的、单调递减的学习率</span></span><br><span class="line"></span><br><span class="line">torch.optim.RMSprop <span class="comment"># 以均方根传播为基础的自适应学习率方法，通常用于非凸优化</span></span><br><span class="line"></span><br><span class="line">torch.optim.Rprop <span class="comment"># 弹性反向传播，Rprop只使用梯度的符号来更新参数，每个参数都有各自的更新步长</span></span><br><span class="line"></span><br><span class="line">torch.optim.LBFGS <span class="comment"># 利用拟牛顿方法的一种算法，适用于小规模数据集</span></span><br><span class="line"></span><br><span class="line">torch.optim.Optimizer <span class="comment"># 通过继承该类并实现所需的优化逻辑来创建自定义的优化器</span></span><br></pre></td></tr></table></figure>
+<h3 id="学习率"><a href="#学习率" class="headerlink" title="学习率"></a>学习率</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">torch.optim.lr_scheduler.StepLR <span class="comment"># 每隔一定的 epoch 数，学习率乘以一个固定的因子 gamma</span></span><br><span class="line"></span><br><span class="line">torch.optim.lr_scheduler.MultiStepLR <span class="comment"># 在一系列预定义的 epoch 数处，学习率乘以一个固定的因子</span></span><br><span class="line"></span><br><span class="line">torch.optim.lr_scheduler.LinearLR <span class="comment"># 以线性的方式调整学习率，从一个初始学习率线性衰减到一个结束学习率</span></span><br><span class="line"></span><br><span class="line">torch.optim.lr_scheduler.ExponentialLR <span class="comment"># 学习率以指数方式衰减，每个epoch乘以一个固定的因子</span></span><br><span class="line"></span><br><span class="line">torch.optim.lr_scheduler.CosineAnnealingLR <span class="comment"># 使用余弦退火的方式调整学习率，在每个周期内先降低再升高</span></span><br><span class="line"></span><br><span class="line">torch.optim.lr_scheduler.LambdaLR <span class="comment"># 自定义学习率，接收 epoch 索引作为输入，并返回一个乘以基础学习率的因子</span></span><br><span class="line"></span><br><span class="line">torch.optim.lr_scheduler.ReduceLROnPlateau <span class="comment"># 当模型的性能不再提升时，减少学习率，例如当验证集的损失不再下降时</span></span><br><span class="line"></span><br><span class="line">torch.optim.lr_scheduler.CyclicLR <span class="comment"># 循环地调整学习率，在一个范围内循环增加和减少</span></span><br><span class="line"></span><br><span class="line">torch.optim.lr_scheduler.OneCycleLR<span class="comment"># 用于训练周期性调整学习率，通常在训练开始时快速增加到最大学习率，然后逐渐减少</span></span><br><span class="line"></span><br><span class="line">torch.optim.lr_scheduler.CosineAnnealingWarmRestarts <span class="comment"># 使用余弦退火调整学习率，并在每次重启时重新设置学习率</span></span><br><span class="line"></span><br><span class="line">torch.optim.lr_scheduler.TriangularLR <span class="comment"># 循环学习率策略，其中学习率在给定的最小值和最大值之间循环变化</span></span><br><span class="line"></span><br><span class="line">torch.optim.lr_scheduler.Triangular2LR <span class="comment"># TriangularLR 的一个变种，其中每个循环的学习率最大值减半</span></span><br></pre></td></tr></table></figure>
+<h3 id="functional函数"><a href="#functional函数" class="headerlink" title="functional函数"></a>functional函数</h3><p><code>torch.nn.functional</code> 模块包含了一系列用于构建神经网络的函数，它们与在 <code>torch.nn</code> 中的类似，但 <code>torch.nn.functional</code> 中的函数通常是无状态的，意味着它们不包含可训练的参数。这些函数通常用于执行某些操作，比如激活函数、损失函数和各种层的操作。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line">F.interpolate <span class="comment"># 对数据进行上采样或下采样，支持多种插值模式，如最近邻、线性、双线性、三线性等</span></span><br><span class="line"></span><br><span class="line">F.pad <span class="comment"># 对张量进行填充，有 constant，reflect，circular 以及 replicate 等模式</span></span><br><span class="line"></span><br><span class="line">F.relu, F.sigmoid, F.tanh, F.softmax <span class="comment"># ReLU，Sigmoid，Tanh 以及 Softmax 激活函数</span></span><br><span class="line"></span><br><span class="line">F.mse_loss, F.cross_entropy, F.nll_loss, F.l1_loss <span class="comment"># 均方误差，交叉熵损失，NLL损失，L1损失</span></span><br><span class="line"></span><br><span class="line">F.multilabel_soft_margin_loss, F.triplet_margin_loss, F.margin_ranking_loss, F.cosine_embedding_loss <span class="comment"># 同上</span></span><br><span class="line"></span><br><span class="line">F.conv1d, F.conv2d, F.conv3d, F.conv_transpose2d <span class="comment"># 一维，二维，三维与转置卷积</span></span><br><span class="line"></span><br><span class="line">F.unfold, F.fold <span class="comment"># 多通道2D卷积与转置卷积 </span></span><br><span class="line"></span><br><span class="line">F.max_pool2d, F.avg_pool2d, F.adaptive_max_pool2d, F.adaptive_avg_pool2d <span class="comment"># 最大，平均池化及自适应形式</span></span><br><span class="line"></span><br><span class="line">F.pyramid_pooling <span class="comment"># 金字塔池化</span></span><br><span class="line"></span><br><span class="line">F.batch_norm, F.layer_norm, F.group_norm <span class="comment"># 批量归一化，层归一化及组归一化</span></span><br><span class="line"></span><br><span class="line">F.local_response_norm <span class="comment"># 局部响应归一化  </span></span><br><span class="line"></span><br><span class="line">F.dropout, F.dropout2d, F.dropout3d <span class="comment"># 一维，二维与三维Dropout</span></span><br><span class="line"></span><br><span class="line">F.upsample_nearest, F.upsample_bilinear <span class="comment"># 最近邻，双线性上采样</span></span><br><span class="line"></span><br><span class="line">F.bilinear <span class="comment"># 双线性变换</span></span><br><span class="line"></span><br><span class="line">F.flatten <span class="comment"># 展平张量，从 start_dim 维度开始  </span></span><br><span class="line"></span><br><span class="line">F.affine_grid, F.grid_sample <span class="comment"># 仿射变换</span></span><br><span class="line"></span><br><span class="line">F.gumbel_softmax <span class="comment"># Gumbel Softmax，用于从分类分布中采样</span></span><br></pre></td></tr></table></figure>
+<h3 id="分布式训练"><a href="#分布式训练" class="headerlink" title="分布式训练"></a>分布式训练</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">torch.distributed <span class="comment"># 包含了分布式训练的各种工具和方法</span></span><br><span class="line"></span><br><span class="line">torch.distributed.launch <span class="comment"># 用于启动分布式训练的实用程序</span></span><br><span class="line"></span><br><span class="line">torch.distributed.reduce, torch.distributed.all_reduce <span class="comment"># 在所有进程中对张量进行归约操作</span></span><br><span class="line"></span><br><span class="line">torch.distributed.barrier <span class="comment"># 同步分布式处理中的所有进程</span></span><br><span class="line"></span><br><span class="line">torch.distributed.broadcast <span class="comment"># 从一个进程广播张量到所有其他进程</span></span><br><span class="line"></span><br><span class="line">torch.nn.DataParallel <span class="comment"># 用于在多个GPU上并行运行模块</span></span><br><span class="line"></span><br><span class="line">torch.nn.parallel.DistributedDataParallel <span class="comment"># 分布式训练中的并行数据处理</span></span><br><span class="line"></span><br><span class="line">torch.multiprocessing <span class="comment"># 与Python multiprocessing模块类似的包，但它支持张量共享在进程之间</span></span><br></pre></td></tr></table></figure>
+<h3 id="CUDA管理"><a href="#CUDA管理" class="headerlink" title="CUDA管理"></a>CUDA管理</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">torch.device <span class="comment"># 指定使用CPU或者GPU等设备</span></span><br><span class="line"></span><br><span class="line">tensor.to <span class="comment"># 将张量移动到指定的设备上</span></span><br><span class="line"></span><br><span class="line">torch.cuda.memory_allocated, torch.cuda.max_memory_allocated <span class="comment"># 获取当前CUDA设备显存量和历史最大分配显存大小</span></span><br><span class="line"></span><br><span class="line">torch.cuda.memory_cached <span class="comment"># 获取当前CUDA设备上缓存的显存量</span></span><br><span class="line"></span><br><span class="line">torch.cuda.empty_cache <span class="comment"># 释放当前CUDA设备上未使用的缓存内存</span></span><br><span class="line"></span><br><span class="line">torch.cuda.memory_summary <span class="comment"># 打印CUDA设备的内存使用情况</span></span><br></pre></td></tr></table></figure>
+<h3 id="模型管理"><a href="#模型管理" class="headerlink" title="模型管理"></a>模型管理</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">torch.save <span class="comment"># 保存模型或张量到文件</span></span><br><span class="line"></span><br><span class="line">torch.load <span class="comment"># 从文件加载模型或张量</span></span><br><span class="line"></span><br><span class="line">torch.nn.Module.state_dict <span class="comment"># 获取模型的状态字典，包含了模型的参数和缓存</span></span><br><span class="line"></span><br><span class="line">torch.nn.Module.load_state_dict <span class="comment"># 加载状态字典到模型中</span></span><br><span class="line"></span><br><span class="line">torch.hub <span class="comment"># 提供了一个预训练模型的仓库，可以用来下载和加载经过预训练的模型和模型组件</span></span><br></pre></td></tr></table></figure>
+<h3 id="调试和检查"><a href="#调试和检查" class="headerlink" title="调试和检查"></a>调试和检查</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">torch.version <span class="comment"># 获取当前PyTorch的版本信息</span></span><br><span class="line"></span><br><span class="line">torch.cuda.get_device_name <span class="comment"># 获取当前CUDA设备的名称</span></span><br><span class="line"></span><br><span class="line">torch.set_printoptions <span class="comment"># 设置打印张量时的选项</span></span><br><span class="line"></span><br><span class="line">torch.is_tensor <span class="comment"># 检查对象是否为 PyTorch 张量</span></span><br><span class="line"></span><br><span class="line">torch.is_floating_point <span class="comment"># 检查张量是否为浮点数据类型</span></span><br><span class="line"></span><br><span class="line">torch.cuda.is_available <span class="comment"># 检查CUDA是否可用</span></span><br><span class="line"></span><br><span class="line">module.register_forward_hook(forward_hook) <span class="comment"># 钩子函数，监控变量</span></span><br><span class="line"></span><br><span class="line">module.register_backward_hook(backward_hook) <span class="comment"># 钩子函数，监控梯度</span></span><br><span class="line"></span><br><span class="line">torch.autograd.set_detect_anomaly <span class="comment"># 开启异常检测，可以帮助调试模型中的梯度问题</span></span><br><span class="line"></span><br><span class="line">torch.numel <span class="comment"># 返回张量中元素的总数</span></span><br><span class="line"></span><br><span class="line">torch.random.seed <span class="comment"># 设置随机种子以确保实验的可复现性</span></span><br><span class="line"></span><br><span class="line">torch.manual_seed <span class="comment"># 设定生成随机数的种子，以确保结果可重现</span></span><br></pre></td></tr></table></figure>
+<h3 id="其他函数"><a href="#其他函数" class="headerlink" title="其他函数"></a>其他函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">torchviz <span class="comment"># 一个小型库，用于可视化PyTorch执行图（计算图）。</span></span><br><span class="line"></span><br><span class="line">torch.utils.tensorboard <span class="comment"># 记录训练过程中的参数和指标，方便在TensorBoard中进行可视化分析。</span></span><br><span class="line"></span><br><span class="line">torch.utils.cpp_extension <span class="comment"># 用于创建和加载自定义C++扩展。</span></span><br><span class="line"></span><br><span class="line">torch.from_dlpack <span class="comment"># 从DLpack导入张量。</span></span><br><span class="line"></span><br><span class="line">tensor.to_dlpack <span class="comment"># 将PyTorch张量导出为DLpack。</span></span><br><span class="line"></span><br><span class="line">torch.set_num_threads <span class="comment"># 设置用于并行计算的 OpenMP 线程数。</span></span><br><span class="line"></span><br><span class="line">torch.set_flush_denormal <span class="comment"># 当设置为True时，将会把非正规的浮点数刷新到零，这有助于防止某些操作中的性能下降。</span></span><br><span class="line"></span><br><span class="line">torch.nn.utils.rnn.pack_padded_sequence <span class="comment"># 用于打包RNN的填充序列</span></span><br><span class="line"></span><br><span class="line">torch.nn.utils.rnn.pad_packed_sequence <span class="comment"># 将打包的序列解压回填充序列</span></span><br><span class="line"></span><br><span class="line">torch.nn.utils.weight_norm, torch.nn.utils.remove_weight_norm <span class="comment"># 应用、移除权重归一化</span></span><br><span class="line"></span><br><span class="line">torch.nn.utils.spectral_norm, torch.nn.utils.remove_spectral_norm <span class="comment"># 应用、移除谱归一化</span></span><br><span class="line"></span><br><span class="line">torch.distributions <span class="comment"># 提供一系列概率分布和相关操作，可用于概率编程和贝叶斯推断</span></span><br><span class="line"></span><br><span class="line">torch.distributions.Categorical <span class="comment"># 用于创建具有离散分布的随机变量，常见于强化学习中的策略梯度算法</span></span><br></pre></td></tr></table></figure>
+
+      </div>
+      <div class="post-tags-categories">
+        
+      </div>
+      
+        <div class="copyright">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+    <strong>author:  </strong>Jayden Lee</a>
+    </li>
+    <li class="post-copyright-link">
+    <strong>link:  </strong>
+    <a href="/2024/01/16/Pytorch/" target="_blank" title="PyTorch常见用法">https://picrew.github.io/2024/01/16/Pytorch/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>Copyright notice:   </strong>
+      All articles on this website, unless otherwise stated, adopt <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+      reprint policy. If reproduced, please indicate source!
+    </li>
+  </ul>
+<div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      <!-- 文章详情页的上一页和下一页 -->
+<div class="post-nav">
+
+
+
+  
+  <div class="post-nav-prev post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload lazyload placeholder" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+    </div>
+    <a href="/2024/01/16/Git/" class="post-nav-link">
+      <div class="title">
+        <i class="fas fa-angle-left"></i> Prev:
+        <div class="title-text">Git常见命令</div>
+      </div>
+      
+      <!-- <div class="content">
+        Git 常用命令
+
+核心概念
+工作区（Working Directory）：包含当前代码的本地目录。
+暂存区（Stagi
+      </div> -->
+    </a>
+  </div>
+
+
+
+</div>
+
+    
+    
+
+    <!-- 打赏 -->
+    
+
+    <!-- 分享 -->
+    
+      <!-- https://github.com/overtrue/share.js -->
+<!-- 文章详情页的分享 -->
+<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+
+<script defer src="/js/shareJs/social-share.min.js"></script>
+</script>
+
+<style>
+  .social-share {
+    margin: 20px 0;
+  }
+</style>
+
+
+    
+    
+    <!-- 评论 -->
+    <!-- 评论 -->
+
+  <div id="myComment">
+    
+      
+<section id="comments" style="padding: 1em;">
+	<div id="vcomment" class="comment"></div>
+</section>
+<style>
+	#comments {
+		background: rgba(255,255,255,1);
+		border-radius: 8px;
+	}
+	#veditor {
+		background-image: url('https://img.zcool.cn/community/01a253594c71cfa8012193a329a77f.gif');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: right;
+		background-color: rgba(255, 255, 255, 0);
+		resize: vertical;
+	}
+	#veditor:focus{
+		background-position-y: 200px;
+		transition: all 0.2s ease-in-out 0s;
+	}
+	
+	#vcomment .vcards .vcard .vhead .vsys i {
+		display: none;
+	}
+	/* 底部valine链接 */
+	#vcomment .vpower {
+		display: none;
+	}
+	
+	/* 底下注释是修改 名称和邮箱和网址输入框的样式 */
+	/* #vcomment .vheader {
+		display: flex;
+		justify-content: space-around;
+	}
+	
+	#vcomment .vheader .vnick {
+		width: 31%;
+		border: 2px solid #dedede;
+		padding-left: 10px;
+		padding-right: 10px;
+		border-radius: 5px
+	}
+
+	#vcomment .vheader .vmail {
+		width: 31%;
+		border: 2px solid #dedede;
+		padding-left: 10px;
+		padding-right: 10px;
+		border-radius: 5px
+	}
+
+	#vcomment .vheader .vlink {
+		width: 31%;
+		border: 2px solid #dedede;
+		padding-left: 10px;
+		padding-right: 10px;
+		border-radius: 5px
+	} */
+
+	img.vimg {
+		transition: all 1s;
+		/* 头像旋转时间为 1s */
+	}
+
+	img.vimg:hover {
+		transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+		-moz-transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+		-ms-transform: rotate(360deg);
+	}
+
+	#vcomment .vcards .vcard {
+		padding: 15px 20px 0 20px;
+		border-radius: 10px;
+		margin-bottom: 15px;
+		box-shadow: 0 0 4px 1px rgba(0, 0, 0, .12);
+		transition: all .3s
+	}
+
+	#vcomment .vcards .vcard:hover {
+		box-shadow: 0 0 8px 3px rgba(0, 0, 0, .12)
+	}
+
+	#vcomment .vcards .vcard .vh .vcard {
+		border: none;
+		box-shadow: none;
+	}
+</style>
+    
+  </div>
+
+
+<!-- 还需要在后面这个地址里设置script, comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
+
+
+  </div>
+
+  <!-- 目录 -->
+  <aside id='l_side'>
+  
+    
+      <section class="widget side_blogger">
+  <div class='content'>
+    
+      
+        <a class='avatar flat-box rectangle' href='/about/'>
+          <img src='https://i.postimg.cc/0NZhx9v1/avatar.jpg'/>
+        </a>
+      
+    
+    
+      <div class='text'>
+        
+          <h2>Jayden</h2>
+        
+        
+          <p>What can l not create ,l do not understand</p>
+
+        
+        
+          <p><span id="jinrishici-sentence"></span></p>
+          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="mailto:1839697295@qq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="https://github.com/Picrew"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=1839697295"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+    
+  
+  
+  
+
+  <div class="layout_sticky">    
+    
+      
+<section class="widget side_toc">
+  
+  <header>
+    
+      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
+    
+  </header>
+
+
+  <div class='content'>
+    <div class="toc-main">
+      <div class="toc-content">
+        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">PyTorch常见用法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AF%BC%E5%85%A5-PyTorch-%E5%BA%93"><span class="toc-text">1. 导入 PyTorch 库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%A3%80%E6%9F%A5-GPU-%E6%94%AF%E6%8C%81"><span class="toc-text">2. 检查 GPU 支持</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%88%9B%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-text">3. 创建自定义数据集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%BD%BF%E7%94%A8%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%BC%BA"><span class="toc-text">4. 使用数据增强</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD"><span class="toc-text">5. 数据加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%AE%9A%E4%B9%89%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B"><span class="toc-text">6. 定义神经网络模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E5%AE%9E%E4%BE%8B%E5%8C%96%E6%A8%A1%E5%9E%8B%E5%92%8C%E4%BC%98%E5%8C%96%E5%99%A8"><span class="toc-text">7. 实例化模型和优化器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E5%AE%9A%E4%B9%89%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-text">8. 定义损失函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B"><span class="toc-text">9. 训练模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E8%AF%84%E4%BC%B0%E6%A8%A1%E5%9E%8B"><span class="toc-text">10. 评估模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E4%BF%9D%E5%AD%98%E5%92%8C%E5%8A%A0%E8%BD%BD%E6%A8%A1%E5%9E%8B"><span class="toc-text">11. 保存和加载模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-%E4%BD%BF%E7%94%A8-GPU-%E5%8A%A0%E9%80%9F"><span class="toc-text">12. 使用 GPU 加速</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-%E4%BD%BF%E7%94%A8-TensorBoard-%E8%BF%9B%E8%A1%8C%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="toc-text">13. 使用 TensorBoard 进行可视化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-%E8%B0%83%E6%95%B4%E5%AD%A6%E4%B9%A0%E7%8E%87"><span class="toc-text">14. 调整学习率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-%E4%BD%BF%E7%94%A8%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B"><span class="toc-text">15. 使用预训练模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0"><span class="toc-text">16. 迁移学习</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">PyTorch 高频用法 (1)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E5%AD%A6%E8%BF%90%E7%AE%97"><span class="toc-text">数学运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%A0%E9%87%8F%E6%93%8D%E4%BD%9C"><span class="toc-text">张量操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82"><span class="toc-text">网络层</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">PyTorch 高频用法 (2)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD"><span class="toc-text">数据加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-text">损失函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A2%AF%E5%BA%A6%E7%AE%A1%E7%90%86"><span class="toc-text">梯度管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="toc-text">性能优化</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">PyTorch 高频用法 (3)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E5%99%A8"><span class="toc-text">优化器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E7%8E%87"><span class="toc-text">学习率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#functional%E5%87%BD%E6%95%B0"><span class="toc-text">functional函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%AD%E7%BB%83"><span class="toc-text">分布式训练</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CUDA%E7%AE%A1%E7%90%86"><span class="toc-text">CUDA管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E7%AE%A1%E7%90%86"><span class="toc-text">模型管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%83%E8%AF%95%E5%92%8C%E6%A3%80%E6%9F%A5"><span class="toc-text">调试和检查</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%87%BD%E6%95%B0"><span class="toc-text">其他函数</span></a></li></ol></li></ol></li></ol> -->
+        <div class="toc"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 手机端目录按钮 -->
+<div id="toc-mobile-btn">
+  <i class="fas fa-list-ul" aria-hidden="true"></i>
+</div>
+
+      
+  <section class="widget side_recent_post">
+    
+  <header>
+    
+      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      
+      <!-- hash算法 -->
+      
+      <div class="aside-list">
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/06/05/AnalogCoder/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">06-05</span>
+                
+              </div>
+              <a class="post-title" href="/2024/06/05/AnalogCoder/">AnalogCoder</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/05/22/about/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">05-22</span>
+                
+              </div>
+              <a class="post-title" href="/2024/05/22/about/">关于我</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/03/28/AutoDMP/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">03-28</span>
+                
+              </div>
+              <a class="post-title" href="/2024/03/28/AutoDMP/">AutoDMP</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">03-25</span>
+                
+              </div>
+              <a class="post-title" href="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/">On_a_Moreau_Envelope_Wirelength_Model_for_Analytical_Global_Placement</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/03/10/HubRouter/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">03-10</span>
+                
+              </div>
+              <a class="post-title" href="/2024/03/10/HubRouter/">HubRouter</a>
+            </div>
+          </div>
+        
+      </div>
+    </div>
+  </section>
+
+    
+  </div>
+</aside>
+
+  <!-- 图片放大 Wrap images with fancybox support -->
+  <script defer src="/js/wrapImage.js"></script>
+</div>
+
+<!-- 文章详情页背景图 -->
+<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
+	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
+	<transition-group tag="ul" :name="names">
+		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
+			<img :src="image" class="bg-swiper-img no-lazy">
+		</li>
+	</transition-group>
+</div>
+<script>
+	var vm = new Vue({
+		el: '#appBgSwiper',
+		data: {
+			names: '' || 'fade' || 'fade', // translate-fade fade
+			mark: 0,
+			img: [],
+			bgColor: '',
+			time: null
+		},
+		methods: {   //添加方法
+			change(i, m) {
+				if (i > m) {
+					// this.names = 'fade';
+				} else if (i < m) {
+					// this.names = 'fade';
+				} else {
+					return;
+				}
+				this.mark = i;
+			},
+			prev() {
+				// this.names = 'fade';
+				this.mark--;
+				if (this.mark === -1) {
+					this.mark = 3;
+					return
+				}
+			},
+			next() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			autoPlay() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			play() {
+				let bgImgDelay = '' || '180000'
+				let delay = parseInt(bgImgDelay) || 180000;
+				this.time = setInterval(this.autoPlay, delay);
+			},
+			enter() {
+				clearInterval(this.time);
+			},
+			leave() {
+				this.play();
+			}
+		},
+		created() {
+			this.play()
+		},
+		beforeDestroy() {
+			clearInterval(this.time);
+		},
+		mounted() {
+			let prop = '' || '';
+			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
+			if (isImg) {
+				let img = prop.split(',');
+				let configRoot = '/'
+				let arrImg = [];
+				img.forEach(el => {
+					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+					var objExp = new RegExp(Expression);
+
+					if (objExp.test(el)) {
+						// http or https
+						arrImg.push(el);
+					} else {
+						// 非http or https开头
+						// 本地文件
+						let firstStr = el.charAt(0);
+						if (firstStr == '/') {
+							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
+						}
+						el = configRoot + el;
+						arrImg.push(el);
+					}
+				})
+				this.img = arrImg;
+			} else {
+				this.bgColor = prop;
+			}
+		}
+	})
+</script>
+
+<style>
+	.bg-swiper-box {
+		position: absolute;
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.bg-swiper-img {
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+	}
+</style>
+
+
+
+
+  <script>
+  function loadMermaid() {
+    if (document.getElementsByClassName('mermaid').length) {
+      if (window.mermaidJsLoad) mermaid.init()
+      else {
+        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
+          window.mermaidJsLoad = true
+          mermaid.initialize({
+            theme: 'default',
+          })
+          if ('true') {
+            mermaid.init();
+          }
+        })
+      }
+    }
+  };
+  document.addEventListener("DOMContentLoaded", function () {
+    loadMermaid();
+  })
+
+  document.addEventListener('pjax:complete', function () {
+    loadMermaid();
+  })
+  
+</script>
+
+
+      </main>
+    </div>
+
+    <!-- 页脚 -->
+    
+  
+  
+    <!-- 底部鱼儿跳动效果，依赖于jquery-->
+<div id="j-fish-skip" style=" position: relative;height: 153px;width: auto;"></div>
+<script defer>
+  var RENDERER = {
+    POINT_INTERVAL: 5,
+    FISH_COUNT: 3,
+    MAX_INTERVAL_COUNT: 50,
+    INIT_HEIGHT_RATE: .5,
+    THRESHOLD: 50,
+    FISH_COLOR: '',
+    init: function () {
+      this.setFishColor(); this.setParameters(), this.reconstructMethods(), this.setup(), this.bindEvent(), this.render()
+    },
+    setFishColor: function () {
+      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+      if (isDark) {
+        this.FISH_COLOR = '#222'; // 暗黑色，有时间把这整成一个变量
+      } else {
+        this.FISH_COLOR = '' || 'rgba(66, 185, 133, 0.8)';
+      }
+    },
+    setParameters: function () {
+      this.$window = $(window), this.$container = $("#j-fish-skip"), this.$canvas = $("<canvas />"), this.context = this.$canvas.appendTo(this.$container).get(0).getContext("2d"), this.points = [], this.fishes = [], this.watchIds = []
+    },
+    createSurfacePoints: function () {
+      var t = Math.round(this.width / this.POINT_INTERVAL);
+      this.pointInterval = this.width / (t - 1), this.points.push(new SURFACE_POINT(this, 0));
+      for (var i = 1; i < t; i++) {
+        var e = new SURFACE_POINT(this, i * this.pointInterval),
+          h = this.points[i - 1];
+        e.setPreviousPoint(h), h.setNextPoint(e), this.points.push(e)
+      }
+    },
+    reconstructMethods: function () {
+      this.watchWindowSize = this.watchWindowSize.bind(this), this.jdugeToStopResize = this.jdugeToStopResize.bind(this), this.startEpicenter = this.startEpicenter.bind(this), this.moveEpicenter = this.moveEpicenter.bind(this), this.reverseVertical = this.reverseVertical.bind(this), this.render = this.render.bind(this)
+    },
+    setup: function () {
+      this.points.length = 0, this.fishes.length = 0, this.watchIds.length = 0, this.intervalCount = this.MAX_INTERVAL_COUNT, this.width = this.$container.width(), this.height = this.$container.height(), this.fishCount = this.FISH_COUNT * this.width / 500 * this.height / 500, this.$canvas.attr({
+        width: this.width,
+        height: this.height
+      }), this.reverse = !1, this.fishes.push(new FISH(this)), this.createSurfacePoints()
+    },
+    watchWindowSize: function () {
+      this.clearTimer(), this.tmpWidth = this.$window.width(), this.tmpHeight = this.$window.height(), this.watchIds.push(setTimeout(this.jdugeToStopResize, this.WATCH_INTERVAL))
+    },
+    clearTimer: function () {
+      for (; this.watchIds.length > 0;) clearTimeout(this.watchIds.pop())
+    },
+    jdugeToStopResize: function () {
+      var t = this.$window.width(),
+        i = this.$window.height(),
+        e = t == this.tmpWidth && i == this.tmpHeight;
+      this.tmpWidth = t, this.tmpHeight = i, e && this.setup()
+    },
+    bindEvent: function () {
+      this.$window.on("resize", this.watchWindowSize), this.$container.on("mouseenter", this.startEpicenter), this.$container.on("mousemove", this.moveEpicenter)
+    },
+    getAxis: function (t) {
+      var i = this.$container.offset();
+      return {
+        x: t.clientX - i.left + this.$window.scrollLeft(),
+        y: t.clientY - i.top + this.$window.scrollTop()
+      }
+    },
+    startEpicenter: function (t) {
+      this.axis = this.getAxis(t)
+    },
+    moveEpicenter: function (t) {
+      var i = this.getAxis(t);
+      this.axis || (this.axis = i), this.generateEpicenter(i.x, i.y, i.y - this.axis.y), this.axis = i
+    },
+    generateEpicenter: function (t, i, e) {
+      if (!(i < this.height / 2 - this.THRESHOLD || i > this.height / 2 + this.THRESHOLD)) {
+        var h = Math.round(t / this.pointInterval);
+        h < 0 || h >= this.points.length || this.points[h].interfere(i, e)
+      }
+    },
+    reverseVertical: function () {
+      this.reverse = !this.reverse;
+      for (var t = 0, i = this.fishes.length; t < i; t++) this.fishes[t].reverseVertical()
+    },
+    controlStatus: function () {
+      for (var t = 0, i = this.points.length; t < i; t++) this.points[t].updateSelf();
+      for (t = 0, i = this.points.length; t < i; t++) this.points[t].updateNeighbors();
+      this.fishes.length < this.fishCount && 0 == --this.intervalCount && (this.intervalCount = this.MAX_INTERVAL_COUNT, this.fishes.push(new FISH(this)))
+    },
+    render: function () {
+      requestAnimationFrame(this.render), this.controlStatus(), this.context.clearRect(0, 0, this.width, this.height), this.context.fillStyle = this.FISH_COLOR;
+      for (var t = 0, i = this.fishes.length; t < i; t++) this.fishes[t].render(this.context);
+      this.context.save(), this.context.globalCompositeOperation = "xor", this.context.beginPath(), this.context.moveTo(0, this.reverse ? 0 : this.height);
+      for (t = 0, i = this.points.length; t < i; t++) this.points[t].render(this.context);
+      this.context.lineTo(this.width, this.reverse ? 0 : this.height), this.context.closePath(), this.context.fill(), this.context.restore()
+    }
+  },
+  SURFACE_POINT = function (t, i) {
+    this.renderer = t, this.x = i, this.init()
+  };
+  SURFACE_POINT.prototype = {
+    SPRING_CONSTANT: .03,
+    SPRING_FRICTION: .9,
+    WAVE_SPREAD: .3,
+    ACCELARATION_RATE: .01,
+    init: function () {
+      this.initHeight = this.renderer.height * this.renderer.INIT_HEIGHT_RATE, this.height = this.initHeight, this.fy = 0, this.force = {
+        previous: 0,
+        next: 0
+      }
+    },
+    setPreviousPoint: function (t) {
+      this.previous = t
+    },
+    setNextPoint: function (t) {
+      this.next = t
+    },
+    interfere: function (t, i) {
+      this.fy = this.renderer.height * this.ACCELARATION_RATE * (this.renderer.height - this.height - t >= 0 ? -1 : 1) * Math.abs(i)
+    },
+    updateSelf: function () {
+      this.fy += this.SPRING_CONSTANT * (this.initHeight - this.height), this.fy *= this.SPRING_FRICTION, this.height += this.fy
+    },
+    updateNeighbors: function () {
+      this.previous && (this.force.previous = this.WAVE_SPREAD * (this.height - this.previous.height)), this.next && (this.force.next = this.WAVE_SPREAD * (this.height - this.next.height))
+    },
+    render: function (t) {
+      this.previous && (this.previous.height += this.force.previous, this.previous.fy += this.force.previous), this.next && (this.next.height += this.force.next, this.next.fy += this.force.next), t.lineTo(this.x, this.renderer.height - this.height)
+    }
+  };
+  var FISH = function (t) {
+    this.renderer = t, this.init()
+  };
+  FISH.prototype = {
+    GRAVITY: .4,
+    init: function () {
+      this.direction = Math.random() < .5, this.x = this.direction ? this.renderer.width + this.renderer.THRESHOLD : -this.renderer.THRESHOLD, this.previousY = this.y, this.vx = this.getRandomValue(4, 10) * (this.direction ? -1 : 1), this.renderer.reverse ? (this.y = this.getRandomValue(1 * this.renderer.height / 10, 4 * this.renderer.height / 10), this.vy = this.getRandomValue(2, 5), this.ay = this.getRandomValue(.05, .2)) : (this.y = this.getRandomValue(6 * this.renderer.height / 10, 9 * this.renderer.height / 10), this.vy = this.getRandomValue(-5, -2), this.ay = this.getRandomValue(-.2, -.05)), this.isOut = !1, this.theta = 0, this.phi = 0
+    },
+    getRandomValue: function (t, i) {
+      return t + (i - t) * Math.random()
+    },
+    reverseVertical: function () {
+      this.isOut = !this.isOut, this.ay *= -1
+    },
+    controlStatus: function (t) {
+      this.previousY = this.y, this.x += this.vx, this.y += this.vy, this.vy += this.ay, this.renderer.reverse ? this.y > this.renderer.height * this.renderer.INIT_HEIGHT_RATE ? (this.vy -= this.GRAVITY, this.isOut = !0) : (this.isOut && (this.ay = this.getRandomValue(.05, .2)), this.isOut = !1) : this.y < this.renderer.height * this.renderer.INIT_HEIGHT_RATE ? (this.vy += this.GRAVITY, this.isOut = !0) : (this.isOut && (this.ay = this.getRandomValue(-.2, -.05)), this.isOut = !1), this.isOut || (this.theta += Math.PI / 20, this.theta %= 2 * Math.PI, this.phi += Math.PI / 30, this.phi %= 2 * Math.PI), this.renderer.generateEpicenter(this.x + (this.direction ? -1 : 1) * this.renderer.THRESHOLD, this.y, this.y - this.previousY), (this.vx > 0 && this.x > this.renderer.width + this.renderer.THRESHOLD || this.vx < 0 && this.x < -this.renderer.THRESHOLD) && this.init()
+    },
+    render: function (t) {
+      t.save(), t.translate(this.x, this.y), t.rotate(Math.PI + Math.atan2(this.vy, this.vx)), t.scale(1, this.direction ? 1 : -1), t.beginPath(), t.moveTo(-30, 0), t.bezierCurveTo(-20, 15, 15, 10, 40, 0), t.bezierCurveTo(15, -10, -20, -15, -30, 0), t.fill(), t.save(), t.translate(40, 0), t.scale(.9 + .2 * Math.sin(this.theta), 1), t.beginPath(), t.moveTo(0, 0), t.quadraticCurveTo(5, 10, 20, 8), t.quadraticCurveTo(12, 5, 10, 0), t.quadraticCurveTo(12, -5, 20, -8), t.quadraticCurveTo(5, -10, 0, 0), t.fill(), t.restore(), t.save(), t.translate(-3, 0), t.rotate((Math.PI / 3 + Math.PI / 10 * Math.sin(this.phi)) * (this.renderer.reverse ? -1 : 1)), t.beginPath(), this.renderer.reverse ? (t.moveTo(5, 0), t.bezierCurveTo(10, 10, 10, 30, 0, 40), t.bezierCurveTo(-12, 25, -8, 10, 0, 0)) : (t.moveTo(-5, 0), t.bezierCurveTo(-10, -10, -10, -30, 0, -40), t.bezierCurveTo(12, -25, 8, -10, 0, 0)), t.closePath(), t.fill(), t.restore(), t.restore(), this.controlStatus(t)
+    }
+  }, $(function () {
+    RENDERER.init()
+    $('.dark').click(function () {
+      setTimeout(() => {
+        RENDERER.setFishColor();
+        RENDERER.context.fill();
+      });
+    })
+  });
+</script>
+  
+  <div class="footer bg-color">
+    <div class="footer-main">
+      
+        
+          <div class="link">
+            
+          </div>
+        
+      
+        
+          <div class="footer-copyright">
+            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> </p>
+
+          </div>
+        
+      
+        
+          <div class="footer-custom">
+            
+          </div>
+        
+      
+    </div>
+  </div>
+
+
+
+    <!-- 渲染暗黑按钮 -->
+    
+      <div class="dark" onclick="toggleDarkMode()">
+  <div class="dark-content">
+    <i class="fas" id="darkIcon" aria-hidden="true"></i>
+  </div>
+</div>
+
+<script defer>
+  $(function() {
+    // 初始化暗黑模式状态
+    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+    updateDarkModeIcon(isDark);
+  });
+
+  function toggleDarkMode() {
+    const isDark = $(document.body).hasClass('darkModel');
+    $(document.body).toggleClass('darkModel');
+    localStorage.setItem('dark', !isDark);
+    updateDarkModeIcon(!isDark);
+  }
+
+  function updateDarkModeIcon(isDark) {
+    const iconElement = document.getElementById('darkIcon');
+    if (isDark) {
+      iconElement.classList.remove('fa-moon');
+      iconElement.classList.add('fa-lightbulb');
+    } else {
+      iconElement.classList.remove('fa-lightbulb');
+      iconElement.classList.add('fa-moon');
+    }
+  }
+</script>
+
+    
+    <!-- 渲染回到顶部按钮 -->
+    
+      <div class="goTop top-btn-color" pointer>
+  <i class="fas fa-arrow-up" aria-hidden="true"></i>
+</div>
+<script defer src="/js/goTop.js"></script>
+
+    
+    <!-- 渲染左下角音乐播放器 -->
+    
+
+    <!-- 图片放大 -->
+    
+      <script src="https://unpkg.com/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    
+
+    <!-- 百度解析 -->
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script async>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <!-- 背景彩带 -->
+    
+      <script async type="text/javascript" size="100" alpha='0.4' zIndex="-1" src="/js/ribbon.min.js"></script>
+    
+
+    <script src="/js/utils/index.js"></script>
+    <script src="/js/app.js"></script>
+    
+    <!-- 文章目录所需js -->
+<!-- <link href="/js/tocbot/tocbot.css" rel="stylesheet">
+<script src="/js/tocbot/tocbot.min.js"></script> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.min.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.css">
+
+<script>
+  var headerEl = 'h2, h3, h4',  //headers 
+    content = '.post-detail',//文章容器
+    idArr = {};  //标题数组以确定是否增加索引id
+  //add #id
+  var option = {
+    // Where to render the table of contents.
+    tocSelector: '.toc',
+    // Where to grab the headings to build the table of contents.
+    contentSelector: content,
+    // Which headings to grab inside of the contentSelector element.
+    headingSelector: headerEl,
+    scrollSmooth: true,
+    scrollSmoothOffset: -70,
+    // headingsOffset: -($(window).height() * 0.4 - 45),
+    headingsOffset: -($(window).height() * 0.4 - 70),
+    // positionFixedSelector: '.toc-main',
+    // positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    activeLinkClass: 'is-active-link',
+    orderedList: true,
+    collapseDepth: 20,
+    // onClick: function (e) {},
+  }
+  if ($('.toc').length > 0) {
+
+    $(content).children(headerEl).each(function () {
+      //去除空格以及多余标点
+      var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
+
+      headerId = headerId.toLowerCase();
+      if (idArr[headerId]) {
+        //id已经存在
+        $(this).attr('id', headerId + '-' + idArr[headerId]);
+        idArr[headerId]++;
+      }
+      else {
+        //id未存在
+        idArr[headerId] = 1;
+        $(this).attr('id', headerId);
+      }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      tocbot.init(option);
+      mobileTocClick();
+    });
+
+  }
+
+  window.tocScrollFn = function () {
+    return bamboo.throttle(function () {
+      findHeadPosition();
+    }, 100)()
+  }
+  window.addEventListener('scroll', tocScrollFn);
+
+  const findHeadPosition = function (top) {
+    if ($('.toc-list').length <= 0) {
+      return false;
+    }
+    setTimeout(() => {  // or DOMContentLoaded 
+      autoScrollToc();
+    }, 0);
+  }
+
+  const autoScrollToc = function () {
+    const $activeItem = document.querySelector('.is-active-link');
+    const $cardToc = document.querySelector('.toc-content');
+    const activePosition = $activeItem.getBoundingClientRect().top
+    const sidebarScrollTop = $cardToc.scrollTop
+    if (activePosition > (document.documentElement.clientHeight - 100)) {
+      $cardToc.scrollTop = sidebarScrollTop + 150
+    }
+    if (activePosition < 150) {
+      $cardToc.scrollTop = sidebarScrollTop - 150
+    }
+  }
+
+  document.addEventListener('pjax:send', function () {
+    if ($('.toc').length) {
+      tocbot.destroy();
+    }
+  });
+
+  document.addEventListener('pjax:complete', function () {
+    if ($('.toc').length) {
+      tocbot.init(option);
+      mobileTocClick();
+    }
+  });
+  
+  // 手机端toc按钮点击出现目录
+  const mobileTocClick = function () {
+    const $cardTocLayout = document.getElementsByClassName('side_toc')[0];
+    const $cardToc = $cardTocLayout.getElementsByClassName('toc-content')[0];
+    let right = '45px';
+    if (window.innerWidth >= 551 && window.innerWidth <= 992) {
+      right = '100px'
+    }
+    const mobileToc = {
+      open: () => {
+        $cardTocLayout.style.cssText = 'animation: toc-open .3s; opacity: 1; right: ' + right
+      },
+
+      close: () => {
+        $cardTocLayout.style.animation = 'toc-close .2s'
+        setTimeout(() => {
+          $cardTocLayout.style.cssText = "opacity:''; animation: ''; right: ''"
+        }, 100)
+      }
+    }
+    document.getElementById('toc-mobile-btn').addEventListener('click', () => {
+      if (window.getComputedStyle($cardTocLayout).getPropertyValue('opacity') === '0') mobileToc.open()
+      else mobileToc.close()
+    })
+
+    $cardToc.addEventListener('click', (e) => {
+      if (window.innerWidth < 992) { // 小于992px的时候
+        mobileToc.close()
+      }
+    })
+  }
+</script>
+
+<style>
+  /* .is-position-fixed {
+    position: sticky !important;
+    top: 74px;
+  }
+
+  .toc-main ul {
+    counter-reset: show-list;
+  }
+
+  .toc-main ul li::before {
+    content: counter(item)".";
+    display: block;
+    position: absolute;
+    left: 12px;
+    top: 0;
+  } */
+</style>
+ 
+
+<!-- 设置导航背景 -->
+<script>
+  let setHeaderClass = () => {
+    const nav = $('#navHeader');
+    const navTop = nav.outerHeight();
+    const winTop = $(window).scrollTop();
+    if(winTop > navTop) {
+      nav.addClass('header-bg-color');
+    }
+    else {
+      nav.removeClass('header-bg-color');
+    }
+  };
+
+  let scrollCollect = () => {
+    return bamboo.throttle(function (e) {
+      setHeaderClass();
+    }, 200)()
+  }
+
+  let initHeaderBg = () => {
+    setHeaderClass();
+  }
+
+  setHeaderClass();
+  window.addEventListener('scroll', scrollCollect);
+
+  document.addEventListener('pjax:send', function () {
+    window.removeEventListener('scroll', scrollCollect)
+  })
+  document.addEventListener('pjax:complete', function () {
+    window.addEventListener('scroll', scrollCollect);
+    setHeaderClass();
+  })
+</script> 
+
+<!-- 渲染issues标签里的内容 -->
+<script>
+  function loadIssuesJS() {
+    if ($(".post-detail").find(".issues-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/issues/index.js');
+  };
+  $(function () {
+    loadIssuesJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof IssuesAPI == "undefined") {
+      loadIssuesJS();
+    }
+  })
+</script>
+
+<!-- 渲染远程json加载的图片标签(getPhotoOnline)里的内容 -->
+<script>
+  function loadPhotoOnlineJS() {
+    if ($(".post-detail").find(".getJsonPhoto-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/getPhotoOnline/index.js');
+  };
+  $(function () {
+    loadPhotoOnlineJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof getPhotoJson == "undefined") {
+      loadPhotoOnlineJS();
+    }
+  })
+</script>
+
+<!-- 渲染远程json加载的talk标签(getTalkOnline)里的内容 -->
+<script>
+  function loadTalkOnlineJS() {
+    if ($(".post-detail").find(".getJsonTalk-api").length == 0) {
+      return;
+    } 
+    loadScript('https://cdnjs.cloudflare.com/ajax/libs/waterfall.js/1.0.2/waterfall.min.js'); // 瀑布流插件，https://raphamorim.io/waterfall.js/
+    loadScript('/js/getTalkOnline/index.js');
+  };
+  $(function () {
+    loadTalkOnlineJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof getTalkJson == "undefined") {
+      loadTalkOnlineJS();
+    }
+  })
+</script>
+
+<!-- 渲染远程json加载的site-card标签(getSiteOnline)里的内容 -->
+<script>
+  function loadSiteOnlineJS() {
+    if ($(".post-detail").find(".getJsonSite-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/getSiteOnline/index.js');
+  };
+  $(function () {
+    loadSiteOnlineJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof getSiteJson == "undefined") {
+      loadSiteOnlineJS();
+    }
+  })
+</script>
+
+<!-- 输入框打字特效 -->
+<!-- 输入框打字特效 -->
+
+  <script src="/js/activate-power-mode.js"></script>
+  <script>
+    POWERMODE.colorful = true;  // 打开随机颜色特效
+    POWERMODE.shake = false;    // 关闭输入框抖动
+    document.body.addEventListener('input', POWERMODE);//监听打字事件
+  </script>
+
+
+<!-- markdown代码一键复制功能 -->
+
+  <link rel="stylesheet" href="https://unpkg.com/v-plugs-ayu/lib/ayu.css">
+  <script src="https://unpkg.com/v-plugs-ayu/lib/ayu.umd.min.js"></script>
+  <script src="/js/clipboard/clipboard.min.js"></script>
+  <div id="appCopy">
+  </div>
+  <script data-pjax>
+    var vm = new Vue({
+      el: '#appCopy',
+      data: {
+      },
+      computed: {
+      },
+      mounted() {
+        const that = this;
+        var copy = 'copy';
+        /* code */
+        var initCopyCode = function () {
+          var copyHtml = '';
+          copyHtml += '<button class="btn-copy" data-clipboard-snippet="" style="position:absolute;top:0;right:0;z-index:1;">';
+          copyHtml += '<i class="fas fa-copy"></i><span>' + copy + '</span>';
+          copyHtml += '</button>';
+          $(".post-detail pre").not('.gutter pre').wrap("<div class='codeBox' style='position:relative;width:100%;'></div>")
+          $(".post-detail pre").not('.gutter pre').before(copyHtml);
+          new ClipboardJS('.btn-copy', {
+            target: function (trigger) {
+              return trigger.nextElementSibling;
+            }
+          });
+        }
+        initCopyCode();
+        $('.btn-copy').unbind('click').bind('click', function () {
+          doSomething();
+        })
+        $(document).unbind('keypress').bind('keypress', function (e) {
+          if (e.ctrlKey && e.keyCode == 67) {
+            doSomething();
+          }
+        })
+
+        function doSomething() {
+          that.$notify({
+            title: "成功",
+            content: "代码已复制，请遵守相关授权协议。",
+            type: 'success'
+          })
+        }
+      },
+      methods: {
+      },
+      created() { }
+    })
+  </script>
+  
+
+<!-- 图片懒加载 -->
+<script defer src="https://unpkg.com/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
+</script>
+
+
+<!-- 卡片滚动动画 -->
+   
+
+<!-- 评论所需js -->
+
+  
+        
+<!-- 具体js，请前往valine/script.ejs查看 -->
+
+      
+        <script>
+  var requiredFields = '';
+  requiredFields = requiredFields.split(',');
+  comment_el = '.comment';
+  let looperValine = null;
+  load_valine = function () {
+    if ($(comment_el).length) {
+      var valine = new Valine({
+        el: '#vcomment',
+        path: window.location.pathname,
+        notify: false,
+        verify: false,
+        app_id: "mptvHjNei9tLgoh91VHoyXI3-gzGzoHsz",
+        app_key: "4GFQ3SvPkglZ7djLOOY0Zwd8",
+        placeholder: "客官，说点什么吧",
+        avatar: "",
+        master: "",   //博主邮箱md5
+        tagMeta: ["博主","小伙伴","访客"],     //标识字段名
+        friends: "",
+        metaPlaceholder: { "nick": "昵称/QQ号", "mail": "邮箱" },
+        requiredFields: requiredFields,
+        enableQQ: true,
+      });
+      function debounce(fn) {
+        var timerID = null
+        return function () {
+          var arg = arguments[0]   //获取事件
+          if (timerID) {
+            clearTimeout(timerID)
+          }
+          timerID = setTimeout(function () {
+            fn(arg)              //事件传入函数
+          }, 200)
+        }
+      }
+      //查询评论 valine.Q('*').limit(7) -- 查询所有，限制7条, 下面的的代码是查询当前页面
+      var themeDanmu = eval('false');
+      var themeLoop = eval('false');
+      var themeLooperTime = '5000' || 5000;
+      var speed = '40' || 20;
+      var isBarrager = true;
+      if (themeDanmu == true) {
+        do_barrager();
+        if ($('.danmuBox').length <= 0) {
+          $('.navbar').append('<div class="danmuBox"><div class="danmuBtn open"><span class="danmuCircle"></span><span class="danmuText">弹幕</span></div></div>');
+        }
+        $('.danmuBtn').on('click', debounce(
+          function () {
+            if ($('.danmuBtn').hasClass('open')) {
+              $('.danmuBtn').removeClass('open')
+              clearInterval(looperValine);
+              $.fn.barrager.removeAll();
+            } else {
+              $('.danmuBtn').addClass("open");
+              do_barrager();
+            }
+          }
+        ))
+      }
+      function do_barrager() {
+        isBarrager && valine.Q(window.location.pathname).find().then(function (comments) {
+          // var num = 0; // 可以记录条数，循环调用的时候只取最新的评论放入弹幕中
+          var run_once = true;
+          var looper_time = themeLooperTime;
+          var total = comments.length;
+          // var looper = null;
+          var index = 0;
+          if (total > 0) {
+            barrager();
+          } else {
+            // 当评论数为0的时候，自动关闭弹幕
+            // $('.danmuBtn').removeClass('open');
+          }
+          function barrager() {
+            if (run_once) {
+              //如果是首次执行,则设置一个定时器,并且把首次执行置为false
+              looperValine = setInterval(barrager, looper_time);
+              run_once = false;
+            }
+            var content = comments[index]._serverData.comment;
+            var email = comments[index]._serverData.mail;
+            var link = comments[index]._serverData.link;
+            var newcontent = content.substring(0, 50).replace(/<[^>]+>/g, "");
+            //发布一个弹幕
+            const item = {
+              img: `https://q1.qlogo.cn/g?b=qq&nk=${email}&s=640`, //图片 
+              info: newcontent, //文字 
+              href: link, //链接 
+              close: true, //显示关闭按钮 
+              speed: speed, //延迟,单位秒,默认6 
+              color: '#fff', //颜色,默认白色 
+              old_ie_color: '#000000', //ie低版兼容色,不能与网页背景相同,默认黑色
+            }
+            $('body').barrager(item);
+            //索引自增
+            index++;
+            //所有弹幕发布完毕，清除计时器。
+            if (index == total) {
+              clearInterval(looperValine);
+              if (themeLoop === true) {
+                setTimeout(function () {
+                  do_barrager();
+                }, 5000);
+              } else {
+                $('.danmuBtn').removeClass('open');
+              }
+              return false;
+            }
+
+          }
+        })
+      }
+    }
+  };
+  $(document).ready(load_valine);
+  document.addEventListener('pjax:send', function (e) {
+    
+  })
+  document.addEventListener('pjax:complete', function () {
+    load_valine();
+  });
+</script>
+
+      
+
+
+<!-- 鼠标点击特效 -->
+<!-- 爱心点击 -->
+
+  
+    <script async src="/js/cursor/fireworks.js"></script>
+  
+
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" data-pjax></script>
+
+
+<!-- 轮播图标签 -->
+<script>
+  var bambooSwiperTag = {};
+  function load_swiper() {
+    if (!document.querySelectorAll(".post-swiper-container")[0]) return;
+    loadCSS("https://unpkg.com/swiper@6/swiper-bundle.min.css")
+    loadScript("https://unpkg.com/swiper@6/swiper-bundle.min.js").then(() => {
+      pjax_swiper();
+    });
+  }
+
+  load_swiper();
+
+  function pjax_swiper() {
+    bambooSwiperTag.swiper = new Swiper('.post-swiper-container', {
+      slidesPerView: 'auto',
+      spaceBetween: 8,
+      centeredSlides: true,
+      loop: true,
+      autoplay: true ? {
+        delay: 3000,
+        stopOnLastSlide: false,
+        disableOnInteraction: false,
+      } : false,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      on:{
+        init: function(){
+          swiperAnimateCache(this); //隐藏动画元素 
+          swiperAnimate(this); //初始化完成开始动画
+        }, 
+        slideChangeTransitionEnd: function(){ 
+          swiperAnimate(this); //每个slide切换结束时也运行当前slide动画
+          //this.slides.eq(this.activeIndex).find('.ani').removeClass('ani'); 动画只展现一次，去除ani类名
+        } 
+      }
+    });
+  }
+
+  document.addEventListener('pjax:complete', function () {
+    if (!document.querySelectorAll(".post-swiper-container")[0]) return;
+    if (typeof bambooSwiperTag.swiper === "undefined") {
+      load_swiper();
+    } else {
+      pjax_swiper();
+    }
+  });
+</script>
+    <!-- pjax -->
+    
+
+<!-- pjax -->
+
+
+  <script src="/js/pjax@0.2.8/index.js"></script>
+  
+    <div class="pjax-animate">
+  
+    <div class="loading-circle"><div id="loader-circle"></div></div>
+    <script>
+      window.ShowLoading = function() {
+        $(".loading-circle").css("display", "block");
+      };
+      window.HideLoading = function() {
+        $(".loading-circle").css("display", "none");
+      }
+    </script>
+  
+	<script>
+    document.addEventListener('pjax:complete', function () {
+      window.HideLoading();
+    })
+    document.addEventListener('pjax:send', function () {
+      window.ShowLoading();
+    })
+    document.addEventListener('pjax:error', function () {
+      window.HideLoading();
+    })
+	</script>
+</div>
+
+  
+
+  <script>
+    var pjax = new Pjax({
+      elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([no-pjax])',   // 拦截正常带链接的 a 标签
+      selectors: ["#pjax-container","title"],                                   // 根据实际需要确认重载区域
+      cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+      timeout: 5000
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+
+    })
+    
+    document.addEventListener('pjax:complete', function () {
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+      window.location.href = e.triggerElement.href;
+    })
+    
+    // 刷新不从顶部开始
+    document.addEventListener("DOMContentLoaded", function () {
+      history.scrollRestoration = 'auto';
+    })
+  </script>
+
+
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="//cdn.bootcss.com/mathjax/0.6.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+</html>
