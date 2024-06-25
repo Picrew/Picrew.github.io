@@ -1,7 +1,8 @@
+https://picrew.github.io/2024/06/25/EDA-LLM/
+https://picrew.github.io/2024/06/05/AnalogCoder/
 https://picrew.github.io/2024/06/17/Circuit-Graph/
 https://picrew.github.io/2024/01/27/Transformer/
 https://picrew.github.io/2024/03/28/AutoDMP/
-https://picrew.github.io/2024/06/05/AnalogCoder/
 https://picrew.github.io/2024/01/16/Pytorch/
 https://picrew.github.io/2024/01/27/BERT/
 https://picrew.github.io/2024/01/27/SQL/
