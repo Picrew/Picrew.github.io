@@ -1939,5 +1939,21 @@ ls：列出目录内容。使用 -l 选项以长列表格式显示详细信息�
 
 
 
-  </body>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="//cdn.bootcss.com/mathjax/0.6.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
 </html>
