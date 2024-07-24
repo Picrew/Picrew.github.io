@@ -1,0 +1,2451 @@
+<!DOCTYPE html>
+<html>
+  <!-- meta/link... -->
+  
+
+
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+  <title>GPT4AIGChip | null</title>
+
+  <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
+  <link href="https://unpkg.com/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="/js/swiper/swiper@5.4.1.min.css" rel="stylesheet">
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/animate.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+    <link href="https://unpkg.com/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" rel="stylesheet">
+  
+  
+    
+<link rel="stylesheet" href="/js/shareJs/share.min.css">
+
+  
+  <style>
+        @media (max-width: 992px) {
+            #waifu {
+                display: none;
+            }
+        }
+    </style>
+    <script defer src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+    
+        <script src="/js/valine/index.js"></script>
+    
+    
+    <!-- 依赖于jquery和vue -->
+    <script src="https://unpkg.com/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.min.js"></script>
+
+    <!-- import link -->
+    
+        
+            
+        
+            
+        
+    
+    <!-- import script -->
+    
+        
+            
+        
+            
+        
+    
+
+<meta name="generator" content="Hexo 7.2.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+  
+  <!-- 预加载动画 -->
+  
+  
+  <div class="preloader_6" id="loader">
+  <div class="loader"></div>
+</div>
+  <script>
+    var endLoading = function () {
+      document.body.style.overflow = 'auto';
+      document.getElementById('loader').classList.add("loaded");
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+  </script>
+
+
+  <body>
+    <!-- 判断是否为暗黑风格 -->
+    <!-- 判断是否为黑夜模式 -->
+<script defer>
+  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+
+  if (isDark) {
+    $(document.body).addClass('darkModel');
+  }
+</script>
+
+    <!-- 需要在上面加载的js -->
+    <script>
+  function loadScript(src, cb) {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var HEAD = document.getElementsByTagName("head")[0] || document.documentElement;
+        var script = document.createElement("script");
+        script.setAttribute("type", "text/javascript");
+        if (cb) {
+          if (JSON.stringify(cb)) {
+            for (let p in cb) {
+              if (p == "onload") {
+                script[p] = () => {
+                  cb[p]()
+                  resolve()
+                }
+              } else {
+                script[p] = cb[p]
+                script.onload = resolve
+              }
+            }
+          } else {
+            script.onload = () => {
+              cb()
+              resolve()
+            };
+          }
+        } else {
+          script.onload = resolve
+        }
+        script.setAttribute("src", src);
+        HEAD.appendChild(script);
+      });
+    });
+  }
+
+  //https://github.com/filamentgroup/loadCSS
+  var loadCSS = function (src) {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var link = document.createElement('link');
+        link.rel = "stylesheet";
+        link.href = src;
+        link.onload = resolve;
+        document.getElementsByTagName("head")[0].appendChild(link);
+      });
+    });
+  };
+
+</script> 
+
+<!-- 轮播图所需要的js -->
+<script src="/js/swiper/swiper.min.js"></script>
+<script src="/js/swiper/vue-awesome-swiper.js"></script>
+<script src="/js/swiper/swiper.animate1.0.3.min.js"></script>
+
+<script type="text/javascript">
+  Vue.use(window.VueAwesomeSwiper)
+</script>
+
+
+  <script src="/js/vue-typed-js/index.js"></script>
+
+
+<!-- 首页的公告滚动插件的js需要重新加载 -->
+<script src="/js/vue-seamless-scroll/index.js"></script>
+
+<!-- 打字机效果js -->
+<script src="https://unpkg.com/typed.js@2.0.11"></script>
+
+
+    <div id="safearea">
+      <main class="main" id="pjax-container">
+        <!-- 头部导航 -->
+        
+<header class="header  " 
+  id="navHeader"
+  style="position: fixed;
+  left: 0; top: 0; z-index: 10;width: 100%;"
+>
+  <div class="header-content">
+    <div class="bars">
+      <div id="appDrawer" class="sidebar-image">
+  <div class="drawer-box-icon">
+    <i class="fas fa-bars" aria-hidden="true" @click="showDialogDrawer"></i>
+  </div>
+  
+  <transition name="fade">
+    <div class="drawer-box_mask" v-cloak style="display: none;" v-show="visible" @click.self="cancelDialogDrawer">
+    </div>
+  </transition>
+  <div class="drawer-box" :class="{'active': visible}">
+    <div class="drawer-box-head bg-color">
+      <img class="drawer-box-head_logo lazyload placeholder" src="/medias/avatar.jpg" class="lazyload placeholder" data-srcset="/medias/avatar.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+      <h3 class="drawer-box-head_title"></h3>
+      <h5 class="drawer-box-head_desc"></h5>
+    </div>
+    
+    <div class="drawer-box-content">
+      <ul class="drawer-box-content_menu">
+        
+        
+          <li class="drawer-box-content_item">
+            <a target="_blank" rel="noopener" href="https://github.com/Picrew">
+              <i class="fas fa-github" aria-hidden="true"></i>
+              <span>Github</span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appDrawer',
+    data: {
+      visible: false,
+      top: 0,
+      openArr: [],
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      isOpen(index) {
+        if (this.openArr.includes(index)) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+      openOrCloseMenu(curIndex) {
+        const index = this.openArr.indexOf(curIndex);
+        if (index !== -1) {
+          this.openArr.splice(index, 1);
+        } else {
+          this.openArr.push(curIndex);
+        }
+      },
+      showDialogDrawer() {
+        this.visible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'width: 100%; height: 100%;overflow: hidden;';
+      },
+      cancelDialogDrawer() {
+        this.visible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      }
+    },
+    created() {}
+  })
+</script>
+
+    </div>
+    <div class="blog-title" id="author-avatar">
+      
+        <div class="avatar">
+          <img src="/medias/avatar.jpg" class="lazyload placeholder" data-srcset="/medias/avatar.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+        </div>
+      
+      <a href="/" class="logo"></a>
+    </div>
+    <nav class="navbar">
+      <ul class="menu">
+        
+      </ul>
+      
+      
+        <div id="appSearch">
+  <div class="search"  @click="showDialog()"><i class="fas fa-search" aria-hidden="true"></i></div>
+  <transition name="fade">
+    <div class="message-box_wrapper" style="display: none;" v-cloak v-show="dialogVisible" @click.self="cancelDialogVisible()">
+      <div class="message-box animated bounceInDown">
+        <h2>
+          <span>
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <span class="title">Search</span>
+          </span>
+          <i class="fas fa-times close" pointer style="float:right;" aria-hidden="true" @click.self="cancelDialogVisible()"></i>
+        </h2>
+        <form class="site-search-form">
+          <input type="text"
+            placeholder="Please enter keywords"
+            id="local-search-input" 
+            @click="getSearchFile()"
+            class="st-search-input"
+            v-model="searchInput"
+          />
+        </form>
+        <div class="result-wrapper">
+          <div id="local-search-result" class="local-search-result-cls"></div>
+        </div>
+      </div>
+    </div>
+  </transition>
+</div>
+<script src="/js/local_search.js"></script>
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appSearch',
+    data: {
+      dialogVisible: false,
+      searchInput: '',
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+      window.addEventListener('pjax:complete', () => {
+        this.cancelDialogVisible();
+      })
+    },
+    methods: {
+      showDialog() {
+        this.dialogVisible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'overflow: hidden;';
+      },
+      getSearchFile() {
+        if (!this.searchInput) {
+          getSearchFile("/search.xml");
+        }
+      },
+      cancelDialogVisible() {
+        this.dialogVisible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      },
+    },
+    created() {}
+  })
+</script>
+<!-- 解决刷新页面闪烁问题，可以在元素上添加display: none, 或者用vue.extend方法，详情：https://blog.csdn.net/qq_31393401/article/details/81017912 -->
+<!-- 下面是搜索基本写法 -->
+<!-- <script type="text/javascript" id="local.search.active">
+  var inputArea = document.querySelector("#local-search-input");
+  inputArea.onclick   = function(){ getSearchFile(); this.onclick = null }
+  inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
+</script> -->
+
+      
+
+    </nav>
+  </div>
+  
+    <a target="_blank" rel="noopener" href="https://github.com/Picrew" class="github-corner color-primary" aria-label="View source on GitHub"><svg width="60" height="60" viewBox="0 0 250 250" style="fill:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+  
+  
+</header>
+        <!-- 内容区域 -->
+        
+<!-- prismjs 代码高亮 -->
+
+
+
+
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
+
+
+  <!-- 文章详情页顶部图片和标题 -->
+
+
+
+
+<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
+  background-position: center center;position: relative;background-image:url('https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp')">
+  <div class="post-detail-header-mask"></div>
+  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
+  
+  <div class="post-detail-header_info-box">
+    <div class="title-box">
+      <span class="title">
+        GPT4AIGChip
+      </span>
+    </div>
+    
+    
+      
+        <span class="post-detail-header_date">
+          <i class="fas fa-calendar"></i> Published in：2024-07-24 |
+        </span>
+      
+
+      
+
+      
+    
+  </div>
+  
+  
+    <script defer src="/js/bubble/bubble.js"></script>
+  
+</div>
+
+
+
+
+
+<div class="post-detail-content post-row" 
+  style="padding-top: 0px;">
+  <div class="main-content">
+    <article class="post post-detail">
+      <div class="post-content">
+        <h1>GPT4AIGChip: Towards Next-Generation AI Accelerator Design Automation via Large Language Models</h1>
+<p><img src="/2024/07/24/GPT4AIGChip/Y18vb6lM1omwwexABPIcRpzvn2c-1721829974411.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/Y18vb6lM1omwwexABPIcRpzvn2c-1721829974411.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h2 id="前言">前言</h2>
+<p>本篇文章来自 GIT 佐治亚理工 Yingyan (Celine) Lin [<a target="_blank" rel="noopener" href="https://eiclab.scs.gatech.edu/pages/team.html">Team</a>]老师。发布在 2023 ICCAD。此外 lin 老师还被受邀 2024 <a target="_blank" rel="noopener" href="https://61dac.conference-program.com/presentation/?id=SPSSN121&amp;sess=sess182">DAC presentation</a> ，提出 LLM4AIGChip 由两个关键组件组成：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2407.01910">Data4AIGChip</a>和 GPT4AIGChip。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>Data4AIGChip: Data4AIGChip tackles the issues of dataset scarcity and quality in LLM-assisted hardware design by creating high-quality, specialized datasets, thereby augmenting the effectiveness of LLMs in AI accelerator design.</p>
+</li>
+<li class="lvl-2">
+<p>GPT4AIGChip:  GPT4AIGChip focuses on employing LLMs to automate the design and verification processes of AI accelerators, leveraging the advanced capabilities of LLMs to streamline and simplify these tasks.</p>
+</li>
+</ul>
+<h3 id="Publication">Publication</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a href="%5Bhttps://arxiv.org/pdf/2309.10730%5D(https://arxiv.org/pdf/2309.10730)">Paper</a></p>
+</li>
+<li class="lvl-2">
+<p><a href="%5Bhttps://drive.google.com/file/d/1nWOR7pGPSYKVQVOQXtva5fRGNqPgp_kS/view%5D(https://drive.google.com/file/d/1nWOR7pGPSYKVQVOQXtva5fRGNqPgp_kS/view)">Slide</a></p>
+</li>
+</ul>
+<hr>
+<h2 id="Introduction">Introduction</h2>
+<p>人工智能对专用 AI 加速器（AI accelerators）迫切需求。然而设计专用 AI 加速器仍然是一项艰巨和耗时任务。此外使用现有工具对所需硬件专业知识对非专家来说是一个巨大挑战。限制 AI 加速器设计扩展到一般 AI 开发者，造成 AI 算法速度和 AI 加速器之间差距越来越大。</p>
+<p>本论文从 LLM 上找到灵感，并启发这个研究中心问题：“我们是否可以利用 LLM 力量自动化 AI 加速器设计” （“<em>Can we harness the power of LLMs to automate the design of AI accelerators?</em>”）</p>
+<p><img src="/2024/07/24/GPT4AIGChip/I8ewbUwFNo7VgCxLgjFcRmnLn3d-1721829974411.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/I8ewbUwFNo7VgCxLgjFcRmnLn3d-1721829974411.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>该论文提出 GPT4AIGChip —— GPT for AI Generated Chip，采用人类自然语言作为设计指令，而不是依赖特定领域语言，对不熟悉硬件的人更容易设计 AI 加速器。论文贡献如下：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>本文调查了现有 LLM 对 AI 加速器设计限制和能力，了解当前位置，并由当前 LLM 设计 pipeline 提出见解，提出 GPT4AIGChip，第一个由 LLM 驱动的 AI 加速器设计自动化框架。</p>
+</li>
+<li class="lvl-2">
+<p>确定 LLM 当前 3 个见解（Insight）：</p>
+<ul class="lvl-2">
+<li class="lvl-4"><strong>对长代码处理</strong>：当前的 LLM 在处理长代码时存在困难，尤其是对于那些不常见的高级合成（HLS）语言。这表明在设计空间中需要将不同的硬件功能解耦，以便更好地处理这些长期依赖性。</li>
+<li class="lvl-4"><strong>数据稀缺与模型训练</strong>: 鉴于高质量注释数据的稀缺性，对开源大型语言模型进行有效的微调变得具有挑战性。因此，结合使用上下文学习和典型的闭源但强大的语言模型的逻辑推理能力，是一个更为有效的选择。</li>
+<li class="lvl-4"><strong>增强提示质量</strong>: 对于大型语言模型，关键是要用高质量的示例来增强提示，这些示例应与输入的设计指令的上下文相关联。这可以帮助模型更准确地理解和生成所需的输出。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>GPT4AIGChip 构建一个由 HLS 编写的分离加速器设计模块，讲加速器设计分离成不同硬件模块和功能，首次实现由 LLM 驱动 AI 加速器设计自动化。</p>
+</li>
+<li class="lvl-2">
+<p>GPT4AIGChip 配备演示增强提示（demo-augmented prompt），利用强大 GPT 模型上下文学习（in-context learning）和逻辑推理（logical reasoning），实现 LLM 支持加速器空间探索。</p>
+</li>
+</ul>
+<hr>
+<h2 id="Where-We-Are-The-limitations-and-capabilities-of-current-LLMs-for-AI-accelerator-design">Where We Are: The limitations and  capabilities of current LLMs for AI accelerator design</h2>
+<h3 id="A-An-Overview-of-the-Assessment">A. An Overview of the Assessment</h3>
+<p>LLMs 虽然在生成任务（e.g. Q.A, language translation, chatbot dialogues）非常出色，但在处理预训练中较少遇到的语言和任务上能力未解决。</p>
+<p>为了有效利用 LLMs 自动化 AI 加速器设计，了解当前最先进的 LLMs 的能力和局限性是至关重要的。这样的理解可以帮助避免过分乐观或悲观的看法。评估旨在提供这种理解，为未来在 LLM 驱动的自动化 AI 加速器设计方面的创新奠定基础。</p>
+<p>文中首先识别了现有 LLMs 在 AI 加速器设计方面的常见局限性，然后验证了在注释过的硬件代码（如 HLS）上微调开源 LLMs 是否能提高它们对硬件代码和设计的理解。最终，考虑到在这两步中识别出的缺陷，重新考虑了 LLMs 在实际 AI 加速器设计自动化中能够有效利用的能力。这种评估和实验方法有助于更精确地利用和发展 LLM 技术在特定高技术领域的应用。</p>
+<h3 id="B-Failures-and-Limitations-of-Existing-LLMs">B. Failures and Limitations of Existing LLMs</h3>
+<p>为了实现用户指令（user instructions）生成 AI 加速器的 HLS，一种直观方法讲用户指令与常用 HLS 模板平日对，作为 LLM 提示输入。这部分采用 skynet 中 HLS 实现作为模板。</p>
+<p>评估 GPT-4 根据指令生成硬件能力，观察 LLM 经常生成无法综合、功能不正确代码，后续列举常见失败情况。</p>
+<p>（os：iSmart3-SkyNet/iSmart3 为 2019 年 DAC-SDC 低功耗目标检测竞赛中 GPU 和 FPGA（Ultra96 FPGA 和 Pynq-Z1 FPGA）双料冠军。当年 Jetson tx2 取得 0.731 IoU 和 67.33 fps；在 Ultra96 FPGA 取得 0.716 IoU 和 25.05 fps。个人认为当年 TinyML 方向一味追求小模型，在岌岌可危保证精度同时极力追求速度，是一个不现实的想法。边缘设备算力总是随着时间增加，永无尽头卷指标是没有很多意义。TinyML 中甚至对部分指标已经到了几乎疯狂。剪枝、量化、蒸馏等方式最好的利用是在当今 MM-LLM 时代。）</p>
+<h4 id="Misinterpretation-of-variable-definitions">Misinterpretation of variable definitions</h4>
+<p>实现硬件加速代码需要精确定义变量和函数以准确实例化模块，但 LLM 可能会实例化不正确大小模块，见图 2（a）：</p>
+<p><img src="/2024/07/24/GPT4AIGChip/UY1wbt0vHouL97xRwaVckJ2wnHh-1721829974411.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/UY1wbt0vHouL97xRwaVckJ2wnHh-1721829974411.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>这个问题由于 LLM 难以理解指令中标识符和代码中变量联系，导致误解。</p>
+<h4 id="Inability-to-capture-long-dependencies">Inability to capture long dependencies</h4>
+<p>AI 加速器参数通常相互交织，一个模块一组参数容易受到另一组参数影响。导致长期依赖。当前 LLM 在处理长依赖关系经常出错，在后期模块设计生成忽略早期设计配置，见图 2（b）：</p>
+<p><img src="/2024/07/24/GPT4AIGChip/SoTtbEaseoHgfhxI81tc2moDnae-1721829974411.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/SoTtbEaseoHgfhxI81tc2moDnae-1721829974411.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>e.g. 前面 BRAM 大小影响分块计算大小，分块计算影响 PE 数量。当输入维度将并行指定为 4 时，LLM 在生成 MAC 阵列时候忽略这一点，仅考虑 2 个并行输入参数。</p>
+<h4 id="Overlooking-crucial-user-instructions">Overlooking crucial user instructions</h4>
+<p>LLM 难以推理两种关系：</p>
+<p>这个问题跟上述长依赖性问题不同，这种限制涉及多个设计概念之间关系，而这些设计概念不一定由长代码分隔。</p>
+<p>e.g. 某些数据维度上展开（并行化）计算需要沿着相同的维度对依赖数据的 BRAM 实例进行分区。然而，如图 2（c）所示，现有的 LLM 生成的代码往往将设计概念孤立地对待。此外，LLM 在将自然语言指令与适当的代码生成联系起来时可能会遇到困难，例如，当被指示模块化某些子模块时，它们可能无法识别相关的领域特定指令。</p>
+<p><img src="/2024/07/24/GPT4AIGChip/ETDcbVG6PoxIzaxaLRkcK9Tqnib-1721829974411.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/ETDcbVG6PoxIzaxaLRkcK9Tqnib-1721829974411.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h4 id="Over-simplified-implementation">Over-simplified implementation</h4>
+<p>AI 加速器实现需要类如 HLS 编码风格来描述硬件，e.g. 将一个元素从一个缓冲区广播到另一个分区缓冲区的多个位置，避免在两个缓冲区内直接赋值。相反，需要首先将元素分配给类似寄存器变量，然后这个中间寄存器数据分配到另一个缓冲区的多个位置，防止源缓冲区内发生访问冲突。如图 2（d）所示，往往忽略硬件设计中细节，生成不切实际设计。</p>
+<p><img src="/2024/07/24/GPT4AIGChip/NceDbuMs3oFcEHx98ZFchooQnYb-1721829974411.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/NceDbuMs3oFcEHx98ZFchooQnYb-1721829974411.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h3 id="C-Closed-sourced-LLMs-vs-Finetuned-Open-sourced-LLMs">C. Closed-sourced LLMs vs. Finetuned Open-sourced LLMs</h3>
+<p>上述局限性表示 LLM 在理解硬件设计代码方面不足，潜在解决方案是使用带注释 HLS 代码对开源 LLM 进行微调。但由于缺乏高质量 HLS 代码以及设计描述和封闭源代码的高级 LLM，这个方法面临挑战。这些障碍建议采用来源但功能不够强大的 LLM，本小节研究功能强大闭源 LLM 和微调开源 LLM。</p>
+<p>对 GPT-4 和 CodeGen 进行基准测试。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>Task</strong>：在HLS中实现两个向量内积运算；</p>
+</li>
+<li class="lvl-2">
+<p><strong>Metric</strong>：Pass@k，代表k次尝试中成功编译比例；</p>
+</li>
+<li class="lvl-2">
+<p><strong>Promp</strong>t：“在HLS中实现两个向量之间的内积运算。你是AI加速器设计方面的专家，拥有广泛的HLS编码知识。” —— “<em>Implement the inner product operator between two vectors in HLS. You are an expert in AI</em> <em>accelerator</em> <em>design with extensive HLS coding knowledge.</em>"</p>
+</li>
+</ul>
+<h4 id="Finetuning-strategy">Finetuning strategy</h4>
+<p>两阶段微调策略：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>从github上收集7000个开源HLS代码片段，使用masked prediction objective对CodeGen进行微调。</p>
+</li>
+<li class="lvl-2">
+<p>创建10个定制HLS模板及其说明，微调LLM和对应AI加速器设计。</p>
+</li>
+</ul>
+<h4 id="Observations">Observations</h4>
+<p>见表 1：</p>
+<p><img src="/2024/07/24/GPT4AIGChip/F8G3bf3gBo3EePxFgbDciAkdnDf-1721829974411.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/F8G3bf3gBo3EePxFgbDciAkdnDf-1721829974411.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>未微调之前 CodeGen 为 0% 正确率，微调后为 31%，但跟 GPT-4 对比还是有显著差距。</p>
+<h3 id="D-Capabilities-of-LLMs">D. Capabilities of LLMs</h3>
+<p>先前工作表明 LLM 能够通过 STF 和 in-context 学习到丰富表示。</p>
+<h4 id="Generalization-capability-from-in-context-demonstrations">Generalization capability from in-context demonstrations.</h4>
+<p>见图 3：</p>
+<p><img src="/2024/07/24/GPT4AIGChip/Uo1cb8kdKoIq4DxAML1c7qkEnlf-1721829974412.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/Uo1cb8kdKoIq4DxAML1c7qkEnlf-1721829974412.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>给定 HLS 演示两个片段，LLM 根据用户指令生成新的硬件风格。在保持相同编码风格和修改设计满足新的需求，推断演示设计差异。本文发现当提供与用户指令有一定关联高质量示例时，LLM 的上下文学习能力能够被激活。</p>
+<h4 id="Logical-reasoning-capability-under-multiple-demonstrations">Logical reasoning capability under multiple demonstrations</h4>
+<p>见图 3，LLM 可以对用户指令所需功能和演示中实现功能相似性进行逐步分析，选择一个适当动作为起点。表明 LLM 的逻辑推理能力，强调高质量演示重要性。</p>
+<hr>
+<h2 id="What-We-Can-Learn-Insights-From-The-Assessment">What We Can Learn: Insights From The Assessment</h2>
+<h3 id="Decoupled-hardware-template-design">Decoupled hardware template design</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>适当设计硬件模板以在设计空间中解耦不同硬件功能，避免长依赖性；</p>
+</li>
+<li class="lvl-2">
+<p>将复杂问题分解成更简单子任务，即不同硬件功能独立。不同硬件功能独立渐进生成，而不是一次性生成所有冗长代码。</p>
+</li>
+</ul>
+<h3 id="Prioritize-in-context-learning-given-limited-data">Prioritize in-context learning given limited data</h3>
+<p>由于注释数据稀缺性，无法以监督方式微调开源 LLM。利用封闭 LLM in-context 和 logical reasoning 是一个更有效选择。</p>
+<h3 id="Proper-prompt-engineering">Proper prompt engineering</h3>
+<p>In-context 学习关键在于目标领域高质量演示：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>输入设计指令强相关性；</p>
+</li>
+<li class="lvl-2">
+<p>广泛涉及参数传达丰富领域知识，增强处理各种输入指令能力。</p>
+</li>
+</ul>
+<hr>
+<h2 id="Instantiate-The-Drawn-Insights-The-Proposed-GPT4AIGChip-Framework">Instantiate The Drawn Insights: The Proposed GPT4AIGChip Framework</h2>
+<h3 id="A-The-Overall-Pipeline-of-GPT4AIGChip">A. The Overall Pipeline of GPT4AIGChip</h3>
+<p>GPT4AIGChip 在 GPT-4 基础上实施 in-context 学习，并整合两个关键组件：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>LLM 友好的硬件模板，将复杂 AI 加速器代码简化为模块结构；</p>
+</li>
+<li class="lvl-2">
+<p>增强演示的提示生成器（the demo-augmented prompt generator），在提示中添加演示来增强 LLM 生成优化 AI 加速器能力。</p>
+</li>
+</ul>
+<p>通过组合，然后 GPT4AIGChip 采取迭代方法改进生成 AI 加速器涉及，逐步接近最优。见图 4：</p>
+<p><img src="/2024/07/24/GPT4AIGChip/Kt1rbW9ZdomqHAx7h7scGdEcnSc-1721829974412.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/Kt1rbW9ZdomqHAx7h7scGdEcnSc-1721829974412.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>搜索引擎根据以往搜索设计反馈，识别下一个设计以及对应指令，指导 LLM 友好硬件模板实现和评估；</p>
+</li>
+<li class="lvl-2">
+<p>demo-augmented prompt generator 为每个模板创建一个提示，结合相关演示（instruction-</p>
+</li>
+</ul>
+<p>code pairs）增强 LLM 上下文学习；</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>配备上述提示的 LLMs 依次生成硬件设计实现；</p>
+</li>
+<li class="lvl-2">
+<p>设计验证流程检查 LLMs 生成的代码，执行必要的修改以确保其可部署性。</p>
+</li>
+</ul>
+<h3 id="B-The-LLM-friendly-Hardware-Template-Design">B. The LLM-friendly Hardware Template Design</h3>
+<h4 id="The-desired-template-design-principles">The desired template design principles</h4>
+<p>三个设计模块关键原则：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>高模块化（High modularity）</strong>：由于 LLM token 数量有限，上下文学习使用输入样本代码大小和每轮生成代码大小受到严格现实。高模块化设计生成方法可以大幅减小 LLM 输入和输出所需代码大小。</p>
+</li>
+<li class="lvl-2">
+<p><strong>解耦模块设计（Decoupled module design）</strong>：将代码模块分割成更小模块无意中引入配置设置之间的耦合和依赖。提出了独立的模块生成，每个模块保持其本地设置。然而，这可能导致总体设计次优，连接模块之间的数据速率不匹配可能导致停滞或死锁。为了协调模块操作，建议增加一个搜索引擎和可调整的模块间通信方案。这些方案可以最佳地协调所有本地设置，调节通信速率和带宽差异。因此，LLM 可以基于其本地设置生成每个模块，维护解耦原则。</p>
+</li>
+<li class="lvl-2">
+<p><strong>深层设计层次结构逐步生成设计（Deep design hierarchies for step-by-step design generation）</strong>：模板采用了基于层次的、模块化的生成方法，简化了过程，并在每个阶段减少了复杂性。每个模块由多个子模块组成，这些子模块遵循解耦原则，并可能进一步包含自己的子模块。这种递归嵌套持续到进一步划分变得不可行（见图 5(b)中的 Level-L）。这允许 LLM 系统地为每个模块生成设计层次结构，在每个步骤中限制代码大小和复杂性。</p>
+</li>
+</ul>
+<p><img src="/2024/07/24/GPT4AIGChip/IcKGbPN8joNRScxkDKJcM4OtnAf-1721829974412.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/IcKGbPN8joNRScxkDKJcM4OtnAf-1721829974412.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h4 id="Overview-of-the-proposed-accelerator-template">Overview of the proposed accelerator template</h4>
+<p>在三个关键原则基础上，引入一个新的、模块化的、解耦的加速器微架构及相应的代码模板，如图 5(b)所示。</p>
+<p><img src="/2024/07/24/GPT4AIGChip/AvkMbwnvyoMBIMxOQvQcGPmrnUe-1721829974412.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/AvkMbwnvyoMBIMxOQvQcGPmrnUe-1721829974412.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>这里关注于广泛使用的 GEMM 操作符，但考虑在 AI 算法中广泛应用，模板保留一个通用结构。模板由一系列多功能模块组成，每个模块都可以根据提示和本地配置设置灵活重新设计，提供不同的硬件效率甚至独特的功能。</p>
+<p>每个模块都由嵌套的子模块层次结构组成，以便于 LLM 逐步生成。模块通过基于流的通信链接和异步数据 FIFOs 相互连接，以减少不同模块之间数据生产和消费速率可能出现的不匹配的控制开销。每个模块内的处理开始和结束主要取决于数据的可用性，促进细粒度的操作重叠和简化控制开销。对于具有多个输入端口的模块，例如图 5(b)中的互连模块，我们还包括了额外的同步逻辑以确保数据对齐和准确性。</p>
+<h4 id="Key-components-of-the-proposed-accelerator-template">Key components of the proposed accelerator template</h4>
+<p><img src="/2024/07/24/GPT4AIGChip/JPGsbM4MUoX7eWxXQq3cBKTunPb-1721829974412.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/JPGsbM4MUoX7eWxXQq3cBKTunPb-1721829974412.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>Buffer modules：</strong></p>
+</li>
+</ul>
+<p>缓冲模块，方便后续计算单元并行数据访问。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>Computing units modules：</strong></p>
+</li>
+</ul>
+<p>计算单元模块，主要用于处理计算，e.g. 乘法和加法。互连被实现为 MAC（乘积累加运算）单元集合以平衡空间数据重用、MAC 数据传播延迟和片上缓冲带宽竞争。为更容易的 LLM 辅助生成结构化嵌套设计层次，以适应多种 MAC 互连风格。e.g. 单个 MAC 可以连接以创建一个一维 PE（处理元素）通道子模块，而多个 PE 通道可以互联以形成一个更大的二维 PE 阵列模块，增强可扩展性。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>Interconnect modules：</strong></p>
+</li>
+</ul>
+<p>它们被设计用来灵活地在缓冲模块和计算单元模块之间分配和同步数据。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>Control (Ctrl) modules：</strong></p>
+</li>
+</ul>
+<p>它们负责从主机获取初始控制数据、解码控制数据，以及可能在运行时生成控制数据以改变各种模块的工作模式。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>Flexible communication arbitrators：</strong></p>
+</li>
+</ul>
+<p>管理互连模块之间可能存在的数据生产/消耗速率和带宽的不匹配，从而实现速率和带宽的转换。</p>
+<h4 id="Implication-and-advantages-of-the-proposed-template">Implication and advantages of the proposed template</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>减少代码大小和模块解耦设计；</p>
+</li>
+<li class="lvl-2">
+<p>利用额外的数据集进行微调：</p>
+</li>
+<li class="lvl-2">
+<p>跨领域适用性。</p>
+</li>
+</ul>
+<h3 id="C-The-Demo-Augmented-Prompt-Generator-Design">C. The Demo-Augmented Prompt Generator Design</h3>
+<h4 id="Workflow">Workflow</h4>
+<p>LLM 在识别不同指令之间相似性能力，并应用到演示增强提示中，减少人类知识在 AI 加速器设计中需求。如图 4 所示：</p>
+<p><img src="/2024/07/24/GPT4AIGChip/FKcHbYugko5F5MxhaSIcgK3vn3e-1721829974412.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/FKcHbYugko5F5MxhaSIcgK3vn3e-1721829974412.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>在每一次迭代中，给定搜索引擎生成的设计指令，使用 LLMs 来识别生成的设计指令与演示库中指令之间的相似性。然后选择两个最相似的指令，并将它们与其对应的实现配对，作为本次代码生成的演示。</p>
+<h4 id="Demonstration-library">Demonstration library</h4>
+<p>演示库是增强式演示提示生成器中至关重要的组成部分。目标是构建一个演示库，涵盖目标领域（本文中为 GEMM）的多样化设计选择。这确保了演示库提供了丰富的领域知识，能够满足搜索引擎生成的多样化设计指令的需求。指导原则：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>高度相关的指令和代码对（Highly correlated instruction and code pairs）：</strong></p>
+</li>
+</ul>
+<p>每个演示包括详细的实施指导和相应的代码，配有注释。每条指令明确链接到特定的代码段，提供了它们之间关联和理念的清晰性。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>多样化的设计选择（Diverse design choices）：</strong></p>
+</li>
+</ul>
+<p>为了确保 LLMs 在给定的设计指令中找到具有足够领域知识的演示，生成了分开的演示，展示了搜索空间中每个设计参数的修改。</p>
+<h3 id="D-Implementation-of-Other-Components-in-GPT4AIGChip">D. Implementation of Other Components in GPT4AIGChip</h3>
+<h4 id="Hardware-design-space">Hardware design space</h4>
+<p>设计了 5 个硬件设计参数：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>MAC array sizes：</strong></p>
+</li>
+</ul>
+<p>指示实例化加速器中 MAC 阵列中 MAC 总数的大小。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>Network-on-Chip (NoC) styles:</strong></p>
+</li>
+</ul>
+<p>确定数据从计算单元到和从计算单元之间的分布，以及数据在它们之间的传播方式。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>On-chip buffer sizes：</strong></p>
+</li>
+</ul>
+<p>指示加速器设计中三个主要缓冲区的容量，包括两个输入缓冲区和一个（部分）输出缓冲区。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>On-chip buffer partition styles:</strong></p>
+</li>
+</ul>
+<p>确定在每个缓冲区内部的片上存储块之间的数据分配。</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>Data reuse patterns:</strong></p>
+</li>
+</ul>
+<p>定义了缓冲后如何在计算过程中重用数据。</p>
+<h4 id="The-adopted-search-algorithm">The adopted search algorithm</h4>
+<p>GPT4AIGChip 加速搜索进化算法，都是初始化 --&gt; 优秀选择 --&gt; 变异和交叉 --&gt; 更新种群 --&gt; 优化器解选择 等常规操作，不过多阐述。</p>
+<h4 id="Design-validation-and-code-correction-flow">Design validation and code correction flow</h4>
+<p>设计验证和代码修正流程：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>Synthesizability Evaluation（综合性验证）：</p>
+<ul class="lvl-2">
+<li class="lvl-4">利用标准化的 Vivado HLS 工具对 LLM 生成的代码进行综合化评估；</li>
+<li class="lvl-4">通过自定义的错误解析器处理输出日志消息；</li>
+<li class="lvl-4">如果解析器发现超出其能力范围的错误，可能需要进行以下操作之一：(1) LLM 驱动的设计重新生成，或者 (2) 人工干预进行错误修正。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>Correctness Verification（正确性验证）：</p>
+<ul class="lvl-2">
+<li class="lvl-4">确保设计在功能上能够产生预期的结果。构建了一个测试台架模板，包括预期的输入和输出；</li>
+<li class="lvl-4">将生成的输出与预期输出进行对比，以确认准确性；</li>
+<li class="lvl-4">鉴于可能出现的各种错误，这一步骤不包括自动修正。如果结果不正确，则需要重新生成设计。</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>Performance Analysis（性能分析）：</p>
+<ul class="lvl-2">
+<li class="lvl-4">评估性能指标（例如延迟）和资源使用情况，以向搜索引擎提供反馈；</li>
+<li class="lvl-4">使用 Vivado HLS 内置工具在设计综合后生成这些性能和资源估算。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="Experimental-Evaluation">Experimental Evaluation</h2>
+<h3 id="A-Experiment-Setup">A. Experiment Setup</h3>
+<p>设计流程选择 Vivado HLS 设计流程，使用 XCZU7EV MPSoC 的 ZCU104 FPGA 作为验证。环境部署在 PYNQ 中，在开发板上展示最终性能评估和测试。</p>
+<h3 id="B-Benchmark-with-Manual-and-Automated-Designs">B. Benchmark with Manual and Automated Designs</h3>
+<p>与两种基准进行比较：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>CHaiDNN 的硬件设计</strong>：这是一个行业级设计自动化工具提供的硬件设计。</p>
+</li>
+<li class="lvl-2">
+<p><strong>人工优化设计</strong>：硬件设计师根据模板参数和需求进行调整和微调。（大约一天）</p>
+</li>
+</ul>
+<p>图 6 所示，文中以 6 种不同网络和 2 种不同输入分辨率为基础评估加速效率：</p>
+<p><img src="/2024/07/24/GPT4AIGChip/QvzCbRnmeoy8o8xrmRMc602jnif-1721829974412.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/QvzCbRnmeoy8o8xrmRMc602jnif-1721829974412.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>延迟减少了 2.0% 〜 16.0%，表明 GPT 4AICchip 已经成功地并实际地展示了第一个 LLM 支持的 AI 加速器设计自动化框架；</p>
+</li>
+<li class="lvl-2">
+<p>硬件效率上能够与人工专家手动优化设计相匹配，同时大幅降低了人力成本。</p>
+</li>
+</ul>
+<h3 id="C-Effectiveness-of-the-Search-Scheme">C. Effectiveness of the Search Scheme</h3>
+<p>在 Resnet-50 上输入 224x224 图片，与随机搜索人类专家手动优化加速器比较，并可视化 Pareto 前沿，即延迟和使用的 DSP 资源之间的权衡。（os：这里随机搜索意思应该是在设计空间中随机选择参数，通常用作基准比较）见图 7：</p>
+<p><img src="/2024/07/24/GPT4AIGChip/QmUQb0MEkon9hcxdYmGcno04nDb-1721829974412.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/QmUQb0MEkon9hcxdYmGcno04nDb-1721829974412.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>随机搜索生成的设计在相对丰富的 DSP 资源设置下表现不如人工专家手动优化设计的延迟-资源权衡。</p>
+</li>
+<li class="lvl-2">
+<p>GPT4AIGChip 框架能够优于随机搜索基准，并能够与人工专家手动优化设计相匹配，在相似的资源条件下达到相似的硬件效率。</p>
+</li>
+</ul>
+<h3 id="D-Ablation-Study-of-the-Prompt-Generator">D. Ablation Study of the Prompt Generator</h3>
+<p>提示生成消融实验</p>
+<p>以 Stationary Computing Units 为生成目标，使用 Pass@10 作为评估指标。</p>
+<h4 id="Prompt-format-and-explicitness">Prompt format and explicitness</h4>
+<p>提示格式和明确性。首先验证使用演示增强提示符必要性，考虑两种替代提示设计：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>No Demo: 使用相同设计指令，但没有演示指令和代码；</p>
+</li>
+<li class="lvl-2">
+<p>High-level Description：将演示中显式指令替换为高级描述（e.g. 输出静态计算单元）</p>
+</li>
+</ul>
+<p>见表 2：</p>
+<p><img src="/2024/07/24/GPT4AIGChip/TgTebGuPOoTOmyxyOG7c2XY3nfk-1721829974412.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/TgTebGuPOoTOmyxyOG7c2XY3nfk-1721829974412.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>演示增强提示将 LLM AI 加速器设计能力提高 50% 和 30%，对比 No Demo 和 High-level Description。</p>
+<h4 id="Demonstration-selection">Demonstration selection</h4>
+<p>除了选择最相似演示之外，还考虑随机选择（Random）和最不相关选择（Dissimilar），见表 3：</p>
+<p><img src="/2024/07/24/GPT4AIGChip/YRFqbolLzotN7PxsYfnc4oQJnBg-1721829974412.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/YRFqbolLzotN7PxsYfnc4oQJnBg-1721829974412.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h4 id="The-number-of-demonstrations">The number of demonstrations</h4>
+<p>评估提示中演示数量关系，见表 5：</p>
+<p><img src="/2024/07/24/GPT4AIGChip/WbgxbD7uHoCDbMx7dVicwufhnvc-1721829974412.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/WbgxbD7uHoCDbMx7dVicwufhnvc-1721829974412.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h3 id="E-Visualizing-the-Generated-Designs">E. Visualizing the Generated Designs</h3>
+<p>更好说明上下文演示生成设计过程，图 8 给出示例：</p>
+<p><img src="/2024/07/24/GPT4AIGChip/WbRPbidjAoAKAexRV0Kc4HbvnYn-1721829974412.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/WbRPbidjAoAKAexRV0Kc4HbvnYn-1721829974412.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>基于内积/外积的矩阵乘法的说明和演示。</p>
+<hr>
+<h2 id="Limitations-And-Future-Work">Limitations And Future Work</h2>
+<p>主要为对演示库依赖、依然需要人类参与需求和生成加速器验证成本。</p>
+
+      </div>
+      <div class="post-tags-categories">
+        
+      </div>
+      
+        <div class="copyright">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+    <strong>author:  </strong>Jayden Lee</a>
+    </li>
+    <li class="post-copyright-link">
+    <strong>link:  </strong>
+    <a href="/2024/07/24/GPT4AIGChip/" target="_blank" title="GPT4AIGChip">https://picrew.github.io/2024/07/24/GPT4AIGChip/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>Copyright notice:   </strong>
+      All articles on this website, unless otherwise stated, adopt <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+      reprint policy. If reproduced, please indicate source!
+    </li>
+  </ul>
+<div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      <!-- 文章详情页的上一页和下一页 -->
+<div class="post-nav">
+
+
+
+
+
+  
+  <div class="post-nav-next post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload lazyload placeholder" src="https://i.postimg.cc/mgbfmf4W/IMG-202406271492-1440x810.jpg" class="lazyload placeholder" data-srcset="https://i.postimg.cc/mgbfmf4W/IMG-202406271492-1440x810.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+    </div>
+    <a href="/2024/06/25/EDA-LLM/" class="post-nav-link">
+      <div class="title">
+        Next: <i class="fas fa-angle-right"></i>
+        <div class="title-text">EDA_LLM</div>
+      </div>
+      <!-- <div class="content">
+        EDA_LLM
+Guide
+本推文整理了 2023 年和 2024 年关于 LLM4EDA 方面论文，尽可能覆盖最近和以
+      </div> -->
+    </a>
+  </div>
+
+</div>
+
+    
+    
+
+    <!-- 打赏 -->
+    
+
+    <!-- 分享 -->
+    
+      <!-- https://github.com/overtrue/share.js -->
+<!-- 文章详情页的分享 -->
+<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+
+<script defer src="/js/shareJs/social-share.min.js"></script>
+</script>
+
+<style>
+  .social-share {
+    margin: 20px 0;
+  }
+</style>
+
+
+    
+    
+    <!-- 评论 -->
+    <!-- 评论 -->
+
+  <div id="myComment">
+    
+      
+<section id="comments" style="padding: 1em;">
+	<div id="vcomment" class="comment"></div>
+</section>
+<style>
+	#comments {
+		background: rgba(255,255,255,1);
+		border-radius: 8px;
+	}
+	#veditor {
+		background-image: url('https://img.zcool.cn/community/01a253594c71cfa8012193a329a77f.gif');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: right;
+		background-color: rgba(255, 255, 255, 0);
+		resize: vertical;
+	}
+	#veditor:focus{
+		background-position-y: 200px;
+		transition: all 0.2s ease-in-out 0s;
+	}
+	
+	#vcomment .vcards .vcard .vhead .vsys i {
+		display: none;
+	}
+	/* 底部valine链接 */
+	#vcomment .vpower {
+		display: none;
+	}
+	
+	/* 底下注释是修改 名称和邮箱和网址输入框的样式 */
+	/* #vcomment .vheader {
+		display: flex;
+		justify-content: space-around;
+	}
+	
+	#vcomment .vheader .vnick {
+		width: 31%;
+		border: 2px solid #dedede;
+		padding-left: 10px;
+		padding-right: 10px;
+		border-radius: 5px
+	}
+
+	#vcomment .vheader .vmail {
+		width: 31%;
+		border: 2px solid #dedede;
+		padding-left: 10px;
+		padding-right: 10px;
+		border-radius: 5px
+	}
+
+	#vcomment .vheader .vlink {
+		width: 31%;
+		border: 2px solid #dedede;
+		padding-left: 10px;
+		padding-right: 10px;
+		border-radius: 5px
+	} */
+
+	img.vimg {
+		transition: all 1s;
+		/* 头像旋转时间为 1s */
+	}
+
+	img.vimg:hover {
+		transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+		-moz-transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+		-ms-transform: rotate(360deg);
+	}
+
+	#vcomment .vcards .vcard {
+		padding: 15px 20px 0 20px;
+		border-radius: 10px;
+		margin-bottom: 15px;
+		box-shadow: 0 0 4px 1px rgba(0, 0, 0, .12);
+		transition: all .3s
+	}
+
+	#vcomment .vcards .vcard:hover {
+		box-shadow: 0 0 8px 3px rgba(0, 0, 0, .12)
+	}
+
+	#vcomment .vcards .vcard .vh .vcard {
+		border: none;
+		box-shadow: none;
+	}
+</style>
+    
+  </div>
+
+
+<!-- 还需要在后面这个地址里设置script, comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
+
+
+  </div>
+
+  <!-- 目录 -->
+  <aside id='l_side'>
+  
+    
+      <section class="widget side_blogger">
+  <div class='content'>
+    
+      
+        <a class='avatar flat-box rectangle' href='/about/'>
+          <img src='https://i.postimg.cc/0NZhx9v1/avatar.jpg'/>
+        </a>
+      
+    
+    
+      <div class='text'>
+        
+          <h2>Jayden</h2>
+        
+        
+          <p>What can l not create ,l do not understand</p>
+
+        
+        
+          <p><span id="jinrishici-sentence"></span></p>
+          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="mailto:junjieli_1@163.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="https://github.com/Picrew"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=1839697295"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+    
+  
+  
+  
+
+  <div class="layout_sticky">    
+    
+      
+<section class="widget side_toc">
+  
+  <header>
+    
+      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
+    
+  </header>
+
+
+  <div class='content'>
+    <div class="toc-main">
+      <div class="toc-content">
+        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">GPT4AIGChip: Towards Next-Generation AI Accelerator Design Automation via Large Language Models</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Publication"><span class="toc-text">Publication</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Introduction"><span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Where-We-Are-The-limitations-and-capabilities-of-current-LLMs-for-AI-accelerator-design"><span class="toc-text">Where We Are: The limitations and  capabilities of current LLMs for AI accelerator design</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#A-An-Overview-of-the-Assessment"><span class="toc-text">A. An Overview of the Assessment</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B-Failures-and-Limitations-of-Existing-LLMs"><span class="toc-text">B. Failures and Limitations of Existing LLMs</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Misinterpretation-of-variable-definitions"><span class="toc-text">Misinterpretation of variable definitions</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Inability-to-capture-long-dependencies"><span class="toc-text">Inability to capture long dependencies</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Overlooking-crucial-user-instructions"><span class="toc-text">Overlooking crucial user instructions</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Over-simplified-implementation"><span class="toc-text">Over-simplified implementation</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C-Closed-sourced-LLMs-vs-Finetuned-Open-sourced-LLMs"><span class="toc-text">C. Closed-sourced LLMs vs. Finetuned Open-sourced LLMs</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Finetuning-strategy"><span class="toc-text">Finetuning strategy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Observations"><span class="toc-text">Observations</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#D-Capabilities-of-LLMs"><span class="toc-text">D. Capabilities of LLMs</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Generalization-capability-from-in-context-demonstrations"><span class="toc-text">Generalization capability from in-context demonstrations.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Logical-reasoning-capability-under-multiple-demonstrations"><span class="toc-text">Logical reasoning capability under multiple demonstrations</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#What-We-Can-Learn-Insights-From-The-Assessment"><span class="toc-text">What We Can Learn: Insights From The Assessment</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Decoupled-hardware-template-design"><span class="toc-text">Decoupled hardware template design</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Prioritize-in-context-learning-given-limited-data"><span class="toc-text">Prioritize in-context learning given limited data</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Proper-prompt-engineering"><span class="toc-text">Proper prompt engineering</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Instantiate-The-Drawn-Insights-The-Proposed-GPT4AIGChip-Framework"><span class="toc-text">Instantiate The Drawn Insights: The Proposed GPT4AIGChip Framework</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#A-The-Overall-Pipeline-of-GPT4AIGChip"><span class="toc-text">A. The Overall Pipeline of GPT4AIGChip</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B-The-LLM-friendly-Hardware-Template-Design"><span class="toc-text">B. The LLM-friendly Hardware Template Design</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#The-desired-template-design-principles"><span class="toc-text">The desired template design principles</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Overview-of-the-proposed-accelerator-template"><span class="toc-text">Overview of the proposed accelerator template</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Key-components-of-the-proposed-accelerator-template"><span class="toc-text">Key components of the proposed accelerator template</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Implication-and-advantages-of-the-proposed-template"><span class="toc-text">Implication and advantages of the proposed template</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C-The-Demo-Augmented-Prompt-Generator-Design"><span class="toc-text">C. The Demo-Augmented Prompt Generator Design</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Workflow"><span class="toc-text">Workflow</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Demonstration-library"><span class="toc-text">Demonstration library</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#D-Implementation-of-Other-Components-in-GPT4AIGChip"><span class="toc-text">D. Implementation of Other Components in GPT4AIGChip</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Hardware-design-space"><span class="toc-text">Hardware design space</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#The-adopted-search-algorithm"><span class="toc-text">The adopted search algorithm</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Design-validation-and-code-correction-flow"><span class="toc-text">Design validation and code correction flow</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Experimental-Evaluation"><span class="toc-text">Experimental Evaluation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#A-Experiment-Setup"><span class="toc-text">A. Experiment Setup</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B-Benchmark-with-Manual-and-Automated-Designs"><span class="toc-text">B. Benchmark with Manual and Automated Designs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C-Effectiveness-of-the-Search-Scheme"><span class="toc-text">C. Effectiveness of the Search Scheme</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#D-Ablation-Study-of-the-Prompt-Generator"><span class="toc-text">D. Ablation Study of the Prompt Generator</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Prompt-format-and-explicitness"><span class="toc-text">Prompt format and explicitness</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Demonstration-selection"><span class="toc-text">Demonstration selection</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#The-number-of-demonstrations"><span class="toc-text">The number of demonstrations</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#E-Visualizing-the-Generated-Designs"><span class="toc-text">E. Visualizing the Generated Designs</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Limitations-And-Future-Work"><span class="toc-text">Limitations And Future Work</span></a></li></ol></li></ol> -->
+        <div class="toc"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 手机端目录按钮 -->
+<div id="toc-mobile-btn">
+  <i class="fas fa-list-ul" aria-hidden="true"></i>
+</div>
+
+      
+  <section class="widget side_recent_post">
+    
+  <header>
+    
+      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      
+      <!-- hash算法 -->
+      
+      <div class="aside-list">
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/07/24/GPT4AIGChip/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">07-24</span>
+                
+              </div>
+              <a class="post-title" href="/2024/07/24/GPT4AIGChip/">GPT4AIGChip</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/06/25/EDA-LLM/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://i.postimg.cc/mgbfmf4W/IMG-202406271492-1440x810.jpg" class="lazyload placeholder" data-srcset="https://i.postimg.cc/mgbfmf4W/IMG-202406271492-1440x810.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">06-25</span>
+                
+              </div>
+              <a class="post-title" href="/2024/06/25/EDA-LLM/">EDA_LLM</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/06/17/Circuit-Graph/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">06-17</span>
+                
+              </div>
+              <a class="post-title" href="/2024/06/17/Circuit-Graph/">Circuit_Graph</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/06/05/AnalogCoder/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://i.postimg.cc/QMHzzjnw/IMG-202406277714-1440x810.jpg" class="lazyload placeholder" data-srcset="https://i.postimg.cc/QMHzzjnw/IMG-202406277714-1440x810.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">06-05</span>
+                
+              </div>
+              <a class="post-title" href="/2024/06/05/AnalogCoder/">AnalogCoder</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/05/26/EfficientPlace/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">05-26</span>
+                
+              </div>
+              <a class="post-title" href="/2024/05/26/EfficientPlace/">EfficientPlace</a>
+            </div>
+          </div>
+        
+      </div>
+    </div>
+  </section>
+
+    
+  </div>
+</aside>
+
+  <!-- 图片放大 Wrap images with fancybox support -->
+  <script defer src="/js/wrapImage.js"></script>
+</div>
+
+<!-- 文章详情页背景图 -->
+<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
+	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
+	<transition-group tag="ul" :name="names">
+		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
+			<img :src="image" class="bg-swiper-img no-lazy">
+		</li>
+	</transition-group>
+</div>
+<script>
+	var vm = new Vue({
+		el: '#appBgSwiper',
+		data: {
+			names: '' || 'fade' || 'fade', // translate-fade fade
+			mark: 0,
+			img: [],
+			bgColor: '',
+			time: null
+		},
+		methods: {   //添加方法
+			change(i, m) {
+				if (i > m) {
+					// this.names = 'fade';
+				} else if (i < m) {
+					// this.names = 'fade';
+				} else {
+					return;
+				}
+				this.mark = i;
+			},
+			prev() {
+				// this.names = 'fade';
+				this.mark--;
+				if (this.mark === -1) {
+					this.mark = 3;
+					return
+				}
+			},
+			next() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			autoPlay() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			play() {
+				let bgImgDelay = '' || '180000'
+				let delay = parseInt(bgImgDelay) || 180000;
+				this.time = setInterval(this.autoPlay, delay);
+			},
+			enter() {
+				clearInterval(this.time);
+			},
+			leave() {
+				this.play();
+			}
+		},
+		created() {
+			this.play()
+		},
+		beforeDestroy() {
+			clearInterval(this.time);
+		},
+		mounted() {
+			let prop = '' || '';
+			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
+			if (isImg) {
+				let img = prop.split(',');
+				let configRoot = '/'
+				let arrImg = [];
+				img.forEach(el => {
+					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+					var objExp = new RegExp(Expression);
+
+					if (objExp.test(el)) {
+						// http or https
+						arrImg.push(el);
+					} else {
+						// 非http or https开头
+						// 本地文件
+						let firstStr = el.charAt(0);
+						if (firstStr == '/') {
+							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
+						}
+						el = configRoot + el;
+						arrImg.push(el);
+					}
+				})
+				this.img = arrImg;
+			} else {
+				this.bgColor = prop;
+			}
+		}
+	})
+</script>
+
+<style>
+	.bg-swiper-box {
+		position: absolute;
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.bg-swiper-img {
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+	}
+</style>
+
+
+  <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://unpkg.com/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+
+  <script>
+  function loadMermaid() {
+    if (document.getElementsByClassName('mermaid').length) {
+      if (window.mermaidJsLoad) mermaid.init()
+      else {
+        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
+          window.mermaidJsLoad = true
+          mermaid.initialize({
+            theme: 'default',
+          })
+          if ('true') {
+            mermaid.init();
+          }
+        })
+      }
+    }
+  };
+  document.addEventListener("DOMContentLoaded", function () {
+    loadMermaid();
+  })
+
+  document.addEventListener('pjax:complete', function () {
+    loadMermaid();
+  })
+  
+</script>
+
+
+      </main>
+    </div>
+
+    <!-- 页脚 -->
+    
+  
+  
+    <!-- 底部鱼儿跳动效果，依赖于jquery-->
+<div id="j-fish-skip" style=" position: relative;height: 153px;width: auto;"></div>
+<script defer>
+  var RENDERER = {
+    POINT_INTERVAL: 5,
+    FISH_COUNT: 3,
+    MAX_INTERVAL_COUNT: 50,
+    INIT_HEIGHT_RATE: .5,
+    THRESHOLD: 50,
+    FISH_COLOR: '',
+    init: function () {
+      this.setFishColor(); this.setParameters(), this.reconstructMethods(), this.setup(), this.bindEvent(), this.render()
+    },
+    setFishColor: function () {
+      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+      if (isDark) {
+        this.FISH_COLOR = '#222'; // 暗黑色，有时间把这整成一个变量
+      } else {
+        this.FISH_COLOR = '' || 'rgba(66, 185, 133, 0.8)';
+      }
+    },
+    setParameters: function () {
+      this.$window = $(window), this.$container = $("#j-fish-skip"), this.$canvas = $("<canvas />"), this.context = this.$canvas.appendTo(this.$container).get(0).getContext("2d"), this.points = [], this.fishes = [], this.watchIds = []
+    },
+    createSurfacePoints: function () {
+      var t = Math.round(this.width / this.POINT_INTERVAL);
+      this.pointInterval = this.width / (t - 1), this.points.push(new SURFACE_POINT(this, 0));
+      for (var i = 1; i < t; i++) {
+        var e = new SURFACE_POINT(this, i * this.pointInterval),
+          h = this.points[i - 1];
+        e.setPreviousPoint(h), h.setNextPoint(e), this.points.push(e)
+      }
+    },
+    reconstructMethods: function () {
+      this.watchWindowSize = this.watchWindowSize.bind(this), this.jdugeToStopResize = this.jdugeToStopResize.bind(this), this.startEpicenter = this.startEpicenter.bind(this), this.moveEpicenter = this.moveEpicenter.bind(this), this.reverseVertical = this.reverseVertical.bind(this), this.render = this.render.bind(this)
+    },
+    setup: function () {
+      this.points.length = 0, this.fishes.length = 0, this.watchIds.length = 0, this.intervalCount = this.MAX_INTERVAL_COUNT, this.width = this.$container.width(), this.height = this.$container.height(), this.fishCount = this.FISH_COUNT * this.width / 500 * this.height / 500, this.$canvas.attr({
+        width: this.width,
+        height: this.height
+      }), this.reverse = !1, this.fishes.push(new FISH(this)), this.createSurfacePoints()
+    },
+    watchWindowSize: function () {
+      this.clearTimer(), this.tmpWidth = this.$window.width(), this.tmpHeight = this.$window.height(), this.watchIds.push(setTimeout(this.jdugeToStopResize, this.WATCH_INTERVAL))
+    },
+    clearTimer: function () {
+      for (; this.watchIds.length > 0;) clearTimeout(this.watchIds.pop())
+    },
+    jdugeToStopResize: function () {
+      var t = this.$window.width(),
+        i = this.$window.height(),
+        e = t == this.tmpWidth && i == this.tmpHeight;
+      this.tmpWidth = t, this.tmpHeight = i, e && this.setup()
+    },
+    bindEvent: function () {
+      this.$window.on("resize", this.watchWindowSize), this.$container.on("mouseenter", this.startEpicenter), this.$container.on("mousemove", this.moveEpicenter)
+    },
+    getAxis: function (t) {
+      var i = this.$container.offset();
+      return {
+        x: t.clientX - i.left + this.$window.scrollLeft(),
+        y: t.clientY - i.top + this.$window.scrollTop()
+      }
+    },
+    startEpicenter: function (t) {
+      this.axis = this.getAxis(t)
+    },
+    moveEpicenter: function (t) {
+      var i = this.getAxis(t);
+      this.axis || (this.axis = i), this.generateEpicenter(i.x, i.y, i.y - this.axis.y), this.axis = i
+    },
+    generateEpicenter: function (t, i, e) {
+      if (!(i < this.height / 2 - this.THRESHOLD || i > this.height / 2 + this.THRESHOLD)) {
+        var h = Math.round(t / this.pointInterval);
+        h < 0 || h >= this.points.length || this.points[h].interfere(i, e)
+      }
+    },
+    reverseVertical: function () {
+      this.reverse = !this.reverse;
+      for (var t = 0, i = this.fishes.length; t < i; t++) this.fishes[t].reverseVertical()
+    },
+    controlStatus: function () {
+      for (var t = 0, i = this.points.length; t < i; t++) this.points[t].updateSelf();
+      for (t = 0, i = this.points.length; t < i; t++) this.points[t].updateNeighbors();
+      this.fishes.length < this.fishCount && 0 == --this.intervalCount && (this.intervalCount = this.MAX_INTERVAL_COUNT, this.fishes.push(new FISH(this)))
+    },
+    render: function () {
+      requestAnimationFrame(this.render), this.controlStatus(), this.context.clearRect(0, 0, this.width, this.height), this.context.fillStyle = this.FISH_COLOR;
+      for (var t = 0, i = this.fishes.length; t < i; t++) this.fishes[t].render(this.context);
+      this.context.save(), this.context.globalCompositeOperation = "xor", this.context.beginPath(), this.context.moveTo(0, this.reverse ? 0 : this.height);
+      for (t = 0, i = this.points.length; t < i; t++) this.points[t].render(this.context);
+      this.context.lineTo(this.width, this.reverse ? 0 : this.height), this.context.closePath(), this.context.fill(), this.context.restore()
+    }
+  },
+  SURFACE_POINT = function (t, i) {
+    this.renderer = t, this.x = i, this.init()
+  };
+  SURFACE_POINT.prototype = {
+    SPRING_CONSTANT: .03,
+    SPRING_FRICTION: .9,
+    WAVE_SPREAD: .3,
+    ACCELARATION_RATE: .01,
+    init: function () {
+      this.initHeight = this.renderer.height * this.renderer.INIT_HEIGHT_RATE, this.height = this.initHeight, this.fy = 0, this.force = {
+        previous: 0,
+        next: 0
+      }
+    },
+    setPreviousPoint: function (t) {
+      this.previous = t
+    },
+    setNextPoint: function (t) {
+      this.next = t
+    },
+    interfere: function (t, i) {
+      this.fy = this.renderer.height * this.ACCELARATION_RATE * (this.renderer.height - this.height - t >= 0 ? -1 : 1) * Math.abs(i)
+    },
+    updateSelf: function () {
+      this.fy += this.SPRING_CONSTANT * (this.initHeight - this.height), this.fy *= this.SPRING_FRICTION, this.height += this.fy
+    },
+    updateNeighbors: function () {
+      this.previous && (this.force.previous = this.WAVE_SPREAD * (this.height - this.previous.height)), this.next && (this.force.next = this.WAVE_SPREAD * (this.height - this.next.height))
+    },
+    render: function (t) {
+      this.previous && (this.previous.height += this.force.previous, this.previous.fy += this.force.previous), this.next && (this.next.height += this.force.next, this.next.fy += this.force.next), t.lineTo(this.x, this.renderer.height - this.height)
+    }
+  };
+  var FISH = function (t) {
+    this.renderer = t, this.init()
+  };
+  FISH.prototype = {
+    GRAVITY: .4,
+    init: function () {
+      this.direction = Math.random() < .5, this.x = this.direction ? this.renderer.width + this.renderer.THRESHOLD : -this.renderer.THRESHOLD, this.previousY = this.y, this.vx = this.getRandomValue(4, 10) * (this.direction ? -1 : 1), this.renderer.reverse ? (this.y = this.getRandomValue(1 * this.renderer.height / 10, 4 * this.renderer.height / 10), this.vy = this.getRandomValue(2, 5), this.ay = this.getRandomValue(.05, .2)) : (this.y = this.getRandomValue(6 * this.renderer.height / 10, 9 * this.renderer.height / 10), this.vy = this.getRandomValue(-5, -2), this.ay = this.getRandomValue(-.2, -.05)), this.isOut = !1, this.theta = 0, this.phi = 0
+    },
+    getRandomValue: function (t, i) {
+      return t + (i - t) * Math.random()
+    },
+    reverseVertical: function () {
+      this.isOut = !this.isOut, this.ay *= -1
+    },
+    controlStatus: function (t) {
+      this.previousY = this.y, this.x += this.vx, this.y += this.vy, this.vy += this.ay, this.renderer.reverse ? this.y > this.renderer.height * this.renderer.INIT_HEIGHT_RATE ? (this.vy -= this.GRAVITY, this.isOut = !0) : (this.isOut && (this.ay = this.getRandomValue(.05, .2)), this.isOut = !1) : this.y < this.renderer.height * this.renderer.INIT_HEIGHT_RATE ? (this.vy += this.GRAVITY, this.isOut = !0) : (this.isOut && (this.ay = this.getRandomValue(-.2, -.05)), this.isOut = !1), this.isOut || (this.theta += Math.PI / 20, this.theta %= 2 * Math.PI, this.phi += Math.PI / 30, this.phi %= 2 * Math.PI), this.renderer.generateEpicenter(this.x + (this.direction ? -1 : 1) * this.renderer.THRESHOLD, this.y, this.y - this.previousY), (this.vx > 0 && this.x > this.renderer.width + this.renderer.THRESHOLD || this.vx < 0 && this.x < -this.renderer.THRESHOLD) && this.init()
+    },
+    render: function (t) {
+      t.save(), t.translate(this.x, this.y), t.rotate(Math.PI + Math.atan2(this.vy, this.vx)), t.scale(1, this.direction ? 1 : -1), t.beginPath(), t.moveTo(-30, 0), t.bezierCurveTo(-20, 15, 15, 10, 40, 0), t.bezierCurveTo(15, -10, -20, -15, -30, 0), t.fill(), t.save(), t.translate(40, 0), t.scale(.9 + .2 * Math.sin(this.theta), 1), t.beginPath(), t.moveTo(0, 0), t.quadraticCurveTo(5, 10, 20, 8), t.quadraticCurveTo(12, 5, 10, 0), t.quadraticCurveTo(12, -5, 20, -8), t.quadraticCurveTo(5, -10, 0, 0), t.fill(), t.restore(), t.save(), t.translate(-3, 0), t.rotate((Math.PI / 3 + Math.PI / 10 * Math.sin(this.phi)) * (this.renderer.reverse ? -1 : 1)), t.beginPath(), this.renderer.reverse ? (t.moveTo(5, 0), t.bezierCurveTo(10, 10, 10, 30, 0, 40), t.bezierCurveTo(-12, 25, -8, 10, 0, 0)) : (t.moveTo(-5, 0), t.bezierCurveTo(-10, -10, -10, -30, 0, -40), t.bezierCurveTo(12, -25, 8, -10, 0, 0)), t.closePath(), t.fill(), t.restore(), t.restore(), this.controlStatus(t)
+    }
+  }, $(function () {
+    RENDERER.init()
+    $('.dark').click(function () {
+      setTimeout(() => {
+        RENDERER.setFishColor();
+        RENDERER.context.fill();
+      });
+    })
+  });
+</script>
+  
+  <div class="footer bg-color">
+    <div class="footer-main">
+      
+        
+          <div class="link">
+            
+          </div>
+        
+      
+        
+          <div class="footer-copyright">
+            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a></p>
+
+          </div>
+        
+      
+        
+          <div class="footer-custom">
+            
+          </div>
+        
+      
+    </div>
+  </div>
+
+
+
+    <!-- 渲染暗黑按钮 -->
+    
+      <div class="dark" onclick="toggleDarkMode()">
+  <div class="dark-content">
+    <i class="fas" id="darkIcon" aria-hidden="true"></i>
+  </div>
+</div>
+
+<script defer>
+  $(function() {
+    // 初始化暗黑模式状态
+    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+    updateDarkModeIcon(isDark);
+  });
+
+  function toggleDarkMode() {
+    const isDark = $(document.body).hasClass('darkModel');
+    $(document.body).toggleClass('darkModel');
+    localStorage.setItem('dark', !isDark);
+    updateDarkModeIcon(!isDark);
+  }
+
+  function updateDarkModeIcon(isDark) {
+    const iconElement = document.getElementById('darkIcon');
+    if (isDark) {
+      iconElement.classList.remove('fa-moon');
+      iconElement.classList.add('fa-lightbulb');
+    } else {
+      iconElement.classList.remove('fa-lightbulb');
+      iconElement.classList.add('fa-moon');
+    }
+  }
+</script>
+
+    
+    <!-- 渲染回到顶部按钮 -->
+    
+      <div class="goTop top-btn-color" pointer>
+  <i class="fas fa-arrow-up" aria-hidden="true"></i>
+</div>
+<script defer src="/js/goTop.js"></script>
+
+    
+    <!-- 渲染左下角音乐播放器 -->
+    
+
+    <!-- 图片放大 -->
+    
+      <script src="https://unpkg.com/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    
+
+    <!-- 百度解析 -->
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script async>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <!-- 背景彩带 -->
+    
+      <script async type="text/javascript" size="100" alpha='0.4' zIndex="-1" src="/js/ribbon.min.js"></script>
+    
+
+    <script src="/js/utils/index.js"></script>
+    <script src="/js/app.js"></script>
+    
+    <!-- 文章目录所需js -->
+<!-- <link href="/js/tocbot/tocbot.css" rel="stylesheet">
+<script src="/js/tocbot/tocbot.min.js"></script> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.min.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.css">
+
+<script>
+  var headerEl = 'h1, h2, h3, h4, h5',  //headers 
+    content = '.post-detail',//文章容器
+    idArr = {};  //标题数组以确定是否增加索引id
+  //add #id
+  var option = {
+    // Where to render the table of contents.
+    tocSelector: '.toc',
+    // Where to grab the headings to build the table of contents.
+    contentSelector: content,
+    // Which headings to grab inside of the contentSelector element.
+    headingSelector: headerEl,
+    scrollSmooth: true,
+    scrollSmoothOffset: -70,
+    // headingsOffset: -($(window).height() * 0.4 - 45),
+    headingsOffset: -($(window).height() * 0.4 - 70),
+    // positionFixedSelector: '.toc-main',
+    // positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    activeLinkClass: 'is-active-link',
+    orderedList: true,
+    collapseDepth: 20,
+    // onClick: function (e) {},
+  }
+  if ($('.toc').length > 0) {
+
+    $(content).children(headerEl).each(function () {
+      //去除空格以及多余标点
+      var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
+
+      headerId = headerId.toLowerCase();
+      if (idArr[headerId]) {
+        //id已经存在
+        $(this).attr('id', headerId + '-' + idArr[headerId]);
+        idArr[headerId]++;
+      }
+      else {
+        //id未存在
+        idArr[headerId] = 1;
+        $(this).attr('id', headerId);
+      }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      tocbot.init(option);
+      mobileTocClick();
+    });
+
+  }
+
+  window.tocScrollFn = function () {
+    return bamboo.throttle(function () {
+      findHeadPosition();
+    }, 100)()
+  }
+  window.addEventListener('scroll', tocScrollFn);
+
+  const findHeadPosition = function (top) {
+    if ($('.toc-list').length <= 0) {
+      return false;
+    }
+    setTimeout(() => {  // or DOMContentLoaded 
+      autoScrollToc();
+    }, 0);
+  }
+
+  const autoScrollToc = function () {
+    const $activeItem = document.querySelector('.is-active-link');
+    const $cardToc = document.querySelector('.toc-content');
+    const activePosition = $activeItem.getBoundingClientRect().top
+    const sidebarScrollTop = $cardToc.scrollTop
+    if (activePosition > (document.documentElement.clientHeight - 100)) {
+      $cardToc.scrollTop = sidebarScrollTop + 150
+    }
+    if (activePosition < 150) {
+      $cardToc.scrollTop = sidebarScrollTop - 150
+    }
+  }
+
+  document.addEventListener('pjax:send', function () {
+    if ($('.toc').length) {
+      tocbot.destroy();
+    }
+  });
+
+  document.addEventListener('pjax:complete', function () {
+    if ($('.toc').length) {
+      tocbot.init(option);
+      mobileTocClick();
+    }
+  });
+  
+  // 手机端toc按钮点击出现目录
+  const mobileTocClick = function () {
+    const $cardTocLayout = document.getElementsByClassName('side_toc')[0];
+    const $cardToc = $cardTocLayout.getElementsByClassName('toc-content')[0];
+    let right = '45px';
+    if (window.innerWidth >= 551 && window.innerWidth <= 992) {
+      right = '100px'
+    }
+    const mobileToc = {
+      open: () => {
+        $cardTocLayout.style.cssText = 'animation: toc-open .3s; opacity: 1; right: ' + right
+      },
+
+      close: () => {
+        $cardTocLayout.style.animation = 'toc-close .2s'
+        setTimeout(() => {
+          $cardTocLayout.style.cssText = "opacity:''; animation: ''; right: ''"
+        }, 100)
+      }
+    }
+    document.getElementById('toc-mobile-btn').addEventListener('click', () => {
+      if (window.getComputedStyle($cardTocLayout).getPropertyValue('opacity') === '0') mobileToc.open()
+      else mobileToc.close()
+    })
+
+    $cardToc.addEventListener('click', (e) => {
+      if (window.innerWidth < 992) { // 小于992px的时候
+        mobileToc.close()
+      }
+    })
+  }
+</script>
+
+<style>
+  /* .is-position-fixed {
+    position: sticky !important;
+    top: 74px;
+  }
+
+  .toc-main ul {
+    counter-reset: show-list;
+  }
+
+  .toc-main ul li::before {
+    content: counter(item)".";
+    display: block;
+    position: absolute;
+    left: 12px;
+    top: 0;
+  } */
+</style>
+ 
+
+<!-- 设置导航背景 -->
+<script>
+  let setHeaderClass = () => {
+    const nav = $('#navHeader');
+    const navTop = nav.outerHeight();
+    const winTop = $(window).scrollTop();
+    if(winTop > navTop) {
+      nav.addClass('header-bg-color');
+    }
+    else {
+      nav.removeClass('header-bg-color');
+    }
+  };
+
+  let scrollCollect = () => {
+    return bamboo.throttle(function (e) {
+      setHeaderClass();
+    }, 200)()
+  }
+
+  let initHeaderBg = () => {
+    setHeaderClass();
+  }
+
+  setHeaderClass();
+  window.addEventListener('scroll', scrollCollect);
+
+  document.addEventListener('pjax:send', function () {
+    window.removeEventListener('scroll', scrollCollect)
+  })
+  document.addEventListener('pjax:complete', function () {
+    window.addEventListener('scroll', scrollCollect);
+    setHeaderClass();
+  })
+</script> 
+
+<!-- 渲染issues标签里的内容 -->
+<script>
+  function loadIssuesJS() {
+    if ($(".post-detail").find(".issues-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/issues/index.js');
+  };
+  $(function () {
+    loadIssuesJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof IssuesAPI == "undefined") {
+      loadIssuesJS();
+    }
+  })
+</script>
+
+<!-- 渲染远程json加载的图片标签(getPhotoOnline)里的内容 -->
+<script>
+  function loadPhotoOnlineJS() {
+    if ($(".post-detail").find(".getJsonPhoto-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/getPhotoOnline/index.js');
+  };
+  $(function () {
+    loadPhotoOnlineJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof getPhotoJson == "undefined") {
+      loadPhotoOnlineJS();
+    }
+  })
+</script>
+
+<!-- 渲染远程json加载的talk标签(getTalkOnline)里的内容 -->
+<script>
+  function loadTalkOnlineJS() {
+    if ($(".post-detail").find(".getJsonTalk-api").length == 0) {
+      return;
+    } 
+    loadScript('https://cdnjs.cloudflare.com/ajax/libs/waterfall.js/1.0.2/waterfall.min.js'); // 瀑布流插件，https://raphamorim.io/waterfall.js/
+    loadScript('/js/getTalkOnline/index.js');
+  };
+  $(function () {
+    loadTalkOnlineJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof getTalkJson == "undefined") {
+      loadTalkOnlineJS();
+    }
+  })
+</script>
+
+<!-- 渲染远程json加载的site-card标签(getSiteOnline)里的内容 -->
+<script>
+  function loadSiteOnlineJS() {
+    if ($(".post-detail").find(".getJsonSite-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/getSiteOnline/index.js');
+  };
+  $(function () {
+    loadSiteOnlineJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof getSiteJson == "undefined") {
+      loadSiteOnlineJS();
+    }
+  })
+</script>
+
+<!-- 输入框打字特效 -->
+<!-- 输入框打字特效 -->
+
+  <script src="/js/activate-power-mode.js"></script>
+  <script>
+    POWERMODE.colorful = true;  // 打开随机颜色特效
+    POWERMODE.shake = false;    // 关闭输入框抖动
+    document.body.addEventListener('input', POWERMODE);//监听打字事件
+  </script>
+
+
+<!-- markdown代码一键复制功能 -->
+
+  <link rel="stylesheet" href="https://unpkg.com/v-plugs-ayu/lib/ayu.css">
+  <script src="https://unpkg.com/v-plugs-ayu/lib/ayu.umd.min.js"></script>
+  <script src="/js/clipboard/clipboard.min.js"></script>
+  <div id="appCopy">
+  </div>
+  <script data-pjax>
+    var vm = new Vue({
+      el: '#appCopy',
+      data: {
+      },
+      computed: {
+      },
+      mounted() {
+        const that = this;
+        var copy = 'copy';
+        /* code */
+        var initCopyCode = function () {
+          var copyHtml = '';
+          copyHtml += '<button class="btn-copy" data-clipboard-snippet="" style="position:absolute;top:0;right:0;z-index:1;">';
+          copyHtml += '<i class="fas fa-copy"></i><span>' + copy + '</span>';
+          copyHtml += '</button>';
+          $(".post-detail pre").not('.gutter pre').wrap("<div class='codeBox' style='position:relative;width:100%;'></div>")
+          $(".post-detail pre").not('.gutter pre').before(copyHtml);
+          new ClipboardJS('.btn-copy', {
+            target: function (trigger) {
+              return trigger.nextElementSibling;
+            }
+          });
+        }
+        initCopyCode();
+        $('.btn-copy').unbind('click').bind('click', function () {
+          doSomething();
+        })
+        $(document).unbind('keypress').bind('keypress', function (e) {
+          if (e.ctrlKey && e.keyCode == 67) {
+            doSomething();
+          }
+        })
+
+        function doSomething() {
+          that.$notify({
+            title: "成功",
+            content: "代码已复制，请遵守相关授权协议。",
+            type: 'success'
+          })
+        }
+      },
+      methods: {
+      },
+      created() { }
+    })
+  </script>
+  
+
+<!-- 图片懒加载 -->
+<script defer src="https://unpkg.com/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
+</script>
+
+
+<!-- 卡片滚动动画 -->
+   
+
+<!-- 评论所需js -->
+
+  
+        
+<!-- 具体js，请前往valine/script.ejs查看 -->
+
+      
+        <script>
+  var requiredFields = '';
+  requiredFields = requiredFields.split(',');
+  comment_el = '.comment';
+  let looperValine = null;
+  load_valine = function () {
+    if ($(comment_el).length) {
+      var valine = new Valine({
+        el: '#vcomment',
+        path: window.location.pathname,
+        notify: false,
+        verify: false,
+        app_id: "mptvHjNei9tLgoh91VHoyXI3-gzGzoHsz",
+        app_key: "4GFQ3SvPkglZ7djLOOY0Zwd8",
+        placeholder: "欢迎评论",
+        avatar: "",
+        master: "",   //博主邮箱md5
+        tagMeta: ["博主","小伙伴","访客"],     //标识字段名
+        friends: "",
+        metaPlaceholder: { "nick": "昵称/QQ号", "mail": "邮箱" },
+        requiredFields: requiredFields,
+        enableQQ: true,
+      });
+      function debounce(fn) {
+        var timerID = null
+        return function () {
+          var arg = arguments[0]   //获取事件
+          if (timerID) {
+            clearTimeout(timerID)
+          }
+          timerID = setTimeout(function () {
+            fn(arg)              //事件传入函数
+          }, 200)
+        }
+      }
+      //查询评论 valine.Q('*').limit(7) -- 查询所有，限制7条, 下面的的代码是查询当前页面
+      var themeDanmu = eval('false');
+      var themeLoop = eval('false');
+      var themeLooperTime = '5000' || 5000;
+      var speed = '40' || 20;
+      var isBarrager = true;
+      if (themeDanmu == true) {
+        do_barrager();
+        if ($('.danmuBox').length <= 0) {
+          $('.navbar').append('<div class="danmuBox"><div class="danmuBtn open"><span class="danmuCircle"></span><span class="danmuText">弹幕</span></div></div>');
+        }
+        $('.danmuBtn').on('click', debounce(
+          function () {
+            if ($('.danmuBtn').hasClass('open')) {
+              $('.danmuBtn').removeClass('open')
+              clearInterval(looperValine);
+              $.fn.barrager.removeAll();
+            } else {
+              $('.danmuBtn').addClass("open");
+              do_barrager();
+            }
+          }
+        ))
+      }
+      function do_barrager() {
+        isBarrager && valine.Q(window.location.pathname).find().then(function (comments) {
+          // var num = 0; // 可以记录条数，循环调用的时候只取最新的评论放入弹幕中
+          var run_once = true;
+          var looper_time = themeLooperTime;
+          var total = comments.length;
+          // var looper = null;
+          var index = 0;
+          if (total > 0) {
+            barrager();
+          } else {
+            // 当评论数为0的时候，自动关闭弹幕
+            // $('.danmuBtn').removeClass('open');
+          }
+          function barrager() {
+            if (run_once) {
+              //如果是首次执行,则设置一个定时器,并且把首次执行置为false
+              looperValine = setInterval(barrager, looper_time);
+              run_once = false;
+            }
+            var content = comments[index]._serverData.comment;
+            var email = comments[index]._serverData.mail;
+            var link = comments[index]._serverData.link;
+            var newcontent = content.substring(0, 50).replace(/<[^>]+>/g, "");
+            //发布一个弹幕
+            const item = {
+              img: `https://q1.qlogo.cn/g?b=qq&nk=${email}&s=640`, //图片 
+              info: newcontent, //文字 
+              href: link, //链接 
+              close: true, //显示关闭按钮 
+              speed: speed, //延迟,单位秒,默认6 
+              color: '#fff', //颜色,默认白色 
+              old_ie_color: '#000000', //ie低版兼容色,不能与网页背景相同,默认黑色
+            }
+            $('body').barrager(item);
+            //索引自增
+            index++;
+            //所有弹幕发布完毕，清除计时器。
+            if (index == total) {
+              clearInterval(looperValine);
+              if (themeLoop === true) {
+                setTimeout(function () {
+                  do_barrager();
+                }, 5000);
+              } else {
+                $('.danmuBtn').removeClass('open');
+              }
+              return false;
+            }
+
+          }
+        })
+      }
+    }
+  };
+  $(document).ready(load_valine);
+  document.addEventListener('pjax:send', function (e) {
+    
+  })
+  document.addEventListener('pjax:complete', function () {
+    load_valine();
+  });
+</script>
+
+      
+
+
+<!-- 鼠标点击特效 -->
+<!-- 爱心点击 -->
+
+  
+    <script async src="/js/cursor/fireworks.js"></script>
+  
+
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" data-pjax></script>
+
+
+<!-- 轮播图标签 -->
+<script>
+  var bambooSwiperTag = {};
+  function load_swiper() {
+    if (!document.querySelectorAll(".post-swiper-container")[0]) return;
+    loadCSS("https://unpkg.com/swiper@6/swiper-bundle.min.css")
+    loadScript("https://unpkg.com/swiper@6/swiper-bundle.min.js").then(() => {
+      pjax_swiper();
+    });
+  }
+
+  load_swiper();
+
+  function pjax_swiper() {
+    bambooSwiperTag.swiper = new Swiper('.post-swiper-container', {
+      slidesPerView: 'auto',
+      spaceBetween: 8,
+      centeredSlides: true,
+      loop: true,
+      autoplay: true ? {
+        delay: 3000,
+        stopOnLastSlide: false,
+        disableOnInteraction: false,
+      } : false,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      on:{
+        init: function(){
+          swiperAnimateCache(this); //隐藏动画元素 
+          swiperAnimate(this); //初始化完成开始动画
+        }, 
+        slideChangeTransitionEnd: function(){ 
+          swiperAnimate(this); //每个slide切换结束时也运行当前slide动画
+          //this.slides.eq(this.activeIndex).find('.ani').removeClass('ani'); 动画只展现一次，去除ani类名
+        } 
+      }
+    });
+  }
+
+  document.addEventListener('pjax:complete', function () {
+    if (!document.querySelectorAll(".post-swiper-container")[0]) return;
+    if (typeof bambooSwiperTag.swiper === "undefined") {
+      load_swiper();
+    } else {
+      pjax_swiper();
+    }
+  });
+</script>
+    <!-- pjax -->
+    
+
+<!-- pjax -->
+
+
+  <script src="/js/pjax@0.2.8/index.js"></script>
+  
+    <div class="pjax-animate">
+  
+    <div class="loading-circle"><div id="loader-circle"></div></div>
+    <script>
+      window.ShowLoading = function() {
+        $(".loading-circle").css("display", "block");
+      };
+      window.HideLoading = function() {
+        $(".loading-circle").css("display", "none");
+      }
+    </script>
+  
+	<script>
+    document.addEventListener('pjax:complete', function () {
+      window.HideLoading();
+    })
+    document.addEventListener('pjax:send', function () {
+      window.ShowLoading();
+    })
+    document.addEventListener('pjax:error', function () {
+      window.HideLoading();
+    })
+	</script>
+</div>
+
+  
+
+  <script>
+    var pjax = new Pjax({
+      elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([no-pjax])',   // 拦截正常带链接的 a 标签
+      selectors: ["#pjax-container","title"],                                   // 根据实际需要确认重载区域
+      cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+      timeout: 5000
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+
+    })
+    
+    document.addEventListener('pjax:complete', function () {
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+      window.location.href = e.triggerElement.href;
+    })
+    
+    // 刷新不从顶部开始
+    document.addEventListener("DOMContentLoaded", function () {
+      history.scrollRestoration = 'auto';
+    })
+  </script>
+
+
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="//cdn.bootcss.com/mathjax/0.6.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+</html>
