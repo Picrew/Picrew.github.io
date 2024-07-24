@@ -522,206 +522,144 @@ mjx-container[display="true"] + br {
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <h1>On a Moreau Envelope Wirelength Model for Analytical Global Placement</h1>
-<p>题外话：Peiyu 这篇文章 Bei Yu 自称是 DAC 2023 最强论文 --&gt; With Yibo Lin --&gt; Moreau Envelope Wirelength Model</p>
-<p>References --[zhihu](<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/579615273/answer/3124602071">Design Automation Conference (DAC)2023 现在进展如何? - 知乎</a>)</p>
+        <h1 id="On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement"><a href="#On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement" class="headerlink" title="On a Moreau Envelope Wirelength Model for Analytical Global Placement"></a>On a Moreau Envelope Wirelength Model for Analytical Global Placement</h1><p>题外话：Peiyu 这篇文章 Bei Yu 自称是 DAC 2023 最强论文 —&gt; With Yibo Lin —&gt; Moreau Envelope Wirelength Model</p>
+<p>References —<a href="[Design Automation Conference (DAC">zhihu</a>2023 现在进展如何? - 知乎](<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/579615273/answer/3124602071">https://www.zhihu.com/question/579615273/answer/3124602071</a>))</p>
 <p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VJQpbweAjoDUuqxsLETc5vQtnvb-1716629216534.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VJQpbweAjoDUuqxsLETc5vQtnvb-1716629216534.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<h1>Introduction</h1>
-<p>​		广泛采用的策略是线长驱动的全局布局，使整个电路线长最小化。分析型布局方法讲布局问题表达为一定合法约束的布线问题。</p>
-<p>​		计算能力和神经网络发展，数值优化方法(numerical optimization approaches)得到了极大关注。要求线长模型处处可微(differentiable)。但是由最大最小坐标的 HPWL 半周线长模型不是处处可微分的。所以，当代布局算法严重依赖于可微分的 HPWL 模型。主要有两种区别 --&gt; 二次近似(quadratic approximations)和非线性近似(nonlinear approximations)。</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>二次近似模型：用平方长度近似每个边的成本，给出了一个严格凸的目标，方便我们优化。二次近似模型一般具有封闭形式的最小值，可通过求解线性系统找到。</p>
-<ul class="lvl-2">
-<li class="lvl-4">二次近似模型为了更好近似HPWL参数，提出线性化技术，与某些净长度成反比的权重做积分，使得加权平方项更接近HPWL  eg. --&gt; <em>Bound2Bound</em> (B2B) model。eg:</li>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>​        广泛采用的策略是线长驱动的全局布局，使整个电路线长最小化。分析型布局方法讲布局问题表达为一定合法约束的布线问题。</p>
+<p>​        计算能力和神经网络发展，数值优化方法(numerical optimization approaches)得到了极大关注。要求线长模型处处可微(differentiable)。但是由最大最小坐标的 HPWL 半周线长模型不是处处可微分的。所以，当代布局算法严重依赖于可微分的 HPWL 模型。主要有两种区别 —&gt; 二次近似(quadratic approximations)和非线性近似(nonlinear approximations)。</p>
+<ul>
+<li>二次近似模型：用平方长度近似每个边的成本，给出了一个严格凸的目标，方便我们优化。二次近似模型一般具有封闭形式的最小值，可通过求解线性系统找到。<ul>
+<li>二次近似模型为了更好近似HPWL参数，提出线性化技术，与某些净长度成反比的权重做积分，使得加权平方项更接近HPWL  eg. —&gt; <em>Bound2Bound</em> (B2B) model。eg:</li>
 </ul>
 </li>
 </ul>
 <p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Z7yPbpdVooqP5xxRcFdc36HmnBe-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Z7yPbpdVooqP5xxRcFdc36HmnBe-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>非线性近似模型：通常非线性模型采用可微函数，比如对数、指数(log-sum-exp)，或者加权平均(weighted-average)。通过控制超参数 r 近似 HPWL 任意精度。</p>
-<ul class="lvl-2">
-<li class="lvl-4">eg. DREAMplace 等采用这种方法。</li>
+<ul>
+<li><p>非线性近似模型：通常非线性模型采用可微函数，比如对数、指数(log-sum-exp)，或者加权平均(weighted-average)。通过控制超参数 r 近似 HPWL 任意精度。</p>
+<ul>
+<li>eg. DREAMplace 等采用这种方法。</li>
 </ul>
 </li>
-<li class="lvl-2">
-<p>新的模型：</p>
-<ul class="lvl-2">
-<li class="lvl-4">eg.Bivariate-Gradient-Based (BiG) model 双变量梯度模型 ：用近似双变量最大值或者最小值的双变量函数来计算相对于坐标的梯度。提高数值稳定性和 CPU 运行时间。</li>
-<li class="lvl-4">eg.Subgradient-based approaches 基于次梯度方法：直接优化 B2B 模型。</li>
+<li><p>新的模型：</p>
+<ul>
+<li>eg.Bivariate-Gradient-Based (BiG) model 双变量梯度模型 ：用近似双变量最大值或者最小值的双变量函数来计算相对于坐标的梯度。提高数值稳定性和 CPU 运行时间。</li>
+<li>eg.Subgradient-based approaches 基于次梯度方法：直接优化 B2B 模型。</li>
 </ul>
 </li>
 </ul>
 <p>Sum up：</p>
-<p>​		 WA（weighted average）模型比LSE（log-sum-exp）模型有更低的逼近误差值，但仍然面临数值稳定性和非凸问题。对比之下，BiG模型有数值稳定性和廉价计算优点，但是依赖于指定的双变量线长模型。非光滑优化方(Non-smooth optimization approaches)不需要任何的近似可微，但是可能遇到收敛速度慢和收敛性差问题。</p>
+<p>​         WA（weighted average）模型比LSE（log-sum-exp）模型有更低的逼近误差值，但仍然面临数值稳定性和非凸问题。对比之下，BiG模型有数值稳定性和廉价计算优点，但是依赖于指定的双变量线长模型。非光滑优化方(Non-smooth optimization approaches)不需要任何的近似可微，但是可能遇到收敛速度慢和收敛性差问题。</p>
 <hr>
-<p>​		 我们提出一种新的可微线长模型，使用 <em>Moreau envelope</em> 来近似HPWL。该模型在数值稳定性，凸性和逼近误差方面都好于以往模型。</p>
-<p>​		 贡献如下：</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>推导了非光滑HPWL函数的近似算子(proximal mapping)显式表示。提出了类似通信系统的注水算法解决近似算子(proximal mapping)和Moreau envelope问题。</p>
-</li>
-<li class="lvl-2">
-<p>提供了理论和实验分析，比较以往算法，验证可行性。</p>
-</li>
-<li class="lvl-2">
-<p>实验表明，提出模型可实现在ISPD06数据高达5.4%的HPWL改进，ISPD06竞赛benchmark超过1%；ISPD19数据高达3.0%的HPWL改进，ISPD19竞赛benchmark超过1.5%。</p>
-</li>
+<p>​         我们提出一种新的可微线长模型，使用 <em>Moreau envelope</em> 来近似HPWL。该模型在数值稳定性，凸性和逼近误差方面都好于以往模型。</p>
+<p>​         贡献如下：</p>
+<ul>
+<li>推导了非光滑HPWL函数的近似算子(proximal mapping)显式表示。提出了类似通信系统的注水算法解决近似算子(proximal mapping)和Moreau envelope问题。</li>
+<li>提供了理论和实验分析，比较以往算法，验证可行性。</li>
+<li>实验表明，提出模型可实现在ISPD06数据高达5.4%的HPWL改进，ISPD06竞赛benchmark超过1%；ISPD19数据高达3.0%的HPWL改进，ISPD19竞赛benchmark超过1.5%。</li>
 </ul>
 <hr>
-<h1>Preliminaries</h1>
-<h2 id="Analytical-Global-Placement（分析全局布局）">Analytical Global Placement（分析全局布局）</h2>
-<p>​		电路布局一般包括三部分，global placement（全局布局），legalization（合法化），detailed placement（详细布局）。在全局布局 GP 阶段，目标找到总线长最小的放置位置，并且重叠控制在最低水平，典型的非线性全局布局表示为：</p>
+<h1 id="Preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h1><h2 id="Analytical-Global-Placement（分析全局布局）"><a href="#Analytical-Global-Placement（分析全局布局）" class="headerlink" title="Analytical Global Placement（分析全局布局）"></a>Analytical Global Placement（分析全局布局）</h2><p>​        电路布局一般包括三部分，global placement（全局布局），legalization（合法化），detailed placement（详细布局）。在全局布局 GP 阶段，目标找到总线长最小的放置位置，并且重叠控制在最低水平，典型的非线性全局布局表示为：</p>
 <p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/NHeGbs2avoOi2ZxJJT9cJgq2ncg-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/NHeGbs2avoOi2ZxJJT9cJgq2ncg-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>​		HPWL 模型定义为 We,表示为：</p>
+<p>​        HPWL 模型定义为 We,表示为：</p>
 <p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VGtgbgf8UoxqArxZ7sGcELl2nkb-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VGtgbgf8UoxqArxZ7sGcELl2nkb-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>​		定义 HPWL 函数是凸和连续，但不是处处可微。</p>
-<h2 id="Nonlinear-Differentiable-Models（非线性微分模型）">Nonlinear Differentiable Models（非线性微分模型）</h2>
-<h3 id="log-sum-exp-LSE-model">log-sum-exp (LSE) model</h3>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZL3Ibal08ojE6xxopp6c9RV9nXb-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZL3Ibal08ojE6xxopp6c9RV9nXb-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<h3 id="weighted-average-WA-model">weighted average (WA) model</h3>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Z5zPbr7PRoTbq8xBT3Vcr4QLnxh-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Z5zPbr7PRoTbq8xBT3Vcr4QLnxh-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>​		参数 r 是控制精度和可微性权衡的超参数。r --&gt; 0+ ，近似任意接近于真实的 HPWL。通常在全局布局 GP 早期阶段，r 设置成一个比较大的值，使得目标变得平滑，随着迭代 step 增多而减小。</p>
-<h2 id="Moreau-Envelope">Moreau Envelope</h2>
-<p>（os：此处需要凸优化数学基础）</p>
+<p>​        定义 HPWL 函数是凸和连续，但不是处处可微。</p>
+<h2 id="Nonlinear-Differentiable-Models（非线性微分模型）"><a href="#Nonlinear-Differentiable-Models（非线性微分模型）" class="headerlink" title="Nonlinear Differentiable Models（非线性微分模型）"></a>Nonlinear Differentiable Models（非线性微分模型）</h2><h3 id="log-sum-exp-LSE-model"><a href="#log-sum-exp-LSE-model" class="headerlink" title="log-sum-exp (LSE) model"></a>log-sum-exp (LSE) model</h3><p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZL3Ibal08ojE6xxopp6c9RV9nXb-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZL3Ibal08ojE6xxopp6c9RV9nXb-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h3 id="weighted-average-WA-model"><a href="#weighted-average-WA-model" class="headerlink" title="weighted average (WA) model"></a>weighted average (WA) model</h3><p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Z5zPbr7PRoTbq8xBT3Vcr4QLnxh-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Z5zPbr7PRoTbq8xBT3Vcr4QLnxh-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>​        参数 r 是控制精度和可微性权衡的超参数。r —&gt; 0+ ，近似任意接近于真实的 HPWL。通常在全局布局 GP 早期阶段，r 设置成一个比较大的值，使得目标变得平滑，随着迭代 step 增多而减小。</p>
+<h2 id="Moreau-Envelope"><a href="#Moreau-Envelope" class="headerlink" title="Moreau Envelope"></a>Moreau Envelope</h2><p>（os：此处需要凸优化数学基础）</p>
 <p>一般的Moreau Envelope定义满足真实Hilbert空间上特定约束的函数。在布局应用中，我们只需考虑定义Rn中下界闭凸函数<em>h(x):</em></p>
 <p>Any t &gt; 0，</p>
 <p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/1.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/1.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>其中Moreau Envelope的ht定义为：</p>
+<p> 其中Moreau Envelope的ht定义为：</p>
 <p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/2.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/2.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>不要求ht为光滑函数。</p>
-<p>近似算子定义为：</p>
+<p> 不要求ht为光滑函数。</p>
+<p> 近似算子定义为：</p>
 <p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/3.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/3.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>由上公式得，Moreau Envelope的ht是自然可微，梯度是全局Lipschitz连续的。envelope theorem指出：</p>
+<p> 由上公式得，Moreau Envelope的ht是自然可微，梯度是全局Lipschitz连续的。envelope theorem指出：</p>
 <p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/4.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/4.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>Since</p>
+<p>Since </p>
 <p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/5.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/5.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
 <p>t被认为是近似精度，类似LSE和WA中的r。</p>
 <hr>
 <p>在全局布线中，HPWL 中的 We 是一个干净直接公式。我们提出一种算法计算 Moreau Envelope 中的 We，使用 We + t 作为近似线长模型，使整个目标处处可微。</p>
-<h2 id="Comparison-between-WA-and-the-Moreau-Envelope-models（对比）">Comparison between WA and the Moreau Envelope models（对比）</h2>
-<p>比较 WA 和 Moreau Envelope 模型。</p>
-<h3 id="Numerical-Stability（数值稳定性）">Numerical Stability（数值稳定性）</h3>
-<p>指数项对 x 坐标敏感，小的 r 导致数值溢出，LSE 和 WA 模型都必须面对这样问题。</p>
-<h3 id="Non-Convexity（非凸性）">Non-Convexity（非凸性）</h3>
-<p>没有理论和实验保证 WA 模型凸性。以一个 3pin 网表为例，水平轴（横轴）代表 pin 坐标，调整 r 参数绘制函数曲线。eg.图 1(a):</p>
+<h2 id="Comparison-between-WA-and-the-Moreau-Envelope-models（对比）"><a href="#Comparison-between-WA-and-the-Moreau-Envelope-models（对比）" class="headerlink" title="Comparison between WA and the Moreau Envelope models（对比）"></a>Comparison between WA and the Moreau Envelope models（对比）</h2><p>比较 WA 和 Moreau Envelope 模型。</p>
+<h3 id="Numerical-Stability（数值稳定性）"><a href="#Numerical-Stability（数值稳定性）" class="headerlink" title="Numerical Stability（数值稳定性）"></a>Numerical Stability（数值稳定性）</h3><p>指数项对 x 坐标敏感，小的 r 导致数值溢出，LSE 和 WA 模型都必须面对这样问题。</p>
+<h3 id="Non-Convexity（非凸性）"><a href="#Non-Convexity（非凸性）" class="headerlink" title="Non-Convexity（非凸性）"></a>Non-Convexity（非凸性）</h3><p>没有理论和实验保证 WA 模型凸性。以一个 3pin 网表为例，水平轴（横轴）代表 pin 坐标，调整 r 参数绘制函数曲线。eg.图 1(a):</p>
 <p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/GE2BbOIvXoodfxxC5yycNcTznCf-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/GE2BbOIvXoodfxxC5yycNcTznCf-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
 <p>验证在不同 r 下，WA 模型函数凹凸性难保证。</p>
-<h2 id="Approximation-Error（近似误差）">Approximation Error（近似误差）</h2>
-<p>线长模型可能是高维，比较难分析。因此对平滑参数 r 和 t 进行实验。给定 X = Xmax - Xmin = 200，随机生成 3000 次不同平滑参数的水平坐标 x ，使用不同线长模型计算近似 x，取平均值。eg.图 1(b):</p>
+<h2 id="Approximation-Error（近似误差）"><a href="#Approximation-Error（近似误差）" class="headerlink" title="Approximation Error（近似误差）"></a>Approximation Error（近似误差）</h2><p>线长模型可能是高维，比较难分析。因此对平滑参数 r 和 t 进行实验。给定 X = Xmax - Xmin = 200，随机生成 3000 次不同平滑参数的水平坐标 x ，使用不同线长模型计算近似 x，取平均值。eg.图 1(b):</p>
 <p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Kdtpbx0GCoSUefx9kqocyModnRz-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Kdtpbx0GCoSUefx9kqocyModnRz-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
 <p>我们提出的模型在近似误差上取得了较好的效果。但是并不是说较低的近似误差就意味着更好的放置质量，这是个比较复杂的因素。除了误差，还有梯度也应该仔细考虑，详细见第四节。</p>
 <hr>
-<h1>Algorithm</h1>
-<p>采用 Moreau Envelope 模型比作 HPWL 近似可微，使用 Relu 作为激活函数。</p>
-<h2 id="The-Gradient-of-the-Moreau-Envelope（Moreau-Envelope-梯度）">The Gradient of the Moreau Envelope（Moreau Envelope 梯度）</h2>
-<p>HPWL 函数水平部分表示为</p>
+<h1 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h1><p>采用 Moreau Envelope 模型比作 HPWL 近似可微，使用 Relu 作为激活函数。</p>
+<h2 id="The-Gradient-of-the-Moreau-Envelope（Moreau-Envelope-梯度）"><a href="#The-Gradient-of-the-Moreau-Envelope（Moreau-Envelope-梯度）" class="headerlink" title="The Gradient of the Moreau Envelope（Moreau Envelope 梯度）"></a>The Gradient of the Moreau Envelope（Moreau Envelope 梯度）</h2><p>HPWL 函数水平部分表示为</p>
 <p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/QkdbbMa0xoIAb9xNRHQcXK3bnDe-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/QkdbbMa0xoIAb9xNRHQcXK3bnDe-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
 <p>水平和垂直方向都是对称，我们只需要关注水平方向分析。</p>
 <p>Theorem 1 定理 1 陈述了近似算子的表示。Corollary 1 推论 1 推广了定理 1，告诉我们如何在给定参数 τ1 和 τ2 情况下计算梯度。</p>
-<h3 id="Theorem-1">Theorem 1</h3>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VkDXbd8iQoyQ5Wxglh1cfR48nPf-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VkDXbd8iQoyQ5Wxglh1cfR48nPf-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<h3 id="Corollary-1">Corollary 1</h3>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/GU7sbXo4wo3D1RxXAQDcCEBxnWh-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/GU7sbXo4wo3D1RxXAQDcCEBxnWh-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<h2 id="Water-filling-Algorithm（注水算法）">Water-filling Algorithm（注水算法）</h2>
-<p>（os：参考通信信道中关于注水算法解释</p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p><a href="%5B%E6%B3%A8%E6%B0%B4%E7%AE%97%E6%B3%95%E8%BF%9B%E8%A1%8C%E5%8A%9F%E7%8E%87%E5%88%86%E9%85%8D%5D(https://zhuanlan.zhihu.com/p/502453127)">zhihu</a></p>
-</li>
-<li class="lvl-2">
-<p>[CSDN](<a target="_blank" rel="noopener" href="https://blog.csdn.net/stay_alive_13/article/details/112846063">(Water Filling)注水算法原理与实现-CSDN博客</a>)</p>
-</li>
+<h3 id="Theorem-1"><a href="#Theorem-1" class="headerlink" title="Theorem 1"></a>Theorem 1</h3><p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VkDXbd8iQoyQ5Wxglh1cfR48nPf-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VkDXbd8iQoyQ5Wxglh1cfR48nPf-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h3 id="Corollary-1"><a href="#Corollary-1" class="headerlink" title="Corollary 1"></a>Corollary 1</h3><p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/GU7sbXo4wo3D1RxXAQDcCEBxnWh-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/GU7sbXo4wo3D1RxXAQDcCEBxnWh-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h2 id="Water-filling-Algorithm（注水算法）"><a href="#Water-filling-Algorithm（注水算法）" class="headerlink" title="Water-filling Algorithm（注水算法）"></a>Water-filling Algorithm（注水算法）</h2><p>（os：参考通信信道中关于注水算法解释</p>
+<ul>
+<li><a href="[注水算法进行功率分配](https://zhuanlan.zhihu.com/p/502453127">zhihu</a>)</li>
+<li><a href="[(Water Filling">CSDN</a>注水算法原理与实现-CSDN博客](<a target="_blank" rel="noopener" href="https://blog.csdn.net/stay_alive_13/article/details/112846063">https://blog.csdn.net/stay_alive_13/article/details/112846063</a>))</li>
 </ul>
 <p>公式 7 和公式 8 给了近似算子的显示表示，其中 τ1 和 τ2 不以封闭形式表示。所以需要先求出公式 8 中方程，获得 proxWe 的精确值。</p>
 <p>以 τ1 为例子，我们要求解方程：</p>
 <p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZS9GbiYdQoeCUFxbWOdcfJQjnhc-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZS9GbiYdQoeCUFxbWOdcfJQjnhc-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
 <p>假设有一个 4 pin 的网络，引脚坐标为 X1、X2、X3、X4，eg.图 2(a)：</p>
 <p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Zlz2b5GGioGrg1xBmdEcO0L0nle-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Zlz2b5GGioGrg1xBmdEcO0L0nle-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>我们需要找到一个 τ1 值，使得蓝色面积为 t。–&gt; 获得 τ1 值的过程 --&gt; 通信中的 Water-filling 注水算法。eg.图 2(b)：</p>
+<p>我们需要找到一个 τ1 值，使得蓝色面积为 t。—&gt; 获得 τ1 值的过程 —&gt; 通信中的 Water-filling 注水算法。eg.图 2(b)：</p>
 <p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ACYGbtYojoc1WwxA0tEcetVVnPd-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ACYGbtYojoc1WwxA0tEcetVVnPd-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
 <p>eg.算法 2：</p>
 <p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/AOd7b5i7qoy4A8xKm5Icw6Ecnwh-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/AOd7b5i7qoy4A8xKm5Icw6Ecnwh-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>​		Water-filling 算法是一个直观且高效的方法，解决近似算子中参数 τ1 和 τ2 计算问题，通过对引脚坐标进行排序，这个算法可以迅速地确定所需的参数，进而允许优化算法继续进行。</p>
-<h2 id="Nonlinear-Optimization（非线性优化）">Nonlinear Optimization（非线性优化）</h2>
-<p>​		r 在 WA 方法和 t 在我们方法对解的质量是重要的。</p>
-<p>​		eg.ePlace 方法中使用溢出(overflow)ϕ 来更新参数 r：</p>
+<p>​        Water-filling 算法是一个直观且高效的方法，解决近似算子中参数 τ1 和 τ2 计算问题，通过对引脚坐标进行排序，这个算法可以迅速地确定所需的参数，进而允许优化算法继续进行。</p>
+<h2 id="Nonlinear-Optimization（非线性优化）"><a href="#Nonlinear-Optimization（非线性优化）" class="headerlink" title="Nonlinear Optimization（非线性优化）"></a>Nonlinear Optimization（非线性优化）</h2><p>​        r 在 WA 方法和 t 在我们方法对解的质量是重要的。</p>
+<p>​        eg.ePlace 方法中使用溢出(overflow)ϕ 来更新参数 r：</p>
 <p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/WRgqbpsr7o1zj7xr8mmcO0qcn8e-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/WRgqbpsr7o1zj7xr8mmcO0qcn8e-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>​		更高的溢出 ϕ 需要更大的 r 牺牲精度来保证可微性。为了更好适应线长模型，使用基于切线的更新方法：</p>
+<p>​        更高的溢出 ϕ 需要更大的 r 牺牲精度来保证可微性。为了更好适应线长模型，使用基于切线的更新方法：</p>
 <p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/6.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/6.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>t0是初始值 --&gt; fix t0 = 4</p>
-</li>
-<li class="lvl-2">
-<p>ϕ是密度溢出</p>
-</li>
-<li class="lvl-2">
-<p>w(x)是水平bin大小</p>
-</li>
-<li class="lvl-2">
-<p>w(y)是垂直bin大小</p>
-</li>
-<li class="lvl-2">
-<p>δ是很小正数 --&gt; 避免数值溢出 --&gt; fix δ = 0.0001</p>
-</li>
+<ul>
+<li>t0是初始值 —&gt; fix t0 = 4</li>
+<li>ϕ是密度溢出</li>
+<li>w(x)是水平bin大小</li>
+<li>w(y)是垂直bin大小</li>
+<li>δ是很小正数 —&gt; 避免数值溢出 —&gt; fix δ = 0.0001</li>
 </ul>
 <hr>
 <p>对于起初的全局布局表示:</p>
 <p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/SlD7bBdZEo6wTuxTvJOcFq1enff-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/SlD7bBdZEo6wTuxTvJOcFq1enff-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
 <p>我们遵循 DREAMPlace3.0 和 elfPlace 中温和方案来迭代更新上述方程中的权重密度 λ：</p>
 <p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/7.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/7.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p>Dk表示第k次迭代的密度</p>
-</li>
-<li class="lvl-2">
-<p>αH ≥ αL &gt; 1 表示密度权重增加速度 --&gt; fix (αH , αL) = (1.01 , 1.02)</p>
-</li>
-<li class="lvl-2">
-<p>β = 2000</p>
-</li>
+<ul>
+<li>Dk表示第k次迭代的密度</li>
+<li>αH ≥ αL &gt; 1 表示密度权重增加速度 —&gt; fix (αH , αL) = (1.01 , 1.02)</li>
+<li>β = 2000</li>
 </ul>
 <hr>
-<h1>Wirelength Model Analysis</h1>
-<h2 id="Approximation-Bound（近似界）">Approximation Bound（近似界）</h2>
-<h3 id="Theorem-2">Theorem 2</h3>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/UefCbwnmnopJw6xDNw1ceh5qnBb-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/UefCbwnmnopJw6xDNw1ceh5qnBb-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>​		描述 Moreau Envelope 函数如何逼近原始函数，与 LSE 和 WA 类似，这里使用的 Moreau Envelope 也可以任意精度近似 HPWL，证明未给出。</p>
-<h2 id="Gradient-Properties（梯度属性）">Gradient Properties（梯度属性）</h2>
-<p>​		理想情况下，平滑参数趋于 0，任何可微分模型梯度都应趋于 We。</p>
-<h3 id="Theorem-3">Theorem 3</h3>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZCnAb3E1joe08CxfFrYcdJL9nCc-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZCnAb3E1joe08CxfFrYcdJL9nCc-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<h3 id="Theorem-4">Theorem 4</h3>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/K5l9bHQOdof27ixhdkDcVXfnnFg-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/K5l9bHQOdof27ixhdkDcVXfnnFg-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<h3 id="Theorem-5">Theorem 5</h3>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/KN3xb4ZoRo9wZpx8NmScWD2unig-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/KN3xb4ZoRo9wZpx8NmScWD2unig-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<h3 id="Corollary-2">Corollary 2</h3>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/OgCWb4grco6FAuxxZb2cbVIkngx-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/OgCWb4grco6FAuxxZb2cbVIkngx-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<h3 id="Theorem-6">Theorem 6</h3>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/F2hXbqVmcohLiKxiEQOceJ4Bncd-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/F2hXbqVmcohLiKxiEQOceJ4Bncd-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<h3 id="Corollary-3">Corollary 3</h3>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/CS6LbQOI6oKHmExADCncUjHSnlg-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/CS6LbQOI6oKHmExADCncUjHSnlg-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h1 id="Wirelength-Model-Analysis"><a href="#Wirelength-Model-Analysis" class="headerlink" title="Wirelength Model Analysis"></a>Wirelength Model Analysis</h1><h2 id="Approximation-Bound（近似界）"><a href="#Approximation-Bound（近似界）" class="headerlink" title="Approximation Bound（近似界）"></a>Approximation Bound（近似界）</h2><h3 id="Theorem-2"><a href="#Theorem-2" class="headerlink" title="Theorem 2"></a>Theorem 2</h3><p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/UefCbwnmnopJw6xDNw1ceh5qnBb-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/UefCbwnmnopJw6xDNw1ceh5qnBb-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>​        描述 Moreau Envelope 函数如何逼近原始函数，与 LSE 和 WA 类似，这里使用的 Moreau Envelope 也可以任意精度近似 HPWL，证明未给出。</p>
+<h2 id="Gradient-Properties（梯度属性）"><a href="#Gradient-Properties（梯度属性）" class="headerlink" title="Gradient Properties（梯度属性）"></a>Gradient Properties（梯度属性）</h2><p>​        理想情况下，平滑参数趋于 0，任何可微分模型梯度都应趋于 We。</p>
+<h3 id="Theorem-3"><a href="#Theorem-3" class="headerlink" title="Theorem 3"></a>Theorem 3</h3><p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZCnAb3E1joe08CxfFrYcdJL9nCc-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZCnAb3E1joe08CxfFrYcdJL9nCc-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h3 id="Theorem-4"><a href="#Theorem-4" class="headerlink" title="Theorem 4"></a>Theorem 4</h3><p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/K5l9bHQOdof27ixhdkDcVXfnnFg-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/K5l9bHQOdof27ixhdkDcVXfnnFg-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h3 id="Theorem-5"><a href="#Theorem-5" class="headerlink" title="Theorem 5"></a>Theorem 5</h3><p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/KN3xb4ZoRo9wZpx8NmScWD2unig-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/KN3xb4ZoRo9wZpx8NmScWD2unig-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h3 id="Corollary-2"><a href="#Corollary-2" class="headerlink" title="Corollary 2"></a>Corollary 2</h3><p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/OgCWb4grco6FAuxxZb2cbVIkngx-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/OgCWb4grco6FAuxxZb2cbVIkngx-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h3 id="Theorem-6"><a href="#Theorem-6" class="headerlink" title="Theorem 6"></a>Theorem 6</h3><p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/F2hXbqVmcohLiKxiEQOceJ4Bncd-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/F2hXbqVmcohLiKxiEQOceJ4Bncd-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h3 id="Corollary-3"><a href="#Corollary-3" class="headerlink" title="Corollary 3"></a>Corollary 3</h3><p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/CS6LbQOI6oKHmExADCncUjHSnlg-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/CS6LbQOI6oKHmExADCncUjHSnlg-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
 <hr>
-<h1>Result</h1>
-<h2 id="Benchmark">Benchmark</h2>
-<p>​		ISPD 2006 、ISPD 2019，eg.表 1：</p>
+<h1 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h1><h2 id="Benchmark"><a href="#Benchmark" class="headerlink" title="Benchmark"></a>Benchmark</h2><p>​        ISPD 2006 、ISPD 2019，eg.表 1：</p>
 <p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/AaJrbaN39oIa4Xx8OISctUsmnwe-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/AaJrbaN39oIa4Xx8OISctUsmnwe-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>​		Base on CUDA/C++ --&gt; DREAMPlace</p>
-<p>​		CPU: Intel Xeon 2.90GHz CPUs ; GPU: NVIDIA GeForce RTX 3090 GPU</p>
-<h2 id="HPWL-Runtime-in-ISPD-2006-and-ISPD-2019">HPWL &amp; Runtime in ISPD 2006 and ISPD 2019</h2>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VOAJbL8Tuoo8Kwx73O4cwqaTnQb-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VOAJbL8Tuoo8Kwx73O4cwqaTnQb-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>​        Base on CUDA/C++ —&gt; DREAMPlace</p>
+<p>​        CPU: Intel Xeon 2.90GHz CPUs ; GPU: NVIDIA GeForce RTX 3090 GPU</p>
+<h2 id="HPWL-amp-Runtime-in-ISPD-2006-and-ISPD-2019"><a href="#HPWL-amp-Runtime-in-ISPD-2006-and-ISPD-2019" class="headerlink" title="HPWL & Runtime in ISPD 2006 and ISPD 2019"></a>HPWL &amp; Runtime in ISPD 2006 and ISPD 2019</h2><p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VOAJbL8Tuoo8Kwx73O4cwqaTnQb-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VOAJbL8Tuoo8Kwx73O4cwqaTnQb-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
 <p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZJogbBEbIoncUpxv1JJcREzvnIf-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZJogbBEbIoncUpxv1JJcREzvnIf-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
 <p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/UULcb5CufowmxoxWHhqcXX3Jncb-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/UULcb5CufowmxoxWHhqcXX3Jncb-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
 <p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/RnCwbIrawoYmCdxRYCwcW4mQn5b-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/RnCwbIrawoYmCdxRYCwcW4mQn5b-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>​		表格 II 显示了在 ISPD2006 基准测试后详细放置的线长改进超过 1%，特别是在具有大量可移动宏的 newblue1 上改进超过了 5%。</p>
-<p>​		表格 III 显示了在最新的 ISPD2019 基准测试上的线长改进超过了 1.5% 到接近 2%。</p>
-<h2 id="Wirelength-during-Global-placement（线长趋势）–-Ablation-Study（消融实验）">Wirelength during Global placement（线长趋势）–&gt; Ablation Study（消融实验）</h2>
-<p>​		选用 ISPD06 中 newblue1 &amp; ISPD2019 中 ispd19_test10。</p>
+<p>​        表格 II 显示了在 ISPD2006 基准测试后详细放置的线长改进超过 1%，特别是在具有大量可移动宏的 newblue1 上改进超过了 5%。</p>
+<p>​        表格 III 显示了在最新的 ISPD2019 基准测试上的线长改进超过了 1.5% 到接近 2%。</p>
+<h2 id="Wirelength-during-Global-placement（线长趋势）—-gt-Ablation-Study（消融实验）"><a href="#Wirelength-during-Global-placement（线长趋势）—-gt-Ablation-Study（消融实验）" class="headerlink" title="Wirelength during Global placement（线长趋势）—> Ablation Study（消融实验）"></a>Wirelength during Global placement（线长趋势）—&gt; Ablation Study（消融实验）</h2><p>​        选用 ISPD06 中 newblue1 &amp; ISPD2019 中 ispd19_test10。</p>
 <p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/SZaJbNTKEop0jUx8ba5cCaoKntd-1716629216536.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/SZaJbNTKEop0jUx8ba5cCaoKntd-1716629216536.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>​		与 WA 相比，在详细放置后，我们可以分别实现约 5.4% 和 1.6% 的改善。</p>
-<p>​		我们的模型获得的线长结果在相同密度溢出时更好。(密度溢出大致反映了整个单元格重叠) --&gt; 相同的密度溢出下，较小的线长意味着更好的布局质量。</p>
+<p>​        与 WA 相比，在详细放置后，我们可以分别实现约 5.4% 和 1.6% 的改善。</p>
+<p>​        我们的模型获得的线长结果在相同密度溢出时更好。(密度溢出大致反映了整个单元格重叠) —&gt; 相同的密度溢出下，较小的线长意味着更好的布局质量。</p>
 
       </div>
       <div class="post-tags-categories">
@@ -767,8 +705,7 @@ mjx-container[display="true"] + br {
       
       <!-- <div class="content">
         AutoDMP: Automated DREAMPlace-based Macro Placement
-
-Introdu
+Introduc
       </div> -->
     </a>
   </div>
@@ -1014,7 +951,7 @@ Introdu
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">On a Moreau Envelope Wirelength Model for Analytical Global Placement</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Preliminaries</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Analytical-Global-Placement%EF%BC%88%E5%88%86%E6%9E%90%E5%85%A8%E5%B1%80%E5%B8%83%E5%B1%80%EF%BC%89"><span class="toc-text">Analytical Global Placement（分析全局布局）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nonlinear-Differentiable-Models%EF%BC%88%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%A8%A1%E5%9E%8B%EF%BC%89"><span class="toc-text">Nonlinear Differentiable Models（非线性微分模型）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#log-sum-exp-LSE-model"><span class="toc-text">log-sum-exp (LSE) model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#weighted-average-WA-model"><span class="toc-text">weighted average (WA) model</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Moreau-Envelope"><span class="toc-text">Moreau Envelope</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Comparison-between-WA-and-the-Moreau-Envelope-models%EF%BC%88%E5%AF%B9%E6%AF%94%EF%BC%89"><span class="toc-text">Comparison between WA and the Moreau Envelope models（对比）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Numerical-Stability%EF%BC%88%E6%95%B0%E5%80%BC%E7%A8%B3%E5%AE%9A%E6%80%A7%EF%BC%89"><span class="toc-text">Numerical Stability（数值稳定性）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Non-Convexity%EF%BC%88%E9%9D%9E%E5%87%B8%E6%80%A7%EF%BC%89"><span class="toc-text">Non-Convexity（非凸性）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Approximation-Error%EF%BC%88%E8%BF%91%E4%BC%BC%E8%AF%AF%E5%B7%AE%EF%BC%89"><span class="toc-text">Approximation Error（近似误差）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Algorithm</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Gradient-of-the-Moreau-Envelope%EF%BC%88Moreau-Envelope-%E6%A2%AF%E5%BA%A6%EF%BC%89"><span class="toc-text">The Gradient of the Moreau Envelope（Moreau Envelope 梯度）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Theorem-1"><span class="toc-text">Theorem 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Corollary-1"><span class="toc-text">Corollary 1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Water-filling-Algorithm%EF%BC%88%E6%B3%A8%E6%B0%B4%E7%AE%97%E6%B3%95%EF%BC%89"><span class="toc-text">Water-filling Algorithm（注水算法）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nonlinear-Optimization%EF%BC%88%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96%EF%BC%89"><span class="toc-text">Nonlinear Optimization（非线性优化）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Wirelength Model Analysis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Approximation-Bound%EF%BC%88%E8%BF%91%E4%BC%BC%E7%95%8C%EF%BC%89"><span class="toc-text">Approximation Bound（近似界）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Theorem-2"><span class="toc-text">Theorem 2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gradient-Properties%EF%BC%88%E6%A2%AF%E5%BA%A6%E5%B1%9E%E6%80%A7%EF%BC%89"><span class="toc-text">Gradient Properties（梯度属性）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Theorem-3"><span class="toc-text">Theorem 3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Theorem-4"><span class="toc-text">Theorem 4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Theorem-5"><span class="toc-text">Theorem 5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Corollary-2"><span class="toc-text">Corollary 2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Theorem-6"><span class="toc-text">Theorem 6</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Corollary-3"><span class="toc-text">Corollary 3</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Result</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Benchmark"><span class="toc-text">Benchmark</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HPWL-Runtime-in-ISPD-2006-and-ISPD-2019"><span class="toc-text">HPWL &amp; Runtime in ISPD 2006 and ISPD 2019</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Wirelength-during-Global-placement%EF%BC%88%E7%BA%BF%E9%95%BF%E8%B6%8B%E5%8A%BF%EF%BC%89%E2%80%93-Ablation-Study%EF%BC%88%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C%EF%BC%89"><span class="toc-text">Wirelength during Global placement（线长趋势）–&gt; Ablation Study（消融实验）</span></a></li></ol></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement"><span class="toc-text">On a Moreau Envelope Wirelength Model for Analytical Global Placement</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Preliminaries"><span class="toc-text">Preliminaries</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Analytical-Global-Placement%EF%BC%88%E5%88%86%E6%9E%90%E5%85%A8%E5%B1%80%E5%B8%83%E5%B1%80%EF%BC%89"><span class="toc-text">Analytical Global Placement（分析全局布局）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nonlinear-Differentiable-Models%EF%BC%88%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%A8%A1%E5%9E%8B%EF%BC%89"><span class="toc-text">Nonlinear Differentiable Models（非线性微分模型）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#log-sum-exp-LSE-model"><span class="toc-text">log-sum-exp (LSE) model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#weighted-average-WA-model"><span class="toc-text">weighted average (WA) model</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Moreau-Envelope"><span class="toc-text">Moreau Envelope</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Comparison-between-WA-and-the-Moreau-Envelope-models%EF%BC%88%E5%AF%B9%E6%AF%94%EF%BC%89"><span class="toc-text">Comparison between WA and the Moreau Envelope models（对比）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Numerical-Stability%EF%BC%88%E6%95%B0%E5%80%BC%E7%A8%B3%E5%AE%9A%E6%80%A7%EF%BC%89"><span class="toc-text">Numerical Stability（数值稳定性）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Non-Convexity%EF%BC%88%E9%9D%9E%E5%87%B8%E6%80%A7%EF%BC%89"><span class="toc-text">Non-Convexity（非凸性）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Approximation-Error%EF%BC%88%E8%BF%91%E4%BC%BC%E8%AF%AF%E5%B7%AE%EF%BC%89"><span class="toc-text">Approximation Error（近似误差）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Algorithm"><span class="toc-text">Algorithm</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Gradient-of-the-Moreau-Envelope%EF%BC%88Moreau-Envelope-%E6%A2%AF%E5%BA%A6%EF%BC%89"><span class="toc-text">The Gradient of the Moreau Envelope（Moreau Envelope 梯度）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Theorem-1"><span class="toc-text">Theorem 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Corollary-1"><span class="toc-text">Corollary 1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Water-filling-Algorithm%EF%BC%88%E6%B3%A8%E6%B0%B4%E7%AE%97%E6%B3%95%EF%BC%89"><span class="toc-text">Water-filling Algorithm（注水算法）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nonlinear-Optimization%EF%BC%88%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%98%E5%8C%96%EF%BC%89"><span class="toc-text">Nonlinear Optimization（非线性优化）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Wirelength-Model-Analysis"><span class="toc-text">Wirelength Model Analysis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Approximation-Bound%EF%BC%88%E8%BF%91%E4%BC%BC%E7%95%8C%EF%BC%89"><span class="toc-text">Approximation Bound（近似界）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Theorem-2"><span class="toc-text">Theorem 2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gradient-Properties%EF%BC%88%E6%A2%AF%E5%BA%A6%E5%B1%9E%E6%80%A7%EF%BC%89"><span class="toc-text">Gradient Properties（梯度属性）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Theorem-3"><span class="toc-text">Theorem 3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Theorem-4"><span class="toc-text">Theorem 4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Theorem-5"><span class="toc-text">Theorem 5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Corollary-2"><span class="toc-text">Corollary 2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Theorem-6"><span class="toc-text">Theorem 6</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Corollary-3"><span class="toc-text">Corollary 3</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Result"><span class="toc-text">Result</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Benchmark"><span class="toc-text">Benchmark</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HPWL-amp-Runtime-in-ISPD-2006-and-ISPD-2019"><span class="toc-text">HPWL &amp; Runtime in ISPD 2006 and ISPD 2019</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Wirelength-during-Global-placement%EF%BC%88%E7%BA%BF%E9%95%BF%E8%B6%8B%E5%8A%BF%EF%BC%89%E2%80%94-gt-Ablation-Study%EF%BC%88%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C%EF%BC%89"><span class="toc-text">Wirelength during Global placement（线长趋势）—&gt; Ablation Study（消融实验）</span></a></li></ol></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -1538,7 +1475,7 @@ Introdu
       
         
           <div class="footer-copyright">
-            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a></p>
+            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> </p>
 
           </div>
         

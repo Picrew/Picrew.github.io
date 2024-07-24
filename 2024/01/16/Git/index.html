@@ -411,170 +411,156 @@
     <article class="post post-detail">
       <div class="post-content">
         <center><h1>Git 常用命令</h1></center>
-<h3 id="核心概念">核心概念</h3>
-<ul class="lvl-0">
-<li class="lvl-2">
-<p><strong>工作区（Working Directory）</strong>：包含当前代码的本地目录。</p>
-</li>
-<li class="lvl-2">
-<p><strong>暂存区（Staging Area 或 Index）</strong>：一个保存下次将提交的文件列表的区域。</p>
-</li>
-<li class="lvl-2">
-<p><strong>仓库（Repository）</strong>：<code>Git</code> 维护的项目的历史记录和版本数据。</p>
-</li>
+
+<h3 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h3><ul>
+<li><strong>工作区（Working Directory）</strong>：包含当前代码的本地目录。</li>
+<li><strong>暂存区（Staging Area 或 Index）</strong>：一个保存下次将提交的文件列表的区域。</li>
+<li><strong>仓库（Repository）</strong>：<code>Git</code> 维护的项目的历史记录和版本数据。</li>
 </ul>
-<h3 id="基本命令">基本命令</h3>
+<h3 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h3><ol>
+<li><strong>安装 <code>Git</code></strong><br>访问 <code>Git</code> 官方网站下载安装程序，并按照指引完成安装。</li>
+</ol>
 <ol>
-<li class="lvl-3">
-<p><strong>安装 <code>Git</code></strong><br>
-访问 <code>Git</code> 官方网站下载安装程序，并按照指引完成安装。</p>
-</li>
-<li class="lvl-3">
-<p><strong>配置 <code>Git</code></strong><br>
-首次安装 <code>Git</code> 后，需要设置用户信息：</p>
+<li><p><strong>配置 <code>Git</code></strong><br>首次安装 <code>Git</code> 后，需要设置用户信息：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;Your Name&quot;</span>  </span><br><span class="line">git config --global user.email <span class="string">&quot;your_email@example.com&quot;</span>  </span><br></pre></td></tr></table></figure>
 </li>
-<li class="lvl-3">
-<p><strong>初始化新仓库</strong><br>
-创建一个新目录，打开终端，切换到该目录下，并输入：</p>
+</ol>
+<ol>
+<li><p><strong>初始化新仓库</strong><br>创建一个新目录，打开终端，切换到该目录下，并输入：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init  </span><br></pre></td></tr></table></figure>
 <p>这将创建一个新的 <code>.git</code> 目录，包含所有必须的仓库文件。</p>
 </li>
-<li class="lvl-3">
-<p><strong>克隆现有仓库</strong><br>
-如果要拷贝一个已经存在的Git仓库，例如从GitHub，使用：</p>
+</ol>
+<ol>
+<li><p><strong>克隆现有仓库</strong><br>如果要拷贝一个已经存在的Git仓库，例如从GitHub，使用：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &lt;repository_url&gt;  </span><br></pre></td></tr></table></figure>
 </li>
-<li class="lvl-3">
-<p><strong>跟踪新文件</strong><br>
-使用 <code>git add</code> 命令来跟踪新文件或变更：</p>
+</ol>
+<ol>
+<li><p><strong>跟踪新文件</strong><br>使用 <code>git add</code> 命令来跟踪新文件或变更：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add &lt;file_or_directory&gt;  </span><br><span class="line">git add . <span class="comment"># 添加当前目录下的所有变更  </span></span><br></pre></td></tr></table></figure>
 </li>
-<li class="lvl-3">
-<p><strong>查看状态</strong><br>
-要查看哪些文件在暂存区，哪些有变更等，使用：</p>
+</ol>
+<ol>
+<li><p><strong>查看状态</strong><br>要查看哪些文件在暂存区，哪些有变更等，使用：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status  </span><br></pre></td></tr></table></figure>
 </li>
-<li class="lvl-3">
-<p><strong>提交更改</strong><br>
-将暂存区的更改提交到仓库历史中：</p>
+</ol>
+<ol>
+<li><p><strong>提交更改</strong><br>将暂存区的更改提交到仓库历史中：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">&quot;A message describing the commit&quot;</span>  </span><br></pre></td></tr></table></figure>
 </li>
-<li class="lvl-3">
-<p><strong>查看提交历史</strong><br>
-要看你的提交历史，包括每个提交的详细信息：</p>
+</ol>
+<ol>
+<li><p><strong>查看提交历史</strong><br>要看你的提交历史，包括每个提交的详细信息：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span>  </span><br><span class="line">git <span class="built_in">log</span> --oneline <span class="comment"># 简化的提交历史  </span></span><br></pre></td></tr></table></figure>
 </li>
-<li class="lvl-3">
-<p><strong>撤销更改</strong><br>
-可以使用以下命令撤销更改：</p>
+</ol>
+<ol>
+<li><p><strong>撤销更改</strong><br>可以使用以下命令撤销更改：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- &lt;file&gt; <span class="comment"># 撤销工作目录中的更改  </span></span><br><span class="line">git reset HEAD &lt;file&gt; <span class="comment"># 从暂存区中移除文件  </span></span><br><span class="line">git reset --hard <span class="comment"># 撤销自上次提交后的所有更改  </span></span><br></pre></td></tr></table></figure>
 </li>
-<li class="lvl-4">
-<p><strong>分支</strong></p>
+</ol>
+<ol>
+<li><p><strong>分支</strong></p>
 <p>分支是独立进行更改的工作流程。常用分支命令包括：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git branch <span class="comment"># 列出分支 </span></span><br><span class="line">git branch &lt;new_branch&gt; <span class="comment"># 创建新分支 </span></span><br><span class="line">git checkout &lt;branch_name&gt; <span class="comment"># 切换分支 </span></span><br><span class="line">git merge &lt;branch_name&gt; <span class="comment"># 合并分支到当前分支</span></span><br></pre></td></tr></table></figure>
 </li>
-<li class="lvl-4">
-<p><strong>远程仓库</strong></p>
+</ol>
+<ol>
+<li><p><strong>远程仓库</strong></p>
 <p>远程仓库是托管在因特网或网络中的仓库。常用命令包括：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git remote add &lt;remote_name&gt; &lt;remote_url&gt; <span class="comment"># 添加远程仓库  </span></span><br><span class="line">git fetch &lt;remote_name&gt; <span class="comment"># 从远程获取代码库  </span></span><br><span class="line">git pull &lt;remote_name&gt; &lt;branch_name&gt; <span class="comment"># 获取远程仓库的更改并合并到当前分支  </span></span><br><span class="line">git push &lt;remote_name&gt; &lt;branch_name&gt; <span class="comment"># 将代码的更改发送到远程仓库  </span></span><br></pre></td></tr></table></figure>
 </li>
-<li class="lvl-4">
-<p><strong>解决合并冲突</strong></p>
+</ol>
+<ol>
+<li><p><strong>解决合并冲突</strong></p>
 <p>当不同的分支对同一文件的同一部分做出更改时，合并这些分支可能会出现冲突。<code>Git</code> 会标记出冲突的文件，需要人工解决这些冲突，然后重新提交。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Git标记出的冲突文件需要手动编辑解决冲突，然后：  </span></span><br><span class="line">git add &lt;resolved_file&gt;  </span><br><span class="line">git commit -m <span class="string">&quot;Resolved merge conflict by incorporating both suggestions.&quot;</span>  </span><br></pre></td></tr></table></figure>
 </li>
-<li class="lvl-4">
-<p><strong>标签</strong></p>
-<p>标签用于为特定的提交打上固定的标记，通常用于版本发布。</p>
+</ol>
+<ol>
+<li><p><strong>标签</strong></p>
+<p>标签用于为特定的提交打上固定的标记，通常用于版本发布。 </p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git tag <span class="comment"># 列出所有标签  </span></span><br><span class="line">git tag &lt;tagname&gt; <span class="comment"># 轻量标签  </span></span><br><span class="line">git tag -a &lt;tagname&gt; -m <span class="string">&quot;version 1.0&quot;</span> <span class="comment"># 带注释的标签  </span></span><br><span class="line">git push --tags <span class="comment"># 推送标签到远程仓库  </span></span><br></pre></td></tr></table></figure>
 </li>
-<li class="lvl-4">
-<p><strong>.gitignore文件</strong></p>
+</ol>
+<ol>
+<li><p><strong>.gitignore文件</strong>  </p>
 <p><code>.gitignore</code> 文件用于指定不应提交到 <code>Git</code> 仓库中的无需跟踪的文件和目录。在该文件中可以添加规则来排除特定的文件或模式。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># .gitignore example  </span></span><br><span class="line">*.<span class="built_in">log</span>  </span><br><span class="line">node_modules/  </span><br><span class="line">.DS_Store  </span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h3 id="高级使用">高级使用</h3>
-<ol>
-<li class="lvl-3">
-<p><strong>交互式暂存（Interactive Staging）</strong><br>
-可以使用交互式添加功能来部分暂存文件。</p>
+<h3 id="高级使用"><a href="#高级使用" class="headerlink" title="高级使用"></a>高级使用</h3><ol>
+<li><p><strong>交互式暂存（Interactive Staging）</strong><br>可以使用交互式添加功能来部分暂存文件。 </p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add -p  </span><br></pre></td></tr></table></figure>
 </li>
-<li class="lvl-3">
-<p><strong>撤销提交（Amending Commits）</strong><br>
-如果需要修改最后一次提交，可以使用 <code>--amend</code> 选项。</p>
+</ol>
+<ol>
+<li><p><strong>撤销提交（Amending Commits）</strong><br>如果需要修改最后一次提交，可以使用 <code>--amend</code> 选项。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit --amend  </span><br></pre></td></tr></table></figure>
 </li>
-<li class="lvl-3">
-<p><strong>衍合提交（Squashing Commits）</strong><br>
-使用 <code>rebase</code> 命令的交互模式可以合并多个提交。</p>
+</ol>
+<ol>
+<li><p><strong>衍合提交（Squashing Commits）</strong><br>使用 <code>rebase</code> 命令的交互模式可以合并多个提交。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase -i HEAD~&lt;number_of_commits&gt;  </span><br></pre></td></tr></table></figure>
 </li>
-<li class="lvl-3">
-<p><strong>子模块（Submodules）</strong><br>
-当项目中包含外部仓库时，可以使用子模块来管理这些依赖。</p>
+</ol>
+<ol>
+<li><p><strong>子模块（Submodules）</strong><br>当项目中包含外部仓库时，可以使用子模块来管理这些依赖。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git submodule add &lt;repository&gt; &lt;path&gt;  </span><br></pre></td></tr></table></figure>
 </li>
-<li class="lvl-3">
-<p><strong>回滚到特定的提交（Reverting Commits）</strong><br>
-如果需要撤销之前的提交，并将这次撤销作为新的提交，可以使用<code>revert</code>命令。</p>
+</ol>
+<ol>
+<li><p><strong>回滚到特定的提交（Reverting Commits）</strong><br>如果需要撤销之前的提交，并将这次撤销作为新的提交，可以使用<code>revert</code>命令。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git revert &lt;commit_hash&gt;  </span><br></pre></td></tr></table></figure>
 </li>
-<li class="lvl-3">
-<p><strong>Cherry-picking</strong><br>
-从其他分支拾取一个特定的提交到当前分支。</p>
+</ol>
+<ol>
+<li><p><strong>Cherry-picking</strong><br>从其他分支拾取一个特定的提交到当前分支。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git cherry-pick &lt;commit_hash&gt;  </span><br></pre></td></tr></table></figure>
 </li>
-<li class="lvl-3">
-<p><strong>stash（暂存工作）</strong><br>
-当你需要临时切换分支，但当前分支上的工作尚未完成时，可以使用 <code>stash</code> 来保存当前的工作进度，稍后再恢复。</p>
+</ol>
+<ol>
+<li><p><strong>stash（暂存工作）</strong><br>当你需要临时切换分支，但当前分支上的工作尚未完成时，可以使用 <code>stash</code> 来保存当前的工作进度，稍后再恢复。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git stash <span class="comment"># 暂存当前的更改  </span></span><br><span class="line">git stash list <span class="comment"># 列出所有的stash  </span></span><br><span class="line">git stash apply <span class="comment"># 应用最近的stash  </span></span><br><span class="line">git stash drop <span class="comment"># 删除最近的stash  </span></span><br><span class="line">git stash pop <span class="comment"># 应用最近的stash并删除  </span></span><br></pre></td></tr></table></figure>
 </li>
-<li class="lvl-3">
-<p><strong>Git Hooks</strong><br>
-<code>Git 钩子</code>（hooks）是在特定的重要动作发生时触发的脚本，如在提交前运行测试，或在推送后通知CI/CD系统。钩子脚本通常位于.git/hooks目录下，并且可以自定义。</p>
-</li>
-<li class="lvl-3">
-<p><strong>配置别名（Aliases）</strong><br>
-如果某个Git命令你使用得非常频繁，可以配置一个别名来缩短命令。</p>
+</ol>
+<ol>
+<li><strong>Git Hooks</strong><br><code>Git 钩子</code>（hooks）是在特定的重要动作发生时触发的脚本，如在提交前运行测试，或在推送后通知CI/CD系统。钩子脚本通常位于.git/hooks目录下，并且可以自定义。 </li>
+</ol>
+<ol>
+<li><p><strong>配置别名（Aliases）</strong><br>如果某个Git命令你使用得非常频繁，可以配置一个别名来缩短命令。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git config --global alias.co checkout  </span><br><span class="line">git config --global alias.br branch  </span><br><span class="line">git config --global alias.ci commit  </span><br><span class="line">git config --global alias.st status  </span><br></pre></td></tr></table></figure>
 </li>
-<li class="lvl-4">
-<p><strong>交互式Rebase</strong><br>
-通过交互式Rebase可以编辑多个提交，如改变提交的顺序，合并提交，修改提交信息等。</p>
+</ol>
+<ol>
+<li><p><strong>交互式Rebase</strong><br>通过交互式Rebase可以编辑多个提交，如改变提交的顺序，合并提交，修改提交信息等。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase -i &lt;commit_hash_or_HEAD&gt;</span><br></pre></td></tr></table></figure>
 </li>
-<li class="lvl-4">
-<p><strong>查找问题（Blame and Bisect）</strong></p>
+</ol>
+<ol>
+<li><p><strong>查找问题（Blame and Bisect）</strong></p>
 <p>使用 <code>git blame</code> 可以查看文件的每一行是谁在什么时候添加的。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git blame &lt;file&gt;</span><br></pre></td></tr></table></figure>
 <p>使用<code>git bisect</code>可以通过二分查找的方式快速定位引入bug的提交。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git bisect start </span><br><span class="line">git bisect bad <span class="comment"># 标记当前版本是坏的 </span></span><br><span class="line">git bisect good &lt;commit_hash&gt; <span class="comment"># 标记某个提交之前的版本是好的 </span></span><br><span class="line"><span class="comment"># Git会自动检出一个新的提交供你测试，直到找到引入bug的提交 </span></span><br><span class="line">git bisect reset <span class="comment"># 结束bisect会话</span></span><br></pre></td></tr></table></figure>
 </li>
-<li class="lvl-4">
-<p><strong>大文件存储（Git LFS）</strong></p>
+</ol>
+<ol>
+<li><p><strong>大文件存储（Git LFS）</strong></p>
 <p>对于大文件，如视频、图片和其他二进制文件，可以使用<code>Git Large File Storage（LFS）</code>来更有效地管理。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git lfs install <span class="comment"># 首先安装Git LFS </span></span><br><span class="line">git lfs track <span class="string">&quot;*.psd&quot;</span> git add .gitattributes <span class="comment"># 跟踪大文件 </span></span><br></pre></td></tr></table></figure>
 </li>
-<li class="lvl-4">
-<p><strong>工作流（Workflows）</strong></p>
+</ol>
+<ol>
+<li><p><strong>工作流（Workflows）</strong></p>
 <p>了解并选择合适的工作流程对于团队协作来说非常重要。常见的Git工作流包括：</p>
-<ul class="lvl-2">
-<li class="lvl-6">
-<p>Feature Branch Workflow</p>
-</li>
-<li class="lvl-6">
-<p>Gitflow Workflow</p>
-</li>
-<li class="lvl-6">
-<p>Forking Workflow</p>
-</li>
-<li class="lvl-6">
-<p>Centralized Workflow</p>
-</li>
+<ul>
+<li>Feature Branch Workflow</li>
+<li>Gitflow Workflow</li>
+<li>Forking Workflow</li>
+<li>Centralized Workflow</li>
 </ul>
 </li>
 </ol>
@@ -623,8 +609,8 @@
       
       <!-- <div class="content">
         Docker 常见用法
-安装 Docker
-在不同的操作系统上安装 Docker 的方法会有所不同。在大多数 Linux
+
+安装 Docker在不同的操作系统上安装 Docker 的方法会有所不同。在大多数 Linux
       </div> -->
     </a>
   </div>
@@ -644,8 +630,8 @@
       </div>
       <!-- <div class="content">
         PyTorch常见用法
-1. 导入 PyTorch 库
-123456import torch  import torch
+
+1. 导入 PyTorch 库123456import torch  import torch
       </div> -->
     </a>
   </div>
@@ -1343,7 +1329,7 @@
       
         
           <div class="footer-copyright">
-            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a></p>
+            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> </p>
 
           </div>
         
