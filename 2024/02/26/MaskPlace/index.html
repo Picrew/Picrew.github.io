@@ -503,6 +503,23 @@ mjx-container[display="true"] + br {
       
 
       
+        <span class="post-detail-header_categories">
+          <i class="iconfont iconbookmark1"></i> category：
+          
+            <a href="/categories/EDA/" class="post-detail-header_category">
+              EDA
+            </a>
+          
+            <a href="/categories/EDA/RL/" class="post-detail-header_category">
+              RL
+            </a>
+          
+            <a href="/categories/EDA/RL/%E7%A7%91%E7%A0%94/" class="post-detail-header_category">
+              科研
+            </a>
+          
+        </span>
+      
 
       
     
@@ -522,106 +539,164 @@ mjx-container[display="true"] + br {
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <h1 id="Maskplace"><a href="#Maskplace" class="headerlink" title="Maskplace"></a>Maskplace</h1><p><img src="/2024/02/26/MaskPlace/AXSZbaXd3oiN0IxuzCmcfmQrnhb-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/AXSZbaXd3oiN0IxuzCmcfmQrnhb-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>​    芯片布局方法分为两种，一种是<strong>传统的基于优化方法</strong>(classic optimization based approaches),第二种是<strong>基于学习的方法</strong>(learning-based approaches)</p>
-<p>​    <strong>基础优化：</strong>一对向量(x,y)表示在 2D 上模块坐标值，布局目标函数为 min[WL(x,y)],服从 D(x,y)&lt;=α（保证所以模块不重叠）。WL 为线长的估计函数，D 为密度的估计函数。</p>
-<p>​    <strong>传统的基于优化方法:</strong>将布局问题公式转化成优化问题并且放松约束条件；</p>
-<p>比如 DREAMPlace，方法：min[WL(x, y) + λD(x, y)]，放松约束条件—&gt; 导致后续手动细化和去掉重叠以至合法化。</p>
-<p>​    <strong>基于学习的方法：</strong>RL 将布局作为顺序决策(sequential decision-making)问题解决</p>
-<p>​    比如 Graph Placement 和 DeepPR 将网格(netlist)表示为超图(hypergraph)—&gt;G = (V, E),V 是一组节点，每个节点是一个模块，E 是一组边，是连接模块之间的导线。</p>
-<p>​    问题：超图(hypergraph)不能全面编码(encode)网表信息，比如 relative positions (offsets)被丢失了。没有这些引脚(pin)信息，线长是不准确的，但是全部编码会比较复杂。在 Graph placement 里面用 RL 放置 15% 的模块减少计算；DeepPR 中减少模块和芯片画布的大小（分辨率）。</p>
+        <h1>Maskplace</h1>
+<p><img src="/2024/02/26/MaskPlace/AXSZbaXd3oiN0IxuzCmcfmQrnhb-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/AXSZbaXd3oiN0IxuzCmcfmQrnhb-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h1>Introduction</h1>
+<p>​	芯片布局方法分为两种，一种是<strong>传统的基于优化方法</strong>(classic optimization based approaches),第二种是<strong>基于学习的方法</strong>(learning-based approaches)</p>
+<p>​	**基础优化：**一对向量(x,y)表示在 2D 上模块坐标值，布局目标函数为 min[WL(x,y)],服从 D(x,y)&lt;=α（保证所以模块不重叠）。WL 为线长的估计函数，D 为密度的估计函数。</p>
+<p>​	**传统的基于优化方法:**将布局问题公式转化成优化问题并且放松约束条件；</p>
+<p>比如 DREAMPlace，方法：min[WL(x, y) + λD(x, y)]，放松约束条件–&gt; 导致后续手动细化和去掉重叠以至合法化。</p>
+<p>​	**基于学习的方法：**RL 将布局作为顺序决策(sequential decision-making)问题解决</p>
+<p>​	比如 Graph Placement 和 DeepPR 将网格(netlist)表示为超图(hypergraph)–&gt;G = (V, E),V 是一组节点，每个节点是一个模块，E 是一组边，是连接模块之间的导线。</p>
+<p>​	问题：超图(hypergraph)不能全面编码(encode)网表信息，比如 relative positions (offsets)被丢失了。没有这些引脚(pin)信息，线长是不准确的，但是全部编码会比较复杂。在 Graph placement 里面用 RL 放置 15% 的模块减少计算；DeepPR 中减少模块和芯片画布的大小（分辨率）。</p>
 <p><img src="/2024/02/26/MaskPlace/OX7RbTLNEop9zhxpyvrcie2mnhg-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/OX7RbTLNEop9zhxpyvrcie2mnhg-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>​    <strong>MaskPlace 方法</strong>：将布局转化成像素级视觉表示学习问题(pixel-level visual representation learning)—&gt;224 X 224</p>
-<p>​    文中总结贡献：</p>
-<p> 1.芯片布局重新定义为一个学习视觉表示的问题 以全面描述芯片上数百万个电路模块</p>
-<p> 2.设计了一个新的策略网络，它可以在一个芯片画布上捕获和聚合全局和细微信息，最大化线长的回报，并确保有效的非重叠放置</p>
-<p> 3.MaskPlace优于最近的先进方法在24个公共芯片基准测试。</p>
-<h1 id="Preliminary-and-Notation"><a href="#Preliminary-and-Notation" class="headerlink" title="Preliminary and Notation"></a>Preliminary and Notation</h1><p><strong>评估指标:HPWL</strong></p>
+<p>​	<strong>MaskPlace 方法</strong>：将布局转化成像素级视觉表示学习问题(pixel-level visual representation learning)–&gt;224 X 224</p>
+<p>​	文中总结贡献：</p>
+<p>1.芯片布局重新定义为一个学习视觉表示的问题 以全面描述芯片上数百万个电路模块</p>
+<p>2.设计了一个新的策略网络，它可以在一个芯片画布上捕获和聚合全局和细微信息，最大化线长的回报，并确保有效的非重叠放置</p>
+<p>3.MaskPlace优于最近的先进方法在24个公共芯片基准测试。</p>
+<h1>Preliminary and Notation</h1>
+<p><strong>评估指标:HPWL</strong></p>
 <p><img src="/2024/02/26/MaskPlace/PY2vbSVMkoFUEZx31rIcC64pncb-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/PY2vbSVMkoFUEZx31rIcC64pncb-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
 <p>HPWL 计算 Step:</p>
 <ol>
-<li>对于每个网络（net），找出连接在该网络上的所有引脚（pins）。</li>
-<li>在这些引脚中，找到最小和最大的 x 坐标值，以及最小和最大的 y 坐标值。</li>
-<li>使用这些坐标值来定义一个边界盒，该边界盒恰好覆盖所有的引脚。</li>
-<li>计算这个边界盒的宽度（w）和高度（h），即最大和最小 x 坐标值的差以及最大和最小 y 坐标值的差。</li>
-<li>对每个网络，半周长是边界盒的宽度和高度之和。</li>
-<li>将所有网络的半周长加在一起，得到整个芯片的总 HPWL。</li>
+<li class="lvl-3">
+<p>对于每个网络（net），找出连接在该网络上的所有引脚（pins）。</p>
+</li>
+<li class="lvl-3">
+<p>在这些引脚中，找到最小和最大的 x 坐标值，以及最小和最大的 y 坐标值。</p>
+</li>
+<li class="lvl-3">
+<p>使用这些坐标值来定义一个边界盒，该边界盒恰好覆盖所有的引脚。</p>
+</li>
+<li class="lvl-3">
+<p>计算这个边界盒的宽度（w）和高度（h），即最大和最小 x 坐标值的差以及最大和最小 y 坐标值的差。</p>
+</li>
+<li class="lvl-3">
+<p>对每个网络，半周长是边界盒的宽度和高度之和。</p>
+</li>
+<li class="lvl-3">
+<p>将所有网络的半周长加在一起，得到整个芯片的总 HPWL。</p>
+</li>
 </ol>
 <p><img src="/2024/02/26/MaskPlace/ZZmGbhb9HotrtbxQbeaczixsngf-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/ZZmGbhb9HotrtbxQbeaczixsngf-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
 <p><img src="/2024/02/26/MaskPlace/XnjybIElto8ijkxnIR7c41d3nQe-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/XnjybIElto8ijkxnIR7c41d3nQe-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
 <p><strong>拥塞（Congestion）计算：</strong></p>
-<p>​    在 RUDY 方法中，每个网格单元需要累加覆盖该单元的所有网络边界盒的高度和宽度的倒数（1/h + 1/w），然后取所有网格单元中的最大值。</p>
+<p>​	在 RUDY 方法中，每个网格单元需要累加覆盖该单元的所有网络边界盒的高度和宽度的倒数（1/h + 1/w），然后取所有网格单元中的最大值。</p>
 <ol>
-<li>网络边界盒 1（Net 1 bounding box）覆盖 _g_7,4 ，其宽度 _w_1 和高度 ℎ1 的倒数之和为 1/w1 + 1/h1。</li>
-<li>网络边界盒 2（Net 2 bounding box）也覆盖 _g_7,4，其宽度 _w_2 和高度 ℎ2 的倒数之和为 1/w2 + 1/h2。</li>
-<li>为 <em>g</em>7,4 累加所有覆盖它的网络边界盒的宽度和高度的倒数。</li>
-<li>拥塞值是所有网格单元中这个累加值的最大值。</li>
+<li class="lvl-3">
+<p>网络边界盒 1（Net 1 bounding box）覆盖 _g_7,4 ，其宽度 _w_1 和高度 ℎ1 的倒数之和为 1/w1 + 1/h1。</p>
+</li>
+<li class="lvl-3">
+<p>网络边界盒 2（Net 2 bounding box）也覆盖 _g_7,4，其宽度 _w_2 和高度 ℎ2 的倒数之和为 1/w2 + 1/h2。</p>
+</li>
+<li class="lvl-3">
+<p>为 <em>g</em>7,4 累加所有覆盖它的网络边界盒的宽度和高度的倒数。</p>
+</li>
+<li class="lvl-3">
+<p>拥塞值是所有网格单元中这个累加值的最大值。</p>
+</li>
 </ol>
 <p><strong>密度（Density）计算：</strong></p>
-<p>​    密度是每个网格单元上模块覆盖区域比例的最大值。它是一个近似计算，旨在减少重叠并避免计算复杂度为 <em>O</em>(<em>V</em>2) 的约束的耗时计算。</p>
-<p>​    以图8(c)为例，计算网格单元 <em>g</em>7,5 的密度值：</p>
+<p>​	密度是每个网格单元上模块覆盖区域比例的最大值。它是一个近似计算，旨在减少重叠并避免计算复杂度为 <em>O</em>(<em>V</em>2) 的约束的耗时计算。</p>
+<p>​	以图8©为例，计算网格单元 <em>g</em>7,5 的密度值：</p>
 <ol>
-<li>检查 <em>g</em>7,5 中叠加的模块数量。</li>
-<li>如果 <em>g</em>7,5 被两个模块完全覆盖，那么这个网格单元的密度值为2.0。</li>
+<li class="lvl-3">
+<p>检查 <em>g</em>7,5 中叠加的模块数量。</p>
+</li>
+<li class="lvl-3">
+<p>如果 <em>g</em>7,5 被两个模块完全覆盖，那么这个网格单元的密度值为2.0。</p>
+</li>
 </ol>
-<h1 id="Approach"><a href="#Approach" class="headerlink" title="Approach"></a>Approach</h1><h2 id="模型框架-Model-Architecture-Overview"><a href="#模型框架-Model-Architecture-Overview" class="headerlink" title="模型框架(Model Architecture Overview):"></a>模型框架(Model Architecture Overview):</h2><p>​    布局过程可用马尔可夫决策过程(MDP)表示,训练一个策略 policy πθ(at|st)，价值函数 Vφ(st)，以先前 observations 和 actions 为输入，选择 actions 为输出。<br><img src="/2024/02/26/MaskPlace/YqZTb4xNtoA2qyxRMjZcuELznyh-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/YqZTb4xNtoA2qyxRMjZcuELznyh-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<h2 id="Position-Mask-位置掩码-："><a href="#Position-Mask-位置掩码-：" class="headerlink" title="Position Mask(位置掩码)："></a>Position Mask(位置掩码)：</h2><p>​    224 X 224 画布网格，1 表示为模块可放置的可行位置（既绿色位置）：</p>
+<h1>Approach</h1>
+<h2 id="模型框架-Model-Architecture-Overview">模型框架(Model Architecture Overview):</h2>
+<p>​	布局过程可用马尔可夫决策过程(MDP)表示,训练一个策略 policy πθ(at|st)，价值函数 Vφ(st)，以先前 observations 和 actions 为输入，选择 actions 为输出。<br>
+<img src="/2024/02/26/MaskPlace/YqZTb4xNtoA2qyxRMjZcuELznyh-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/YqZTb4xNtoA2qyxRMjZcuELznyh-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h2 id="Position-Mask-位置掩码-：">Position Mask(位置掩码)：</h2>
+<p>​	224 X 224 画布网格，1 表示为模块可放置的可行位置（既绿色位置）：</p>
 <p><img src="/2024/02/26/MaskPlace/B0EJbWQuWo4wgixZoBYcEjOUnHf-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/B0EJbWQuWo4wgixZoBYcEjOUnHf-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
 <p><strong>作用：保证模块之间没有重叠（即，满足重叠约束）并学习布局和线长之间的关系。</strong></p>
-<h2 id="Wire-Mask-线路编码-："><a href="#Wire-Mask-线路编码-：" class="headerlink" title="Wire Mask(线路编码)："></a>Wire Mask(线路编码)：</h2><p>​        一个连续的矩阵，用于表示如果我们在特定位置放置一个模块_Mt_，半周长线长(HPWL)会增加多少：</p>
-<p>​        1.计算每个候选位置的 HPWL。这个过程本质上是 _O_(_N2P_) 复杂度的，其中 _N_ 是候选位置的数量，_P_ 是引脚的总数。</p>
-<p>​        2.使用快速算法通过考虑引脚偏移、网络边界框以及 HPWL 度量的线性特性来降低计算复杂度。这意味着，通过调整网络边界框相对于引脚位置的关系，可以更快地计算出 HPWL。</p>
+<h2 id="Wire-Mask-线路编码-：">Wire Mask(线路编码)：</h2>
+<p>​		一个连续的矩阵，用于表示如果我们在特定位置放置一个模块_Mt_，半周长线长(HPWL)会增加多少：</p>
+<p>​		1.计算每个候选位置的 HPWL。这个过程本质上是 <em>O</em>(<em>N2P</em>) 复杂度的，其中 <em>N</em> 是候选位置的数量，<em>P</em> 是引脚的总数。</p>
+<p>​		2.使用快速算法通过考虑引脚偏移、网络边界框以及 HPWL 度量的线性特性来降低计算复杂度。这意味着，通过调整网络边界框相对于引脚位置的关系，可以更快地计算出 HPWL。</p>
 <p><img src="/2024/02/26/MaskPlace/W1mabDniro4r9FxZQircDGMDnQb-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/W1mabDniro4r9FxZQircDGMDnQb-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>​    <strong>作用：目的是找到一个位置，使得增加的线长最小。</strong></p>
-<h2 id="View-Mask（视图掩码）："><a href="#View-Mask（视图掩码）：" class="headerlink" title="View Mask（视图掩码）："></a>View Mask（视图掩码）：</h2><p>​        一种观察当前芯片布局的全局掩码，它是一个大小为 224×224224×224 的矩阵，其中每个元素的值为 0 或 1。在这个矩阵中，值为 “1” 表示相应的网格单元已被一个模块占据。<br>​        在处理芯片布局时，View Mask 考虑到了模块的真实大小，而不是假设所有模块都具有单位大小。这意味着，如果一个模块的尺寸是宽度 _w_ 乘以高度 ℎ，那么它将占据画布上的[_wN/W_] X [_hN/H_]个网格单元。这里，_W_ 和 _H_ 表示画布的总宽度和高度，_N_ 是画布网格单元的数量。</p>
-<h2 id="Learning-Algorithm（学习算法）："><a href="#Learning-Algorithm（学习算法）：" class="headerlink" title="Learning Algorithm（学习算法）："></a>Learning Algorithm（学习算法）：</h2><p><img src="/2024/02/26/MaskPlace/PXghbl4bbodg6CxHM7ScnhQNnFb-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/PXghbl4bbodg6CxHM7ScnhQNnFb-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>​        <strong>1.应用掩码表示电路：</strong>首先，我们应用上述掩码来表示整个电路，并将它们输入到下游网络。在图中，这些掩码包括位置掩码（Position Mask）、两个步骤后的线路掩码（Wire Mask），以及当前布局的视图掩码（View Mask）。</p>
-<p>​        <strong>2.全局特征编码器（Global Feature Encoder）：</strong>然后，全局特征编码器将当前布局的视图掩码和后续两个步骤的线路掩码嵌入到一个嵌入向量中。</p>
-<p>​        <strong>3.结合位置嵌入：</strong>这个嵌入向量与第 t 个电路模块的位置嵌入在值网络中结合，通过全连接层生成一个标量来评估当前状态。</p>
-<p>​        <strong>4.全局掩码解码器（Global Mask Decoder）：</strong>接着，全局掩码解码器恢复一个大小为 N^2 的特征图，该特征图与策略网络中的不同位置掩码和线路掩码通过 1×1 的卷积融合，以避免局部信号扩散。</p>
-<p>​        <strong>5.策略网络（Policy Network）：</strong>策略网络预测一个大小为 N×N 的概率动作矩阵，指示下一个模块放置的位置。在采样动作之前，我们可以使用位置掩码来移除不可行的动作。</p>
-<p>​        <strong>6.拥塞满足模块（Congestion Satisfaction Block）：</strong>最后，拥塞满足模块应用拥塞阈值于概率矩阵上，以选择最终的动作。</p>
-<h2 id="Reinforcement-Learning（强化学习）："><a href="#Reinforcement-Learning（强化学习）：" class="headerlink" title="Reinforcement Learning（强化学习）："></a>Reinforcement Learning（强化学习）：</h2><p>​        采用了演员-评论家（actor-critic）架构和 PPO（Proximal Policy Optimization）算法来训练策略网络。</p>
+<p>​	<strong>作用：目的是找到一个位置，使得增加的线长最小。</strong></p>
+<h2 id="View-Mask（视图掩码）：">View Mask（视图掩码）：</h2>
+<p>​		一种观察当前芯片布局的全局掩码，它是一个大小为 224×224224×224 的矩阵，其中每个元素的值为 0 或 1。在这个矩阵中，值为 “1” 表示相应的网格单元已被一个模块占据。​		在处理芯片布局时，View Mask 考虑到了模块的真实大小，而不是假设所有模块都具有单位大小。这意味着，如果一个模块的尺寸是宽度 <em>w</em> 乘以高度 ℎ，那么它将占据画布上的[<em>wN/W</em>] X [<em>hN/H</em>]个网格单元。这里，<em>W</em> 和 <em>H</em> 表示画布的总宽度和高度，<em>N</em> 是画布网格单元的数量。</p>
+<h2 id="Learning-Algorithm（学习算法）：">Learning Algorithm（学习算法）：</h2>
+<p><img src="/2024/02/26/MaskPlace/PXghbl4bbodg6CxHM7ScnhQNnFb-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/PXghbl4bbodg6CxHM7ScnhQNnFb-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>​		**1.应用掩码表示电路：**首先，我们应用上述掩码来表示整个电路，并将它们输入到下游网络。在图中，这些掩码包括位置掩码（Position Mask）、两个步骤后的线路掩码（Wire Mask），以及当前布局的视图掩码（View Mask）。</p>
+<p>​		**2.全局特征编码器（Global Feature Encoder）：**然后，全局特征编码器将当前布局的视图掩码和后续两个步骤的线路掩码嵌入到一个嵌入向量中。</p>
+<p>​		**3.结合位置嵌入：**这个嵌入向量与第 t 个电路模块的位置嵌入在值网络中结合，通过全连接层生成一个标量来评估当前状态。</p>
+<p>​		**4.全局掩码解码器（Global Mask Decoder）：**接着，全局掩码解码器恢复一个大小为 N^2 的特征图，该特征图与策略网络中的不同位置掩码和线路掩码通过 1×1 的卷积融合，以避免局部信号扩散。</p>
+<p>​		**5.策略网络（Policy Network）：**策略网络预测一个大小为 N×N 的概率动作矩阵，指示下一个模块放置的位置。在采样动作之前，我们可以使用位置掩码来移除不可行的动作。</p>
+<p>​		**6.拥塞满足模块（Congestion Satisfaction Block）：**最后，拥塞满足模块应用拥塞阈值于概率矩阵上，以选择最终的动作。</p>
+<h2 id="Reinforcement-Learning（强化学习）：">Reinforcement Learning（强化学习）：</h2>
+<p>​		采用了演员-评论家（actor-critic）架构和 PPO（Proximal Policy Optimization）算法来训练策略网络。</p>
 <p>分割 N*N 个单元格。</p>
 <p><img src="/2024/02/26/MaskPlace/QfdTbV5nGoQU7BxVKWLcXJlSnsg-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/QfdTbV5nGoQU7BxVKWLcXJlSnsg-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>​        <strong>策略网络的目标函数（L_policy(θ)）：</strong>它是通过期望值形式来定义的，该函数试图最小化比率 r_t(θ)和优势函数 Â_t 的乘积。比率 r_t(θ)是当前策略和旧策略之间的比值，用于评估当前策略相对于旧策略的性能改进。优势函数 Â_t 是累积折现奖励 G_t 与估计值 V̂_t 的差，用于衡量特定行动的相对价值。</p>
-<p>​        <strong>累积折现奖励（G_t）：</strong>这是一个总和，计算从当前时刻起，未来的奖励值，并通过折扣因子 γ 降低远期奖励的重要性。</p>
-<p>​        <strong>价值网络的目标函数（L_value(φ)）：</strong>价值网络的目标是最小化实际累积奖励与估计累积奖励之间的差的平方。这个差异衡量了价值网络对于当前状态的估计准确性。</p>
-<h2 id="Reward："><a href="#Reward：" class="headerlink" title="Reward："></a>Reward：</h2><p>​        Rt = <strong>HPWL</strong>t−1 −<strong>HPWL</strong>t</p>
-<p>​        与 HPWL 增加相反。</p>
-<h2 id="Training-and-Testing："><a href="#Training-and-Testing：" class="headerlink" title="Training and Testing："></a>Training and Testing：</h2><p><img src="/2024/02/26/MaskPlace/JNh0bz394oaKDmx8RgjceG6InHf-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/JNh0bz394oaKDmx8RgjceG6InHf-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt><br>    Training 之前，根据网络数量，面积和已经放置固定的模块数量对电路模块排序，确定放置顺序。在训练中，我们通过忽略拥塞满意度块来更新每个时期的策略和值网络。当更新值网络时，我们停止了全局掩码编码器中的梯度反向传播，以避免对策略网络的影响。<br>    Testing 时候针对每一个步骤 t：<br>    <strong>1.获取概率矩阵：</strong>首先，从策略网络获取一个概率矩阵。<br>    <strong>2.采样动作：</strong>从概率矩阵中采样一个放置动作 at。<br>    <strong>3.拥堵满意度检查：</strong>应用这个放置动作后，拥堵满意度模块会检查拥堵是否超过了一个阈值_Cth_。<br>    <strong>4.超过拥堵阈值：</strong>如果拥堵超过了阈值：</p>
-<ul>
-<li><p>均匀采样几个动作。</p>
+<p>​		**策略网络的目标函数（L_policy(θ)）：**它是通过期望值形式来定义的，该函数试图最小化比率 r_t(θ)和优势函数 Â_t 的乘积。比率 r_t(θ)是当前策略和旧策略之间的比值，用于评估当前策略相对于旧策略的性能改进。优势函数 Â_t 是累积折现奖励 G_t 与估计值 V̂_t 的差，用于衡量特定行动的相对价值。</p>
+<p>​		**累积折现奖励（G_t）：**这是一个总和，计算从当前时刻起，未来的奖励值，并通过折扣因子 γ 降低远期奖励的重要性。</p>
+<p>​		**价值网络的目标函数（L_value(φ)）：**价值网络的目标是最小化实际累积奖励与估计累积奖励之间的差的平方。这个差异衡量了价值网络对于当前状态的估计准确性。</p>
+<h2 id="Reward：">Reward：</h2>
+<p>​		Rt = <strong>HPWL</strong>t−1 −<strong>HPWL</strong>t</p>
+<p>​		与 HPWL 增加相反。</p>
+<h2 id="Training-and-Testing：">Training and Testing：</h2>
+<p><img src="/2024/02/26/MaskPlace/JNh0bz394oaKDmx8RgjceG6InHf-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/JNh0bz394oaKDmx8RgjceG6InHf-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt><br>
+Training 之前，根据网络数量，面积和已经放置固定的模块数量对电路模块排序，确定放置顺序。在训练中，我们通过忽略拥塞满意度块来更新每个时期的策略和值网络。当更新值网络时，我们停止了全局掩码编码器中的梯度反向传播，以避免对策略网络的影响。<br>
+Testing 时候针对每一个步骤 t：<br>
+**1.获取概率矩阵：**首先，从策略网络获取一个概率矩阵。<br>
+**2.采样动作：**从概率矩阵中采样一个放置动作 at。<br>
+**3.拥堵满意度检查：**应用这个放置动作后，拥堵满意度模块会检查拥堵是否超过了一个阈值_Cth_。<br>
+**4.超过拥堵阈值：**如果拥堵超过了阈值：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>均匀采样几个动作。</p>
 </li>
-<li><p>查找每个动作对应的线掩码中的值，并估算采取这些动作前的拥堵。</p>
+<li class="lvl-2">
+<p>查找每个动作对应的线掩码中的值，并估算采取这些动作前的拥堵。</p>
 </li>
-<li><p>选择一个在线掩码中具有最小值且拥堵小于<em>Cth</em> 的动作。</p>
-<p><strong>5.所有动作都超过拥堵阈值：</strong>如果所有采样的动作都不能满足拥堵阈值_Cth_，那么选择拥堵最小的动作。<br><strong>6.进入下一步：</strong>选择了动作后，移动到下一步。</p>
+<li class="lvl-2">
+<p>选择一个在线掩码中具有最小值且拥堵小于<em>Cth</em> 的动作。</p>
+<p>**5.所有动作都超过拥堵阈值：**如果所有采样的动作都不能满足拥堵阈值_Cth_，那么选择拥堵最小的动作。<br>
+**6.进入下一步：**选择了动作后，移动到下一步。</p>
 </li>
 </ul>
-<h1 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h1><p> <strong>Optimization-based methods（优化算法）：</strong></p>
-<p> NTUPlace3、RePlAce、DREAMPlace</p>
-<p> <strong>Learning-based approaches（学习算法）：</strong></p>
-<p> Graph Placement、DeepPR</p>
-<h2 id="Benchmark"><a href="#Benchmark" class="headerlink" title="Benchmark:"></a>Benchmark:</h2><p>ISPD2005、IBM benchmark、Ariane RISC-V CPU design</p>
+<h1>Experiments</h1>
+<p><strong>Optimization-based methods（优化算法）：</strong></p>
+<p>NTUPlace3、RePlAce、DREAMPlace</p>
+<p><strong>Learning-based approaches（学习算法）：</strong></p>
+<p>Graph Placement、DeepPR</p>
+<h2 id="Benchmark">Benchmark:</h2>
+<p>ISPD2005、IBM benchmark、Ariane RISC-V CPU design</p>
 <p><img src="/2024/02/26/MaskPlace/image.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/image.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<h2 id="Main-Results："><a href="#Main-Results：" class="headerlink" title="Main Results："></a>Main Results：</h2><p>所有宏的 HPWL 结果</p>
+<h2 id="Main-Results：">Main Results：</h2>
+<p>所有宏的 HPWL 结果</p>
 <p><img src="/2024/02/26/MaskPlace/HkMgb23KYons3yxxETjcb2FInDb-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/HkMgb23KYons3yxxETjcb2FInDb-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<h2 id="Compare-to-Graph-Representation："><a href="#Compare-to-Graph-Representation：" class="headerlink" title="Compare to Graph Representation："></a>Compare to Graph Representation：</h2><p>与 Graph Placement 在 HPWL（半周线长）, congestion（拥塞）, density（密度）, overlap area ratio（重叠面积比）这四个方向比较。</p>
+<h2 id="Compare-to-Graph-Representation：">Compare to Graph Representation：</h2>
+<p>与 Graph Placement 在 HPWL（半周线长）, congestion（拥塞）, density（密度）, overlap area ratio（重叠面积比）这四个方向比较。</p>
 <p><img src="/2024/02/26/MaskPlace/UWjSbJowKobxz9xvE96ckJEsnQd-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/UWjSbJowKobxz9xvE96ckJEsnQd-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<h2 id="Routing-Wirelength："><a href="#Routing-Wirelength：" class="headerlink" title="Routing Wirelength："></a><strong>Routing Wirelength：</strong></h2><p>与 DeepPR 在 routing wirelength（布线线长）。</p>
+<h2 id="Routing-Wirelength："><strong>Routing Wirelength：</strong></h2>
+<p>与 DeepPR 在 routing wirelength（布线线长）。</p>
 <p><img src="/2024/02/26/MaskPlace/NHeybPTNioqKdDxzx1vcXe8tnbd-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/NHeybPTNioqKdDxzx1vcXe8tnbd-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<h2 id="Standard-Cells："><a href="#Standard-Cells：" class="headerlink" title="Standard Cells："></a><strong>Standard Cells：</strong></h2><p>与 DeepPR、DREAMPlace 比较 macros（宏）和 standard cells（标准单元）的 HPWL。</p>
+<h2 id="Standard-Cells："><strong>Standard Cells：</strong></h2>
+<p>与 DeepPR、DREAMPlace 比较 macros（宏）和 standard cells（标准单元）的 HPWL。</p>
 <p><img src="/2024/02/26/MaskPlace/QNCVbESv8ow5qyx1TsDcxJrsnlb-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/QNCVbESv8ow5qyx1TsDcxJrsnlb-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<h2 id="Placement-w-o-real-size："><a href="#Placement-w-o-real-size：" class="headerlink" title="Placement w/o real size："></a><strong>Placement w/o real size：</strong></h2><p>考虑到 DeepPR 忽略了模块大小，我们在相同的设置中实现 MaskPlace。</p>
+<h2 id="Placement-w-o-real-size："><strong>Placement w/o real size：</strong></h2>
+<p>考虑到 DeepPR 忽略了模块大小，我们在相同的设置中实现 MaskPlace。</p>
 <p><img src="/2024/02/26/MaskPlace/JHzXbt8zvoYbEHxFZGUcZHxln3b-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/JHzXbt8zvoYbEHxFZGUcZHxln3b-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<h2 id="Transferability："><a href="#Transferability：" class="headerlink" title="Transferability："></a>Transferability：</h2><p>在 adaptec1 训练得到的模型在其他数据集上效果，验证可移植性。</p>
+<h2 id="Transferability：">Transferability：</h2>
+<p>在 adaptec1 训练得到的模型在其他数据集上效果，验证可移植性。</p>
 <p><img src="/2024/02/26/MaskPlace/Q8DdbPTx6oLzBgxNWiKchdCDnFe-1716624950944.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/Q8DdbPTx6oLzBgxNWiKchdCDnFe-1716624950944.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<h2 id="Efficiency："><a href="#Efficiency：" class="headerlink" title="Efficiency："></a>Efficiency：</h2><p>不同方法下推理（inference）效率。</p>
+<h2 id="Efficiency：">Efficiency：</h2>
+<p>不同方法下推理（inference）效率。</p>
 <p><img src="/2024/02/26/MaskPlace/R4IHbgwtqogkcuxAMQtcaZu5n6c-1716624950944.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/R4IHbgwtqogkcuxAMQtcaZu5n6c-1716624950944.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<h2 id="Ablation-Study："><a href="#Ablation-Study：" class="headerlink" title="Ablation Study："></a>Ablation Study：</h2><p>w/o 网络数量等一系列消融实验。</p>
+<h2 id="Ablation-Study：">Ablation Study：</h2>
+<p>w/o 网络数量等一系列消融实验。</p>
 <p><img src="/2024/02/26/MaskPlace/QIAObCYcWoQ0y7xXUBxcT76ZnOc-1716624950944.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/QIAObCYcWoQ0y7xXUBxcT76ZnOc-1716624950944.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<h2 id="Congestion-Satisfaction："><a href="#Congestion-Satisfaction：" class="headerlink" title="Congestion Satisfaction："></a>Congestion Satisfaction：</h2><p>评估 congestion（拥塞）满意度。</p>
+<h2 id="Congestion-Satisfaction：">Congestion Satisfaction：</h2>
+<p>评估 congestion（拥塞）满意度。</p>
 <p><img src="/2024/02/26/MaskPlace/Y1o8bCuBsob9h7xEMroc9RDMnie.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/Y1o8bCuBsob9h7xEMroc9RDMnie.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
 
       </div>
@@ -668,7 +743,9 @@ mjx-container[display="true"] + br {
       
       <!-- <div class="content">
         DeepPR
-Introduction​        布局为芯片设计中最关键但最耗时的步骤之一，包括宏（SRAM…）和
+
+Introduction
+​		布局为芯片设计中最关键但最耗时的步骤之一，包括宏（SRAM…）和标准单元
       </div> -->
     </a>
   </div>
@@ -688,8 +765,8 @@ Introduction​        布局为芯片设计中最关键但最耗时的步骤之
       </div>
       <!-- <div class="content">
         详细复现 Transformer
-
-模型分解为了实现一个基本的Transformer模型，我们需要构建以下几个主要组件：
+模型分解
+为了实现一个基本的Transformer模型，我们需要构建以下几个主要组件：
       </div> -->
     </a>
   </div>
@@ -916,7 +993,7 @@ Introduction​        布局为芯片设计中最关键但最耗时的步骤之
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Maskplace"><span class="toc-text">Maskplace</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Preliminary-and-Notation"><span class="toc-text">Preliminary and Notation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Approach"><span class="toc-text">Approach</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E6%A1%86%E6%9E%B6-Model-Architecture-Overview"><span class="toc-text">模型框架(Model Architecture Overview):</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Position-Mask-%E4%BD%8D%E7%BD%AE%E6%8E%A9%E7%A0%81-%EF%BC%9A"><span class="toc-text">Position Mask(位置掩码)：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Wire-Mask-%E7%BA%BF%E8%B7%AF%E7%BC%96%E7%A0%81-%EF%BC%9A"><span class="toc-text">Wire Mask(线路编码)：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#View-Mask%EF%BC%88%E8%A7%86%E5%9B%BE%E6%8E%A9%E7%A0%81%EF%BC%89%EF%BC%9A"><span class="toc-text">View Mask（视图掩码）：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Learning-Algorithm%EF%BC%88%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%EF%BC%89%EF%BC%9A"><span class="toc-text">Learning Algorithm（学习算法）：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reinforcement-Learning%EF%BC%88%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%EF%BC%89%EF%BC%9A"><span class="toc-text">Reinforcement Learning（强化学习）：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reward%EF%BC%9A"><span class="toc-text">Reward：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Training-and-Testing%EF%BC%9A"><span class="toc-text">Training and Testing：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Experiments"><span class="toc-text">Experiments</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Benchmark"><span class="toc-text">Benchmark:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Main-Results%EF%BC%9A"><span class="toc-text">Main Results：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Compare-to-Graph-Representation%EF%BC%9A"><span class="toc-text">Compare to Graph Representation：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Routing-Wirelength%EF%BC%9A"><span class="toc-text">Routing Wirelength：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Standard-Cells%EF%BC%9A"><span class="toc-text">Standard Cells：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Placement-w-o-real-size%EF%BC%9A"><span class="toc-text">Placement w&#x2F;o real size：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Transferability%EF%BC%9A"><span class="toc-text">Transferability：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Efficiency%EF%BC%9A"><span class="toc-text">Efficiency：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ablation-Study%EF%BC%9A"><span class="toc-text">Ablation Study：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Congestion-Satisfaction%EF%BC%9A"><span class="toc-text">Congestion Satisfaction：</span></a></li></ol></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Maskplace</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Preliminary and Notation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Approach</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E6%A1%86%E6%9E%B6-Model-Architecture-Overview"><span class="toc-text">模型框架(Model Architecture Overview):</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Position-Mask-%E4%BD%8D%E7%BD%AE%E6%8E%A9%E7%A0%81-%EF%BC%9A"><span class="toc-text">Position Mask(位置掩码)：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Wire-Mask-%E7%BA%BF%E8%B7%AF%E7%BC%96%E7%A0%81-%EF%BC%9A"><span class="toc-text">Wire Mask(线路编码)：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#View-Mask%EF%BC%88%E8%A7%86%E5%9B%BE%E6%8E%A9%E7%A0%81%EF%BC%89%EF%BC%9A"><span class="toc-text">View Mask（视图掩码）：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Learning-Algorithm%EF%BC%88%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%EF%BC%89%EF%BC%9A"><span class="toc-text">Learning Algorithm（学习算法）：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reinforcement-Learning%EF%BC%88%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%EF%BC%89%EF%BC%9A"><span class="toc-text">Reinforcement Learning（强化学习）：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reward%EF%BC%9A"><span class="toc-text">Reward：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Training-and-Testing%EF%BC%9A"><span class="toc-text">Training and Testing：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Experiments</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Benchmark"><span class="toc-text">Benchmark:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Main-Results%EF%BC%9A"><span class="toc-text">Main Results：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Compare-to-Graph-Representation%EF%BC%9A"><span class="toc-text">Compare to Graph Representation：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Routing-Wirelength%EF%BC%9A"><span class="toc-text">Routing Wirelength：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Standard-Cells%EF%BC%9A"><span class="toc-text">Standard Cells：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Placement-w-o-real-size%EF%BC%9A"><span class="toc-text">Placement w&#x2F;o real size：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Transferability%EF%BC%9A"><span class="toc-text">Transferability：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Efficiency%EF%BC%9A"><span class="toc-text">Efficiency：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ablation-Study%EF%BC%9A"><span class="toc-text">Ablation Study：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Congestion-Satisfaction%EF%BC%9A"><span class="toc-text">Congestion Satisfaction：</span></a></li></ol></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -942,6 +1019,27 @@ Introduction​        布局为芯片设计中最关键但最耗时的步骤之
       <!-- hash算法 -->
       
       <div class="aside-list">
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/09/11/think1/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://i.postimg.cc/LswWKGcX/IMG-202406278649-1440x810.jpg" class="lazyload placeholder" data-srcset="https://i.postimg.cc/LswWKGcX/IMG-202406278649-1440x810.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">09-11</span>
+                
+              </div>
+              <a class="post-title" href="/2024/09/11/think1/">秋念</a>
+            </div>
+          </div>
         
           <div class="aside-list-item">
             
@@ -1024,27 +1122,6 @@ Introduction​        布局为芯片设计中最关键但最耗时的步骤之
                 
               </div>
               <a class="post-title" href="/2024/06/05/AnalogCoder/">AnalogCoder</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2024/05/26/EfficientPlace/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">05-26</span>
-                
-              </div>
-              <a class="post-title" href="/2024/05/26/EfficientPlace/">EfficientPlace</a>
             </div>
           </div>
         
@@ -1440,7 +1517,7 @@ Introduction​        布局为芯片设计中最关键但最耗时的步骤之
       
         
           <div class="footer-copyright">
-            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a></p>
+            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> </p>
 
           </div>
         

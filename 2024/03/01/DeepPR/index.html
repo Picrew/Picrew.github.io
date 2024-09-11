@@ -503,6 +503,23 @@ mjx-container[display="true"] + br {
       
 
       
+        <span class="post-detail-header_categories">
+          <i class="iconfont iconbookmark1"></i> category：
+          
+            <a href="/categories/EDA/" class="post-detail-header_category">
+              EDA
+            </a>
+          
+            <a href="/categories/EDA/RL/" class="post-detail-header_category">
+              RL
+            </a>
+          
+            <a href="/categories/EDA/RL/%E7%A7%91%E7%A0%94/" class="post-detail-header_category">
+              科研
+            </a>
+          
+        </span>
+      
 
       
     
@@ -522,134 +539,189 @@ mjx-container[display="true"] + br {
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <h1 id="DeepPR"><a href="#DeepPR" class="headerlink" title="DeepPR"></a>DeepPR</h1><p><img src="/2024/03/01/DeepPR/UpcVbV44doADLtxTiUdc5TcWnjc-1716625506837.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/UpcVbV44doADLtxTiUdc5TcWnjc-1716625506837.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>​        布局为芯片设计中最关键但最耗时的步骤之一，包括宏（SRAM…）和标准单元（逻辑与非门…）的布局。一个好布局带来芯片面积利用率，时序性能和布线能力，布局和布线时强相关的。布局的原则是 PPA —&gt; Power（功耗）, Performance（性能）, Area（面积）。</p>
-<p>​        对于芯片布局问题设计了一个 pipeline，input 输入为 hypergraph H = (V, E)代表的网表结构，V 指的是 node（单元 cells）集合，E 是电路组件连接的 edge（边）。</p>
+        <h1>DeepPR</h1>
+<p><img src="/2024/03/01/DeepPR/UpcVbV44doADLtxTiUdc5TcWnjc-1716625506837.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/UpcVbV44doADLtxTiUdc5TcWnjc-1716625506837.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h1>Introduction</h1>
+<p>​		布局为芯片设计中最关键但最耗时的步骤之一，包括宏（SRAM…）和标准单元（逻辑与非门…）的布局。一个好布局带来芯片面积利用率，时序性能和布线能力，布局和布线时强相关的。布局的原则是 PPA --&gt; Power（功耗）, Performance（性能）, Area（面积）。</p>
+<p>​		对于芯片布局问题设计了一个 pipeline，input 输入为 hypergraph H = (V, E)代表的网表结构，V 指的是 node（单元 cells）集合，E 是电路组件连接的 edge（边）。</p>
 <p><img src="/2024/03/01/DeepPR/I383bIB9aoNdXRx56ylclazHnPh-1716625506837.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/I383bIB9aoNdXRx56ylclazHnPh-1716625506837.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>​        1.宏布局首先确定宏在芯片画布上的位置，然后大量的标准单元基于相邻的宏调整它们的位置，最后获得完整的布局解决方案。</p>
+<p>​		1.宏布局首先确定宏在芯片画布上的位置，然后大量的标准单元基于相邻的宏调整它们的位置，最后获得完整的布局解决方案。</p>
 <p><img src="/2024/03/01/DeepPR/IFi1bYf95orJc6xFsROcvwfLnaf-1716625506837.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/IFi1bYf95orJc6xFsROcvwfLnaf-1716625506837.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>​        2.在不违反边约束前提下 实现总线长最小。</p>
-<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p>​    提出了一个叫 DeepPR 的两阶段布局算法,并且联合学习(joint learning)布局(placement)和布线(routing)任务：</p>
-<ul>
-<li>第一阶段是用RL进行宏(macros)布局;</li>
-<li><p>第二阶段是用基于梯度的优化放置器(gradient-based optimization placer)放置标准单元(cells);</p>
-<p>文中给出了四个贡献：</p>
+<p>​		2.在不违反边约束前提下 实现总线长最小。</p>
+<h2 id="Method">Method</h2>
+<p>​	提出了一个叫 DeepPR 的两阶段布局算法,并且联合学习(joint learning)布局(placement)和布线(routing)任务：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>第一阶段是用RL进行宏(macros)布局;</p>
+</li>
+<li class="lvl-2">
+<p>第二阶段是用基于梯度的优化放置器(gradient-based optimization placer)放置标准单元(cells);</p>
 </li>
 </ul>
+<p>文中给出了四个贡献：</p>
 <ol>
-<li>提出一种端对端(end to end)的学习方法。</li>
-<li>首次引入联邦学习同时解决布局和布线任务。</li>
-<li>设计了一种新的策略方式，引入CNN和GNN提供两个视图，不是单个CNN或者GNN获得。</li>
-<li>效果优于单独的布局或者单独的布线任务。</li>
+<li class="lvl-3">
+<p>提出一种端对端(end to end)的学习方法。</p>
+</li>
+<li class="lvl-3">
+<p>首次引入联邦学习同时解决布局和布线任务。</p>
+</li>
+<li class="lvl-3">
+<p>设计了一种新的策略方式，引入CNN和GNN提供两个视图，不是单个CNN或者GNN获得。</p>
+</li>
+<li class="lvl-3">
+<p>效果优于单独的布局或者单独的布线任务。</p>
+</li>
 </ol>
-<h1 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h1><hr>
+<h1>Related Work</h1>
+<hr>
 <p><strong>Placement（布局）</strong></p>
-<h3 id="Classical-methods-for-Placement（经典放置方法）："><a href="#Classical-methods-for-Placement（经典放置方法）：" class="headerlink" title="Classical methods for Placement（经典放置方法）："></a>Classical methods for Placement（经典放置方法）：</h3><h3 id="Partitioning-based-methods（分区方法）："><a href="#Partitioning-based-methods（分区方法）：" class="headerlink" title="Partitioning-based methods（分区方法）："></a><strong>Partitioning-based methods（分区方法）：</strong></h3><p>分区方法是递归的将电路网表(netlist)和芯片布局进行划分，直到子列表获得最优解。</p>
+<h3 id="Classical-methods-for-Placement（经典放置方法）：">Classical methods for Placement（经典放置方法）：</h3>
+<h3 id="Partitioning-based-methods（分区方法）："><strong>Partitioning-based methods（分区方法）：</strong></h3>
+<p>分区方法是递归的将电路网表(netlist)和芯片布局进行划分，直到子列表获得最优解。</p>
 <p>总结：分层结构执行速度快，更容易扩大到更大的电路网表，但因为是子结构独立解决最优解问题，导致牺牲质量。</p>
-<h3 id="Stochastic-hill-climbing-methods（随机-爬山法方法）："><a href="#Stochastic-hill-climbing-methods（随机-爬山法方法）：" class="headerlink" title="Stochastic/hill-climbing methods（随机/爬山法方法）："></a>S<strong>tochastic/hill-climbing methods（随机/爬山法方法）：</strong></h3><p>总结：基于模拟退火办法，更灵活而且能更好找到全局最优解，缺点是随着电路网表规模增加，耗时很大。</p>
-<h3 id="Analytic-solvers（解析求解器）："><a href="#Analytic-solvers（解析求解器）：" class="headerlink" title="Analytic solvers（解析求解器）："></a><strong>Analytic solvers（解析求解器）：</strong></h3><p>通常采用力导向方法和非线性优化器。</p>
+<h3 id="Stochastic-hill-climbing-methods（随机-爬山法方法）：">S<strong>tochastic/hill-climbing methods（随机/爬山法方法）：</strong></h3>
+<p>总结：基于模拟退火办法，更灵活而且能更好找到全局最优解，缺点是随着电路网表规模增加，耗时很大。</p>
+<h3 id="Analytic-solvers（解析求解器）："><strong>Analytic solvers（解析求解器）：</strong></h3>
+<p>通常采用力导向方法和非线性优化器。</p>
 <p>总结：二次方法计算效率高但性能相对较低，而非线性优化则更平滑地逼近成本函数，但复杂性更高。</p>
 <p>例子：ePlace 、RePlAce</p>
-<h3 id="基于-GPU："><a href="#基于-GPU：" class="headerlink" title="基于 GPU："></a><strong>基于 GPU：</strong></h3><p>解析布局问题类似于训练神经网络，都涉及优化参数和最小化成本函数。</p>
+<h3 id="基于-GPU："><strong>基于 GPU：</strong></h3>
+<p>解析布局问题类似于训练神经网络，都涉及优化参数和最小化成本函数。</p>
 <p>优点：通过深度学习工具包 PyTorch 实现了经过手工优化的关键运算符，相对于基于 CPU 的工具实现了超过 30 倍的加速。</p>
 <p>例子：DREAMPlace</p>
-<h2 id="Learning-based-methods-for-Placement（基于学习的方法布局）："><a href="#Learning-based-methods-for-Placement（基于学习的方法布局）：" class="headerlink" title="Learning-based methods for Placement（基于学习的方法布局）："></a>Learning-based methods for Placement（基于学习的方法布局）：</h2><p>​    1.端到端学习</p>
-<p>​    以 Google 的 GraphPlace 为例，端到端的学习方法，用于宏单元的布局，将芯片布局建模为一个顺序决策问题。</p>
+<h2 id="Learning-based-methods-for-Placement（基于学习的方法布局）：">Learning-based methods for Placement（基于学习的方法布局）：</h2>
+<p>​	1.端到端学习</p>
+<p>​	以 Google 的 GraphPlace 为例，端到端的学习方法，用于宏单元的布局，将芯片布局建模为一个顺序决策问题。</p>
 <p>每一步中，强化学习代理（RL agent）放置一个宏单元，使用目标指标作为奖励，直到执行最后一个动作。</p>
 <p>图神经网络（GNN）被用于价值网络，以编码电路网表信息，而在策略网络中，反卷积层输出当前宏单元位置的掩码。</p>
-<p>​    2.结合 RL 和启发式(SA)的方法</p>
-<p>​    一种在强化学习和模拟退火（SA）之间循环的框架，其中强化学习模块调整电路组件之间的相对空间顺序，而模拟退火则基于强化学习初始化进一步探索解空间。</p>
-<p>​    前者是一个具有与解析求解器相同目标函数的学习方法，而后者本质上是一个模拟退火求解器。</p>
+<p>​	2.结合 RL 和启发式(SA)的方法</p>
+<p>​	一种在强化学习和模拟退火（SA）之间循环的框架，其中强化学习模块调整电路组件之间的相对空间顺序，而模拟退火则基于强化学习初始化进一步探索解空间。</p>
+<p>​	前者是一个具有与解析求解器相同目标函数的学习方法，而后者本质上是一个模拟退火求解器。</p>
 <hr>
 <p><strong>Routing（布线）</strong></p>
-<h2 id="Classical-amp-Learning-based-methods-for-Routing（传统和学习方法对于布线）："><a href="#Classical-amp-Learning-based-methods-for-Routing（传统和学习方法对于布线）：" class="headerlink" title="Classical & Learning-based methods for Routing（传统和学习方法对于布线）："></a>Classical &amp; Learning-based methods for Routing（传统和学习方法对于布线）：</h2><h3 id="Classical-Routing："><a href="#Classical-Routing：" class="headerlink" title="Classical Routing："></a>Classical Routing：</h3><p>​    多引脚网问题分解为一组双引脚连接问题。</p>
-<p>​    每个引脚到引脚的布线问题通过经典的启发式方法解决，如 rip-up and reroute，力导向布线和区域式布线。</p>
-<h3 id="Learning-based-methods-for-Routing："><a href="#Learning-based-methods-for-Routing：" class="headerlink" title="Learning-based methods for Routing："></a>Learning-based methods for Routing：</h3><p>​    使用深度强化学习（DQN）模型决定布线方向的行动，即在每一步选择向北、向南等。</p>
-<p>​    提出了一种基于注意力的 REINFORCE 算法，用于选择布线顺序，并在确定布线顺序后使用模式布线器生成实际的布线。</p>
-<p>​    应用遗传算法创建初始布线候选，并使用强化学习逐步修复设计规则违规。</p>
-<h1 id="Methodology"><a href="#Methodology" class="headerlink" title="Methodology"></a>Methodology</h1><h2 id="Problem-Formulation："><a href="#Problem-Formulation：" class="headerlink" title="Problem Formulation："></a>Problem Formulation：</h2><p>​    首先对于宏布局问题 —&gt; 没有重叠和线长最小 —&gt; MDP</p>
+<h2 id="Classical-Learning-based-methods-for-Routing（传统和学习方法对于布线）：">Classical &amp; Learning-based methods for Routing（传统和学习方法对于布线）：</h2>
+<h3 id="Classical-Routing：">Classical Routing：</h3>
+<p>​	多引脚网问题分解为一组双引脚连接问题。</p>
+<p>​	每个引脚到引脚的布线问题通过经典的启发式方法解决，如 rip-up and reroute，力导向布线和区域式布线。</p>
+<h3 id="Learning-based-methods-for-Routing：">Learning-based methods for Routing：</h3>
+<p>​	使用深度强化学习（DQN）模型决定布线方向的行动，即在每一步选择向北、向南等。</p>
+<p>​	提出了一种基于注意力的 REINFORCE 算法，用于选择布线顺序，并在确定布线顺序后使用模式布线器生成实际的布线。</p>
+<p>​	应用遗传算法创建初始布线候选，并使用强化学习逐步修复设计规则违规。</p>
+<h1>Methodology</h1>
+<h2 id="Problem-Formulation：">Problem Formulation：</h2>
+<p>​	首先对于宏布局问题 --&gt; 没有重叠和线长最小 --&gt; MDP</p>
 <p><img src="/2024/03/01/DeepPR/Zuasbqf6uojUJMxAZWkcBVXEnue-1716625506837.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/Zuasbqf6uojUJMxAZWkcBVXEnue-1716625506837.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>​    <strong>MDP:</strong></p>
-<p>​    State _st_:</p>
-<p>​    全局图像 I —&gt; 全局图像 I 是对芯片画布的抽象表示，类比为一个二进制图像，其中每个位置都可以被标记为 1（已被占用）或 0（空闲）。这里将芯片的布局问题比喻为一个棋盘游戏（例如，象棋或围棋），其中需要决定宏单元（棋子）的放置位置。因此，全局图像 I 是一个表示已占用和空闲位置的二进制图像，通过这种方式来描述宏单元的布局。</p>
-<p>​    网表图 H —&gt; 网表图 H 是一个包含所有已放置宏单元详细位置的网络图。在这个图中，每个宏单元都在芯片上有一个特定的位置。这个图反映了宏单元之间的相对关系，类似于棋盘游戏的规则，这些规则用来指导放置过程。因此，网表图 H 提供了对布局中宏单元位置的详细描述，是在强化学习中用来表示状态的一部分。</p>
-<p>​    Action _at_:</p>
+<p>​	<strong>MDP:</strong></p>
+<p>​	State <em>st</em>:</p>
+<p>​	全局图像 I --&gt; 全局图像 I 是对芯片画布的抽象表示，类比为一个二进制图像，其中每个位置都可以被标记为 1（已被占用）或 0（空闲）。这里将芯片的布局问题比喻为一个棋盘游戏（例如，象棋或围棋），其中需要决定宏单元（棋子）的放置位置。因此，全局图像 I 是一个表示已占用和空闲位置的二进制图像，通过这种方式来描述宏单元的布局。</p>
+<p>​	网表图 H --&gt; 网表图 H 是一个包含所有已放置宏单元详细位置的网络图。在这个图中，每个宏单元都在芯片上有一个特定的位置。这个图反映了宏单元之间的相对关系，类似于棋盘游戏的规则，这些规则用来指导放置过程。因此，网表图 H 提供了对布局中宏单元位置的详细描述，是在强化学习中用来表示状态的一部分。</p>
+<p>​	Action <em>at</em>:</p>
 <p>动作空间包含在时间 t 时 n × n 画布上的可用位置，其中 n 表示网格的大小。选定当前宏单元的空闲位置（x，y）后，将 Ixy 设置为 1，并从可用列表中删除此位置。</p>
-<p>​    Reward _rt_:</p>
-<p>​    在每一轮结束时，奖励是最终解决方案的线长和路由拥塞的负加权和。权重是二者权衡，采用了随机网络蒸馏（RND)方法在每一个时间步计算奖励。</p>
-<p>​    Policy：</p>
-<p>​    邻近策略优化 PPO(Proximal Policy Optimization)</p>
-<h2 id="The-Structure-of-Policy-Network"><a href="#The-Structure-of-Policy-Network" class="headerlink" title="The Structure of Policy Network"></a>The Structure of Policy Network</h2><p><img src="/2024/03/01/DeepPR/ZdClbbEW7oR4z2xirjrcBhxJnhd-1716625506837.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/ZdClbbEW7oR4z2xirjrcBhxJnhd-1716625506837.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>​    将当前状态表示为图像，用 CNN 和 GNN 进行全局详细信息 embed，生成 Action 的概率分布。</p>
+<p>​	Reward <em>rt</em>:</p>
+<p>​	在每一轮结束时，奖励是最终解决方案的线长和路由拥塞的负加权和。权重是二者权衡，采用了随机网络蒸馏（RND)方法在每一个时间步计算奖励。</p>
+<p>​	Policy：</p>
+<p>​	邻近策略优化 PPO(Proximal Policy Optimization)</p>
+<h2 id="The-Structure-of-Policy-Network">The Structure of Policy Network</h2>
+<p><img src="/2024/03/01/DeepPR/ZdClbbEW7oR4z2xirjrcBhxJnhd-1716625506837.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/ZdClbbEW7oR4z2xirjrcBhxJnhd-1716625506837.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>​	将当前状态表示为图像，用 CNN 和 GNN 进行全局详细信息 embed，生成 Action 的概率分布。</p>
 <ol>
-<li><p>当前状态的图像表示：</p>
-<ul>
-<li>由于解决宏单元布局问题与类似围棋等棋盘游戏的目标都是以顺序方式确定宏单元（棋子）的位置，因此将当前状态建模为大小为 n × n 的图像 I。在实验中，选择 n 从 {32, 64} 中进行。图像中的每个位置 (x, y) 上的 Ixy 被设为 1 表示先前的宏单元已经放置在这个位置上。这种图像表示提供了布局的整体概览，但可能会损失一些详细信息。</li>
+<li class="lvl-3">
+<p>当前状态的图像表示：</p>
+<ul class="lvl-2">
+<li class="lvl-5">由于解决宏单元布局问题与类似围棋等棋盘游戏的目标都是以顺序方式确定宏单元（棋子）的位置，因此将当前状态建模为大小为 n × n 的图像 I。在实验中，选择 n 从 {32, 64} 中进行。图像中的每个位置 (x, y) 上的 Ixy 被设为 1 表示先前的宏单元已经放置在这个位置上。这种图像表示提供了布局的整体概览，但可能会损失一些详细信息。</li>
 </ul>
 </li>
-<li><p>全局嵌入和详细节点嵌入的获取：</p>
-<ul>
-<li>使用卷积神经网络（CNN）从图像 I 中获取全局嵌入。这一步的灵感来自围棋等游戏中 CNN 的成功应用。</li>
-<li>使用图神经网络（GNN）为当前考虑的宏单元生成详细的节点嵌入。GNN 的作用是探索网表的物理意义，并将节点之间的连接性信息提炼为低维度的向量表示。</li>
+<li class="lvl-3">
+<p>全局嵌入和详细节点嵌入的获取：</p>
+<ul class="lvl-2">
+<li class="lvl-5">使用卷积神经网络（CNN）从图像 I 中获取全局嵌入。这一步的灵感来自围棋等游戏中 CNN 的成功应用。</li>
+<li class="lvl-5">使用图神经网络（GNN）为当前考虑的宏单元生成详细的节点嵌入。GNN 的作用是探索网表的物理意义，并将节点之间的连接性信息提炼为低维度的向量表示。</li>
 </ul>
 </li>
-<li><p>多视角嵌入模型：</p>
-<ul>
-<li>将全局嵌入和节点嵌入通过连接操作进行融合。</li>
-<li>将融合结果传递给一个全连接层，生成一个概率分布，用于描述在给定状态下执行不同动作的可能性。</li>
-<li>该模型被设计成一个多视角嵌入模型，旨在综合探索全局和节点级别的信息，以更好地指导强化学习代理在每一步中作出决策。</li>
+<li class="lvl-3">
+<p>多视角嵌入模型：</p>
+<ul class="lvl-2">
+<li class="lvl-5">将全局嵌入和节点嵌入通过连接操作进行融合。</li>
+<li class="lvl-5">将融合结果传递给一个全连接层，生成一个概率分布，用于描述在给定状态下执行不同动作的可能性。</li>
+<li class="lvl-5">该模型被设计成一个多视角嵌入模型，旨在综合探索全局和节点级别的信息，以更好地指导强化学习代理在每一步中作出决策。</li>
 </ul>
 </li>
 </ol>
-<h2 id="Reward-Design（奖励设计）"><a href="#Reward-Design（奖励设计）" class="headerlink" title="Reward Design（奖励设计）"></a>Reward Design（奖励设计）</h2><h3 id="Extrinsic-Reward-Design（外在奖励设计）"><a href="#Extrinsic-Reward-Design（外在奖励设计）" class="headerlink" title="Extrinsic Reward Design（外在奖励设计）"></a>Extrinsic Reward Design（外在奖励设计）</h3><p>​    定义了线长和拥塞的成本函数：</p>
+<h2 id="Reward-Design（奖励设计）">Reward Design（奖励设计）</h2>
+<h3 id="Extrinsic-Reward-Design（外在奖励设计）">Extrinsic Reward Design（外在奖励设计）</h3>
+<p>​	定义了线长和拥塞的成本函数：</p>
 <p><img src="/2024/03/01/DeepPR/PS71bPk24o6aQdxgjtRc7ecDnOJ-1716625506837.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/PS71bPk24o6aQdxgjtRc7ecDnOJ-1716625506837.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>​    线长公式：</p>
+<p>​	线长公式：</p>
 <p><img src="/2024/03/01/DeepPR/CqrCbCVYYoycltxZ8Xqck0F6nxg-1716625506838.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/CqrCbCVYYoycltxZ8Xqck0F6nxg-1716625506838.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>​    拥塞公式：</p>
-<p>​    使用矩形均匀线密度（RUDY） 实验中设置拥塞阈值为 0.1</p>
-<h3 id="Intrinsic-Reward-Design（内在奖励设计）"><a href="#Intrinsic-Reward-Design（内在奖励设计）" class="headerlink" title="Intrinsic Reward Design（内在奖励设计）"></a>Intrinsic Reward Design（内在奖励设计）</h3><p><img src="/2024/03/01/DeepPR/GT4Qb7TITofYypx3P3bc15jXnWh-1716625506838.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/GT4Qb7TITofYypx3P3bc15jXnWh-1716625506838.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>​        随机网络蒸馏(RND)涉及到两个网络，目标网络和预测网络。</p>
-<p>​        题外话，介绍一下目标网络和预测网络作用：</p>
+<p>​	拥塞公式：</p>
+<p>​	使用矩形均匀线密度（RUDY） 实验中设置拥塞阈值为 0.1</p>
+<h3 id="Intrinsic-Reward-Design（内在奖励设计）">Intrinsic Reward Design（内在奖励设计）</h3>
+<p><img src="/2024/03/01/DeepPR/GT4Qb7TITofYypx3P3bc15jXnWh-1716625506838.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/GT4Qb7TITofYypx3P3bc15jXnWh-1716625506838.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>​		随机网络蒸馏(RND)涉及到两个网络，目标网络和预测网络。</p>
+<p>​		题外话，介绍一下目标网络和预测网络作用：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Answer from Chatgpt</span></span><br></pre></td></tr></table></figure>
 <ol>
-<li><p>预测网络（Predictor Network）：</p>
-<ul>
-<li>预测网络通常是一个神经网络，它负责接收环境的输入，并输出对环境的某些方面的预测。</li>
-<li>在强化学习中，预测网络的训练是为了使其能够准确地预测环境的一些方面。在文中的情境下，它可能学习预测布局状态的某些特征或属性。</li>
+<li class="lvl-3">
+<p>预测网络（Predictor Network）：</p>
+<ul class="lvl-2">
+<li class="lvl-5">预测网络通常是一个神经网络，它负责接收环境的输入，并输出对环境的某些方面的预测。</li>
+<li class="lvl-5">在强化学习中，预测网络的训练是为了使其能够准确地预测环境的一些方面。在文中的情境下，它可能学习预测布局状态的某些特征或属性。</li>
 </ul>
 </li>
-<li><p>目标网络（Target Network）：</p>
-<ul>
-<li>目标网络是另一个神经网络，它与预测网络相似，但在训练过程中不像预测网络那样频繁地更新权重。目标网络的参数是定期从预测网络中复制而来的，通常以较低的频率进行更新。</li>
-<li><p>目标网络的目的是提供一个相对于预测网络的固定的、不容易变化的目标，以减缓训练中的不稳定性。这有助于确保目标的一致性，因为目标网络的参数在一段时间内保持不变。</p>
+<li class="lvl-3">
+<p>目标网络（Target Network）：</p>
+<ul class="lvl-2">
+<li class="lvl-5">
+<p>目标网络是另一个神经网络，它与预测网络相似，但在训练过程中不像预测网络那样频繁地更新权重。目标网络的参数是定期从预测网络中复制而来的，通常以较低的频率进行更新。</p>
+</li>
+<li class="lvl-5">
+<p>目标网络的目的是提供一个相对于预测网络的固定的、不容易变化的目标，以减缓训练中的不稳定性。这有助于确保目标的一致性，因为目标网络的参数在一段时间内保持不变。</p>
 <p>在训练过程中，代理使用预测网络进行实际的动作选择和环境交互。然后，定期地，目标网络的参数被复制为预测网络的参数，以提供一个稳定的目标。这样的设置有助于稳定训练，减少因为网络参数的快速变化而导致的训练不稳定性。</p>
 </li>
 </ul>
 </li>
 </ol>
-<h3 id="Combination-with-Gradient-based-Placement-Optimization"><a href="#Combination-with-Gradient-based-Placement-Optimization" class="headerlink" title="Combination with Gradient-based Placement Optimization"></a>Combination with Gradient-based Placement Optimization</h3><p>​        标准单元放置。用 DREAMPlace 完成。</p>
-<h3 id="Joint-Learning-of-Placement-and-Routing"><a href="#Joint-Learning-of-Placement-and-Routing" class="headerlink" title="Joint Learning of Placement and Routing"></a>Joint Learning of Placement and Routing</h3><p>​        依然是之前老生常谈 —&gt; 我的理解是在布局之后紧跟就是布线 没有太新颖的做法</p>
+<h3 id="Combination-with-Gradient-based-Placement-Optimization">Combination with Gradient-based Placement Optimization</h3>
+<p>​		标准单元放置。用 DREAMPlace 完成。</p>
+<h3 id="Joint-Learning-of-Placement-and-Routing">Joint Learning of Placement and Routing</h3>
+<p>​		依然是之前老生常谈 --&gt; 我的理解是在布局之后紧跟就是布线 没有太新颖的做法</p>
 <p>优点：</p>
 <ol>
-<li>放置解决方案为布线代理提供了大量的训练数据，这比之前工作中使用的随机生成的数据更有优势，因为它能够更好地模拟真实场景下的数据分布。</li>
-<li>布线为放置代理提供了一个直接的优化目标，从而减少了中间成本模型的需要，并减少了奖励信号中的偏差。（这里的偏差指的是单个布局或者单个布线任务代理相比较带来）</li>
+<li class="lvl-3">
+<p>放置解决方案为布线代理提供了大量的训练数据，这比之前工作中使用的随机生成的数据更有优势，因为它能够更好地模拟真实场景下的数据分布。</p>
+</li>
+<li class="lvl-3">
+<p>布线为放置代理提供了一个直接的优化目标，从而减少了中间成本模型的需要，并减少了奖励信号中的偏差。（这里的偏差指的是单个布局或者单个布线任务代理相比较带来）</p>
+</li>
 </ol>
-<h1 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h1><h2 id="Benchmarks-and-Settings"><a href="#Benchmarks-and-Settings" class="headerlink" title="Benchmarks and Settings"></a>Benchmarks and Settings</h2><p>​        Datasets : ISPD-2005</p>
-<p>​        Policy : PPO</p>
-<p>​        Backbone : GCN —&gt; 一层 16 feature 一层 32 feature</p>
-<p>​        Lr : 2.5 × 10−4</p>
+<h1>Experiments</h1>
+<h2 id="Benchmarks-and-Settings">Benchmarks and Settings</h2>
+<p>​		Datasets : ISPD-2005</p>
+<p>​		Policy : PPO</p>
+<p>​		Backbone : GCN --&gt; 一层 16 feature 一层 32 feature</p>
+<p>​		Lr : 2.5 × 10−4</p>
 <p><img src="/2024/03/01/DeepPR/S3l2bHY8vo0TZ4xAtNacRcz5njb-1716625506838.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/S3l2bHY8vo0TZ4xAtNacRcz5njb-1716625506838.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<h2 id="Pretraining"><a href="#Pretraining" class="headerlink" title="Pretraining"></a>Pretraining</h2><p>​        仅由宏(Macors)之间的连接组成网表训练策略(Policy)网络，为后续任务微调此预训练策略。</p>
+<h2 id="Pretraining">Pretraining</h2>
+<p>​		仅由宏(Macors)之间的连接组成网表训练策略(Policy)网络，为后续任务微调此预训练策略。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Answer from Chatgpt</span></span><br><span class="line">promot:{原文.....解释一下这段中预训练的故事吗}</span><br></pre></td></tr></table></figure>
 <p><img src="/2024/03/01/DeepPR/P31fbwjYdobI67xQkLKcSKR3nAd-1716625506838.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/P31fbwjYdobI67xQkLKcSKR3nAd-1716625506838.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
 <p>我觉得说得很有道理</p>
-<h2 id="Results-on-Joint-Macro-Standard-cell-Placement（布局结果）"><a href="#Results-on-Joint-Macro-Standard-cell-Placement（布局结果）" class="headerlink" title="Results on Joint Macro/Standard cell Placement（布局结果）"></a>Results on Joint Macro/Standard cell Placement（布局结果）</h2><h3 id="Comparison-of-agents-pre-trained-on-circuit-adaptec1（预训练迭代次数对比）："><a href="#Comparison-of-agents-pre-trained-on-circuit-adaptec1（预训练迭代次数对比）：" class="headerlink" title="Comparison of agents pre-trained on circuit adaptec1（预训练迭代次数对比）："></a>Comparison of agents pre-trained on circuit adaptec1（预训练迭代次数对比）：</h3><p><img src="/2024/03/01/DeepPR/YyXbbnNvCoROtJxWbeUcaiq9nae-1716625506838.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/YyXbbnNvCoROtJxWbeUcaiq9nae-1716625506838.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>​        为 300 迭代时候效果最优。500 迭代可能过拟合了。</p>
-<h3 id="Comparison-on-macro-standard-cell-placement-task-on-circuits-from-ISPD-2005（布局任务对比）："><a href="#Comparison-on-macro-standard-cell-placement-task-on-circuits-from-ISPD-2005（布局任务对比）：" class="headerlink" title="Comparison on macro/standard cell placement task on circuits from ISPD-2005（布局任务对比）："></a>Comparison on macro/standard cell placement task on circuits from ISPD-2005（布局任务对比）：</h3><p><img src="/2024/03/01/DeepPR/K07jbI9Hqo7FjtxWFWucK1Qbnrc-1716625506838.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/K07jbI9Hqo7FjtxWFWucK1Qbnrc-1716625506838.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<h3 id="Runtime-breakdown-and-comparison-with-classical-placer-on-eight-circuits-from-ISPD-2005（时间对比）："><a href="#Runtime-breakdown-and-comparison-with-classical-placer-on-eight-circuits-from-ISPD-2005（时间对比）：" class="headerlink" title="Runtime breakdown and comparison with classical placer on eight circuits from ISPD-2005（时间对比）："></a>Runtime breakdown and comparison with classical placer on eight circuits from ISPD-2005（时间对比）：</h3><p><img src="/2024/03/01/DeepPR/VdeFbiay9oNEY8xXpcbcfkdJnzB-1716625506838.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/VdeFbiay9oNEY8xXpcbcfkdJnzB-1716625506838.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<h3 id="Visualization-of-macro-in-orange-standard-cell-in-blue-placement-by-our-DeepPlace-on-circuits-adaptec3-and-bigblue1-from-ISPD-2005（可视化结果）："><a href="#Visualization-of-macro-in-orange-standard-cell-in-blue-placement-by-our-DeepPlace-on-circuits-adaptec3-and-bigblue1-from-ISPD-2005（可视化结果）：" class="headerlink" title="Visualization of macro (in orange) /standard cell (in blue) placement by our DeepPlace on circuits adaptec3 and bigblue1 from ISPD-2005（可视化结果）："></a>Visualization of macro (in orange) /standard cell (in blue) placement by our DeepPlace on circuits adaptec3 and bigblue1 from ISPD-2005（可视化结果）：</h3><p><img src="/2024/03/01/DeepPR/Uj1SbnrR2oMhcxx7bwCclQ5anKe-1716625506838.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/Uj1SbnrR2oMhcxx7bwCclQ5anKe-1716625506838.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<h2 id="Results-on-Joint-Placement-and-Routing（布线布局联邦结果）："><a href="#Results-on-Joint-Placement-and-Routing（布线布局联邦结果）：" class="headerlink" title="Results on Joint Placement and Routing（布线布局联邦结果）："></a>Results on Joint Placement and Routing（布线布局联邦结果）：</h2><h3 id="Final-wirelength-comparison-for-joint-placement-and-routing-problem-on-ISPD-2005-benchmark（HWPL-参数对比）："><a href="#Final-wirelength-comparison-for-joint-placement-and-routing-problem-on-ISPD-2005-benchmark（HWPL-参数对比）：" class="headerlink" title="Final wirelength comparison for joint placement and routing problem on ISPD-2005 benchmark（HWPL 参数对比）："></a>Final wirelength comparison for joint placement and routing problem on ISPD-2005 benchmark（HWPL 参数对比）：</h3><p><img src="/2024/03/01/DeepPR/BDrQbvLUvoHdnYx3tuucz5iEn3c-1716625506838.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/BDrQbvLUvoHdnYx3tuucz5iEn3c-1716625506838.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<h2 id="Ablation-Study（消融实验）："><a href="#Ablation-Study（消融实验）：" class="headerlink" title="Ablation Study（消融实验）："></a>Ablation Study（消融实验）：</h2><p>​        三种消融实验对比 —&gt; 证明随机网络蒸馏(RND)有效性</p>
+<h2 id="Results-on-Joint-Macro-Standard-cell-Placement（布局结果）">Results on Joint Macro/Standard cell Placement（布局结果）</h2>
+<h3 id="Comparison-of-agents-pre-trained-on-circuit-adaptec1（预训练迭代次数对比）：">Comparison of agents pre-trained on circuit adaptec1（预训练迭代次数对比）：</h3>
+<p><img src="/2024/03/01/DeepPR/YyXbbnNvCoROtJxWbeUcaiq9nae-1716625506838.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/YyXbbnNvCoROtJxWbeUcaiq9nae-1716625506838.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>​		为 300 迭代时候效果最优。500 迭代可能过拟合了。</p>
+<h3 id="Comparison-on-macro-standard-cell-placement-task-on-circuits-from-ISPD-2005（布局任务对比）：">Comparison on macro/standard cell placement task on circuits from ISPD-2005（布局任务对比）：</h3>
+<p><img src="/2024/03/01/DeepPR/K07jbI9Hqo7FjtxWFWucK1Qbnrc-1716625506838.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/K07jbI9Hqo7FjtxWFWucK1Qbnrc-1716625506838.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h3 id="Runtime-breakdown-and-comparison-with-classical-placer-on-eight-circuits-from-ISPD-2005（时间对比）：">Runtime breakdown and comparison with classical placer on eight circuits from ISPD-2005（时间对比）：</h3>
+<p><img src="/2024/03/01/DeepPR/VdeFbiay9oNEY8xXpcbcfkdJnzB-1716625506838.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/VdeFbiay9oNEY8xXpcbcfkdJnzB-1716625506838.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h3 id="Visualization-of-macro-in-orange-standard-cell-in-blue-placement-by-our-DeepPlace-on-circuits-adaptec3-and-bigblue1-from-ISPD-2005（可视化结果）：">Visualization of macro (in orange) /standard cell (in blue) placement by our DeepPlace on circuits adaptec3 and bigblue1 from ISPD-2005（可视化结果）：</h3>
+<p><img src="/2024/03/01/DeepPR/Uj1SbnrR2oMhcxx7bwCclQ5anKe-1716625506838.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/Uj1SbnrR2oMhcxx7bwCclQ5anKe-1716625506838.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h2 id="Results-on-Joint-Placement-and-Routing（布线布局联邦结果）：">Results on Joint Placement and Routing（布线布局联邦结果）：</h2>
+<h3 id="Final-wirelength-comparison-for-joint-placement-and-routing-problem-on-ISPD-2005-benchmark（HWPL-参数对比）：">Final wirelength comparison for joint placement and routing problem on ISPD-2005 benchmark（HWPL 参数对比）：</h3>
+<p><img src="/2024/03/01/DeepPR/BDrQbvLUvoHdnYx3tuucz5iEn3c-1716625506838.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/BDrQbvLUvoHdnYx3tuucz5iEn3c-1716625506838.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h2 id="Ablation-Study（消融实验）：">Ablation Study（消融实验）：</h2>
+<p>​		三种消融实验对比 --&gt; 证明随机网络蒸馏(RND)有效性</p>
 <p><img src="/2024/03/01/DeepPR/SbaSb6eeHouUgNxDXtocFSWQnjg.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/SbaSb6eeHouUgNxDXtocFSWQnjg.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
 
       </div>
@@ -715,7 +787,9 @@ mjx-container[display="true"] + br {
       </div>
       <!-- <div class="content">
         Maskplace
-Introduction​    芯片布局方法分为两种，一种是传统的基于优化方法(classic o
+
+Introduction
+​	芯片布局方法分为两种，一种是传统的基于优化方法(classic op
       </div> -->
     </a>
   </div>
@@ -942,7 +1016,7 @@ Introduction​    芯片布局方法分为两种，一种是传统的基于优�
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#DeepPR"><span class="toc-text">DeepPR</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-text">Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Method"><span class="toc-text">Method</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Related-Work"><span class="toc-text">Related Work</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Classical-methods-for-Placement%EF%BC%88%E7%BB%8F%E5%85%B8%E6%94%BE%E7%BD%AE%E6%96%B9%E6%B3%95%EF%BC%89%EF%BC%9A"><span class="toc-text">Classical methods for Placement（经典放置方法）：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Partitioning-based-methods%EF%BC%88%E5%88%86%E5%8C%BA%E6%96%B9%E6%B3%95%EF%BC%89%EF%BC%9A"><span class="toc-text">Partitioning-based methods（分区方法）：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stochastic-hill-climbing-methods%EF%BC%88%E9%9A%8F%E6%9C%BA-%E7%88%AC%E5%B1%B1%E6%B3%95%E6%96%B9%E6%B3%95%EF%BC%89%EF%BC%9A"><span class="toc-text">Stochastic&#x2F;hill-climbing methods（随机&#x2F;爬山法方法）：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Analytic-solvers%EF%BC%88%E8%A7%A3%E6%9E%90%E6%B1%82%E8%A7%A3%E5%99%A8%EF%BC%89%EF%BC%9A"><span class="toc-text">Analytic solvers（解析求解器）：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E-GPU%EF%BC%9A"><span class="toc-text">基于 GPU：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Learning-based-methods-for-Placement%EF%BC%88%E5%9F%BA%E4%BA%8E%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%96%B9%E6%B3%95%E5%B8%83%E5%B1%80%EF%BC%89%EF%BC%9A"><span class="toc-text">Learning-based methods for Placement（基于学习的方法布局）：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Classical-amp-Learning-based-methods-for-Routing%EF%BC%88%E4%BC%A0%E7%BB%9F%E5%92%8C%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E5%AF%B9%E4%BA%8E%E5%B8%83%E7%BA%BF%EF%BC%89%EF%BC%9A"><span class="toc-text">Classical &amp; Learning-based methods for Routing（传统和学习方法对于布线）：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Classical-Routing%EF%BC%9A"><span class="toc-text">Classical Routing：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Learning-based-methods-for-Routing%EF%BC%9A"><span class="toc-text">Learning-based methods for Routing：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Methodology"><span class="toc-text">Methodology</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-Formulation%EF%BC%9A"><span class="toc-text">Problem Formulation：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Structure-of-Policy-Network"><span class="toc-text">The Structure of Policy Network</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reward-Design%EF%BC%88%E5%A5%96%E5%8A%B1%E8%AE%BE%E8%AE%A1%EF%BC%89"><span class="toc-text">Reward Design（奖励设计）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Extrinsic-Reward-Design%EF%BC%88%E5%A4%96%E5%9C%A8%E5%A5%96%E5%8A%B1%E8%AE%BE%E8%AE%A1%EF%BC%89"><span class="toc-text">Extrinsic Reward Design（外在奖励设计）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Intrinsic-Reward-Design%EF%BC%88%E5%86%85%E5%9C%A8%E5%A5%96%E5%8A%B1%E8%AE%BE%E8%AE%A1%EF%BC%89"><span class="toc-text">Intrinsic Reward Design（内在奖励设计）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Combination-with-Gradient-based-Placement-Optimization"><span class="toc-text">Combination with Gradient-based Placement Optimization</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Joint-Learning-of-Placement-and-Routing"><span class="toc-text">Joint Learning of Placement and Routing</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Experiments"><span class="toc-text">Experiments</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Benchmarks-and-Settings"><span class="toc-text">Benchmarks and Settings</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pretraining"><span class="toc-text">Pretraining</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Results-on-Joint-Macro-Standard-cell-Placement%EF%BC%88%E5%B8%83%E5%B1%80%E7%BB%93%E6%9E%9C%EF%BC%89"><span class="toc-text">Results on Joint Macro&#x2F;Standard cell Placement（布局结果）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Comparison-of-agents-pre-trained-on-circuit-adaptec1%EF%BC%88%E9%A2%84%E8%AE%AD%E7%BB%83%E8%BF%AD%E4%BB%A3%E6%AC%A1%E6%95%B0%E5%AF%B9%E6%AF%94%EF%BC%89%EF%BC%9A"><span class="toc-text">Comparison of agents pre-trained on circuit adaptec1（预训练迭代次数对比）：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Comparison-on-macro-standard-cell-placement-task-on-circuits-from-ISPD-2005%EF%BC%88%E5%B8%83%E5%B1%80%E4%BB%BB%E5%8A%A1%E5%AF%B9%E6%AF%94%EF%BC%89%EF%BC%9A"><span class="toc-text">Comparison on macro&#x2F;standard cell placement task on circuits from ISPD-2005（布局任务对比）：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Runtime-breakdown-and-comparison-with-classical-placer-on-eight-circuits-from-ISPD-2005%EF%BC%88%E6%97%B6%E9%97%B4%E5%AF%B9%E6%AF%94%EF%BC%89%EF%BC%9A"><span class="toc-text">Runtime breakdown and comparison with classical placer on eight circuits from ISPD-2005（时间对比）：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Visualization-of-macro-in-orange-standard-cell-in-blue-placement-by-our-DeepPlace-on-circuits-adaptec3-and-bigblue1-from-ISPD-2005%EF%BC%88%E5%8F%AF%E8%A7%86%E5%8C%96%E7%BB%93%E6%9E%9C%EF%BC%89%EF%BC%9A"><span class="toc-text">Visualization of macro (in orange) &#x2F;standard cell (in blue) placement by our DeepPlace on circuits adaptec3 and bigblue1 from ISPD-2005（可视化结果）：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Results-on-Joint-Placement-and-Routing%EF%BC%88%E5%B8%83%E7%BA%BF%E5%B8%83%E5%B1%80%E8%81%94%E9%82%A6%E7%BB%93%E6%9E%9C%EF%BC%89%EF%BC%9A"><span class="toc-text">Results on Joint Placement and Routing（布线布局联邦结果）：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Final-wirelength-comparison-for-joint-placement-and-routing-problem-on-ISPD-2005-benchmark%EF%BC%88HWPL-%E5%8F%82%E6%95%B0%E5%AF%B9%E6%AF%94%EF%BC%89%EF%BC%9A"><span class="toc-text">Final wirelength comparison for joint placement and routing problem on ISPD-2005 benchmark（HWPL 参数对比）：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ablation-Study%EF%BC%88%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C%EF%BC%89%EF%BC%9A"><span class="toc-text">Ablation Study（消融实验）：</span></a></li></ol></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">DeepPR</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Method"><span class="toc-text">Method</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Related Work</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Classical-methods-for-Placement%EF%BC%88%E7%BB%8F%E5%85%B8%E6%94%BE%E7%BD%AE%E6%96%B9%E6%B3%95%EF%BC%89%EF%BC%9A"><span class="toc-text">Classical methods for Placement（经典放置方法）：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Partitioning-based-methods%EF%BC%88%E5%88%86%E5%8C%BA%E6%96%B9%E6%B3%95%EF%BC%89%EF%BC%9A"><span class="toc-text">Partitioning-based methods（分区方法）：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stochastic-hill-climbing-methods%EF%BC%88%E9%9A%8F%E6%9C%BA-%E7%88%AC%E5%B1%B1%E6%B3%95%E6%96%B9%E6%B3%95%EF%BC%89%EF%BC%9A"><span class="toc-text">Stochastic&#x2F;hill-climbing methods（随机&#x2F;爬山法方法）：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Analytic-solvers%EF%BC%88%E8%A7%A3%E6%9E%90%E6%B1%82%E8%A7%A3%E5%99%A8%EF%BC%89%EF%BC%9A"><span class="toc-text">Analytic solvers（解析求解器）：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E-GPU%EF%BC%9A"><span class="toc-text">基于 GPU：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Learning-based-methods-for-Placement%EF%BC%88%E5%9F%BA%E4%BA%8E%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%96%B9%E6%B3%95%E5%B8%83%E5%B1%80%EF%BC%89%EF%BC%9A"><span class="toc-text">Learning-based methods for Placement（基于学习的方法布局）：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Classical-Learning-based-methods-for-Routing%EF%BC%88%E4%BC%A0%E7%BB%9F%E5%92%8C%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E5%AF%B9%E4%BA%8E%E5%B8%83%E7%BA%BF%EF%BC%89%EF%BC%9A"><span class="toc-text">Classical &amp; Learning-based methods for Routing（传统和学习方法对于布线）：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Classical-Routing%EF%BC%9A"><span class="toc-text">Classical Routing：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Learning-based-methods-for-Routing%EF%BC%9A"><span class="toc-text">Learning-based methods for Routing：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Methodology</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-Formulation%EF%BC%9A"><span class="toc-text">Problem Formulation：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Structure-of-Policy-Network"><span class="toc-text">The Structure of Policy Network</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reward-Design%EF%BC%88%E5%A5%96%E5%8A%B1%E8%AE%BE%E8%AE%A1%EF%BC%89"><span class="toc-text">Reward Design（奖励设计）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Extrinsic-Reward-Design%EF%BC%88%E5%A4%96%E5%9C%A8%E5%A5%96%E5%8A%B1%E8%AE%BE%E8%AE%A1%EF%BC%89"><span class="toc-text">Extrinsic Reward Design（外在奖励设计）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Intrinsic-Reward-Design%EF%BC%88%E5%86%85%E5%9C%A8%E5%A5%96%E5%8A%B1%E8%AE%BE%E8%AE%A1%EF%BC%89"><span class="toc-text">Intrinsic Reward Design（内在奖励设计）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Combination-with-Gradient-based-Placement-Optimization"><span class="toc-text">Combination with Gradient-based Placement Optimization</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Joint-Learning-of-Placement-and-Routing"><span class="toc-text">Joint Learning of Placement and Routing</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Experiments</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Benchmarks-and-Settings"><span class="toc-text">Benchmarks and Settings</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pretraining"><span class="toc-text">Pretraining</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Results-on-Joint-Macro-Standard-cell-Placement%EF%BC%88%E5%B8%83%E5%B1%80%E7%BB%93%E6%9E%9C%EF%BC%89"><span class="toc-text">Results on Joint Macro&#x2F;Standard cell Placement（布局结果）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Comparison-of-agents-pre-trained-on-circuit-adaptec1%EF%BC%88%E9%A2%84%E8%AE%AD%E7%BB%83%E8%BF%AD%E4%BB%A3%E6%AC%A1%E6%95%B0%E5%AF%B9%E6%AF%94%EF%BC%89%EF%BC%9A"><span class="toc-text">Comparison of agents pre-trained on circuit adaptec1（预训练迭代次数对比）：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Comparison-on-macro-standard-cell-placement-task-on-circuits-from-ISPD-2005%EF%BC%88%E5%B8%83%E5%B1%80%E4%BB%BB%E5%8A%A1%E5%AF%B9%E6%AF%94%EF%BC%89%EF%BC%9A"><span class="toc-text">Comparison on macro&#x2F;standard cell placement task on circuits from ISPD-2005（布局任务对比）：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Runtime-breakdown-and-comparison-with-classical-placer-on-eight-circuits-from-ISPD-2005%EF%BC%88%E6%97%B6%E9%97%B4%E5%AF%B9%E6%AF%94%EF%BC%89%EF%BC%9A"><span class="toc-text">Runtime breakdown and comparison with classical placer on eight circuits from ISPD-2005（时间对比）：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Visualization-of-macro-in-orange-standard-cell-in-blue-placement-by-our-DeepPlace-on-circuits-adaptec3-and-bigblue1-from-ISPD-2005%EF%BC%88%E5%8F%AF%E8%A7%86%E5%8C%96%E7%BB%93%E6%9E%9C%EF%BC%89%EF%BC%9A"><span class="toc-text">Visualization of macro (in orange) &#x2F;standard cell (in blue) placement by our DeepPlace on circuits adaptec3 and bigblue1 from ISPD-2005（可视化结果）：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Results-on-Joint-Placement-and-Routing%EF%BC%88%E5%B8%83%E7%BA%BF%E5%B8%83%E5%B1%80%E8%81%94%E9%82%A6%E7%BB%93%E6%9E%9C%EF%BC%89%EF%BC%9A"><span class="toc-text">Results on Joint Placement and Routing（布线布局联邦结果）：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Final-wirelength-comparison-for-joint-placement-and-routing-problem-on-ISPD-2005-benchmark%EF%BC%88HWPL-%E5%8F%82%E6%95%B0%E5%AF%B9%E6%AF%94%EF%BC%89%EF%BC%9A"><span class="toc-text">Final wirelength comparison for joint placement and routing problem on ISPD-2005 benchmark（HWPL 参数对比）：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ablation-Study%EF%BC%88%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C%EF%BC%89%EF%BC%9A"><span class="toc-text">Ablation Study（消融实验）：</span></a></li></ol></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -968,6 +1042,27 @@ Introduction​    芯片布局方法分为两种，一种是传统的基于优�
       <!-- hash算法 -->
       
       <div class="aside-list">
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/09/11/think1/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://i.postimg.cc/LswWKGcX/IMG-202406278649-1440x810.jpg" class="lazyload placeholder" data-srcset="https://i.postimg.cc/LswWKGcX/IMG-202406278649-1440x810.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">09-11</span>
+                
+              </div>
+              <a class="post-title" href="/2024/09/11/think1/">秋念</a>
+            </div>
+          </div>
         
           <div class="aside-list-item">
             
@@ -1050,27 +1145,6 @@ Introduction​    芯片布局方法分为两种，一种是传统的基于优�
                 
               </div>
               <a class="post-title" href="/2024/06/05/AnalogCoder/">AnalogCoder</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2024/05/26/EfficientPlace/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">05-26</span>
-                
-              </div>
-              <a class="post-title" href="/2024/05/26/EfficientPlace/">EfficientPlace</a>
             </div>
           </div>
         
@@ -1466,7 +1540,7 @@ Introduction​    芯片布局方法分为两种，一种是传统的基于优�
       
         
           <div class="footer-copyright">
-            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a></p>
+            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> </p>
 
           </div>
         

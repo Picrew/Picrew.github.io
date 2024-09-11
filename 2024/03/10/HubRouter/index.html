@@ -503,6 +503,23 @@ mjx-container[display="true"] + br {
       
 
       
+        <span class="post-detail-header_categories">
+          <i class="iconfont iconbookmark1"></i> category：
+          
+            <a href="/categories/EDA/" class="post-detail-header_category">
+              EDA
+            </a>
+          
+            <a href="/categories/EDA/RL/" class="post-detail-header_category">
+              RL
+            </a>
+          
+            <a href="/categories/EDA/RL/%E7%A7%91%E7%A0%94/" class="post-detail-header_category">
+              科研
+            </a>
+          
+        </span>
+      
 
       
     
@@ -522,97 +539,143 @@ mjx-container[display="true"] + br {
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <h1 id="HubRouter-Learning-Global-Routing-via-Hub-Generation-and-Pin-hub-Connection"><a href="#HubRouter-Learning-Global-Routing-via-Hub-Generation-and-Pin-hub-Connection" class="headerlink" title="HubRouter: Learning Global Routing via Hub Generation and Pin-hub Connection"></a>HubRouter: Learning Global Routing via Hub Generation and Pin-hub Connection</h1><p><img src="/2024/03/10/HubRouter/GnJzbxOH4oLMYZxHE6JcwOvrneg.png" class="lazyload placeholder" data-srcset="/2024/03/10/HubRouter/GnJzbxOH4oLMYZxHE6JcwOvrneg.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>​        全局布线(Global Routing - GR)是 VLSI 设计中最复杂且最耗时的组合问题之一。GR 目标是总线长最小，同时避免拥塞(Congestion)，是个 NP 问题。</p>
-<p>​        传统采用启发式算法，多样性和规模问题对传统算法有了挑战，机器学习(ML)已经用于全局布线，在芯片设计中从逻辑合成到布局。</p>
-<p>​        新式算法：</p>
-<ul>
-<li>深度强化学习(Deep Reinforcement Learning - DRL )和生成式模型(Generative model)已经被用来解决全局布线。问题在于，DRL很受状态空间(State Space)影响，随着网格空间增大，需要花费大量时间生成。相反，生成式模型有一次性生成能力，在计算上更容易处理。</li>
-<li>生成式方法在训练时候考虑连通性限制，确保布线满足电路连通性要求。但是问题在于，如果初始生成路径不满足连通性要求时候，后处理阶段会变成一种穷举搜索过程。</li>
+        <h1>HubRouter: Learning Global Routing via Hub Generation and Pin-hub Connection</h1>
+<p><img src="/2024/03/10/HubRouter/GnJzbxOH4oLMYZxHE6JcwOvrneg.png" class="lazyload placeholder" data-srcset="/2024/03/10/HubRouter/GnJzbxOH4oLMYZxHE6JcwOvrneg.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h1>Introduction</h1>
+<p>​		全局布线(Global Routing - GR)是 VLSI 设计中最复杂且最耗时的组合问题之一。GR 目标是总线长最小，同时避免拥塞(Congestion)，是个 NP 问题。</p>
+<p>​		传统采用启发式算法，多样性和规模问题对传统算法有了挑战，机器学习(ML)已经用于全局布线，在芯片设计中从逻辑合成到布局。</p>
+<p>​		新式算法：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>深度强化学习(Deep Reinforcement Learning - DRL )和生成式模型(Generative model)已经被用来解决全局布线。问题在于，DRL很受状态空间(State Space)影响，随着网格空间增大，需要花费大量时间生成。相反，生成式模型有一次性生成能力，在计算上更容易处理。</p>
+</li>
+<li class="lvl-2">
+<p>生成式方法在训练时候考虑连通性限制，确保布线满足电路连通性要求。但是问题在于，如果初始生成路径不满足连通性要求时候，后处理阶段会变成一种穷举搜索过程。</p>
+</li>
 </ul>
 <p><img src="/2024/03/10/HubRouter/1280X1280.png" class="lazyload placeholder" data-srcset="/2024/03/10/HubRouter/1280X1280.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>​         图一这里上图表示原始布线，下图表示算法生成的布线，生成布线没有正确连接所有应该连接的点(pin)，对于这样的情况，平均连通率很低，低于20%，意味着超过80%的生成布线需要经过耗时的后处理才能达到要求。显著的缺点。</p>
-<h2 id="Hub"><a href="#Hub" class="headerlink" title="Hub"></a>Hub</h2><p>​     为了解决上述问题，定义了一个新的概念，叫hub。将pin - pin问题 —&gt; hub - pin问题 。</p>
-<p>​     提出了一种新的两阶段全局布线方法 —&gt; HubRouter</p>
-<h3 id="1-Hub-generation-phase（hub生成阶段）"><a href="#1-Hub-generation-phase（hub生成阶段）" class="headerlink" title="1.Hub-generation phase（hub生成阶段）"></a>1.Hub-generation phase（hub生成阶段）</h3><p>​     可以在多个框架下生成，比如 GAN (Generative Adversarial Nets) , VAE (Variational Auto-Encoder) , DPM (Diffusion Probabilistic Models) 。虽然hub是生成阶段的主要输出，但为了提升生成质量和准确性，发现生成附加信息是非常有用的。比如感知和掩码(local perception and stripe masks)，能够去除噪声点。</p>
-<h3 id="2-pin-hub-connection-phase（hub和pin连接阶段）"><a href="#2-pin-hub-connection-phase（hub和pin连接阶段）" class="headerlink" title="2.pin-hub-connection phase（hub和pin连接阶段）"></a>2.pin-hub-connection phase（hub和pin连接阶段）</h3><pre><code> 将连接视为最小斯坦纳树(RSMT)问题，使用 actor-critic 模型网络策略。
-</code></pre><p><img src="/2024/03/10/HubRouter/2.png" class="lazyload placeholder" data-srcset="/2024/03/10/HubRouter/2.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="2"></p>
-<p>​     图二是与不同全局布线方法特点对比。</p>
-<p>​     文中总结重点是：</p>
-<ul>
-<li>提出 hub，意味布线的关键点，在保证连接性情况下有效连接。</li>
-<li>设计 HubRouter 算法，连通性保证消除了耗时的后处理(Post-Processing)。</li>
-<li>生成阶段，引入多任务学习，布线和掩码一起生成，提高 hub 生成质量；连接阶段，采用 actor-critic 模型网络有效模拟 RSMT 构建。</li>
-<li>在多个真实数据集上实验，目前的SOTA模型。</li>
+<p>​		 图一这里上图表示原始布线，下图表示算法生成的布线，生成布线没有正确连接所有应该连接的点(pin)，对于这样的情况，平均连通率很低，低于20%，意味着超过80%的生成布线需要经过耗时的后处理才能达到要求。显著的缺点。</p>
+<h2 id="Hub">Hub</h2>
+<p>​	 为了解决上述问题，定义了一个新的概念，叫hub。将pin - pin问题 --&gt; hub - pin问题 。</p>
+<p>​	 提出了一种新的两阶段全局布线方法 --&gt; HubRouter</p>
+<h3 id="1-Hub-generation-phase（hub生成阶段）">1.Hub-generation phase（hub生成阶段）</h3>
+<p>​	 可以在多个框架下生成，比如 GAN (Generative Adversarial Nets) , VAE (Variational Auto-Encoder) , DPM (Diffusion Probabilistic Models) 。虽然hub是生成阶段的主要输出，但为了提升生成质量和准确性，发现生成附加信息是非常有用的。比如感知和掩码(local perception and stripe masks)，能够去除噪声点。</p>
+<h3 id="2-pin-hub-connection-phase（hub和pin连接阶段）">2.pin-hub-connection phase（hub和pin连接阶段）</h3>
+<pre><code>将连接视为最小斯坦纳树(RSMT)问题，使用 actor-critic 模型网络策略。
+</code></pre>
+<p><img src="/2024/03/10/HubRouter/2.png" class="lazyload placeholder" data-srcset="/2024/03/10/HubRouter/2.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="2"></p>
+<p>​	 图二是与不同全局布线方法特点对比。</p>
+<p>​	 文中总结重点是：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>提出 hub，意味布线的关键点，在保证连接性情况下有效连接。</p>
+</li>
+<li class="lvl-2">
+<p>设计 HubRouter 算法，连通性保证消除了耗时的后处理(Post-Processing)。</p>
+</li>
+<li class="lvl-2">
+<p>生成阶段，引入多任务学习，布线和掩码一起生成，提高 hub 生成质量；连接阶段，采用 actor-critic 模型网络有效模拟 RSMT 构建。</p>
+</li>
+<li class="lvl-2">
+<p>在多个真实数据集上实验，目前的SOTA模型。</p>
+</li>
 </ul>
-<h1 id="Background-and-Preliminaries"><a href="#Background-and-Preliminaries" class="headerlink" title="Background and Preliminaries"></a>Background and Preliminaries</h1><h2 id="Global-Routing（全局布线）"><a href="#Global-Routing（全局布线）" class="headerlink" title="Global Routing（全局布线）"></a>Global Routing（全局布线）</h2><p><img src="/2024/03/10/HubRouter/Givkb5MYWotWPrxFkIcc9pzTnfG.png" class="lazyload placeholder" data-srcset="/2024/03/10/HubRouter/Givkb5MYWotWPrxFkIcc9pzTnfG.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<h1>Background and Preliminaries</h1>
+<h2 id="Global-Routing（全局布线）">Global Routing（全局布线）</h2>
+<p><img src="/2024/03/10/HubRouter/Givkb5MYWotWPrxFkIcc9pzTnfG.png" class="lazyload placeholder" data-srcset="/2024/03/10/HubRouter/Givkb5MYWotWPrxFkIcc9pzTnfG.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
 <p>图 a ：芯片画布和网表</p>
 <p>图 b： 网格图</p>
 <p>全局布线主要目标连接所有需要的连接，在基础上，减少布线线长(WL)和溢出(OF)。</p>
-<h2 id="Generative-Global-Routing（生成全局布线）"><a href="#Generative-Global-Routing（生成全局布线）" class="headerlink" title="Generative Global Routing（生成全局布线）"></a>Generative Global Routing（生成全局布线）</h2><p>生成模型 views：</p>
-<p>一般看来：全局布线 —&gt; 布线图</p>
-<p>生成模型：布局 —&gt; 图像 ； 布线 —&gt; 独立条件的图像生成</p>
+<h2 id="Generative-Global-Routing（生成全局布线）">Generative Global Routing（生成全局布线）</h2>
+<p>生成模型 views：</p>
+<p>一般看来：全局布线 --&gt; 布线图</p>
+<p>生成模型：布局 --&gt; 图像 ； 布线 --&gt; 独立条件的图像生成</p>
 <p>具体来说，像素(pixels)代表全局布线中小方格(tiles)，从给定条件图像生成布局输出图像。</p>
 <p>条件图像包含三个 channel：第一个 channel 代表引脚位置，另外两个 channel 代表水平和垂直网格边缘容量。</p>
 <p><img src="/2024/03/10/HubRouter/HcE2bx0AQosP6jxx8XQctkBVnQc.png" class="lazyload placeholder" data-srcset="/2024/03/10/HubRouter/HcE2bx0AQosP6jxx8XQctkBVnQc.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>图 c：条件图像 —&gt; 亮点代表引脚位置</p>
-<p>图 d：布线图像 —&gt; 布线路径</p>
-<h2 id="Hub-1"><a href="#Hub-1" class="headerlink" title="Hub"></a>Hub</h2><p>图 d 还表示了 hub 的四种不同形态，我的理解就是 1，2，3，4 个引脚输出：+ ⊤  ⌞  ·</p>
+<p>图 c：条件图像 --&gt; 亮点代表引脚位置</p>
+<p>图 d：布线图像 --&gt; 布线路径</p>
+<h2 id="Hub-2">Hub</h2>
+<p>图 d 还表示了 hub 的四种不同形态，我的理解就是 1，2，3，4 个引脚输出：+ ⊤  ⌞  ·</p>
 <p><img src="/2024/03/10/HubRouter/V3e8bDVgLolX3exu9iMcAXAInIh.png" class="lazyload placeholder" data-srcset="/2024/03/10/HubRouter/V3e8bDVgLolX3exu9iMcAXAInIh.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
 <p><img src="/2024/03/10/HubRouter/JHXobfh9iolGNhxNv1Fcfw7Inad.png" class="lazyload placeholder" data-srcset="/2024/03/10/HubRouter/JHXobfh9iolGNhxNv1Fcfw7Inad.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<h2 id="Difference-between-Hubs-and-Steiner-Points（Hub-点和斯坦纳点不同）"><a href="#Difference-between-Hubs-and-Steiner-Points（Hub-点和斯坦纳点不同）" class="headerlink" title="Difference between Hubs and Steiner Points（Hub 点和斯坦纳点不同）"></a>Difference between Hubs and Steiner Points（Hub 点和斯坦纳点不同）</h2><p>斯坦纳点(Rectilinear Steiner Point —&gt; RSP)是搜索全局最小总距离，但是 hub 是来确定路径。</p>
+<h2 id="Difference-between-Hubs-and-Steiner-Points（Hub-点和斯坦纳点不同）">Difference between Hubs and Steiner Points（Hub 点和斯坦纳点不同）</h2>
+<p>斯坦纳点(Rectilinear Steiner Point --&gt; RSP)是搜索全局最小总距离，但是 hub 是来确定路径。</p>
 <p>RSP是Hub的特例，Hub可以随意生成不同形状的路径(不仅是最短的)</p>
-<h1 id="From-Pin-Pin-to-Hub-Pin-Connection-A-Two-phase-Routing-Scheme"><a href="#From-Pin-Pin-to-Hub-Pin-Connection-A-Two-phase-Routing-Scheme" class="headerlink" title="From Pin-Pin to Hub-Pin Connection: A Two-phase Routing Scheme"></a>From Pin-Pin to Hub-Pin Connection: A Two-phase Routing Scheme</h1><h2 id="Approach-Overview"><a href="#Approach-Overview" class="headerlink" title="Approach Overview"></a>Approach Overview</h2><p>概括了一个两阶段模型：</p>
+<h1>From Pin-Pin to Hub-Pin Connection: A Two-phase Routing Scheme</h1>
+<h2 id="Approach-Overview">Approach Overview</h2>
+<p>概括了一个两阶段模型：</p>
 <p><strong>1.第一阶段：中心点生成阶段（Hub-Generation Phase）</strong></p>
-<p>​    在这个阶段，模型旨在逼近条件分布 <code>pθ(x|z, c)</code> 使其接近先验分布 <code>p(x|c)</code>。给定条件 <code>c</code> 和从先验分布 <code>pz(z)</code> 中采样得到的潜在变量 <code>z</code>（通常假设为高斯分布），模型会生成一些“中心点（hubs）”。</p>
-<p>​    这里的 <code>c</code> 和 <code>x</code> 分别代表条件图像和输入图像。条件图像可能包括引脚位置、已经提取的中心点以及条带掩模（stripe mask）。条带掩模是用来指示布线区域的一种方式，它可以帮助模型更好地理解哪些区域可以用于布线。</p>
+<p>​	在这个阶段，模型旨在逼近条件分布 <code>pθ(x|z, c)</code> 使其接近先验分布 <code>p(x|c)</code>。给定条件 <code>c</code> 和从先验分布 <code>pz(z)</code> 中采样得到的潜在变量 <code>z</code>（通常假设为高斯分布），模型会生成一些“中心点（hubs）”。</p>
+<p>​	这里的 <code>c</code> 和 <code>x</code> 分别代表条件图像和输入图像。条件图像可能包括引脚位置、已经提取的中心点以及条带掩模（stripe mask）。条带掩模是用来指示布线区域的一种方式，它可以帮助模型更好地理解哪些区域可以用于布线。</p>
 <p><strong>2.第二阶段：引脚-中心点连接阶段（Pin-Hub-Connection Phase）</strong></p>
-<p>​    在这个阶段，模型连接第一阶段生成的中心点，以获得最终的布线路由。这个过程可以被视为构建矩形稳定最小生成树（Rectilinear Steiner Minimum Tree，RSMT）的一部分。为了完成布线，模型遵循了一个基于强化学习（Reinforcement Learning，RL）的算法 REST。</p>
-<p>​    在两阶段的过程中，作者还提出了一个多任务学习框架来提高生成中心点的质量。特别是，提出了一种新颖的条带掩模学习方法，旨在减轻噪声点案例可能造成的负面影响。算法的具体细节在附录 B 中给出。</p>
-<h2 id="Hub-generation-Phase-Multi-task-Learning-of-Hub-Mask-and-Unused-Pre-Routing（Hub-生成阶段）"><a href="#Hub-generation-Phase-Multi-task-Learning-of-Hub-Mask-and-Unused-Pre-Routing（Hub-生成阶段）" class="headerlink" title="Hub-generation Phase: Multi-task Learning of Hub, Mask, and Unused Pre-Routing（Hub 生成阶段）"></a>Hub-generation Phase: Multi-task Learning of Hub, Mask, and Unused Pre-Routing（Hub 生成阶段）</h2><p>​    Hub 生成可以表示为图像到图像的任务，附录 B 介绍了将 GAN，VAE，EAN 纳入到生成框架。</p>
-<p>​    对比 PRNet 生成模型，PRNet 在 CGAN 中使用双向映射将连接约束注入训练目标，将准确率提高了 10%，但在复杂情况下几乎无效。</p>
+<p>​	在这个阶段，模型连接第一阶段生成的中心点，以获得最终的布线路由。这个过程可以被视为构建矩形稳定最小生成树（Rectilinear Steiner Minimum Tree，RSMT）的一部分。为了完成布线，模型遵循了一个基于强化学习（Reinforcement Learning，RL）的算法 REST。</p>
+<p>​	在两阶段的过程中，作者还提出了一个多任务学习框架来提高生成中心点的质量。特别是，提出了一种新颖的条带掩模学习方法，旨在减轻噪声点案例可能造成的负面影响。算法的具体细节在附录 B 中给出。</p>
+<h2 id="Hub-generation-Phase-Multi-task-Learning-of-Hub-Mask-and-Unused-Pre-Routing（Hub-生成阶段）">Hub-generation Phase: Multi-task Learning of Hub, Mask, and Unused Pre-Routing（Hub 生成阶段）</h2>
+<p>​	Hub 生成可以表示为图像到图像的任务，附录 B 介绍了将 GAN，VAE，EAN 纳入到生成框架。</p>
+<p>​	对比 PRNet 生成模型，PRNet 在 CGAN 中使用双向映射将连接约束注入训练目标，将准确率提高了 10%，但在复杂情况下几乎无效。</p>
 <p><img src="/2024/03/10/HubRouter/RzL8bNZ2BoCG2wxHWR7crLcanfb.png" class="lazyload placeholder" data-srcset="/2024/03/10/HubRouter/RzL8bNZ2BoCG2wxHWR7crLcanfb.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>​    Hub 生成与其他图片生成任务有所不同，在布线时候，很微小的噪声都会对结果产生很大的影响。特别是最外侧的噪声，会显著增加线路长度，eg 图(b) 和图(c) 。图(b) 的两个噪声点导致了图(c) 的线长显著增加（所有生成的 Hub 都需要在同一线路连接）。</p>
-<p>​    为了保持高精度生成结果，提出多任务处理框架，输入 input 为：Hub ，Route ，Mask。Hub 为第一阶段主要目的，Route 和 Mask 为辅助。特别是，预先生成的 Routes 是预路由结果，在第二阶段并不使用，但是用于在基于 CNN 的网络中获得更好的连续局部感知。</p>
-<p>​    提出了 stripe mask 新掩码模块，以关注 hub 生成的不良情况。具体来说，stripe mask 定义为一个矩阵，其中的值只有 0 和 1，值为 1 表示在对应行或列有一个 hub。在推理时，通过一个二值化的 stripe mask 来掩盖生成的 hubs，从而剔除噪声点，这样可以缩短生成的路线，去除多余的路径。</p>
-<p>  两个优点：</p>
-<ul>
-<li>实际测试，适当的stripe mask可以消除大部分噪声点。</li>
-<li>布线结果不需要唯一，而stripe mask模块能够提供不同的路由选择。例如在图4(d)中，两个黑色的hubs可以任意选择一个黄色点作为转折点来相互连接，同时路径长度保持相同。</li>
+<p>​	Hub 生成与其他图片生成任务有所不同，在布线时候，很微小的噪声都会对结果产生很大的影响。特别是最外侧的噪声，会显著增加线路长度，eg 图(b) 和图© 。图(b) 的两个噪声点导致了图© 的线长显著增加（所有生成的 Hub 都需要在同一线路连接）。</p>
+<p>​	为了保持高精度生成结果，提出多任务处理框架，输入 input 为：Hub ，Route ，Mask。Hub 为第一阶段主要目的，Route 和 Mask 为辅助。特别是，预先生成的 Routes 是预路由结果，在第二阶段并不使用，但是用于在基于 CNN 的网络中获得更好的连续局部感知。</p>
+<p>​	提出了 stripe mask 新掩码模块，以关注 hub 生成的不良情况。具体来说，stripe mask 定义为一个矩阵，其中的值只有 0 和 1，值为 1 表示在对应行或列有一个 hub。在推理时，通过一个二值化的 stripe mask 来掩盖生成的 hubs，从而剔除噪声点，这样可以缩短生成的路线，去除多余的路径。</p>
+<p>两个优点：</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>实际测试，适当的stripe mask可以消除大部分噪声点。</p>
+</li>
+<li class="lvl-2">
+<p>布线结果不需要唯一，而stripe mask模块能够提供不同的路由选择。例如在图4(d)中，两个黑色的hubs可以任意选择一个黄色点作为转折点来相互连接，同时路径长度保持相同。</p>
+</li>
 </ul>
-<h2 id="Pin-hub-connection-Phase-RSMT-Construction"><a href="#Pin-hub-connection-Phase-RSMT-Construction" class="headerlink" title="Pin-hub-connection Phase: RSMT Construction"></a>Pin-hub-connection Phase: RSMT Construction</h2><p>Pin - Hub 连接 归纳为 RSMT 过程。</p>
+<h2 id="Pin-hub-connection-Phase-RSMT-Construction">Pin-hub-connection Phase: RSMT Construction</h2>
+<p>Pin - Hub 连接 归纳为 RSMT 过程。</p>
 <p>Hub 优势：</p>
-<ul>
-<li>没有Hub，RSMT构造只能找到最短布线，不能在合适情况下生成合适布线。</li>
-<li>一个好的Hub生成可以将RSMT布线阶段时间复杂度表示为<em>O(n</em> <em>log</em> <em>n)。</em></li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>没有Hub，RSMT构造只能找到最短布线，不能在合适情况下生成合适布线。</p>
+</li>
+<li class="lvl-2">
+<p>一个好的Hub生成可以将RSMT布线阶段时间复杂度表示为<em>O(n</em> <em>log</em> <em>n)。</em></p>
+</li>
 </ul>
 <p><img src="/2024/03/10/HubRouter/ROWOb5NAXozTVfxCUBScQN76nkd.png" class="lazyload placeholder" data-srcset="/2024/03/10/HubRouter/ROWOb5NAXozTVfxCUBScQN76nkd.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
 <p>图 3 中 Actor 网络用于创建有坐标信息的 RES 结果，Crieic 网络设置 Baseline 预测 Actor 网络构建的 RSMT 预期布线长度，通过更新策略最小化 RSMT 长度。</p>
-<h1 id="Experiment-and-Analysis"><a href="#Experiment-and-Analysis" class="headerlink" title="Experiment and Analysis"></a>Experiment and Analysis</h1><p>实验设备：i9-10920X CPU, NVIDIA RTX 3090 GPU and 128 GB RAM</p>
+<h1>Experiment and Analysis</h1>
+<p>实验设备：i9-10920X CPU, NVIDIA RTX 3090 GPU and 128 GB RAM</p>
 <p>实验过程：不同种子下重复三次，平均值和标准差值与 PRNet 一致。</p>
-<h2 id="Datasets-and-Setups"><a href="#Datasets-and-Setups" class="headerlink" title="Datasets and Setups"></a>Datasets and Setups</h2><p>ISPD-07 和 ISPD-98</p>
+<h2 id="Datasets-and-Setups">Datasets and Setups</h2>
+<p>ISPD-07 和 ISPD-98</p>
 <p>“Route-small-4”和“Route-small”分别表示具有不超过和超过 4 个引脚并且引脚的半周长线长（HPWL）小于 16 的情况。</p>
-<p>‘Route-large-4’和’Route-large’相似，其 HPWL 大于 16。</p>
-<h2 id="Unconnected-Cases-in-Previous-Generative-Global-Routing-Approaches（连通情况对比）"><a href="#Unconnected-Cases-in-Previous-Generative-Global-Routing-Approaches（连通情况对比）" class="headerlink" title="Unconnected Cases in Previous Generative Global Routing Approaches（连通情况对比）"></a>Unconnected Cases in Previous Generative Global Routing Approaches（连通情况对比）</h2><p><img src="/2024/03/10/HubRouter/GL3XbsbeBoAPZVxeRjXcyWqsn3N.png" class="lazyload placeholder" data-srcset="/2024/03/10/HubRouter/GL3XbsbeBoAPZVxeRjXcyWqsn3N.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>'Route-large-4’和’Route-large’相似，其 HPWL 大于 16。</p>
+<h2 id="Unconnected-Cases-in-Previous-Generative-Global-Routing-Approaches（连通情况对比）">Unconnected Cases in Previous Generative Global Routing Approaches（连通情况对比）</h2>
+<p><img src="/2024/03/10/HubRouter/GL3XbsbeBoAPZVxeRjXcyWqsn3N.png" class="lazyload placeholder" data-srcset="/2024/03/10/HubRouter/GL3XbsbeBoAPZVxeRjXcyWqsn3N.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
 <p>HubRouter 为最优结果</p>
-<h2 id="Benchmarking-Global-Routing-and-Ablation-Study（全局布线-消融实验）"><a href="#Benchmarking-Global-Routing-and-Ablation-Study（全局布线-消融实验）" class="headerlink" title="Benchmarking Global Routing and Ablation Study（全局布线 消融实验）"></a>Benchmarking Global Routing and Ablation Study（全局布线 消融实验）</h2><h3 id="Benchmarking-Global-Routing（全局布线）"><a href="#Benchmarking-Global-Routing（全局布线）" class="headerlink" title="Benchmarking Global Routing（全局布线）"></a>Benchmarking Global Routing（全局布线）</h3><p><img src="/2024/03/10/HubRouter/ISY7bF8mEoFxlexSkBwcLXdvnH1.png" class="lazyload placeholder" data-srcset="/2024/03/10/HubRouter/ISY7bF8mEoFxlexSkBwcLXdvnH1.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>简单来说：需要高质量 —&gt; GAN ; 需要速度快 —&gt; VAE ; 有丰富的计算资源 —&gt; DPM</p>
-<h3 id="Ablation-Study（消融实验）"><a href="#Ablation-Study（消融实验）" class="headerlink" title="Ablation Study（消融实验）"></a>Ablation Study（消融实验）</h3><p><img src="/2024/03/10/HubRouter/VQ11bn5LcoJwDnxvfGtcDZ4pn3c.png" class="lazyload placeholder" data-srcset="/2024/03/10/HubRouter/VQ11bn5LcoJwDnxvfGtcDZ4pn3c.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>​     1.Hubs —&gt; HubRouter-h</p>
-<p>​     2.Hubs + Routers —&gt; HubRouter-hr</p>
-<p>​     3.Hubs + Routers + Stripe Masks —&gt; HubRouter-hrm</p>
+<h2 id="Benchmarking-Global-Routing-and-Ablation-Study（全局布线-消融实验）">Benchmarking Global Routing and Ablation Study（全局布线 消融实验）</h2>
+<h3 id="Benchmarking-Global-Routing（全局布线）">Benchmarking Global Routing（全局布线）</h3>
+<p><img src="/2024/03/10/HubRouter/ISY7bF8mEoFxlexSkBwcLXdvnH1.png" class="lazyload placeholder" data-srcset="/2024/03/10/HubRouter/ISY7bF8mEoFxlexSkBwcLXdvnH1.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>简单来说：需要高质量 --&gt; GAN ; 需要速度快 --&gt; VAE ; 有丰富的计算资源 --&gt; DPM</p>
+<h3 id="Ablation-Study（消融实验）">Ablation Study（消融实验）</h3>
+<p><img src="/2024/03/10/HubRouter/VQ11bn5LcoJwDnxvfGtcDZ4pn3c.png" class="lazyload placeholder" data-srcset="/2024/03/10/HubRouter/VQ11bn5LcoJwDnxvfGtcDZ4pn3c.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>​	 1.Hubs --&gt; HubRouter-h</p>
+<p>​	 2.Hubs + Routers --&gt; HubRouter-hr</p>
+<p>​	 3.Hubs + Routers + Stripe Masks --&gt; HubRouter-hrm</p>
 <p>结果表明：</p>
-<p>​    生成过程中，HubRouter-hrm 效果最好</p>
-<p>​    连接过程中，HubRouter (T=8)效果最好</p>
-<h2 id="Further-Studies-and-Discussion（进一步研究）"><a href="#Further-Studies-and-Discussion（进一步研究）" class="headerlink" title="Further Studies and Discussion（进一步研究）"></a>Further Studies and Discussion（进一步研究）</h2><p>​    HubRouter 不仅可以做全局布线，分别执行 RSMT 构造和交互式路径重规划，以体现 HubRouter 的通用性。使用 GAN 网络。</p>
-<h3 id="RSMT-Construction（RSMT-构造）"><a href="#RSMT-Construction（RSMT-构造）" class="headerlink" title="RSMT Construction（RSMT 构造）"></a>RSMT Construction（RSMT 构造）</h3><p><img src="/2024/03/10/HubRouter/QrFebbfErovQGfxbckscNcshnAb.png" class="lazyload placeholder" data-srcset="/2024/03/10/HubRouter/QrFebbfErovQGfxbckscNcshnAb.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>​    当度小于 25 时，REST 的性能最好，而当度大于 30 时，HubRouter 的性能优于其他方法。</p>
-<p>​    os：这里的度(degree)我觉得是前面提到的。好吧其实我不太理解。</p>
-<h3 id="Interactive-Path-Replanning（交互式路径规划）"><a href="#Interactive-Path-Replanning（交互式路径规划）" class="headerlink" title="Interactive Path Replanning（交互式路径规划）"></a>Interactive Path Replanning（交互式路径规划）</h3><p><img src="/2024/03/10/HubRouter/N6Xhb20D3oZhNVxTpxMc11bxneh.png" class="lazyload placeholder" data-srcset="/2024/03/10/HubRouter/N6Xhb20D3oZhNVxTpxMc11bxneh.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>​    通过不同的 Hub 决定新的路径规划。</p>
-<h3 id="Analysis-of-Scalability-and-Time-Overhead（可扩展性和时间）"><a href="#Analysis-of-Scalability-and-Time-Overhead（可扩展性和时间）" class="headerlink" title="Analysis of Scalability and Time Overhead（可扩展性和时间）"></a>Analysis of Scalability and Time Overhead（可扩展性和时间）</h3><p><img src="/2024/03/10/HubRouter/CB71btnFko8HQXxip2acMXs5nSh.png" class="lazyload placeholder" data-srcset="/2024/03/10/HubRouter/CB71btnFko8HQXxip2acMXs5nSh.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p>​    HubRouter 的 RSMT 构建时间比 GeoSteiner 慢。</p>
-<h3 id="Non-End-to-End-framework（非端到端框架）"><a href="#Non-End-to-End-framework（非端到端框架）" class="headerlink" title="Non End-to-End framework（非端到端框架）"></a>Non End-to-End framework（非端到端框架）</h3><p>​    HubRouter 是两阶段框架，PRNet 是端到端框架。各有千秋。</p>
+<p>​	生成过程中，HubRouter-hrm 效果最好</p>
+<p>​	连接过程中，HubRouter (T=8)效果最好</p>
+<h2 id="Further-Studies-and-Discussion（进一步研究）">Further Studies and Discussion（进一步研究）</h2>
+<p>​	HubRouter 不仅可以做全局布线，分别执行 RSMT 构造和交互式路径重规划，以体现 HubRouter 的通用性。使用 GAN 网络。</p>
+<h3 id="RSMT-Construction（RSMT-构造）">RSMT Construction（RSMT 构造）</h3>
+<p><img src="/2024/03/10/HubRouter/QrFebbfErovQGfxbckscNcshnAb.png" class="lazyload placeholder" data-srcset="/2024/03/10/HubRouter/QrFebbfErovQGfxbckscNcshnAb.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>​	当度小于 25 时，REST 的性能最好，而当度大于 30 时，HubRouter 的性能优于其他方法。</p>
+<p>​	os：这里的度(degree)我觉得是前面提到的。好吧其实我不太理解。</p>
+<h3 id="Interactive-Path-Replanning（交互式路径规划）">Interactive Path Replanning（交互式路径规划）</h3>
+<p><img src="/2024/03/10/HubRouter/N6Xhb20D3oZhNVxTpxMc11bxneh.png" class="lazyload placeholder" data-srcset="/2024/03/10/HubRouter/N6Xhb20D3oZhNVxTpxMc11bxneh.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>​	通过不同的 Hub 决定新的路径规划。</p>
+<h3 id="Analysis-of-Scalability-and-Time-Overhead（可扩展性和时间）">Analysis of Scalability and Time Overhead（可扩展性和时间）</h3>
+<p><img src="/2024/03/10/HubRouter/CB71btnFko8HQXxip2acMXs5nSh.png" class="lazyload placeholder" data-srcset="/2024/03/10/HubRouter/CB71btnFko8HQXxip2acMXs5nSh.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p>​	HubRouter 的 RSMT 构建时间比 GeoSteiner 慢。</p>
+<h3 id="Non-End-to-End-framework（非端到端框架）">Non End-to-End framework（非端到端框架）</h3>
+<p>​	HubRouter 是两阶段框架，PRNet 是端到端框架。各有千秋。</p>
 
       </div>
       <div class="post-tags-categories">
@@ -903,7 +966,7 @@ mjx-container[display="true"] + br {
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#HubRouter-Learning-Global-Routing-via-Hub-Generation-and-Pin-hub-Connection"><span class="toc-text">HubRouter: Learning Global Routing via Hub Generation and Pin-hub Connection</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-text">Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Hub"><span class="toc-text">Hub</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Hub-generation-phase%EF%BC%88hub%E7%94%9F%E6%88%90%E9%98%B6%E6%AE%B5%EF%BC%89"><span class="toc-text">1.Hub-generation phase（hub生成阶段）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-pin-hub-connection-phase%EF%BC%88hub%E5%92%8Cpin%E8%BF%9E%E6%8E%A5%E9%98%B6%E6%AE%B5%EF%BC%89"><span class="toc-text">2.pin-hub-connection phase（hub和pin连接阶段）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Background-and-Preliminaries"><span class="toc-text">Background and Preliminaries</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Global-Routing%EF%BC%88%E5%85%A8%E5%B1%80%E5%B8%83%E7%BA%BF%EF%BC%89"><span class="toc-text">Global Routing（全局布线）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Generative-Global-Routing%EF%BC%88%E7%94%9F%E6%88%90%E5%85%A8%E5%B1%80%E5%B8%83%E7%BA%BF%EF%BC%89"><span class="toc-text">Generative Global Routing（生成全局布线）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hub-1"><span class="toc-text">Hub</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Difference-between-Hubs-and-Steiner-Points%EF%BC%88Hub-%E7%82%B9%E5%92%8C%E6%96%AF%E5%9D%A6%E7%BA%B3%E7%82%B9%E4%B8%8D%E5%90%8C%EF%BC%89"><span class="toc-text">Difference between Hubs and Steiner Points（Hub 点和斯坦纳点不同）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#From-Pin-Pin-to-Hub-Pin-Connection-A-Two-phase-Routing-Scheme"><span class="toc-text">From Pin-Pin to Hub-Pin Connection: A Two-phase Routing Scheme</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Approach-Overview"><span class="toc-text">Approach Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hub-generation-Phase-Multi-task-Learning-of-Hub-Mask-and-Unused-Pre-Routing%EF%BC%88Hub-%E7%94%9F%E6%88%90%E9%98%B6%E6%AE%B5%EF%BC%89"><span class="toc-text">Hub-generation Phase: Multi-task Learning of Hub, Mask, and Unused Pre-Routing（Hub 生成阶段）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pin-hub-connection-Phase-RSMT-Construction"><span class="toc-text">Pin-hub-connection Phase: RSMT Construction</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Experiment-and-Analysis"><span class="toc-text">Experiment and Analysis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Datasets-and-Setups"><span class="toc-text">Datasets and Setups</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Unconnected-Cases-in-Previous-Generative-Global-Routing-Approaches%EF%BC%88%E8%BF%9E%E9%80%9A%E6%83%85%E5%86%B5%E5%AF%B9%E6%AF%94%EF%BC%89"><span class="toc-text">Unconnected Cases in Previous Generative Global Routing Approaches（连通情况对比）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Benchmarking-Global-Routing-and-Ablation-Study%EF%BC%88%E5%85%A8%E5%B1%80%E5%B8%83%E7%BA%BF-%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C%EF%BC%89"><span class="toc-text">Benchmarking Global Routing and Ablation Study（全局布线 消融实验）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Benchmarking-Global-Routing%EF%BC%88%E5%85%A8%E5%B1%80%E5%B8%83%E7%BA%BF%EF%BC%89"><span class="toc-text">Benchmarking Global Routing（全局布线）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ablation-Study%EF%BC%88%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C%EF%BC%89"><span class="toc-text">Ablation Study（消融实验）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Further-Studies-and-Discussion%EF%BC%88%E8%BF%9B%E4%B8%80%E6%AD%A5%E7%A0%94%E7%A9%B6%EF%BC%89"><span class="toc-text">Further Studies and Discussion（进一步研究）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RSMT-Construction%EF%BC%88RSMT-%E6%9E%84%E9%80%A0%EF%BC%89"><span class="toc-text">RSMT Construction（RSMT 构造）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Interactive-Path-Replanning%EF%BC%88%E4%BA%A4%E4%BA%92%E5%BC%8F%E8%B7%AF%E5%BE%84%E8%A7%84%E5%88%92%EF%BC%89"><span class="toc-text">Interactive Path Replanning（交互式路径规划）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Analysis-of-Scalability-and-Time-Overhead%EF%BC%88%E5%8F%AF%E6%89%A9%E5%B1%95%E6%80%A7%E5%92%8C%E6%97%B6%E9%97%B4%EF%BC%89"><span class="toc-text">Analysis of Scalability and Time Overhead（可扩展性和时间）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Non-End-to-End-framework%EF%BC%88%E9%9D%9E%E7%AB%AF%E5%88%B0%E7%AB%AF%E6%A1%86%E6%9E%B6%EF%BC%89"><span class="toc-text">Non End-to-End framework（非端到端框架）</span></a></li></ol></li></ol></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">HubRouter: Learning Global Routing via Hub Generation and Pin-hub Connection</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Introduction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Hub"><span class="toc-text">Hub</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Hub-generation-phase%EF%BC%88hub%E7%94%9F%E6%88%90%E9%98%B6%E6%AE%B5%EF%BC%89"><span class="toc-text">1.Hub-generation phase（hub生成阶段）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-pin-hub-connection-phase%EF%BC%88hub%E5%92%8Cpin%E8%BF%9E%E6%8E%A5%E9%98%B6%E6%AE%B5%EF%BC%89"><span class="toc-text">2.pin-hub-connection phase（hub和pin连接阶段）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Background and Preliminaries</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Global-Routing%EF%BC%88%E5%85%A8%E5%B1%80%E5%B8%83%E7%BA%BF%EF%BC%89"><span class="toc-text">Global Routing（全局布线）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Generative-Global-Routing%EF%BC%88%E7%94%9F%E6%88%90%E5%85%A8%E5%B1%80%E5%B8%83%E7%BA%BF%EF%BC%89"><span class="toc-text">Generative Global Routing（生成全局布线）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hub-2"><span class="toc-text">Hub</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Difference-between-Hubs-and-Steiner-Points%EF%BC%88Hub-%E7%82%B9%E5%92%8C%E6%96%AF%E5%9D%A6%E7%BA%B3%E7%82%B9%E4%B8%8D%E5%90%8C%EF%BC%89"><span class="toc-text">Difference between Hubs and Steiner Points（Hub 点和斯坦纳点不同）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">From Pin-Pin to Hub-Pin Connection: A Two-phase Routing Scheme</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Approach-Overview"><span class="toc-text">Approach Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hub-generation-Phase-Multi-task-Learning-of-Hub-Mask-and-Unused-Pre-Routing%EF%BC%88Hub-%E7%94%9F%E6%88%90%E9%98%B6%E6%AE%B5%EF%BC%89"><span class="toc-text">Hub-generation Phase: Multi-task Learning of Hub, Mask, and Unused Pre-Routing（Hub 生成阶段）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pin-hub-connection-Phase-RSMT-Construction"><span class="toc-text">Pin-hub-connection Phase: RSMT Construction</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">Experiment and Analysis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Datasets-and-Setups"><span class="toc-text">Datasets and Setups</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Unconnected-Cases-in-Previous-Generative-Global-Routing-Approaches%EF%BC%88%E8%BF%9E%E9%80%9A%E6%83%85%E5%86%B5%E5%AF%B9%E6%AF%94%EF%BC%89"><span class="toc-text">Unconnected Cases in Previous Generative Global Routing Approaches（连通情况对比）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Benchmarking-Global-Routing-and-Ablation-Study%EF%BC%88%E5%85%A8%E5%B1%80%E5%B8%83%E7%BA%BF-%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C%EF%BC%89"><span class="toc-text">Benchmarking Global Routing and Ablation Study（全局布线 消融实验）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Benchmarking-Global-Routing%EF%BC%88%E5%85%A8%E5%B1%80%E5%B8%83%E7%BA%BF%EF%BC%89"><span class="toc-text">Benchmarking Global Routing（全局布线）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ablation-Study%EF%BC%88%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C%EF%BC%89"><span class="toc-text">Ablation Study（消融实验）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Further-Studies-and-Discussion%EF%BC%88%E8%BF%9B%E4%B8%80%E6%AD%A5%E7%A0%94%E7%A9%B6%EF%BC%89"><span class="toc-text">Further Studies and Discussion（进一步研究）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RSMT-Construction%EF%BC%88RSMT-%E6%9E%84%E9%80%A0%EF%BC%89"><span class="toc-text">RSMT Construction（RSMT 构造）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Interactive-Path-Replanning%EF%BC%88%E4%BA%A4%E4%BA%92%E5%BC%8F%E8%B7%AF%E5%BE%84%E8%A7%84%E5%88%92%EF%BC%89"><span class="toc-text">Interactive Path Replanning（交互式路径规划）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Analysis-of-Scalability-and-Time-Overhead%EF%BC%88%E5%8F%AF%E6%89%A9%E5%B1%95%E6%80%A7%E5%92%8C%E6%97%B6%E9%97%B4%EF%BC%89"><span class="toc-text">Analysis of Scalability and Time Overhead（可扩展性和时间）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Non-End-to-End-framework%EF%BC%88%E9%9D%9E%E7%AB%AF%E5%88%B0%E7%AB%AF%E6%A1%86%E6%9E%B6%EF%BC%89"><span class="toc-text">Non End-to-End framework（非端到端框架）</span></a></li></ol></li></ol></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -929,6 +992,27 @@ mjx-container[display="true"] + br {
       <!-- hash算法 -->
       
       <div class="aside-list">
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/09/11/think1/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://i.postimg.cc/LswWKGcX/IMG-202406278649-1440x810.jpg" class="lazyload placeholder" data-srcset="https://i.postimg.cc/LswWKGcX/IMG-202406278649-1440x810.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">09-11</span>
+                
+              </div>
+              <a class="post-title" href="/2024/09/11/think1/">秋念</a>
+            </div>
+          </div>
         
           <div class="aside-list-item">
             
@@ -1011,27 +1095,6 @@ mjx-container[display="true"] + br {
                 
               </div>
               <a class="post-title" href="/2024/06/05/AnalogCoder/">AnalogCoder</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2024/05/26/EfficientPlace/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">05-26</span>
-                
-              </div>
-              <a class="post-title" href="/2024/05/26/EfficientPlace/">EfficientPlace</a>
             </div>
           </div>
         
@@ -1427,7 +1490,7 @@ mjx-container[display="true"] + br {
       
         
           <div class="footer-copyright">
-            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a></p>
+            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> </p>
 
           </div>
         

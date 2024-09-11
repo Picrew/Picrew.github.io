@@ -391,6 +391,19 @@
       
 
       
+        <span class="post-detail-header_categories">
+          <i class="iconfont iconbookmark1"></i> category：
+          
+            <a href="/categories/%E5%85%B4%E8%B6%A3/" class="post-detail-header_category">
+              兴趣
+            </a>
+          
+            <a href="/categories/%E5%85%B4%E8%B6%A3/%E5%B7%A5%E5%85%B7/" class="post-detail-header_category">
+              工具
+            </a>
+          
+        </span>
+      
 
       
     
@@ -411,541 +424,826 @@
     <article class="post post-detail">
       <div class="post-content">
         <center><h1>Shell 命令汇总</h1></center>
-
-<h3 id="1-目录操作"><a href="#1-目录操作" class="headerlink" title="1.目录操作"></a>1.目录操作</h3><ul>
-<li><code>ls</code>：列出目录内容。使用 <code>-l</code> 选项以长列表格式显示详细信息，使用 <code>-a</code> 显示隐藏文件。</li>
+<h3 id="1-目录操作">1.目录操作</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>ls</code>：列出目录内容。使用 <code>-l</code> 选项以长列表格式显示详细信息，使用 <code>-a</code> 显示隐藏文件。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -la</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>cd</code>：更改目录。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>cd</code>：更改目录。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /path/to/directory  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>pwd</code>：显示当前工作目录的路径。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>pwd</code>：显示当前工作目录的路径。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">pwd</span>  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>mkdir</code>：创建一个新目录。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>mkdir</code>：创建一个新目录。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> new_directory  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>rmdir</code>：删除空目录。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>rmdir</code>：删除空目录。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rmdir</span> empty_directory </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>rm</code>：删除文件或目录。使用 <code>-r</code> 递归删除目录及其内容，使用 <code>-f</code> 强制删除无需确认。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>rm</code>：删除文件或目录。使用 <code>-r</code> 递归删除目录及其内容，使用 <code>-f</code> 强制删除无需确认。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -rf /path/to/directory  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>cp</code>：复制文件或目录。使用 <code>-r</code> 复制目录。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>cp</code>：复制文件或目录。使用 <code>-r</code> 复制目录。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> source_file target_file  </span><br><span class="line"><span class="built_in">cp</span> -r source_directory target_directory  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>mv</code>：移动或重命名文件或目录。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>mv</code>：移动或重命名文件或目录。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mv</span> old_name new_name  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>touch</code>：创建一个空文件或者更新现有文件的时间戳。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>touch</code>：创建一个空文件或者更新现有文件的时间戳。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">touch</span> filename  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>rename</code>：批量重命名文件。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>rename</code>：批量重命名文件。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rename <span class="string">&#x27;s/old/new/&#x27;</span> *.txt  </span><br></pre></td></tr></table></figure>
-<h3 id="2-文件操作"><a href="#2-文件操作" class="headerlink" title="2.文件操作"></a>2.文件操作</h3><ul>
-<li><code>cat</code>：查看文件内容或将多个文件合并输出。</li>
+<h3 id="2-文件操作">2.文件操作</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>cat</code>：查看文件内容或将多个文件合并输出。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> filename  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>more</code> 和 <code>less</code>：分页查看文件内容。<code>less</code> 比 <code>more</code> 功能更强大，支持向前和向后翻页。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>more</code> 和 <code>less</code>：分页查看文件内容。<code>less</code> 比 <code>more</code> 功能更强大，支持向前和向后翻页。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">less filename </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>tail</code>：查看文件末尾的内容。使用 <code>-f</code> 可以实时跟踪文件的更新。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>tail</code>：查看文件末尾的内容。使用 <code>-f</code> 可以实时跟踪文件的更新。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">tail</span> -f filename  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>head</code>：查看文件开头的内容。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>head</code>：查看文件开头的内容。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">head</span> filename  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>grep</code>：搜索文本并打印匹配的行。使用 <code>-i</code> 忽略大小写，使用 <code>-r</code> 递归搜索。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>grep</code>：搜索文本并打印匹配的行。使用 <code>-i</code> 忽略大小写，使用 <code>-r</code> 递归搜索。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&#x27;pattern&#x27;</span> filename </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>sed</code>：流编辑器，可以对文本进行过滤和替换。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>sed</code>：流编辑器，可以对文本进行过滤和替换。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed <span class="string">&#x27;s/old/new/&#x27;</span> filename </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>awk</code>：文本模式扫描和处理语言，用于复杂的文本处理。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>awk</code>：文本模式扫描和处理语言，用于复杂的文本处理。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">&#x27;&#123;print $1&#125;&#x27;</span> filename  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>nano</code>, <code>vi</code>, <code>vim</code>, <code>emacs</code>：文本编辑器。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>nano</code>, <code>vi</code>, <code>vim</code>, <code>emacs</code>：文本编辑器。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nano filename  </span><br><span class="line">vim filename </span><br><span class="line">emacs file.txt </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>find</code>：在目录树中查找文件。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>find</code>：在目录树中查找文件。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find /path/to/search -name <span class="string">&quot;filename&quot;</span>  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>locate</code>：使用预建的数据库快速查找文件的位置（数据库通过 <code>updatedb</code> 命令更新）。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>locate</code>：使用预建的数据库快速查找文件的位置（数据库通过 <code>updatedb</code> 命令更新）。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">locate filename </span><br></pre></td></tr></table></figure>
-<h3 id="3-系统信息"><a href="#3-系统信息" class="headerlink" title="3.系统信息"></a>3.系统信息</h3><ul>
-<li><code>top</code>：实时显示系统进程和资源使用情况。</li>
+<h3 id="3-系统信息">3.系统信息</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>top</code>：实时显示系统进程和资源使用情况。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">top  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>ps</code>：显示当前运行的进程。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>ps</code>：显示当前运行的进程。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>kill</code>：终止进程。使用 <code>-9</code> 强制终止。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>kill</code>：终止进程。使用 <code>-9</code> 强制终止。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kill</span> -9 PID </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>df</code>：查看磁盘使用情况。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>df</code>：查看磁盘使用情况。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">df</span> -h  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>du</code>：查看文件或目录的磁盘使用量。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>du</code>：查看文件或目录的磁盘使用量。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">du</span> -sh /path/to/directory  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>free</code>：查看内存使用情况。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>free</code>：查看内存使用情况。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free -m </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>uptime</code>：显示系统运行时间和负载。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>uptime</code>：显示系统运行时间和负载。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">uptime</span>  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>uname</code>：显示系统信息。使用 <code>-a</code> 显示所有信息。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>uname</code>：显示系统信息。使用 <code>-a</code> 显示所有信息。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">uname</span> -a  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>who</code>：显示当前登录的用户。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>who</code>：显示当前登录的用户。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">who</span>  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>w</code>：显示当前登录用户和他们正在做的事情。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>w</code>：显示当前登录用户和他们正在做的事情。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">w </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>hostname</code>：显示或设置系统的主机名。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>hostname</code>：显示或设置系统的主机名。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hostname  </span><br></pre></td></tr></table></figure>
-<h3 id="4-网络操作"><a href="#4-网络操作" class="headerlink" title="4.网络操作"></a>4.网络操作</h3><ul>
-<li><code>ping</code>：检查与远程服务器的连接。</li>
+<h3 id="4-网络操作">4.网络操作</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>ping</code>：检查与远程服务器的连接。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping example.com  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>ifconfig</code> / <code>ip addr</code>：显示网络接口的配置信息。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>ifconfig</code> / <code>ip addr</code>：显示网络接口的配置信息。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ifconfig  </span><br><span class="line">ip addr  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>netstat</code>：显示网络连接、路由表、接口统计等网络信息。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>netstat</code>：显示网络连接、路由表、接口统计等网络信息。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -tulpn  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>ssh</code>：远程登录到其他计算机。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>ssh</code>：远程登录到其他计算机。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh [email protected]  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>scp</code>：安全地复制文件到远端服务器或从远端服务器复制文件。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>scp</code>：安全地复制文件到远端服务器或从远端服务器复制文件。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp local_file [email protected]:remote_file  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>wget</code> / <code>curl</code>：从网络上下载文件。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>wget</code> / <code>curl</code>：从网络上下载文件。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget http://example.com/file  </span><br><span class="line">curl -O http://example.com/file </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>traceroute</code> / <code>tracepath</code>：显示数据包到达主机所经过的路由。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>traceroute</code> / <code>tracepath</code>：显示数据包到达主机所经过的路由。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">traceroute example.com  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>dig</code>：查询 DNS 名称服务器信息。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>dig</code>：查询 DNS 名称服务器信息。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dig example.com  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>nslookup</code>：查询域名系统以获取域名或 IP 地址对应的信息。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>nslookup</code>：查询域名系统以获取域名或 IP 地址对应的信息。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nslookup example.com</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>route</code>：显示和操作 IP 路由表。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>route</code>：显示和操作 IP 路由表。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route -n  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>iptables</code>：配置 Linux 内核防火墙。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>iptables</code>：配置 Linux 内核防火墙。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -L  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>httpd</code> / <code>apache2</code>：Apache HTTP 服务器。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>httpd</code> / <code>apache2</code>：Apache HTTP 服务器。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start apache2  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>nginx</code>：高性能的 HTTP 和反向代理服务器。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>nginx</code>：高性能的 HTTP 和反向代理服务器。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start nginx  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>ftp</code>：文件传输协议客户端。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>ftp</code>：文件传输协议客户端。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ftp ftp.example.com  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>sftp</code>：SSH 文件传输协议，安全地传输文件。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>sftp</code>：SSH 文件传输协议，安全地传输文件。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sftp [email protected]  </span><br></pre></td></tr></table></figure>
-<h3 id="5-压缩操作"><a href="#5-压缩操作" class="headerlink" title="5.压缩操作"></a>5.压缩操作</h3><ul>
-<li><code>tar</code>：创建和解压 tar 归档文件。</li>
+<h3 id="5-压缩操作">5.压缩操作</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>tar</code>：创建和解压 tar 归档文件。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar cvf archive_name.tar /path/to/directory</span><br><span class="line">tar xvf archive_name.tar</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>gzip</code> / <code>gunzip</code>：压缩或解压缩 gzip 文件。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>gzip</code> / <code>gunzip</code>：压缩或解压缩 gzip 文件。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gzip filename  </span><br><span class="line">gunzip filename.gz </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>zip</code> / <code>unzip</code>：创建和解压 zip 文件。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>zip</code> / <code>unzip</code>：创建和解压 zip 文件。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zip archive_name.zip file1 file2  </span><br><span class="line">unzip archive_name.zip  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>bzip2</code> / <code>bunzip2</code>：压缩或解压缩 bzip2 文件。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>bzip2</code> / <code>bunzip2</code>：压缩或解压缩 bzip2 文件。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bzip2 filename  </span><br><span class="line">bunzip2 filename.bz2  </span><br></pre></td></tr></table></figure>
-<h3 id="6-管道和重定向"><a href="#6-管道和重定向" class="headerlink" title="6.管道和重定向"></a>6.管道和重定向</h3><ul>
-<li><code>|</code>：管道，将一个命令的输出作为另一个命令的输入。</li>
+<h3 id="6-管道和重定向">6.管道和重定向</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>|</code>：管道，将一个命令的输出作为另一个命令的输入。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> file.txt | grep <span class="string">&quot;search_term&quot;</span>  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>&gt;</code>：重定向标准输出到文件，覆盖文件内容。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>&gt;</code>：重定向标准输出到文件，覆盖文件内容。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Hello, World!&quot;</span> &gt; file.txt  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>&gt;&gt;</code>：重定向标准输出到文件，附加在文件末尾。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>&gt;&gt;</code>：重定向标准输出到文件，附加在文件末尾。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Hello, World!&quot;</span> &gt;&gt; file.txt  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>&lt;</code>：将文件内容作为命令的标准输入。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>&lt;</code>：将文件内容作为命令的标准输入。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&quot;search_term&quot;</span> &lt; file.txt </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>2&gt;</code>：重定向标准错误到文件。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>2&gt;</code>：重定向标准错误到文件。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">command</span> 2&gt; error.log</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>&amp;&gt;</code>：重定向标准输出和标准错误到同一个文件。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>&amp;&gt;</code>：重定向标准输出和标准错误到同一个文件。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">command</span> &amp;&gt; output.log </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>tee</code>：读取标准输入的数据，并同时写入到标准输出和一个或多个文件中，常与管道一起使用。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>tee</code>：读取标准输入的数据，并同时写入到标准输出和一个或多个文件中，常与管道一起使用。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">command</span> | <span class="built_in">tee</span> output.txt  </span><br></pre></td></tr></table></figure>
-<h3 id="7-包管理"><a href="#7-包管理" class="headerlink" title="7.包管理"></a>7.包管理</h3><ul>
-<li><code>dpkg</code>：Debian 包管理工具，用于安装、构建、删除和管理 Debian 包。</li>
+<h3 id="7-包管理">7.包管理</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>dpkg</code>：Debian 包管理工具，用于安装、构建、删除和管理 Debian 包。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dpkg -i package.deb  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>rpm</code>：RPM 包管理工具，用于安装、卸载、查询和更新 RPM 包。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>rpm</code>：RPM 包管理工具，用于安装、卸载、查询和更新 RPM 包。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh package.rpm  </span><br></pre></td></tr></table></figure>
-<h3 id="8-权限管理"><a href="#8-权限管理" class="headerlink" title="8.权限管理"></a>8.权限管理</h3><ul>
-<li><code>sudo</code>：以超级用户（或其他用户）的身份执行命令。</li>
+<h3 id="8-权限管理">8.权限管理</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>sudo</code>：以超级用户（或其他用户）的身份执行命令。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>su</code>：切换当前用户到另一个用户。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>su</code>：切换当前用户到另一个用户。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su - username  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>useradd</code> / <code>adduser</code>：创建新的系统用户。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>useradd</code> / <code>adduser</code>：创建新的系统用户。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useradd new_user  </span><br><span class="line">adduser new_user </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>usermod</code>：修改用户账号属性。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>usermod</code>：修改用户账号属性。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">usermod -aG groupname username </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>passwd</code>：更改用户密码。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>passwd</code>：更改用户密码。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd username  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>groups</code>：显示用户所属的所有组。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>groups</code>：显示用户所属的所有组。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">groups</span> username</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>chgrp</code>：更改文件或目录的群组所有权。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>chgrp</code>：更改文件或目录的群组所有权。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chgrp</span> groupname filename  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>setfacl</code>：设置文件访问控制列表（ACL），提供比传统权限更详细的权限设置。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>setfacl</code>：设置文件访问控制列表（ACL），提供比传统权限更详细的权限设置。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setfacl -m u:username:rwx file  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>getfacl</code>：获取文件的访问控制列表。</li>
+<ul class="lvl-0">
+<li class="lvl-3">
+<p><code>getfacl</code>：获取文件的访问控制列表。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getfacl file </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>chmod</code>：改变文件或目录的权限。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>chmod</code>：改变文件或目录的权限。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> 755 filename </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>chown</code>：改变文件或目录的所有者。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>chown</code>：改变文件或目录的所有者。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chown</span> username:groupname filename  </span><br></pre></td></tr></table></figure>
-<h3 id="9-系统管理"><a href="#9-系统管理" class="headerlink" title="9.系统管理"></a>9.系统管理</h3><ul>
-<li><code>apt-get</code>, <code>yum</code>, <code>dnf</code>, <code>pacman</code>：不同的Linux发行版使用不同的包管理器来安装、更新和删除软件包。</li>
+<h3 id="9-系统管理">9.系统管理</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>apt-get</code>, <code>yum</code>, <code>dnf</code>, <code>pacman</code>：不同的Linux发行版使用不同的包管理器来安装、更新和删除软件包。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">apt-get install package_name  </span><br><span class="line">yum install package_name  </span><br><span class="line">dnf install package_name  </span><br><span class="line">pacman -S package_name  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>service</code>：在系统上启动、停止、重启和管理服务。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>service</code>：在系统上启动、停止、重启和管理服务。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service service_name start  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>systemctl</code>：控制 systemd 系统和服务管理器。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>systemctl</code>：控制 systemd 系统和服务管理器。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start service_name  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>crontab</code>：安排定时任务。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>crontab</code>：安排定时任务。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab -e  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>journalctl</code>：查看由 systemd 管理的系统和服务日志。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>journalctl</code>：查看由 systemd 管理的系统和服务日志。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">journalctl -u service_name  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>dmesg</code>：显示或控制内核环形缓冲区消息。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>dmesg</code>：显示或控制内核环形缓冲区消息。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmesg | grep something  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>logrotate</code>：自动轮转、压缩、删除和邮寄系统日志文件。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>logrotate</code>：自动轮转、压缩、删除和邮寄系统日志文件。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logrotate /etc/logrotate.conf  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>syslog</code> / <code>rsyslog</code> / <code>syslog-ng</code>：处理系统日志的守护进程。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>syslog</code> / <code>rsyslog</code> / <code>syslog-ng</code>：处理系统日志的守护进程。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service rsyslog status  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>fsck</code>：检查和修复 Linux 文件系统。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>fsck</code>：检查和修复 Linux 文件系统。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fsck /dev/sda1  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>testdisk</code>：强大的免费数据恢复软件。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>testdisk</code>：强大的免费数据恢复软件。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">testdisk /dev/sda  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>photorec</code>：与 testdisk 相关的工具，用于恢复丢失的文件。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>photorec</code>：与 testdisk 相关的工具，用于恢复丢失的文件。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">photorec /dev/sda  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>grub</code>：GNU GRUB 是一个启动加载程序，用于在多操作系统中管理引导过程。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>grub</code>：GNU GRUB 是一个启动加载程序，用于在多操作系统中管理引导过程。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update-grub  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>init</code> / <code>telinit</code>：init 是所有进程的父进程，用于控制系统的运行级别。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>init</code> / <code>telinit</code>：init 是所有进程的父进程，用于控制系统的运行级别。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">telinit 3  </span><br></pre></td></tr></table></figure>
-<h3 id="10-硬件管理"><a href="#10-硬件管理" class="headerlink" title="10.硬件管理"></a>10.硬件管理</h3><ul>
-<li><code>fdisk</code>：磁盘分区工具。</li>
+<h3 id="10-硬件管理">10.硬件管理</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>fdisk</code>：磁盘分区工具。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk /dev/sdx  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>mkfs</code>：在分区上创建文件系统。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>mkfs</code>：在分区上创建文件系统。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs -t ext4 /dev/sdx1  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>mount</code> / <code>umount</code>：挂载或卸载文件系统。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>mount</code> / <code>umount</code>：挂载或卸载文件系统。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/sdx1 /mnt  </span><br><span class="line">umount /mnt  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>lscpu</code>：显示 CPU 架构信息。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>lscpu</code>：显示 CPU 架构信息。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lscpu  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>lsblk</code>：列出所有可用的块设备。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>lsblk</code>：列出所有可用的块设备。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsblk  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>lspci</code>：列出所有 PCI 设备。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>lspci</code>：列出所有 PCI 设备。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lspci  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>lsusb</code>：列出 USB 设备。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>lsusb</code>：列出 USB 设备。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsusb  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>dmidecode</code>：提取硬件系统组件的信息，如序列号和固件版本。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>dmidecode</code>：提取硬件系统组件的信息，如序列号和固件版本。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dmidecode  </span><br></pre></td></tr></table></figure>
-<h3 id="11-进程管理"><a href="#11-进程管理" class="headerlink" title="11.进程管理"></a>11.进程管理</h3><ul>
-<li><code>bg</code>：将一个在后台暂停的作业继续执行。</li>
+<h3 id="11-进程管理">11.进程管理</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>bg</code>：将一个在后台暂停的作业继续执行。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bg</span> %job_id </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>fg</code>：将后台中的作业调至前台继续运行。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>fg</code>：将后台中的作业调至前台继续运行。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">fg</span> %job_id </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>jobs</code>：显示当前会话中的所有作业及其状态。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>jobs</code>：显示当前会话中的所有作业及其状态。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">jobs</span>  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>nohup</code>：运行命令，即使退出登录也不会中断。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>nohup</code>：运行命令，即使退出登录也不会中断。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">nohup</span> <span class="built_in">command</span> &amp;  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>screen</code> / <code>tmux</code>：使用虚拟终端，允许用户在单个终端窗口中多次登录会话。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>screen</code> / <code>tmux</code>：使用虚拟终端，允许用户在单个终端窗口中多次登录会话。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">screen  </span><br><span class="line">tmux  </span><br></pre></td></tr></table></figure>
-<h3 id="12-脚本编写和执行"><a href="#12-脚本编写和执行" class="headerlink" title="12.脚本编写和执行"></a>12.脚本编写和执行</h3><ul>
-<li><code>bash</code> / <code>sh</code>：Shell 脚本解释器，用于执行 Shell 脚本。</li>
+<h3 id="12-脚本编写和执行">12.脚本编写和执行</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>bash</code> / <code>sh</code>：Shell 脚本解释器，用于执行 Shell 脚本。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bash script.sh  </span><br><span class="line">sh script.sh  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>cron</code>：time-based 作业调度器，用于自动运行脚本和命令。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>cron</code>：time-based 作业调度器，用于自动运行脚本和命令。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab -l </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>at</code>：用于安排一次性任务。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>at</code>：用于安排一次性任务。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">at 10:30 PM  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>watch</code>：周期性地执行命令，并显示输出。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>watch</code>：周期性地执行命令，并显示输出。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">watch -n 5 <span class="string">&#x27;ls -l /path/to/directory&#x27;</span>  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>alias</code>：创建命令别名简化命令输入。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>alias</code>：创建命令别名简化命令输入。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> ll=<span class="string">&#x27;ls -la&#x27;</span>  </span><br></pre></td></tr></table></figure>
-<h3 id="13-系统监控和性能"><a href="#13-系统监控和性能" class="headerlink" title="13.系统监控和性能"></a>13.系统监控和性能</h3><ul>
-<li><code>iostat</code>：报告 CPU 统计和所有块设备的 I/O 统计。</li>
+<h3 id="13-系统监控和性能">13.系统监控和性能</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>iostat</code>：报告 CPU 统计和所有块设备的 I/O 统计。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iostat  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>vmstat</code>：报告虚拟内存统计。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>vmstat</code>：报告虚拟内存统计。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vmstat  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>htop</code>：交互式进程查看器，类似于 <code>top</code>，但提供更多信息和更好的用户界面。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>htop</code>：交互式进程查看器，类似于 <code>top</code>，但提供更多信息和更好的用户界面。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">htop  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>lsof</code>：列出被进程打开的文件。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>lsof</code>：列出被进程打开的文件。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>strace</code>：跟踪系统调用和信号。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>strace</code>：跟踪系统调用和信号。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strace -p PID  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>tcpdump</code>：抓取网络上的数据包。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>tcpdump</code>：抓取网络上的数据包。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i eth0 </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>nmap</code>：网络探测和安全审核。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>nmap</code>：网络探测和安全审核。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -A target_host  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>nice</code> / <code>renice</code>：调整程序运行的优先级。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>nice</code> / <code>renice</code>：调整程序运行的优先级。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">nice</span> -n 10 <span class="built_in">command</span>  </span><br><span class="line">renice 10 -p PID  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>ionice</code>：设置程序访问磁盘的优先级。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>ionice</code>：设置程序访问磁盘的优先级。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ionice -c 3 -p PID  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>tune2fs</code>：调整可调文件系统参数。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>tune2fs</code>：调整可调文件系统参数。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tune2fs -l /dev/sda1  </span><br></pre></td></tr></table></figure>
-<h3 id="14-文本处理"><a href="#14-文本处理" class="headerlink" title="14.文本处理"></a>14.文本处理</h3><ul>
-<li><code>sort</code>：对文本文件中的行进行排序。</li>
+<h3 id="14-文本处理">14.文本处理</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>sort</code>：对文本文件中的行进行排序。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sort</span> filename  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>uniq</code>：报告或省略重复的行，常用于 <code>sort</code> 命令之后。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>uniq</code>：报告或省略重复的行，常用于 <code>sort</code> 命令之后。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sort</span> filename | <span class="built_in">uniq</span>  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>cut</code>：移除文件中的部分字段。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>cut</code>：移除文件中的部分字段。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cut</span> -d<span class="string">&#x27;,&#x27;</span> -f1 filename  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>paste</code>：合并两个或多个文件的行。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>paste</code>：合并两个或多个文件的行。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">paste</span> file1 file2  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>join</code>：在两个文件中，将含有相同字段的行连接起来。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>join</code>：在两个文件中，将含有相同字段的行连接起来。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">join</span> file1 file2  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>tr</code>：替换或删除字符。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>tr</code>：替换或删除字符。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> file.txt | <span class="built_in">tr</span> <span class="string">&#x27;[:lower:]&#x27;</span> <span class="string">&#x27;[:upper:]&#x27;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>nl</code>：给文件加上行号。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>nl</code>：给文件加上行号。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">nl</span> file.txt  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>wc</code>：统计文件的行、词和字符数。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>wc</code>：统计文件的行、词和字符数。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">wc</span> filename  </span><br></pre></td></tr></table></figure>
-<h3 id="15-加密和备份"><a href="#15-加密和备份" class="headerlink" title="15.加密和备份"></a>15.加密和备份</h3><ul>
-<li><code>openssl</code>：强大的加密工具，用于创建私钥、证书签名请求（CSR）、证书和其他。</li>
+<h3 id="15-加密和备份">15.加密和备份</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>openssl</code>：强大的加密工具，用于创建私钥、证书签名请求（CSR）、证书和其他。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out private.key 2048</span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>gpg</code>：GNU Privacy Guard，用于加密和签名数据。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>gpg</code>：GNU Privacy Guard，用于加密和签名数据。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gpg --encrypt --recipient [email protected] file  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>ssh-keygen</code>：用于生成 SSH 密钥对。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>ssh-keygen</code>：用于生成 SSH 密钥对。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>fail2ban</code>：防止暴力破解的工具，它监视日志文件并基于配置的规则封禁可疑的 IP 地址。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>fail2ban</code>：防止暴力破解的工具，它监视日志文件并基于配置的规则封禁可疑的 IP 地址。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fail2ban-client status  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>rsync</code>：用于备份和同步文件和目录。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>rsync</code>：用于备份和同步文件和目录。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -a /path/to/source /path/to/destination  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>dd</code>：用于复制和转换原始磁盘数据。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>dd</code>：用于复制和转换原始磁盘数据。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dd</span> <span class="keyword">if</span>=/dev/sda of=/path/to/backup.img  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>tar</code>：除了创建和解压归档文件，<code>tar</code> 也常用于备份。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>tar</code>：除了创建和解压归档文件，<code>tar</code> 也常用于备份。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar cvpzf backup.tar.gz /path/to/directory  </span><br></pre></td></tr></table></figure>
-<h3 id="16-虚拟化和容器"><a href="#16-虚拟化和容器" class="headerlink" title="16.虚拟化和容器"></a>16.虚拟化和容器</h3><ul>
-<li><code>docker</code>：容器化平台，用于开发、运输和运行应用。</li>
+<h3 id="16-虚拟化和容器">16.虚拟化和容器</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>docker</code>：容器化平台，用于开发、运输和运行应用。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run image_name  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>virsh</code>：命令行工具，用于管理 KVM 和 Xen 虚拟机。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>virsh</code>：命令行工具，用于管理 KVM 和 Xen 虚拟机。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh list --all </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>vagrant</code>：构建和维护虚拟化环境的命令行工具。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>vagrant</code>：构建和维护虚拟化环境的命令行工具。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vagrant up  </span><br></pre></td></tr></table></figure>
-<h3 id="17-版本控制系统"><a href="#17-版本控制系统" class="headerlink" title="17.版本控制系统"></a>17.版本控制系统</h3><ul>
-<li><code>git</code>：分布式版本控制系统，用于跟踪和协调源代码变更。</li>
+<h3 id="17-版本控制系统">17.版本控制系统</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>git</code>：分布式版本控制系统，用于跟踪和协调源代码变更。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/user/repo.git </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>svn</code>：集中式版本控制系统。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>svn</code>：集中式版本控制系统。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn checkout http://example.com/svn/repo/trunk  </span><br></pre></td></tr></table></figure>
-<h3 id="18-编程和开发工具"><a href="#18-编程和开发工具" class="headerlink" title="18.编程和开发工具"></a>18.编程和开发工具</h3><ul>
-<li><code>make</code>：自动化编译程序，通常与 <code>Makefile</code> 文件一起使用。</li>
+<h3 id="18-编程和开发工具">18.编程和开发工具</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>make</code>：自动化编译程序，通常与 <code>Makefile</code> 文件一起使用。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>gcc</code>：GNU 编译器集合，用于编译 C 和 C++ 程序。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>gcc</code>：GNU 编译器集合，用于编译 C 和 C++ 程序。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -o output source.c  </span><br></pre></td></tr></table></figure>
-<ul>
-<li><code>gdb</code>：GNU 调试器，用于调试程序。</li>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>gdb</code>：GNU 调试器，用于调试程序。</p>
+</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gdb ./program  </span><br></pre></td></tr></table></figure>
 
@@ -993,11 +1291,13 @@
       
       <!-- <div class="content">
         SQL 常见用法
-
 数据定义语言 (DDL)
+
+
 CREATE 创建数据库对象，如数据库、表、索引、视图等。
 
-123456
+
+1234
       </div> -->
     </a>
   </div>
@@ -1017,8 +1317,8 @@ CREATE 创建数据库对象，如数据库、表、索引、视图等。
       </div>
       <!-- <div class="content">
         Docker 常见用法
-
-安装 Docker在不同的操作系统上安装 Docker 的方法会有所不同。在大多数 Linux
+安装 Docker
+在不同的操作系统上安装 Docker 的方法会有所不同。在大多数 Linux
       </div> -->
     </a>
   </div>
@@ -1278,6 +1578,27 @@ CREATE 创建数据库对象，如数据库、表、索引、视图等。
             
 
             <div class="post-img-box">
+              <a href="/2024/09/11/think1/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://i.postimg.cc/LswWKGcX/IMG-202406278649-1440x810.jpg" class="lazyload placeholder" data-srcset="https://i.postimg.cc/LswWKGcX/IMG-202406278649-1440x810.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">09-11</span>
+                
+              </div>
+              <a class="post-title" href="/2024/09/11/think1/">秋念</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
               <a href="/2024/07/24/GPT4AIGChip/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
                 <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
@@ -1353,27 +1674,6 @@ CREATE 创建数据库对象，如数据库、表、索引、视图等。
                 
               </div>
               <a class="post-title" href="/2024/06/05/AnalogCoder/">AnalogCoder</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2024/05/26/EfficientPlace/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">05-26</span>
-                
-              </div>
-              <a class="post-title" href="/2024/05/26/EfficientPlace/">EfficientPlace</a>
             </div>
           </div>
         
@@ -1716,7 +2016,7 @@ CREATE 创建数据库对象，如数据库、表、索引、视图等。
       
         
           <div class="footer-copyright">
-            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a></p>
+            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> </p>
 
           </div>
         
