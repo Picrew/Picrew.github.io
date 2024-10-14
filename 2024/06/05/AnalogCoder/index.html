@@ -549,13 +549,13 @@ mjx-container[display="true"] + br {
 <p>​	模拟电路设计比数字电路设计提出了更多挑战，包括：</p>
 <ol>
 <li class="lvl-3">
-<p>**复杂性。**与数电逻辑门设计不同，模电包括各种组件，类似电压和电流源、MOSFET、电阻和电容。微小的调整都会显著改变电路功能。</p>
+<p><strong>复杂性</strong>。与数电逻辑门设计不同，模电包括各种组件，类似电压和电流源、MOSFET、电阻和电容。微小的调整都会显著改变电路功能。</p>
 </li>
 <li class="lvl-3">
 <p><strong>抽象层次</strong>。数电设计可以在 Verilog 等高抽象级别编写，直接分配功能，无需硬件底层组件。相比之下，模电需要在设计代码中直接表示物理组件，需要一个更详细和特定于组件的设计过程，更难有效利用 LLM 帮助。</p>
 </li>
 <li class="lvl-3">
-<p>**语料库数据量（Corpus data volume）。**虽然数电的 Verilog 在 Github 上占不到 0.1%，但模电主要语言 SPICE 更不常见。</p>
+<p><strong>语料库数据量（Corpus data volume）</strong>。虽然数电的 Verilog 在 Github 上占不到 0.1%，但模电主要语言 SPICE 更不常见。</p>
 <p>减轻传统手动模拟电路设计缺点，弥补 LLM 中现有差距，引入 AnalogCoder，一种新的免训练 LLM 代理（LLM-based agent），通过生成 python 代码实现模电设计。进一步提高 LLM 设计能力，提出<strong>特定领域的提示工程（doman-specific  prompt engineering）、反馈增强的设计流程（feedback-enhanced design flow）、电路设计语料库（circuit tool library）</strong>。大大提高设计成功性。</p>
 <p>本项工作中，优先考虑模拟电路正确功能，避免广泛的参数优化。实验证明，AnalogCoder 可以自主解决 24 个模电设计的 20 个。本文总结三个贡献：</p>
 <ul class="lvl-2">
@@ -1021,6 +1021,27 @@ mjx-container[display="true"] + br {
             
 
             <div class="post-img-box">
+              <a href="/2024/10/14/IncreMacro/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">10-14</span>
+                
+              </div>
+              <a class="post-title" href="/2024/10/14/IncreMacro/">IncreMacro</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
               <a href="/2024/09/11/think1/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
                 <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://i.postimg.cc/LswWKGcX/IMG-202406278649-1440x810.jpg" class="lazyload placeholder" data-srcset="https://i.postimg.cc/LswWKGcX/IMG-202406278649-1440x810.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
@@ -1096,27 +1117,6 @@ mjx-container[display="true"] + br {
                 
               </div>
               <a class="post-title" href="/2024/06/17/Circuit-Graph/">Circuit_Graph</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2024/06/05/AnalogCoder/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://i.postimg.cc/QMHzzjnw/IMG-202406277714-1440x810.jpg" class="lazyload placeholder" data-srcset="https://i.postimg.cc/QMHzzjnw/IMG-202406277714-1440x810.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">06-05</span>
-                
-              </div>
-              <a class="post-title" href="/2024/06/05/AnalogCoder/">AnalogCoder</a>
             </div>
           </div>
         
@@ -1512,7 +1512,7 @@ mjx-container[display="true"] + br {
       
         
           <div class="footer-copyright">
-            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> </p>
+            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a></p>
 
           </div>
         
