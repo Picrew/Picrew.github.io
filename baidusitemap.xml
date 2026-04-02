@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://picrew.github.io/2026/04/02/about/</loc>
+    <lastmod>2026-04-02</lastmod>
+  </url>
+  <url>
     <loc>https://picrew.github.io/2024/10/14/IncreMacro/</loc>
     <lastmod>2024-10-14</lastmod>
   </url>
@@ -79,9 +83,5 @@
   <url>
     <loc>https://picrew.github.io/2024/03/28/AutoDMP/</loc>
     <lastmod>2024-09-11</lastmod>
-  </url>
-  <url>
-    <loc>https://picrew.github.io/2024/05/22/about/</loc>
-    <lastmod>2024-06-25</lastmod>
   </url>
 </urlset> 
