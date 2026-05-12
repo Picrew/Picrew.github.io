@@ -1,4 +1,4 @@
-https://picrew.github.io/2026/04/02/about/
+https://picrew.github.io/about/index.html
 https://picrew.github.io/2024/10/14/IncreMacro/
 https://picrew.github.io/2024/06/25/EDA-LLM/
 https://picrew.github.io/2024/06/05/AnalogCoder/
