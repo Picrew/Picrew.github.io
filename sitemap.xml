@@ -209,27 +209,6 @@
   </url>
   
   <url>
-    <loc>https://picrew.github.io/categories/EDA/LLM/</loc>
-    <lastmod>2026-05-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://picrew.github.io/categories/EDA/LLM/%E7%A7%91%E7%A0%94/</loc>
-    <lastmod>2026-05-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://picrew.github.io/categories/EDA/%E7%A7%91%E7%A0%94/</loc>
-    <lastmod>2026-05-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://picrew.github.io/categories/%E5%85%B4%E8%B6%A3/</loc>
     <lastmod>2026-05-12</lastmod>
     <changefreq>weekly</changefreq>
@@ -244,6 +223,13 @@
   </url>
   
   <url>
+    <loc>https://picrew.github.io/categories/EDA/LLM/</loc>
+    <lastmod>2026-05-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://picrew.github.io/categories/EDA/RL/</loc>
     <lastmod>2026-05-12</lastmod>
     <changefreq>weekly</changefreq>
@@ -251,7 +237,7 @@
   </url>
   
   <url>
-    <loc>https://picrew.github.io/categories/EDA/LLM/%E8%B0%83%E7%A0%94/</loc>
+    <loc>https://picrew.github.io/categories/EDA/%E7%A7%91%E7%A0%94/</loc>
     <lastmod>2026-05-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -272,7 +258,21 @@
   </url>
   
   <url>
+    <loc>https://picrew.github.io/categories/EDA/LLM/%E7%A7%91%E7%A0%94/</loc>
+    <lastmod>2026-05-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://picrew.github.io/categories/EDA/RL/%E7%A7%91%E7%A0%94/</loc>
+    <lastmod>2026-05-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://picrew.github.io/categories/EDA/LLM/%E8%B0%83%E7%A0%94/</loc>
     <lastmod>2026-05-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
