@@ -41,6 +41,41 @@
                 display: none;
             }
         }
+        .header .header-content .navbar .ui-lang-toggle {
+            -webkit-appearance: none;
+            appearance: none;
+            border: 0;
+            outline: 0;
+            background: transparent;
+            box-shadow: none;
+            color: #fff;
+            height: 60px;
+            min-width: 48px;
+            margin: 0;
+            padding: 0 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            font: inherit;
+            font-size: 16px;
+            line-height: 1;
+            white-space: nowrap;
+            cursor: pointer;
+            vertical-align: top;
+        }
+        .header .header-content .navbar .ui-lang-toggle:hover,
+        .header .header-content .navbar .ui-lang-toggle:focus {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        .header .header-content .navbar .ui-lang-toggle i {
+            font-size: 18px;
+            line-height: 1;
+        }
+        .header .header-content .navbar .ui-lang-toggle span {
+            display: inline-block;
+            line-height: 1;
+        }
     </style>
     
 
@@ -551,7 +586,7 @@ mjx-container[display="true"] + br {
     <article class="post post-detail">
       <div class="post-content">
         <h1>GPT4AIGChip: Towards Next-Generation AI Accelerator Design Automation via Large Language Models</h1>
-<p><img src="/2024/07/24/GPT4AIGChip/Y18vb6lM1omwwexABPIcRpzvn2c-1721829974411.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/Y18vb6lM1omwwexABPIcRpzvn2c-1721829974411.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/07/24/GPT4AIGChip/Y18vb6lM1omwwexABPIcRpzvn2c-1721829974411.png" data-srcset="/2024/07/24/GPT4AIGChip/Y18vb6lM1omwwexABPIcRpzvn2c-1721829974411.png"></p>
 <h2 id="前言">前言</h2>
 <p>本篇文章来自 GIT 佐治亚理工 Yingyan (Celine) Lin [<a target="_blank" rel="noopener" href="https://eiclab.scs.gatech.edu/pages/team.html">Team</a>]老师。发布在 2023 ICCAD。此外 lin 老师还被受邀 2024 <a target="_blank" rel="noopener" href="https://61dac.conference-program.com/presentation/?id=SPSSN121&amp;sess=sess182">DAC presentation</a> ，提出 LLM4AIGChip 由两个关键组件组成：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2407.01910">Data4AIGChip</a>和 GPT4AIGChip。</p>
 <ul class="lvl-0">
@@ -575,7 +610,7 @@ mjx-container[display="true"] + br {
 <h2 id="Introduction">Introduction</h2>
 <p>人工智能对专用 AI 加速器（AI accelerators）迫切需求。然而设计专用 AI 加速器仍然是一项艰巨和耗时任务。此外使用现有工具对所需硬件专业知识对非专家来说是一个巨大挑战。限制 AI 加速器设计扩展到一般 AI 开发者，造成 AI 算法速度和 AI 加速器之间差距越来越大。</p>
 <p>本论文从 LLM 上找到灵感，并启发这个研究中心问题：“我们是否可以利用 LLM 力量自动化 AI 加速器设计” （“<em>Can we harness the power of LLMs to automate the design of AI accelerators?</em>”）</p>
-<p><img src="/2024/07/24/GPT4AIGChip/I8ewbUwFNo7VgCxLgjFcRmnLn3d-1721829974411.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/I8ewbUwFNo7VgCxLgjFcRmnLn3d-1721829974411.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/07/24/GPT4AIGChip/I8ewbUwFNo7VgCxLgjFcRmnLn3d-1721829974411.png" data-srcset="/2024/07/24/GPT4AIGChip/I8ewbUwFNo7VgCxLgjFcRmnLn3d-1721829974411.png"></p>
 <p>该论文提出 GPT4AIGChip —— GPT for AI Generated Chip，采用人类自然语言作为设计指令，而不是依赖特定领域语言，对不熟悉硬件的人更容易设计 AI 加速器。论文贡献如下：</p>
 <ul class="lvl-0">
 <li class="lvl-2">
@@ -608,20 +643,20 @@ mjx-container[display="true"] + br {
 <p>（os：iSmart3-SkyNet/iSmart3 为 2019 年 DAC-SDC 低功耗目标检测竞赛中 GPU 和 FPGA（Ultra96 FPGA 和 Pynq-Z1 FPGA）双料冠军。当年 Jetson tx2 取得 0.731 IoU 和 67.33 fps；在 Ultra96 FPGA 取得 0.716 IoU 和 25.05 fps。个人认为当年 TinyML 方向一味追求小模型，在岌岌可危保证精度同时极力追求速度，是一个不现实的想法。边缘设备算力总是随着时间增加，永无尽头卷指标是没有很多意义。TinyML 中甚至对部分指标已经到了几乎疯狂。剪枝、量化、蒸馏等方式最好的利用是在当今 MM-LLM 时代。）</p>
 <h4 id="Misinterpretation-of-variable-definitions">Misinterpretation of variable definitions</h4>
 <p>实现硬件加速代码需要精确定义变量和函数以准确实例化模块，但 LLM 可能会实例化不正确大小模块，见图 2（a）：</p>
-<p><img src="/2024/07/24/GPT4AIGChip/UY1wbt0vHouL97xRwaVckJ2wnHh-1721829974411.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/UY1wbt0vHouL97xRwaVckJ2wnHh-1721829974411.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/07/24/GPT4AIGChip/UY1wbt0vHouL97xRwaVckJ2wnHh-1721829974411.png" data-srcset="/2024/07/24/GPT4AIGChip/UY1wbt0vHouL97xRwaVckJ2wnHh-1721829974411.png"></p>
 <p>这个问题由于 LLM 难以理解指令中标识符和代码中变量联系，导致误解。</p>
 <h4 id="Inability-to-capture-long-dependencies">Inability to capture long dependencies</h4>
 <p>AI 加速器参数通常相互交织，一个模块一组参数容易受到另一组参数影响。导致长期依赖。当前 LLM 在处理长依赖关系经常出错，在后期模块设计生成忽略早期设计配置，见图 2（b）：</p>
-<p><img src="/2024/07/24/GPT4AIGChip/SoTtbEaseoHgfhxI81tc2moDnae-1721829974411.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/SoTtbEaseoHgfhxI81tc2moDnae-1721829974411.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/07/24/GPT4AIGChip/SoTtbEaseoHgfhxI81tc2moDnae-1721829974411.png" data-srcset="/2024/07/24/GPT4AIGChip/SoTtbEaseoHgfhxI81tc2moDnae-1721829974411.png"></p>
 <p>e.g. 前面 BRAM 大小影响分块计算大小，分块计算影响 PE 数量。当输入维度将并行指定为 4 时，LLM 在生成 MAC 阵列时候忽略这一点，仅考虑 2 个并行输入参数。</p>
 <h4 id="Overlooking-crucial-user-instructions">Overlooking crucial user instructions</h4>
 <p>LLM 难以推理两种关系：</p>
 <p>这个问题跟上述长依赖性问题不同，这种限制涉及多个设计概念之间关系，而这些设计概念不一定由长代码分隔。</p>
 <p>e.g. 某些数据维度上展开（并行化）计算需要沿着相同的维度对依赖数据的 BRAM 实例进行分区。然而，如图 2（c）所示，现有的 LLM 生成的代码往往将设计概念孤立地对待。此外，LLM 在将自然语言指令与适当的代码生成联系起来时可能会遇到困难，例如，当被指示模块化某些子模块时，它们可能无法识别相关的领域特定指令。</p>
-<p><img src="/2024/07/24/GPT4AIGChip/ETDcbVG6PoxIzaxaLRkcK9Tqnib-1721829974411.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/ETDcbVG6PoxIzaxaLRkcK9Tqnib-1721829974411.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/07/24/GPT4AIGChip/ETDcbVG6PoxIzaxaLRkcK9Tqnib-1721829974411.png" data-srcset="/2024/07/24/GPT4AIGChip/ETDcbVG6PoxIzaxaLRkcK9Tqnib-1721829974411.png"></p>
 <h4 id="Over-simplified-implementation">Over-simplified implementation</h4>
 <p>AI 加速器实现需要类如 HLS 编码风格来描述硬件，e.g. 将一个元素从一个缓冲区广播到另一个分区缓冲区的多个位置，避免在两个缓冲区内直接赋值。相反，需要首先将元素分配给类似寄存器变量，然后这个中间寄存器数据分配到另一个缓冲区的多个位置，防止源缓冲区内发生访问冲突。如图 2（d）所示，往往忽略硬件设计中细节，生成不切实际设计。</p>
-<p><img src="/2024/07/24/GPT4AIGChip/NceDbuMs3oFcEHx98ZFchooQnYb-1721829974411.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/NceDbuMs3oFcEHx98ZFchooQnYb-1721829974411.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/07/24/GPT4AIGChip/NceDbuMs3oFcEHx98ZFchooQnYb-1721829974411.png" data-srcset="/2024/07/24/GPT4AIGChip/NceDbuMs3oFcEHx98ZFchooQnYb-1721829974411.png"></p>
 <h3 id="C-Closed-sourced-LLMs-vs-Finetuned-Open-sourced-LLMs">C. Closed-sourced LLMs vs. Finetuned Open-sourced LLMs</h3>
 <p>上述局限性表示 LLM 在理解硬件设计代码方面不足，潜在解决方案是使用带注释 HLS 代码对开源 LLM 进行微调。但由于缺乏高质量 HLS 代码以及设计描述和封闭源代码的高级 LLM，这个方法面临挑战。这些障碍建议采用来源但功能不够强大的 LLM，本小节研究功能强大闭源 LLM 和微调开源 LLM。</p>
 <p>对 GPT-4 和 CodeGen 进行基准测试。</p>
@@ -648,13 +683,13 @@ mjx-container[display="true"] + br {
 </ul>
 <h4 id="Observations">Observations</h4>
 <p>见表 1：</p>
-<p><img src="/2024/07/24/GPT4AIGChip/F8G3bf3gBo3EePxFgbDciAkdnDf-1721829974411.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/F8G3bf3gBo3EePxFgbDciAkdnDf-1721829974411.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/07/24/GPT4AIGChip/F8G3bf3gBo3EePxFgbDciAkdnDf-1721829974411.png" data-srcset="/2024/07/24/GPT4AIGChip/F8G3bf3gBo3EePxFgbDciAkdnDf-1721829974411.png"></p>
 <p>未微调之前 CodeGen 为 0% 正确率，微调后为 31%，但跟 GPT-4 对比还是有显著差距。</p>
 <h3 id="D-Capabilities-of-LLMs">D. Capabilities of LLMs</h3>
 <p>先前工作表明 LLM 能够通过 STF 和 in-context 学习到丰富表示。</p>
 <h4 id="Generalization-capability-from-in-context-demonstrations">Generalization capability from in-context demonstrations.</h4>
 <p>见图 3：</p>
-<p><img src="/2024/07/24/GPT4AIGChip/Uo1cb8kdKoIq4DxAML1c7qkEnlf-1721829974412.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/Uo1cb8kdKoIq4DxAML1c7qkEnlf-1721829974412.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/07/24/GPT4AIGChip/Uo1cb8kdKoIq4DxAML1c7qkEnlf-1721829974412.png" data-srcset="/2024/07/24/GPT4AIGChip/Uo1cb8kdKoIq4DxAML1c7qkEnlf-1721829974412.png"></p>
 <p>给定 HLS 演示两个片段，LLM 根据用户指令生成新的硬件风格。在保持相同编码风格和修改设计满足新的需求，推断演示设计差异。本文发现当提供与用户指令有一定关联高质量示例时，LLM 的上下文学习能力能够被激活。</p>
 <h4 id="Logical-reasoning-capability-under-multiple-demonstrations">Logical reasoning capability under multiple demonstrations</h4>
 <p>见图 3，LLM 可以对用户指令所需功能和演示中实现功能相似性进行逐步分析，选择一个适当动作为起点。表明 LLM 的逻辑推理能力，强调高质量演示重要性。</p>
@@ -694,7 +729,7 @@ mjx-container[display="true"] + br {
 </li>
 </ul>
 <p>通过组合，然后 GPT4AIGChip 采取迭代方法改进生成 AI 加速器涉及，逐步接近最优。见图 4：</p>
-<p><img src="/2024/07/24/GPT4AIGChip/Kt1rbW9ZdomqHAx7h7scGdEcnSc-1721829974412.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/Kt1rbW9ZdomqHAx7h7scGdEcnSc-1721829974412.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/07/24/GPT4AIGChip/Kt1rbW9ZdomqHAx7h7scGdEcnSc-1721829974412.png" data-srcset="/2024/07/24/GPT4AIGChip/Kt1rbW9ZdomqHAx7h7scGdEcnSc-1721829974412.png"></p>
 <ul class="lvl-0">
 <li class="lvl-2">
 <p>搜索引擎根据以往搜索设计反馈，识别下一个设计以及对应指令，指导 LLM 友好硬件模板实现和评估；</p>
@@ -726,14 +761,14 @@ mjx-container[display="true"] + br {
 <p><strong>深层设计层次结构逐步生成设计（Deep design hierarchies for step-by-step design generation）</strong>：模板采用了基于层次的、模块化的生成方法，简化了过程，并在每个阶段减少了复杂性。每个模块由多个子模块组成，这些子模块遵循解耦原则，并可能进一步包含自己的子模块。这种递归嵌套持续到进一步划分变得不可行（见图 5(b)中的 Level-L）。这允许 LLM 系统地为每个模块生成设计层次结构，在每个步骤中限制代码大小和复杂性。</p>
 </li>
 </ul>
-<p><img src="/2024/07/24/GPT4AIGChip/IcKGbPN8joNRScxkDKJcM4OtnAf-1721829974412.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/IcKGbPN8joNRScxkDKJcM4OtnAf-1721829974412.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/07/24/GPT4AIGChip/IcKGbPN8joNRScxkDKJcM4OtnAf-1721829974412.png" data-srcset="/2024/07/24/GPT4AIGChip/IcKGbPN8joNRScxkDKJcM4OtnAf-1721829974412.png"></p>
 <h4 id="Overview-of-the-proposed-accelerator-template">Overview of the proposed accelerator template</h4>
 <p>在三个关键原则基础上，引入一个新的、模块化的、解耦的加速器微架构及相应的代码模板，如图 5(b)所示。</p>
-<p><img src="/2024/07/24/GPT4AIGChip/AvkMbwnvyoMBIMxOQvQcGPmrnUe-1721829974412.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/AvkMbwnvyoMBIMxOQvQcGPmrnUe-1721829974412.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/07/24/GPT4AIGChip/AvkMbwnvyoMBIMxOQvQcGPmrnUe-1721829974412.png" data-srcset="/2024/07/24/GPT4AIGChip/AvkMbwnvyoMBIMxOQvQcGPmrnUe-1721829974412.png"></p>
 <p>这里关注于广泛使用的 GEMM 操作符，但考虑在 AI 算法中广泛应用，模板保留一个通用结构。模板由一系列多功能模块组成，每个模块都可以根据提示和本地配置设置灵活重新设计，提供不同的硬件效率甚至独特的功能。</p>
 <p>每个模块都由嵌套的子模块层次结构组成，以便于 LLM 逐步生成。模块通过基于流的通信链接和异步数据 FIFOs 相互连接，以减少不同模块之间数据生产和消费速率可能出现的不匹配的控制开销。每个模块内的处理开始和结束主要取决于数据的可用性，促进细粒度的操作重叠和简化控制开销。对于具有多个输入端口的模块，例如图 5(b)中的互连模块，我们还包括了额外的同步逻辑以确保数据对齐和准确性。</p>
 <h4 id="Key-components-of-the-proposed-accelerator-template">Key components of the proposed accelerator template</h4>
-<p><img src="/2024/07/24/GPT4AIGChip/JPGsbM4MUoX7eWxXQq3cBKTunPb-1721829974412.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/JPGsbM4MUoX7eWxXQq3cBKTunPb-1721829974412.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/07/24/GPT4AIGChip/JPGsbM4MUoX7eWxXQq3cBKTunPb-1721829974412.png" data-srcset="/2024/07/24/GPT4AIGChip/JPGsbM4MUoX7eWxXQq3cBKTunPb-1721829974412.png"></p>
 <ul class="lvl-0">
 <li class="lvl-2">
 <p><strong>Buffer modules：</strong></p>
@@ -779,7 +814,7 @@ mjx-container[display="true"] + br {
 <h3 id="C-The-Demo-Augmented-Prompt-Generator-Design">C. The Demo-Augmented Prompt Generator Design</h3>
 <h4 id="Workflow">Workflow</h4>
 <p>LLM 在识别不同指令之间相似性能力，并应用到演示增强提示中，减少人类知识在 AI 加速器设计中需求。如图 4 所示：</p>
-<p><img src="/2024/07/24/GPT4AIGChip/FKcHbYugko5F5MxhaSIcgK3vn3e-1721829974412.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/FKcHbYugko5F5MxhaSIcgK3vn3e-1721829974412.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/07/24/GPT4AIGChip/FKcHbYugko5F5MxhaSIcgK3vn3e-1721829974412.png" data-srcset="/2024/07/24/GPT4AIGChip/FKcHbYugko5F5MxhaSIcgK3vn3e-1721829974412.png"></p>
 <p>在每一次迭代中，给定搜索引擎生成的设计指令，使用 LLMs 来识别生成的设计指令与演示库中指令之间的相似性。然后选择两个最相似的指令，并将它们与其对应的实现配对，作为本次代码生成的演示。</p>
 <h4 id="Demonstration-library">Demonstration library</h4>
 <p>演示库是增强式演示提示生成器中至关重要的组成部分。目标是构建一个演示库，涵盖目标领域（本文中为 GEMM）的多样化设计选择。这确保了演示库提供了丰富的领域知识，能够满足搜索引擎生成的多样化设计指令的需求。指导原则：</p>
@@ -872,7 +907,7 @@ mjx-container[display="true"] + br {
 </li>
 </ul>
 <p>图 6 所示，文中以 6 种不同网络和 2 种不同输入分辨率为基础评估加速效率：</p>
-<p><img src="/2024/07/24/GPT4AIGChip/QvzCbRnmeoy8o8xrmRMc602jnif-1721829974412.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/QvzCbRnmeoy8o8xrmRMc602jnif-1721829974412.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/07/24/GPT4AIGChip/QvzCbRnmeoy8o8xrmRMc602jnif-1721829974412.png" data-srcset="/2024/07/24/GPT4AIGChip/QvzCbRnmeoy8o8xrmRMc602jnif-1721829974412.png"></p>
 <ul class="lvl-0">
 <li class="lvl-2">
 <p>延迟减少了 2.0% 〜 16.0%，表明 GPT 4AICchip 已经成功地并实际地展示了第一个 LLM 支持的 AI 加速器设计自动化框架；</p>
@@ -883,7 +918,7 @@ mjx-container[display="true"] + br {
 </ul>
 <h3 id="C-Effectiveness-of-the-Search-Scheme">C. Effectiveness of the Search Scheme</h3>
 <p>在 Resnet-50 上输入 224x224 图片，与随机搜索人类专家手动优化加速器比较，并可视化 Pareto 前沿，即延迟和使用的 DSP 资源之间的权衡。（os：这里随机搜索意思应该是在设计空间中随机选择参数，通常用作基准比较）见图 7：</p>
-<p><img src="/2024/07/24/GPT4AIGChip/QmUQb0MEkon9hcxdYmGcno04nDb-1721829974412.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/QmUQb0MEkon9hcxdYmGcno04nDb-1721829974412.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/07/24/GPT4AIGChip/QmUQb0MEkon9hcxdYmGcno04nDb-1721829974412.png" data-srcset="/2024/07/24/GPT4AIGChip/QmUQb0MEkon9hcxdYmGcno04nDb-1721829974412.png"></p>
 <ul class="lvl-0">
 <li class="lvl-2">
 <p>随机搜索生成的设计在相对丰富的 DSP 资源设置下表现不如人工专家手动优化设计的延迟-资源权衡。</p>
@@ -906,17 +941,17 @@ mjx-container[display="true"] + br {
 </li>
 </ul>
 <p>见表 2：</p>
-<p><img src="/2024/07/24/GPT4AIGChip/TgTebGuPOoTOmyxyOG7c2XY3nfk-1721829974412.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/TgTebGuPOoTOmyxyOG7c2XY3nfk-1721829974412.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/07/24/GPT4AIGChip/TgTebGuPOoTOmyxyOG7c2XY3nfk-1721829974412.png" data-srcset="/2024/07/24/GPT4AIGChip/TgTebGuPOoTOmyxyOG7c2XY3nfk-1721829974412.png"></p>
 <p>演示增强提示将 LLM AI 加速器设计能力提高 50% 和 30%，对比 No Demo 和 High-level Description。</p>
 <h4 id="Demonstration-selection">Demonstration selection</h4>
 <p>除了选择最相似演示之外，还考虑随机选择（Random）和最不相关选择（Dissimilar），见表 3：</p>
-<p><img src="/2024/07/24/GPT4AIGChip/YRFqbolLzotN7PxsYfnc4oQJnBg-1721829974412.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/YRFqbolLzotN7PxsYfnc4oQJnBg-1721829974412.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/07/24/GPT4AIGChip/YRFqbolLzotN7PxsYfnc4oQJnBg-1721829974412.png" data-srcset="/2024/07/24/GPT4AIGChip/YRFqbolLzotN7PxsYfnc4oQJnBg-1721829974412.png"></p>
 <h4 id="The-number-of-demonstrations">The number of demonstrations</h4>
 <p>评估提示中演示数量关系，见表 5：</p>
-<p><img src="/2024/07/24/GPT4AIGChip/WbgxbD7uHoCDbMx7dVicwufhnvc-1721829974412.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/WbgxbD7uHoCDbMx7dVicwufhnvc-1721829974412.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/07/24/GPT4AIGChip/WbgxbD7uHoCDbMx7dVicwufhnvc-1721829974412.png" data-srcset="/2024/07/24/GPT4AIGChip/WbgxbD7uHoCDbMx7dVicwufhnvc-1721829974412.png"></p>
 <h3 id="E-Visualizing-the-Generated-Designs">E. Visualizing the Generated Designs</h3>
 <p>更好说明上下文演示生成设计过程，图 8 给出示例：</p>
-<p><img src="/2024/07/24/GPT4AIGChip/WbRPbidjAoAKAexRV0Kc4HbvnYn-1721829974412.png" class="lazyload placeholder" data-srcset="/2024/07/24/GPT4AIGChip/WbRPbidjAoAKAexRV0Kc4HbvnYn-1721829974412.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/07/24/GPT4AIGChip/WbRPbidjAoAKAexRV0Kc4HbvnYn-1721829974412.png" data-srcset="/2024/07/24/GPT4AIGChip/WbRPbidjAoAKAexRV0Kc4HbvnYn-1721829974412.png"></p>
 <p>基于内积/外积的矩阵乘法的说明和演示。</p>
 <hr>
 <h2 id="Limitations-And-Future-Work">Limitations And Future Work</h2>
@@ -927,12 +962,12 @@ mjx-container[display="true"] + br {
         
         <div class="tags">
           
-            <a href="/tags/LLM/" class="">
-              LLM
-            </a>
-          
             <a href="/tags/%E7%A7%91%E7%A0%94/" class="">
               科研
+            </a>
+          
+            <a href="/tags/LLM/" class="">
+              LLM
             </a>
           
         </div>
@@ -1759,7 +1794,7 @@ Guide
       
         
           <div class="footer-copyright">
-            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> </p>
+            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a></p>
 
           </div>
         

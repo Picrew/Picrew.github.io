@@ -41,6 +41,41 @@
                 display: none;
             }
         }
+        .header .header-content .navbar .ui-lang-toggle {
+            -webkit-appearance: none;
+            appearance: none;
+            border: 0;
+            outline: 0;
+            background: transparent;
+            box-shadow: none;
+            color: #fff;
+            height: 60px;
+            min-width: 48px;
+            margin: 0;
+            padding: 0 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            font: inherit;
+            font-size: 16px;
+            line-height: 1;
+            white-space: nowrap;
+            cursor: pointer;
+            vertical-align: top;
+        }
+        .header .header-content .navbar .ui-lang-toggle:hover,
+        .header .header-content .navbar .ui-lang-toggle:focus {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        .header .header-content .navbar .ui-lang-toggle i {
+            font-size: 18px;
+            line-height: 1;
+        }
+        .header .header-content .navbar .ui-lang-toggle span {
+            display: inline-block;
+            line-height: 1;
+        }
     </style>
     
 
@@ -551,13 +586,13 @@ mjx-container[display="true"] + br {
     <article class="post post-detail">
       <div class="post-content">
         <h1>DeepPR</h1>
-<p><img src="/2024/03/01/DeepPR/UpcVbV44doADLtxTiUdc5TcWnjc-1716625506837.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/UpcVbV44doADLtxTiUdc5TcWnjc-1716625506837.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/01/DeepPR/UpcVbV44doADLtxTiUdc5TcWnjc-1716625506837.png" data-srcset="/2024/03/01/DeepPR/UpcVbV44doADLtxTiUdc5TcWnjc-1716625506837.png"></p>
 <h1>Introduction</h1>
 <p>​		布局为芯片设计中最关键但最耗时的步骤之一，包括宏（SRAM…）和标准单元（逻辑与非门…）的布局。一个好布局带来芯片面积利用率，时序性能和布线能力，布局和布线时强相关的。布局的原则是 PPA --&gt; Power（功耗）, Performance（性能）, Area（面积）。</p>
 <p>​		对于芯片布局问题设计了一个 pipeline，input 输入为 hypergraph H = (V, E)代表的网表结构，V 指的是 node（单元 cells）集合，E 是电路组件连接的 edge（边）。</p>
-<p><img src="/2024/03/01/DeepPR/I383bIB9aoNdXRx56ylclazHnPh-1716625506837.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/I383bIB9aoNdXRx56ylclazHnPh-1716625506837.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/01/DeepPR/I383bIB9aoNdXRx56ylclazHnPh-1716625506837.png" data-srcset="/2024/03/01/DeepPR/I383bIB9aoNdXRx56ylclazHnPh-1716625506837.png"></p>
 <p>​		1.宏布局首先确定宏在芯片画布上的位置，然后大量的标准单元基于相邻的宏调整它们的位置，最后获得完整的布局解决方案。</p>
-<p><img src="/2024/03/01/DeepPR/IFi1bYf95orJc6xFsROcvwfLnaf-1716625506837.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/IFi1bYf95orJc6xFsROcvwfLnaf-1716625506837.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/01/DeepPR/IFi1bYf95orJc6xFsROcvwfLnaf-1716625506837.png" data-srcset="/2024/03/01/DeepPR/IFi1bYf95orJc6xFsROcvwfLnaf-1716625506837.png"></p>
 <p>​		2.在不违反边约束前提下 实现总线长最小。</p>
 <h2 id="Method">Method</h2>
 <p>​	提出了一个叫 DeepPR 的两阶段布局算法,并且联合学习(joint learning)布局(placement)和布线(routing)任务：</p>
@@ -622,7 +657,7 @@ mjx-container[display="true"] + br {
 <h1>Methodology</h1>
 <h2 id="Problem-Formulation：">Problem Formulation：</h2>
 <p>​	首先对于宏布局问题 --&gt; 没有重叠和线长最小 --&gt; MDP</p>
-<p><img src="/2024/03/01/DeepPR/Zuasbqf6uojUJMxAZWkcBVXEnue-1716625506837.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/Zuasbqf6uojUJMxAZWkcBVXEnue-1716625506837.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/01/DeepPR/Zuasbqf6uojUJMxAZWkcBVXEnue-1716625506837.png" data-srcset="/2024/03/01/DeepPR/Zuasbqf6uojUJMxAZWkcBVXEnue-1716625506837.png"></p>
 <p>​	<strong>MDP:</strong></p>
 <p>​	State <em>st</em>:</p>
 <p>​	全局图像 I --&gt; 全局图像 I 是对芯片画布的抽象表示，类比为一个二进制图像，其中每个位置都可以被标记为 1（已被占用）或 0（空闲）。这里将芯片的布局问题比喻为一个棋盘游戏（例如，象棋或围棋），其中需要决定宏单元（棋子）的放置位置。因此，全局图像 I 是一个表示已占用和空闲位置的二进制图像，通过这种方式来描述宏单元的布局。</p>
@@ -634,7 +669,7 @@ mjx-container[display="true"] + br {
 <p>​	Policy：</p>
 <p>​	邻近策略优化 PPO(Proximal Policy Optimization)</p>
 <h2 id="The-Structure-of-Policy-Network">The Structure of Policy Network</h2>
-<p><img src="/2024/03/01/DeepPR/ZdClbbEW7oR4z2xirjrcBhxJnhd-1716625506837.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/ZdClbbEW7oR4z2xirjrcBhxJnhd-1716625506837.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/01/DeepPR/ZdClbbEW7oR4z2xirjrcBhxJnhd-1716625506837.png" data-srcset="/2024/03/01/DeepPR/ZdClbbEW7oR4z2xirjrcBhxJnhd-1716625506837.png"></p>
 <p>​	将当前状态表示为图像，用 CNN 和 GNN 进行全局详细信息 embed，生成 Action 的概率分布。</p>
 <ol>
 <li class="lvl-3">
@@ -662,13 +697,13 @@ mjx-container[display="true"] + br {
 <h2 id="Reward-Design（奖励设计）">Reward Design（奖励设计）</h2>
 <h3 id="Extrinsic-Reward-Design（外在奖励设计）">Extrinsic Reward Design（外在奖励设计）</h3>
 <p>​	定义了线长和拥塞的成本函数：</p>
-<p><img src="/2024/03/01/DeepPR/PS71bPk24o6aQdxgjtRc7ecDnOJ-1716625506837.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/PS71bPk24o6aQdxgjtRc7ecDnOJ-1716625506837.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/01/DeepPR/PS71bPk24o6aQdxgjtRc7ecDnOJ-1716625506837.png" data-srcset="/2024/03/01/DeepPR/PS71bPk24o6aQdxgjtRc7ecDnOJ-1716625506837.png"></p>
 <p>​	线长公式：</p>
-<p><img src="/2024/03/01/DeepPR/CqrCbCVYYoycltxZ8Xqck0F6nxg-1716625506838.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/CqrCbCVYYoycltxZ8Xqck0F6nxg-1716625506838.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/01/DeepPR/CqrCbCVYYoycltxZ8Xqck0F6nxg-1716625506838.png" data-srcset="/2024/03/01/DeepPR/CqrCbCVYYoycltxZ8Xqck0F6nxg-1716625506838.png"></p>
 <p>​	拥塞公式：</p>
 <p>​	使用矩形均匀线密度（RUDY） 实验中设置拥塞阈值为 0.1</p>
 <h3 id="Intrinsic-Reward-Design（内在奖励设计）">Intrinsic Reward Design（内在奖励设计）</h3>
-<p><img src="/2024/03/01/DeepPR/GT4Qb7TITofYypx3P3bc15jXnWh-1716625506838.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/GT4Qb7TITofYypx3P3bc15jXnWh-1716625506838.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/01/DeepPR/GT4Qb7TITofYypx3P3bc15jXnWh-1716625506838.png" data-srcset="/2024/03/01/DeepPR/GT4Qb7TITofYypx3P3bc15jXnWh-1716625506838.png"></p>
 <p>​		随机网络蒸馏(RND)涉及到两个网络，目标网络和预测网络。</p>
 <p>​		题外话，介绍一下目标网络和预测网络作用：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Answer from Chatgpt</span></span><br></pre></td></tr></table></figure>
@@ -712,28 +747,28 @@ mjx-container[display="true"] + br {
 <p>​		Policy : PPO</p>
 <p>​		Backbone : GCN --&gt; 一层 16 feature 一层 32 feature</p>
 <p>​		Lr : 2.5 × 10−4</p>
-<p><img src="/2024/03/01/DeepPR/S3l2bHY8vo0TZ4xAtNacRcz5njb-1716625506838.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/S3l2bHY8vo0TZ4xAtNacRcz5njb-1716625506838.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/01/DeepPR/S3l2bHY8vo0TZ4xAtNacRcz5njb-1716625506838.png" data-srcset="/2024/03/01/DeepPR/S3l2bHY8vo0TZ4xAtNacRcz5njb-1716625506838.png"></p>
 <h2 id="Pretraining">Pretraining</h2>
 <p>​		仅由宏(Macors)之间的连接组成网表训练策略(Policy)网络，为后续任务微调此预训练策略。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Answer from Chatgpt</span></span><br><span class="line">promot:{原文.....解释一下这段中预训练的故事吗}</span><br></pre></td></tr></table></figure>
-<p><img src="/2024/03/01/DeepPR/P31fbwjYdobI67xQkLKcSKR3nAd-1716625506838.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/P31fbwjYdobI67xQkLKcSKR3nAd-1716625506838.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/01/DeepPR/P31fbwjYdobI67xQkLKcSKR3nAd-1716625506838.png" data-srcset="/2024/03/01/DeepPR/P31fbwjYdobI67xQkLKcSKR3nAd-1716625506838.png"></p>
 <p>我觉得说得很有道理</p>
 <h2 id="Results-on-Joint-Macro-Standard-cell-Placement（布局结果）">Results on Joint Macro/Standard cell Placement（布局结果）</h2>
 <h3 id="Comparison-of-agents-pre-trained-on-circuit-adaptec1（预训练迭代次数对比）：">Comparison of agents pre-trained on circuit adaptec1（预训练迭代次数对比）：</h3>
-<p><img src="/2024/03/01/DeepPR/YyXbbnNvCoROtJxWbeUcaiq9nae-1716625506838.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/YyXbbnNvCoROtJxWbeUcaiq9nae-1716625506838.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/01/DeepPR/YyXbbnNvCoROtJxWbeUcaiq9nae-1716625506838.png" data-srcset="/2024/03/01/DeepPR/YyXbbnNvCoROtJxWbeUcaiq9nae-1716625506838.png"></p>
 <p>​		为 300 迭代时候效果最优。500 迭代可能过拟合了。</p>
 <h3 id="Comparison-on-macro-standard-cell-placement-task-on-circuits-from-ISPD-2005（布局任务对比）：">Comparison on macro/standard cell placement task on circuits from ISPD-2005（布局任务对比）：</h3>
-<p><img src="/2024/03/01/DeepPR/K07jbI9Hqo7FjtxWFWucK1Qbnrc-1716625506838.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/K07jbI9Hqo7FjtxWFWucK1Qbnrc-1716625506838.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/01/DeepPR/K07jbI9Hqo7FjtxWFWucK1Qbnrc-1716625506838.png" data-srcset="/2024/03/01/DeepPR/K07jbI9Hqo7FjtxWFWucK1Qbnrc-1716625506838.png"></p>
 <h3 id="Runtime-breakdown-and-comparison-with-classical-placer-on-eight-circuits-from-ISPD-2005（时间对比）：">Runtime breakdown and comparison with classical placer on eight circuits from ISPD-2005（时间对比）：</h3>
-<p><img src="/2024/03/01/DeepPR/VdeFbiay9oNEY8xXpcbcfkdJnzB-1716625506838.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/VdeFbiay9oNEY8xXpcbcfkdJnzB-1716625506838.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/01/DeepPR/VdeFbiay9oNEY8xXpcbcfkdJnzB-1716625506838.png" data-srcset="/2024/03/01/DeepPR/VdeFbiay9oNEY8xXpcbcfkdJnzB-1716625506838.png"></p>
 <h3 id="Visualization-of-macro-in-orange-standard-cell-in-blue-placement-by-our-DeepPlace-on-circuits-adaptec3-and-bigblue1-from-ISPD-2005（可视化结果）：">Visualization of macro (in orange) /standard cell (in blue) placement by our DeepPlace on circuits adaptec3 and bigblue1 from ISPD-2005（可视化结果）：</h3>
-<p><img src="/2024/03/01/DeepPR/Uj1SbnrR2oMhcxx7bwCclQ5anKe-1716625506838.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/Uj1SbnrR2oMhcxx7bwCclQ5anKe-1716625506838.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/01/DeepPR/Uj1SbnrR2oMhcxx7bwCclQ5anKe-1716625506838.png" data-srcset="/2024/03/01/DeepPR/Uj1SbnrR2oMhcxx7bwCclQ5anKe-1716625506838.png"></p>
 <h2 id="Results-on-Joint-Placement-and-Routing（布线布局联邦结果）：">Results on Joint Placement and Routing（布线布局联邦结果）：</h2>
 <h3 id="Final-wirelength-comparison-for-joint-placement-and-routing-problem-on-ISPD-2005-benchmark（HWPL-参数对比）：">Final wirelength comparison for joint placement and routing problem on ISPD-2005 benchmark（HWPL 参数对比）：</h3>
-<p><img src="/2024/03/01/DeepPR/BDrQbvLUvoHdnYx3tuucz5iEn3c-1716625506838.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/BDrQbvLUvoHdnYx3tuucz5iEn3c-1716625506838.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/01/DeepPR/BDrQbvLUvoHdnYx3tuucz5iEn3c-1716625506838.png" data-srcset="/2024/03/01/DeepPR/BDrQbvLUvoHdnYx3tuucz5iEn3c-1716625506838.png"></p>
 <h2 id="Ablation-Study（消融实验）：">Ablation Study（消融实验）：</h2>
 <p>​		三种消融实验对比 --&gt; 证明随机网络蒸馏(RND)有效性</p>
-<p><img src="/2024/03/01/DeepPR/SbaSb6eeHouUgNxDXtocFSWQnjg.png" class="lazyload placeholder" data-srcset="/2024/03/01/DeepPR/SbaSb6eeHouUgNxDXtocFSWQnjg.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/01/DeepPR/SbaSb6eeHouUgNxDXtocFSWQnjg.png" data-srcset="/2024/03/01/DeepPR/SbaSb6eeHouUgNxDXtocFSWQnjg.png"></p>
 
       </div>
       <div class="post-tags-categories">
@@ -1567,7 +1602,7 @@ Introduction
       
         
           <div class="footer-copyright">
-            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> </p>
+            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a></p>
 
           </div>
         

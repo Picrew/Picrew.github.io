@@ -41,6 +41,41 @@
                 display: none;
             }
         }
+        .header .header-content .navbar .ui-lang-toggle {
+            -webkit-appearance: none;
+            appearance: none;
+            border: 0;
+            outline: 0;
+            background: transparent;
+            box-shadow: none;
+            color: #fff;
+            height: 60px;
+            min-width: 48px;
+            margin: 0;
+            padding: 0 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            font: inherit;
+            font-size: 16px;
+            line-height: 1;
+            white-space: nowrap;
+            cursor: pointer;
+            vertical-align: top;
+        }
+        .header .header-content .navbar .ui-lang-toggle:hover,
+        .header .header-content .navbar .ui-lang-toggle:focus {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        .header .header-content .navbar .ui-lang-toggle i {
+            font-size: 18px;
+            line-height: 1;
+        }
+        .header .header-content .navbar .ui-lang-toggle span {
+            display: inline-block;
+            line-height: 1;
+        }
     </style>
     
 
@@ -551,7 +586,7 @@ mjx-container[display="true"] + br {
     <article class="post post-detail">
       <div class="post-content">
         <h1>Maskplace</h1>
-<p><img src="/2024/02/26/MaskPlace/AXSZbaXd3oiN0IxuzCmcfmQrnhb-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/AXSZbaXd3oiN0IxuzCmcfmQrnhb-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/02/26/MaskPlace/AXSZbaXd3oiN0IxuzCmcfmQrnhb-1716624950943.png" data-srcset="/2024/02/26/MaskPlace/AXSZbaXd3oiN0IxuzCmcfmQrnhb-1716624950943.png"></p>
 <h1>Introduction</h1>
 <p>​	芯片布局方法分为两种，一种是<strong>传统的基于优化方法</strong>(classic optimization based approaches),第二种是<strong>基于学习的方法</strong>(learning-based approaches)</p>
 <p>​	**基础优化：**一对向量(x,y)表示在 2D 上模块坐标值，布局目标函数为 min[WL(x,y)],服从 D(x,y)&lt;=α（保证所以模块不重叠）。WL 为线长的估计函数，D 为密度的估计函数。</p>
@@ -560,7 +595,7 @@ mjx-container[display="true"] + br {
 <p>​	**基于学习的方法：**RL 将布局作为顺序决策(sequential decision-making)问题解决</p>
 <p>​	比如 Graph Placement 和 DeepPR 将网格(netlist)表示为超图(hypergraph)–&gt;G = (V, E),V 是一组节点，每个节点是一个模块，E 是一组边，是连接模块之间的导线。</p>
 <p>​	问题：超图(hypergraph)不能全面编码(encode)网表信息，比如 relative positions (offsets)被丢失了。没有这些引脚(pin)信息，线长是不准确的，但是全部编码会比较复杂。在 Graph placement 里面用 RL 放置 15% 的模块减少计算；DeepPR 中减少模块和芯片画布的大小（分辨率）。</p>
-<p><img src="/2024/02/26/MaskPlace/OX7RbTLNEop9zhxpyvrcie2mnhg-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/OX7RbTLNEop9zhxpyvrcie2mnhg-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/02/26/MaskPlace/OX7RbTLNEop9zhxpyvrcie2mnhg-1716624950943.png" data-srcset="/2024/02/26/MaskPlace/OX7RbTLNEop9zhxpyvrcie2mnhg-1716624950943.png"></p>
 <p>​	<strong>MaskPlace 方法</strong>：将布局转化成像素级视觉表示学习问题(pixel-level visual representation learning)–&gt;224 X 224</p>
 <p>​	文中总结贡献：</p>
 <p>1.芯片布局重新定义为一个学习视觉表示的问题 以全面描述芯片上数百万个电路模块</p>
@@ -568,7 +603,7 @@ mjx-container[display="true"] + br {
 <p>3.MaskPlace优于最近的先进方法在24个公共芯片基准测试。</p>
 <h1>Preliminary and Notation</h1>
 <p><strong>评估指标:HPWL</strong></p>
-<p><img src="/2024/02/26/MaskPlace/PY2vbSVMkoFUEZx31rIcC64pncb-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/PY2vbSVMkoFUEZx31rIcC64pncb-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/02/26/MaskPlace/PY2vbSVMkoFUEZx31rIcC64pncb-1716624950943.png" data-srcset="/2024/02/26/MaskPlace/PY2vbSVMkoFUEZx31rIcC64pncb-1716624950943.png"></p>
 <p>HPWL 计算 Step:</p>
 <ol>
 <li class="lvl-3">
@@ -590,8 +625,8 @@ mjx-container[display="true"] + br {
 <p>将所有网络的半周长加在一起，得到整个芯片的总 HPWL。</p>
 </li>
 </ol>
-<p><img src="/2024/02/26/MaskPlace/ZZmGbhb9HotrtbxQbeaczixsngf-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/ZZmGbhb9HotrtbxQbeaczixsngf-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p><img src="/2024/02/26/MaskPlace/XnjybIElto8ijkxnIR7c41d3nQe-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/XnjybIElto8ijkxnIR7c41d3nQe-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/02/26/MaskPlace/ZZmGbhb9HotrtbxQbeaczixsngf-1716624950943.png" data-srcset="/2024/02/26/MaskPlace/ZZmGbhb9HotrtbxQbeaczixsngf-1716624950943.png"></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/02/26/MaskPlace/XnjybIElto8ijkxnIR7c41d3nQe-1716624950943.png" data-srcset="/2024/02/26/MaskPlace/XnjybIElto8ijkxnIR7c41d3nQe-1716624950943.png"></p>
 <p><strong>拥塞（Congestion）计算：</strong></p>
 <p>​	在 RUDY 方法中，每个网格单元需要累加覆盖该单元的所有网络边界盒的高度和宽度的倒数（1/h + 1/w），然后取所有网格单元中的最大值。</p>
 <ol>
@@ -622,21 +657,21 @@ mjx-container[display="true"] + br {
 <h1>Approach</h1>
 <h2 id="模型框架-Model-Architecture-Overview">模型框架(Model Architecture Overview):</h2>
 <p>​	布局过程可用马尔可夫决策过程(MDP)表示,训练一个策略 policy πθ(at|st)，价值函数 Vφ(st)，以先前 observations 和 actions 为输入，选择 actions 为输出。<br>
-<img src="/2024/02/26/MaskPlace/YqZTb4xNtoA2qyxRMjZcuELznyh-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/YqZTb4xNtoA2qyxRMjZcuELznyh-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/02/26/MaskPlace/YqZTb4xNtoA2qyxRMjZcuELznyh-1716624950943.png" data-srcset="/2024/02/26/MaskPlace/YqZTb4xNtoA2qyxRMjZcuELznyh-1716624950943.png"></p>
 <h2 id="Position-Mask-位置掩码-：">Position Mask(位置掩码)：</h2>
 <p>​	224 X 224 画布网格，1 表示为模块可放置的可行位置（既绿色位置）：</p>
-<p><img src="/2024/02/26/MaskPlace/B0EJbWQuWo4wgixZoBYcEjOUnHf-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/B0EJbWQuWo4wgixZoBYcEjOUnHf-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/02/26/MaskPlace/B0EJbWQuWo4wgixZoBYcEjOUnHf-1716624950943.png" data-srcset="/2024/02/26/MaskPlace/B0EJbWQuWo4wgixZoBYcEjOUnHf-1716624950943.png"></p>
 <p><strong>作用：保证模块之间没有重叠（即，满足重叠约束）并学习布局和线长之间的关系。</strong></p>
 <h2 id="Wire-Mask-线路编码-：">Wire Mask(线路编码)：</h2>
 <p>​		一个连续的矩阵，用于表示如果我们在特定位置放置一个模块_Mt_，半周长线长(HPWL)会增加多少：</p>
 <p>​		1.计算每个候选位置的 HPWL。这个过程本质上是 <em>O</em>(<em>N2P</em>) 复杂度的，其中 <em>N</em> 是候选位置的数量，<em>P</em> 是引脚的总数。</p>
 <p>​		2.使用快速算法通过考虑引脚偏移、网络边界框以及 HPWL 度量的线性特性来降低计算复杂度。这意味着，通过调整网络边界框相对于引脚位置的关系，可以更快地计算出 HPWL。</p>
-<p><img src="/2024/02/26/MaskPlace/W1mabDniro4r9FxZQircDGMDnQb-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/W1mabDniro4r9FxZQircDGMDnQb-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/02/26/MaskPlace/W1mabDniro4r9FxZQircDGMDnQb-1716624950943.png" data-srcset="/2024/02/26/MaskPlace/W1mabDniro4r9FxZQircDGMDnQb-1716624950943.png"></p>
 <p>​	<strong>作用：目的是找到一个位置，使得增加的线长最小。</strong></p>
 <h2 id="View-Mask（视图掩码）：">View Mask（视图掩码）：</h2>
 <p>​		一种观察当前芯片布局的全局掩码，它是一个大小为 224×224224×224 的矩阵，其中每个元素的值为 0 或 1。在这个矩阵中，值为 “1” 表示相应的网格单元已被一个模块占据。​		在处理芯片布局时，View Mask 考虑到了模块的真实大小，而不是假设所有模块都具有单位大小。这意味着，如果一个模块的尺寸是宽度 <em>w</em> 乘以高度 ℎ，那么它将占据画布上的[<em>wN/W</em>] X [<em>hN/H</em>]个网格单元。这里，<em>W</em> 和 <em>H</em> 表示画布的总宽度和高度，<em>N</em> 是画布网格单元的数量。</p>
 <h2 id="Learning-Algorithm（学习算法）：">Learning Algorithm（学习算法）：</h2>
-<p><img src="/2024/02/26/MaskPlace/PXghbl4bbodg6CxHM7ScnhQNnFb-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/PXghbl4bbodg6CxHM7ScnhQNnFb-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/02/26/MaskPlace/PXghbl4bbodg6CxHM7ScnhQNnFb-1716624950943.png" data-srcset="/2024/02/26/MaskPlace/PXghbl4bbodg6CxHM7ScnhQNnFb-1716624950943.png"></p>
 <p>​		**1.应用掩码表示电路：**首先，我们应用上述掩码来表示整个电路，并将它们输入到下游网络。在图中，这些掩码包括位置掩码（Position Mask）、两个步骤后的线路掩码（Wire Mask），以及当前布局的视图掩码（View Mask）。</p>
 <p>​		**2.全局特征编码器（Global Feature Encoder）：**然后，全局特征编码器将当前布局的视图掩码和后续两个步骤的线路掩码嵌入到一个嵌入向量中。</p>
 <p>​		**3.结合位置嵌入：**这个嵌入向量与第 t 个电路模块的位置嵌入在值网络中结合，通过全连接层生成一个标量来评估当前状态。</p>
@@ -646,7 +681,7 @@ mjx-container[display="true"] + br {
 <h2 id="Reinforcement-Learning（强化学习）：">Reinforcement Learning（强化学习）：</h2>
 <p>​		采用了演员-评论家（actor-critic）架构和 PPO（Proximal Policy Optimization）算法来训练策略网络。</p>
 <p>分割 N*N 个单元格。</p>
-<p><img src="/2024/02/26/MaskPlace/QfdTbV5nGoQU7BxVKWLcXJlSnsg-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/QfdTbV5nGoQU7BxVKWLcXJlSnsg-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/02/26/MaskPlace/QfdTbV5nGoQU7BxVKWLcXJlSnsg-1716624950943.png" data-srcset="/2024/02/26/MaskPlace/QfdTbV5nGoQU7BxVKWLcXJlSnsg-1716624950943.png"></p>
 <p>​		**策略网络的目标函数（L_policy(θ)）：**它是通过期望值形式来定义的，该函数试图最小化比率 r_t(θ)和优势函数 Â_t 的乘积。比率 r_t(θ)是当前策略和旧策略之间的比值，用于评估当前策略相对于旧策略的性能改进。优势函数 Â_t 是累积折现奖励 G_t 与估计值 V̂_t 的差，用于衡量特定行动的相对价值。</p>
 <p>​		**累积折现奖励（G_t）：**这是一个总和，计算从当前时刻起，未来的奖励值，并通过折扣因子 γ 降低远期奖励的重要性。</p>
 <p>​		**价值网络的目标函数（L_value(φ)）：**价值网络的目标是最小化实际累积奖励与估计累积奖励之间的差的平方。这个差异衡量了价值网络对于当前状态的估计准确性。</p>
@@ -654,7 +689,7 @@ mjx-container[display="true"] + br {
 <p>​		Rt = <strong>HPWL</strong>t−1 −<strong>HPWL</strong>t</p>
 <p>​		与 HPWL 增加相反。</p>
 <h2 id="Training-and-Testing：">Training and Testing：</h2>
-<p><img src="/2024/02/26/MaskPlace/JNh0bz394oaKDmx8RgjceG6InHf-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/JNh0bz394oaKDmx8RgjceG6InHf-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt><br>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/02/26/MaskPlace/JNh0bz394oaKDmx8RgjceG6InHf-1716624950943.png" data-srcset="/2024/02/26/MaskPlace/JNh0bz394oaKDmx8RgjceG6InHf-1716624950943.png"><br>
 Training 之前，根据网络数量，面积和已经放置固定的模块数量对电路模块排序，确定放置顺序。在训练中，我们通过忽略拥塞满意度块来更新每个时期的策略和值网络。当更新值网络时，我们停止了全局掩码编码器中的梯度反向传播，以避免对策略网络的影响。<br>
 Testing 时候针对每一个步骤 t：<br>
 **1.获取概率矩阵：**首先，从策略网络获取一个概率矩阵。<br>
@@ -681,34 +716,34 @@ Testing 时候针对每一个步骤 t：<br>
 <p>Graph Placement、DeepPR</p>
 <h2 id="Benchmark">Benchmark:</h2>
 <p>ISPD2005、IBM benchmark、Ariane RISC-V CPU design</p>
-<p><img src="/2024/02/26/MaskPlace/image.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/image.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/02/26/MaskPlace/image.png" data-srcset="/2024/02/26/MaskPlace/image.png"></p>
 <h2 id="Main-Results：">Main Results：</h2>
 <p>所有宏的 HPWL 结果</p>
-<p><img src="/2024/02/26/MaskPlace/HkMgb23KYons3yxxETjcb2FInDb-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/HkMgb23KYons3yxxETjcb2FInDb-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/02/26/MaskPlace/HkMgb23KYons3yxxETjcb2FInDb-1716624950943.png" data-srcset="/2024/02/26/MaskPlace/HkMgb23KYons3yxxETjcb2FInDb-1716624950943.png"></p>
 <h2 id="Compare-to-Graph-Representation：">Compare to Graph Representation：</h2>
 <p>与 Graph Placement 在 HPWL（半周线长）, congestion（拥塞）, density（密度）, overlap area ratio（重叠面积比）这四个方向比较。</p>
-<p><img src="/2024/02/26/MaskPlace/UWjSbJowKobxz9xvE96ckJEsnQd-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/UWjSbJowKobxz9xvE96ckJEsnQd-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/02/26/MaskPlace/UWjSbJowKobxz9xvE96ckJEsnQd-1716624950943.png" data-srcset="/2024/02/26/MaskPlace/UWjSbJowKobxz9xvE96ckJEsnQd-1716624950943.png"></p>
 <h2 id="Routing-Wirelength："><strong>Routing Wirelength：</strong></h2>
 <p>与 DeepPR 在 routing wirelength（布线线长）。</p>
-<p><img src="/2024/02/26/MaskPlace/NHeybPTNioqKdDxzx1vcXe8tnbd-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/NHeybPTNioqKdDxzx1vcXe8tnbd-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/02/26/MaskPlace/NHeybPTNioqKdDxzx1vcXe8tnbd-1716624950943.png" data-srcset="/2024/02/26/MaskPlace/NHeybPTNioqKdDxzx1vcXe8tnbd-1716624950943.png"></p>
 <h2 id="Standard-Cells："><strong>Standard Cells：</strong></h2>
 <p>与 DeepPR、DREAMPlace 比较 macros（宏）和 standard cells（标准单元）的 HPWL。</p>
-<p><img src="/2024/02/26/MaskPlace/QNCVbESv8ow5qyx1TsDcxJrsnlb-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/QNCVbESv8ow5qyx1TsDcxJrsnlb-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/02/26/MaskPlace/QNCVbESv8ow5qyx1TsDcxJrsnlb-1716624950943.png" data-srcset="/2024/02/26/MaskPlace/QNCVbESv8ow5qyx1TsDcxJrsnlb-1716624950943.png"></p>
 <h2 id="Placement-w-o-real-size："><strong>Placement w/o real size：</strong></h2>
 <p>考虑到 DeepPR 忽略了模块大小，我们在相同的设置中实现 MaskPlace。</p>
-<p><img src="/2024/02/26/MaskPlace/JHzXbt8zvoYbEHxFZGUcZHxln3b-1716624950943.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/JHzXbt8zvoYbEHxFZGUcZHxln3b-1716624950943.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/02/26/MaskPlace/JHzXbt8zvoYbEHxFZGUcZHxln3b-1716624950943.png" data-srcset="/2024/02/26/MaskPlace/JHzXbt8zvoYbEHxFZGUcZHxln3b-1716624950943.png"></p>
 <h2 id="Transferability：">Transferability：</h2>
 <p>在 adaptec1 训练得到的模型在其他数据集上效果，验证可移植性。</p>
-<p><img src="/2024/02/26/MaskPlace/Q8DdbPTx6oLzBgxNWiKchdCDnFe-1716624950944.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/Q8DdbPTx6oLzBgxNWiKchdCDnFe-1716624950944.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/02/26/MaskPlace/Q8DdbPTx6oLzBgxNWiKchdCDnFe-1716624950944.png" data-srcset="/2024/02/26/MaskPlace/Q8DdbPTx6oLzBgxNWiKchdCDnFe-1716624950944.png"></p>
 <h2 id="Efficiency：">Efficiency：</h2>
 <p>不同方法下推理（inference）效率。</p>
-<p><img src="/2024/02/26/MaskPlace/R4IHbgwtqogkcuxAMQtcaZu5n6c-1716624950944.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/R4IHbgwtqogkcuxAMQtcaZu5n6c-1716624950944.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/02/26/MaskPlace/R4IHbgwtqogkcuxAMQtcaZu5n6c-1716624950944.png" data-srcset="/2024/02/26/MaskPlace/R4IHbgwtqogkcuxAMQtcaZu5n6c-1716624950944.png"></p>
 <h2 id="Ablation-Study：">Ablation Study：</h2>
 <p>w/o 网络数量等一系列消融实验。</p>
-<p><img src="/2024/02/26/MaskPlace/QIAObCYcWoQ0y7xXUBxcT76ZnOc-1716624950944.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/QIAObCYcWoQ0y7xXUBxcT76ZnOc-1716624950944.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/02/26/MaskPlace/QIAObCYcWoQ0y7xXUBxcT76ZnOc-1716624950944.png" data-srcset="/2024/02/26/MaskPlace/QIAObCYcWoQ0y7xXUBxcT76ZnOc-1716624950944.png"></p>
 <h2 id="Congestion-Satisfaction：">Congestion Satisfaction：</h2>
 <p>评估 congestion（拥塞）满意度。</p>
-<p><img src="/2024/02/26/MaskPlace/Y1o8bCuBsob9h7xEMroc9RDMnie.png" class="lazyload placeholder" data-srcset="/2024/02/26/MaskPlace/Y1o8bCuBsob9h7xEMroc9RDMnie.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/02/26/MaskPlace/Y1o8bCuBsob9h7xEMroc9RDMnie.png" data-srcset="/2024/02/26/MaskPlace/Y1o8bCuBsob9h7xEMroc9RDMnie.png"></p>
 
       </div>
       <div class="post-tags-categories">
@@ -1544,7 +1579,7 @@ Introduction
       
         
           <div class="footer-copyright">
-            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> </p>
+            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a></p>
 
           </div>
         

@@ -41,6 +41,41 @@
                 display: none;
             }
         }
+        .header .header-content .navbar .ui-lang-toggle {
+            -webkit-appearance: none;
+            appearance: none;
+            border: 0;
+            outline: 0;
+            background: transparent;
+            box-shadow: none;
+            color: #fff;
+            height: 60px;
+            min-width: 48px;
+            margin: 0;
+            padding: 0 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            font: inherit;
+            font-size: 16px;
+            line-height: 1;
+            white-space: nowrap;
+            cursor: pointer;
+            vertical-align: top;
+        }
+        .header .header-content .navbar .ui-lang-toggle:hover,
+        .header .header-content .navbar .ui-lang-toggle:focus {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        .header .header-content .navbar .ui-lang-toggle i {
+            font-size: 18px;
+            line-height: 1;
+        }
+        .header .header-content .navbar .ui-lang-toggle span {
+            display: inline-block;
+            line-height: 1;
+        }
     </style>
     
 
@@ -551,7 +586,7 @@ mjx-container[display="true"] + br {
     <article class="post post-detail">
       <div class="post-content">
         <h1>AutoDMP: Automated DREAMPlace-based Macro Placement</h1>
-<p><img src="/2024/03/28/AutoDMP/ESP0bqgX4obytOx7CT2cPgnknWb-1716626740132.png" class="lazyload placeholder" data-srcset="/2024/03/28/AutoDMP/ESP0bqgX4obytOx7CT2cPgnknWb-1716626740132.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/28/AutoDMP/ESP0bqgX4obytOx7CT2cPgnknWb-1716626740132.png" data-srcset="/2024/03/28/AutoDMP/ESP0bqgX4obytOx7CT2cPgnknWb-1716626740132.png"></p>
 <h1>Introduction</h1>
 <p>​		宏对芯片布局产生较大影响，需要优先关注宏布局。设计目标有线长、功率和面积。讲布局问题分解为先放置宏单元，再放置标准单元。</p>
 <p>​		混合布局方法，比两阶段布局更有前景。宏单元合法化(macro legalization)对混合布局来说有挑战性 --&gt; 特别是宏单元紧密封装。所以需要新的有效和高效设计空间探索技术。</p>
@@ -714,21 +749,21 @@ $$</p>
 <hr>
 <h2 id="Parameter-Space">Parameter Space</h2>
 <p>列出 DREAMPlace 16 个参数 eg.表 1：</p>
-<p><img src="/2024/03/28/AutoDMP/GIaAbYwSQo9wiRxxQ5FcAsUJnMt-1716626740133.png" class="lazyload placeholder" data-srcset="/2024/03/28/AutoDMP/GIaAbYwSQo9wiRxxQ5FcAsUJnMt-1716626740133.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/28/AutoDMP/GIaAbYwSQo9wiRxxQ5FcAsUJnMt-1716626740133.png" data-srcset="/2024/03/28/AutoDMP/GIaAbYwSQo9wiRxxQ5FcAsUJnMt-1716626740133.png"></p>
 <p>​		在此基础上，提出了新的参数，解决合法化问题。</p>
 <h3 id="Default-DREAMPlace-Parameters">Default DREAMPlace Parameters</h3>
 <p>​		调整学习率(LR)、衰减、梯度下降优化器。</p>
 <h3 id="Initial-Locations">Initial Locations</h3>
 <p>​		开始放置时，宏单元和标准单元集中在一个位置，最大限度减少线长。随着密度项拉格朗日乘子逐渐增加，单元扩散，在全局布局结束时候达到最小势能配置。​		DREAMPlace 最初将单元格和宏的所有初始位置设置在平面图的中心，eg.图 1：</p>
-<p><img src="/2024/03/28/AutoDMP/P5ScbmTRdoKvrwxhXEUc7OoTnAg-1716626740133.png" class="lazyload placeholder" data-srcset="/2024/03/28/AutoDMP/P5ScbmTRdoKvrwxhXEUc7OoTnAg-1716626740133.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/28/AutoDMP/P5ScbmTRdoKvrwxhXEUc7OoTnAg-1716626740133.png" data-srcset="/2024/03/28/AutoDMP/P5ScbmTRdoKvrwxhXEUc7OoTnAg-1716626740133.png"></p>
 <p>​		调整初始位置显著影响最终排列形状。宏单元是第一个展开，梯度通常也是最显著且稳定，决定标准单元布局位置。</p>
 <p>​		为了扩大布局多样性，引入了两个参数来设置初始单元的位置作为布局的宽度和高度的百分比。遵循高斯分布的噪声也被添加到初始位置以避免零初始梯度。</p>
 <h3 id="Macro-Halos">Macro Halos</h3>
 <p>​		对 DREAMPlace 中宏单元合法性问题解决。​		在宏单元边界加光晕，保留足够空间。eg.图 2：<br>
-<img src="/2024/03/28/AutoDMP/GZ72bKzN7okfu5xAeazcKq7ynST-1716626740133.png" class="lazyload placeholder" data-srcset="/2024/03/28/AutoDMP/GZ72bKzN7okfu5xAeazcKq7ynST-1716626740133.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/28/AutoDMP/GZ72bKzN7okfu5xAeazcKq7ynST-1716626740133.png" data-srcset="/2024/03/28/AutoDMP/GZ72bKzN7okfu5xAeazcKq7ynST-1716626740133.png"></p>
 <h3 id="Parameters’-Effect">Parameters’ Effect</h3>
 <p>​	进行了敏感性分析，证明选择表 1 参数。eg.表 1：</p>
-<p><img src="/2024/03/28/AutoDMP/E1lJbnBCnoI7z7xtFJocWssnnDe-1716626740133.png" class="lazyload placeholder" data-srcset="/2024/03/28/AutoDMP/E1lJbnBCnoI7z7xtFJocWssnnDe-1716626740133.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/28/AutoDMP/E1lJbnBCnoI7z7xtFJocWssnnDe-1716626740133.png" data-srcset="/2024/03/28/AutoDMP/E1lJbnBCnoI7z7xtFJocWssnnDe-1716626740133.png"></p>
 <hr>
 <h2 id="Design-Space-Exploration">Design Space Exploration</h2>
 <h3 id="MOTPE">MOTPE</h3>
@@ -741,7 +776,7 @@ $$</p>
 </li>
 <li class="lvl-3">
 <p>在采样过程结束时，从 Pareto 前沿选择最有前途的候选解，并在 EDA 工具内进行更高级的评估，包括线长、时序和功率等指标。如果中间的 PPA 质量非常不满意，可以提前终止 EDA 流程。<br>
-eg.图 3：<img src="/2024/03/28/AutoDMP/INTfbDsvloSNtsxccebcZ29Fn1b-1716626740133.png" class="lazyload placeholder" data-srcset="/2024/03/28/AutoDMP/INTfbDsvloSNtsxccebcZ29Fn1b-1716626740133.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt><br>
+eg.图 3：<img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/28/AutoDMP/INTfbDsvloSNtsxccebcZ29Fn1b-1716626740133.png" data-srcset="/2024/03/28/AutoDMP/INTfbDsvloSNtsxccebcZ29Fn1b-1716626740133.png"><br>
 概念上显示了两级探索方法。</p>
 <ul class="lvl-2">
 <li class="lvl-5">左边的区域表示通过DREAMPlace参数调整进行搜索的空间。</li>
@@ -757,7 +792,7 @@ eg.图 3：<img src="/2024/03/28/AutoDMP/INTfbDsvloSNtsxccebcZ29Fn1b-17166267401
 </li>
 <li class="lvl-2">
 <p>解决方案：使用 k 均值聚类方法来减少候选解的数量，聚类 3D Pareto 点。接近目标代理空间的点对应于外观相似的布局。<br>
-eg.图 4：<img src="/2024/03/28/AutoDMP/VWlxbGk9Log5Q1xvOgrcqC5Sn3f-1716626740133.png" class="lazyload placeholder" data-srcset="/2024/03/28/AutoDMP/VWlxbGk9Log5Q1xvOgrcqC5Sn3f-1716626740133.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt><br>
+eg.图 4：<img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/28/AutoDMP/VWlxbGk9Log5Q1xvOgrcqC5Sn3f-1716626740133.png" data-srcset="/2024/03/28/AutoDMP/VWlxbGk9Log5Q1xvOgrcqC5Sn3f-1716626740133.png"><br>
 展示了评估过程中的一个基准测试的宏布局候选选择过程：</p>
 <ul class="lvl-2">
 <li class="lvl-4">图中灰色点表示采样点，绿色点表示Pareto点，红色点表示通过k均值聚类选择的候选解。</li>
@@ -767,7 +802,7 @@ eg.图 4：<img src="/2024/03/28/AutoDMP/VWlxbGk9Log5Q1xvOgrcqC5Sn3f-17166267401
 </ul>
 <h2 id="Infrastructure">Infrastructure</h2>
 <p>Flow show eg.图 5：</p>
-<p><img src="/2024/03/28/AutoDMP/QD2cbOnYjoZsNkxxXI0cpM7an6g-1716626740133.png" class="lazyload placeholder" data-srcset="/2024/03/28/AutoDMP/QD2cbOnYjoZsNkxxXI0cpM7an6g-1716626740133.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/28/AutoDMP/QD2cbOnYjoZsNkxxXI0cpM7an6g-1716626740133.png" data-srcset="/2024/03/28/AutoDMP/QD2cbOnYjoZsNkxxXI0cpM7an6g-1716626740133.png"></p>
 <hr>
 <h1>Experiments</h1>
 <p>AutoDMP 框架是在 DREAMPlace 和 ABCDPlace 之上开发的。Flow 流程遵循 TILOS 宏布局流程。实现 Cadence Innovus 21.15 完成。RTL 设计使用 Cadence Genus 21.14 生成。</p>
@@ -778,23 +813,23 @@ eg.图 4：<img src="/2024/03/28/AutoDMP/VWlxbGk9Log5Q1xvOgrcqC5Sn3f-17166267401
 <h2 id="Benchmark-Results">Benchmark Results</h2>
 <h3 id="布线优化结果报告">布线优化结果报告</h3>
 <p>布线优化后的结果报告，主要检查时序(timing)、设计规则检查违规(design rule check --&gt; DRC)、功耗(Power)和布线长度(routed wirelength)。虽然是报告了 PPA(功耗，性能，面积)之一，但其他两个参数也令人满意。eg.图 4:</p>
-<p><img src="/2024/03/28/AutoDMP/N3tyb5JXPoyvFvxGdxwc7CNQnug-1716626740133.png" class="lazyload placeholder" data-srcset="/2024/03/28/AutoDMP/N3tyb5JXPoyvFvxGdxwc7CNQnug-1716626740133.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/28/AutoDMP/N3tyb5JXPoyvFvxGdxwc7CNQnug-1716626740133.png" data-srcset="/2024/03/28/AutoDMP/N3tyb5JXPoyvFvxGdxwc7CNQnug-1716626740133.png"></p>
 <p>​		显示 BlackParrot 的宏放置都具有一致的质量。</p>
 <h3 id="AutoDMP-算法可行性验证">AutoDMP 算法可行性验证</h3>
 <p>​		表 2 展示了使用 AutoDMP 放置和使用参考 TILOS 流程得到的放置的 PPA 结果。TILOS 流程采用了 Innovus 以顺序 full placement 方式。eg.表 2：</p>
-<p><img src="/2024/03/28/AutoDMP/OvaebIcXKo4sp1xWFsecZHHhnNf-1716626740133.png" class="lazyload placeholder" data-srcset="/2024/03/28/AutoDMP/OvaebIcXKo4sp1xWFsecZHHhnNf-1716626740133.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/28/AutoDMP/OvaebIcXKo4sp1xWFsecZHHhnNf-1716626740133.png" data-srcset="/2024/03/28/AutoDMP/OvaebIcXKo4sp1xWFsecZHHhnNf-1716626740133.png"></p>
 <p>​		此处只是为了证明方法可行性。</p>
 <h3 id="Ariane-数据集测试布局对比">Ariane 数据集测试布局对比</h3>
 <p>​		使用 Cadence Innovus 和 AutoDMP 获得的 Ariane 基准测试的布局。eg.图 6：</p>
-<p><img src="/2024/03/28/AutoDMP/Zk8rbpQasoTZ22xg5ODcY0DDnPc-1716626740133.png" class="lazyload placeholder" data-srcset="/2024/03/28/AutoDMP/Zk8rbpQasoTZ22xg5ODcY0DDnPc-1716626740133.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/28/AutoDMP/Zk8rbpQasoTZ22xg5ODcY0DDnPc-1716626740133.png" data-srcset="/2024/03/28/AutoDMP/Zk8rbpQasoTZ22xg5ODcY0DDnPc-1716626740133.png"></p>
 <p>​		宏的放置并没有什么不同，并遵循传统的人性化规则，宏位于外围，远离 IO 引脚，为标准单元留下连续的空间。</p>
 <h3 id="MemPool-Group-基准测试">MemPool Group 基准测试</h3>
 <p>​		使用 Cadence Innovus 和 AutoDMP 得到的 MemPool Group 基准测试的宏和标准单元放置的逻辑到物理映射和单元密度图。eg.图 7：</p>
-<p><img src="/2024/03/28/AutoDMP/T1cXbc8imoMoztxy587ceZmZnUd-1716626740133.png" class="lazyload placeholder" data-srcset="/2024/03/28/AutoDMP/T1cXbc8imoMoztxy587ceZmZnUd-1716626740133.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/28/AutoDMP/T1cXbc8imoMoztxy587ceZmZnUd-1716626740133.png" data-srcset="/2024/03/28/AutoDMP/T1cXbc8imoMoztxy587ceZmZnUd-1716626740133.png"></p>
 <p>​		宏放置和逻辑组的物理排列方式都有相当大的不同。然而，AutoDMP 放置器会像商业工具一样将逻辑单元组物理地放置在一起。差别不大。</p>
 <h3 id="参数可传递性">参数可传递性</h3>
 <p>​		将 NanGate 45 nm 上的 NVDLA 的最佳参数转移到更先进的开源 ASAP 7nm 工艺。只有宏光晕大小通过缩小它们来修改，以匹配新技术。eg.图 8：</p>
-<p><img src="/2024/03/28/AutoDMP/PTzVbqQN8ouZyexfhErcct5in7c-1716626740133.png" class="lazyload placeholder" data-srcset="/2024/03/28/AutoDMP/PTzVbqQN8ouZyexfhErcct5in7c-1716626740133.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/28/AutoDMP/PTzVbqQN8ouZyexfhErcct5in7c-1716626740133.png" data-srcset="/2024/03/28/AutoDMP/PTzVbqQN8ouZyexfhErcct5in7c-1716626740133.png"></p>
 <h2 id="额外展示">额外展示</h2>
 <p>​		在此感谢 TILOS-AI-Institute 对 EDA 布局任务开源贡献</p>
 <p>​		References – <a target="_blank" rel="noopener" href="https://tilos-ai-institute.github.io/MacroPlacement/Docs/OurProgress/#December20">TILOS</a></p>
@@ -804,25 +839,25 @@ eg.图 4：<img src="/2024/03/28/AutoDMP/VWlxbGk9Log5Q1xvOgrcqC5Sn3f-17166267401
 <p><strong>Ariane133-NG45-68%-1.3ns</strong></p>
 </li>
 </ul>
-<p><img src="/2024/03/28/AutoDMP/KGf6bSAUIomRj0x4a4vczu3tn2c-1716626740133.png" class="lazyload placeholder" data-srcset="/2024/03/28/AutoDMP/KGf6bSAUIomRj0x4a4vczu3tn2c-1716626740133.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/28/AutoDMP/KGf6bSAUIomRj0x4a4vczu3tn2c-1716626740133.png" data-srcset="/2024/03/28/AutoDMP/KGf6bSAUIomRj0x4a4vczu3tn2c-1716626740133.png"></p>
 <ul class="lvl-0">
 <li class="lvl-2">
 <p><strong>Ariane133-GF12-68%</strong></p>
 </li>
 </ul>
-<p><img src="/2024/03/28/AutoDMP/P21gbHb4eobuHVxqTokcqfzMnWe-1716626740133.png" class="lazyload placeholder" data-srcset="/2024/03/28/AutoDMP/P21gbHb4eobuHVxqTokcqfzMnWe-1716626740133.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/28/AutoDMP/P21gbHb4eobuHVxqTokcqfzMnWe-1716626740133.png" data-srcset="/2024/03/28/AutoDMP/P21gbHb4eobuHVxqTokcqfzMnWe-1716626740133.png"></p>
 <ul class="lvl-0">
 <li class="lvl-2">
 <p><strong>BlackParrot-NG45-68%-(bp clock)1.3ns</strong></p>
 </li>
 </ul>
-<p><img src="/2024/03/28/AutoDMP/OlxibY78loP8Xfxy5qFc6WmOnhe-1716626740133.png" class="lazyload placeholder" data-srcset="/2024/03/28/AutoDMP/OlxibY78loP8Xfxy5qFc6WmOnhe-1716626740133.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/28/AutoDMP/OlxibY78loP8Xfxy5qFc6WmOnhe-1716626740133.png" data-srcset="/2024/03/28/AutoDMP/OlxibY78loP8Xfxy5qFc6WmOnhe-1716626740133.png"></p>
 <ul class="lvl-0">
 <li class="lvl-2">
 <p><strong>BlackParrot-GF12-68%</strong></p>
 </li>
 </ul>
-<p><img src="/2024/03/28/AutoDMP/XlCybqKWboNqxxxgO0Xc1zuKnYe.png" class="lazyload placeholder" data-srcset="/2024/03/28/AutoDMP/XlCybqKWboNqxxxgO0Xc1zuKnYe.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/28/AutoDMP/XlCybqKWboNqxxxgO0Xc1zuKnYe.png" data-srcset="/2024/03/28/AutoDMP/XlCybqKWboNqxxxgO0Xc1zuKnYe.png"></p>
 
       </div>
       <div class="post-tags-categories">
@@ -1649,7 +1684,7 @@ eg.图 4：<img src="/2024/03/28/AutoDMP/VWlxbGk9Log5Q1xvOgrcqC5Sn3f-17166267401
       
         
           <div class="footer-copyright">
-            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> </p>
+            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a></p>
 
           </div>
         

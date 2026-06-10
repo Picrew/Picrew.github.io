@@ -41,6 +41,41 @@
                 display: none;
             }
         }
+        .header .header-content .navbar .ui-lang-toggle {
+            -webkit-appearance: none;
+            appearance: none;
+            border: 0;
+            outline: 0;
+            background: transparent;
+            box-shadow: none;
+            color: #fff;
+            height: 60px;
+            min-width: 48px;
+            margin: 0;
+            padding: 0 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            font: inherit;
+            font-size: 16px;
+            line-height: 1;
+            white-space: nowrap;
+            cursor: pointer;
+            vertical-align: top;
+        }
+        .header .header-content .navbar .ui-lang-toggle:hover,
+        .header .header-content .navbar .ui-lang-toggle:focus {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        .header .header-content .navbar .ui-lang-toggle i {
+            font-size: 18px;
+            line-height: 1;
+        }
+        .header .header-content .navbar .ui-lang-toggle span {
+            display: inline-block;
+            line-height: 1;
+        }
     </style>
     
 
@@ -567,7 +602,7 @@ mjx-container[display="true"] + br {
 </ul>
 <p>本文提出了一种新的采样效率框架（Sample-Efficient）—— EfficientPlace，用于快速宏布局。效率来自两个方面。双层学习内部优化框架（Bi-level Learning-Inside-Optimization Framework）。本文解释优化来源于宏布局过程中固有的两个方面，第一个方面，本质上是一个优化问题，寻找一个巨大的设计空间内最优解；第二个方面，搜索空间广阔性要求 RL 通过试错来学习和概括。</p>
 <p>EfficientPlace 通过“双层学习内部优化框架（Bi-level Learning-Inside-Optimization Framework）”来利用这种两个方面。本框架有助于在一个搜索中累计在线经验。图 1 所示。</p>
-<p><img src="/2024/05/26/EfficientPlace/1.jpg" class="lazyload placeholder" data-srcset="/2024/05/26/EfficientPlace/1.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/05/26/EfficientPlace/1.jpg" data-srcset="/2024/05/26/EfficientPlace/1.jpg"></p>
 <ul class="lvl-0">
 <li class="lvl-2">
 <p>high-level：蒙特卡洛树搜索（MCTS）用于战略导航搜索。利用一种滚动前沿（rolling frontiers）机制引导RL代理（Agent）关注和利用有价值状态，增强精英解决方法。（os：此处rolling frontiers我并不知道怎么翻译。在树结构中，“front”通常指的是树的某个特定层次的所有节点。通常在BFS使用，搜索过程从树的根节点开始，逐层向下访问直到所有的层都被探索完成。每一层的所有节点可以被看作是那一层的“front”或“前沿”。文中rolling frontiers应该是想表达在搜索过程中，树的front是动态的）</p>
@@ -603,7 +638,7 @@ mjx-container[display="true"] + br {
 <p>基于学习方法主要指定决策，讲宏单元定位在中间各种转台，用神经网络泛化能力来实现探索和利用的平衡。此方法在开始未探索之前非常有效。但是 RL 从空画布开始独立展开，这会导致对次优状态偏差，并导致冗余计算。</p>
 <h2 id="EfficientPlace-The-Bi-Level-Framework">EfficientPlace: The Bi-Level Framework</h2>
 <p>本文提出了 EfficientPlace，讲树搜索算法的精确性和 RL 算法灵活性结合。图 2 描述了模型结构。</p>
-<p><img src="/2024/05/26/EfficientPlace/UDGcbzv8ooqODCx1Sjfc3IOanLn-1716718313577.png" class="lazyload placeholder" data-srcset="/2024/05/26/EfficientPlace/UDGcbzv8ooqODCx1Sjfc3IOanLn-1716718313577.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/05/26/EfficientPlace/UDGcbzv8ooqODCx1Sjfc3IOanLn-1716718313577.png" data-srcset="/2024/05/26/EfficientPlace/UDGcbzv8ooqODCx1Sjfc3IOanLn-1716718313577.png"></p>
 <p>在 high-level 上，采用全局树搜索算法进行精确指导。重点是识别和利用有希望的状态。</p>
 <p>在 low-level 上，利用 RL 的学习和泛化能力，促进有效的探索。</p>
 <p>简称：MCTS 引导的直接搜索和 RL 驱动的自适应学习。</p>
@@ -638,18 +673,18 @@ $$</p>
 <p>数据集为：ISPD05。</p>
 <h2 id="Main-Results">Main Results</h2>
 <p>表 1 半周线长的结果。</p>
-<p><img src="/2024/05/26/EfficientPlace/Main_results.png" class="lazyload placeholder" data-srcset="/2024/05/26/EfficientPlace/Main_results.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/05/26/EfficientPlace/Main_results.png" data-srcset="/2024/05/26/EfficientPlace/Main_results.png"></p>
 <h2 id="Runtime-Step-Analysis">Runtime &amp; Step Analysis</h2>
 <p>与 WireMaks-EA 对比 HPWL 与时间曲线。图 4。</p>
-<p><img src="/2024/05/26/EfficientPlace/DlpebaVttoKtv8xaF7NclaGYnng-1716718313577.png" class="lazyload placeholder" data-srcset="/2024/05/26/EfficientPlace/DlpebaVttoKtv8xaF7NclaGYnng-1716718313577.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/05/26/EfficientPlace/DlpebaVttoKtv8xaF7NclaGYnng-1716718313577.png" data-srcset="/2024/05/26/EfficientPlace/DlpebaVttoKtv8xaF7NclaGYnng-1716718313577.png"></p>
 <h2 id="Congestion-Results">Congestion Results</h2>
 <p>拥塞结果，见表 6。</p>
-<p><img src="/2024/05/26/EfficientPlace/PDRUbNQXhoLyDTxwctwcPjfhn4e-1716718313577.png" class="lazyload placeholder" data-srcset="/2024/05/26/EfficientPlace/PDRUbNQXhoLyDTxwctwcPjfhn4e-1716718313577.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/05/26/EfficientPlace/PDRUbNQXhoLyDTxwctwcPjfhn4e-1716718313577.png" data-srcset="/2024/05/26/EfficientPlace/PDRUbNQXhoLyDTxwctwcPjfhn4e-1716718313577.png"></p>
 <h2 id="Mixed-size-Placement">Mixed-size Placement</h2>
 <p>混合布局。EfficientPlace 宏单元放置 +DREAMPlace 标准单元放置。见表 5。</p>
-<p><img src="/2024/05/26/EfficientPlace/LiP3bidYoobhf5xOgLUcMZYdncc-1716718313577.png" class="lazyload placeholder" data-srcset="/2024/05/26/EfficientPlace/LiP3bidYoobhf5xOgLUcMZYdncc-1716718313577.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/05/26/EfficientPlace/LiP3bidYoobhf5xOgLUcMZYdncc-1716718313577.png" data-srcset="/2024/05/26/EfficientPlace/LiP3bidYoobhf5xOgLUcMZYdncc-1716718313577.png"></p>
 <p>混合布局效果展示，见图 10。</p>
-<p><img src="/2024/05/26/EfficientPlace/RrlobN70vox2kzxZzoNcrAr7nne-1716718313577.png" class="lazyload placeholder" data-srcset="/2024/05/26/EfficientPlace/RrlobN70vox2kzxZzoNcrAr7nne-1716718313577.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/05/26/EfficientPlace/RrlobN70vox2kzxZzoNcrAr7nne-1716718313577.png" data-srcset="/2024/05/26/EfficientPlace/RrlobN70vox2kzxZzoNcrAr7nne-1716718313577.png"></p>
 <h2 id="Ablation-Study-on-Model-Components">Ablation Study on Model Components</h2>
 <p>针对模型的消融实验。</p>
 <ul class="lvl-0">
@@ -667,10 +702,10 @@ $$</p>
 </li>
 </ul>
 <p>见图 5。</p>
-<p><img src="/2024/05/26/EfficientPlace/M2k7b87Szoo0NHxqVVMc40iKnMd-1716718313577.png" class="lazyload placeholder" data-srcset="/2024/05/26/EfficientPlace/M2k7b87Szoo0NHxqVVMc40iKnMd-1716718313577.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/05/26/EfficientPlace/M2k7b87Szoo0NHxqVVMc40iKnMd-1716718313577.png" data-srcset="/2024/05/26/EfficientPlace/M2k7b87Szoo0NHxqVVMc40iKnMd-1716718313577.png"></p>
 <h2 id="Comparison-Study-on-Grid-Sizes">Comparison Study on Grid Sizes</h2>
 <p>EfficientPlace 展示了在不同网格大小上差异，证明更精细的网格，学习曲线越好，有更小的 HPWL 参数，证明了 EfficientPlace 在网格细粒度上有效性。见图 6。</p>
-<p><img src="/2024/05/26/EfficientPlace/2.png" class="lazyload placeholder" data-srcset="/2024/05/26/EfficientPlace/2.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/05/26/EfficientPlace/2.png" data-srcset="/2024/05/26/EfficientPlace/2.png"></p>
 
       </div>
       <div class="post-tags-categories">
@@ -1503,7 +1538,7 @@ Introdu
       
         
           <div class="footer-copyright">
-            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> </p>
+            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a></p>
 
           </div>
         

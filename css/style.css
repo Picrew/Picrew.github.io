@@ -857,6 +857,7 @@ pre:hover::-webkit-scrollbar-thumb:hover,
 .header .header-content .navbar {
   height: 100%;
   display: flex;
+  align-items: center;
 }
 .header .header-content .navbar .menu {
   height: 100%;
@@ -948,6 +949,41 @@ pre:hover::-webkit-scrollbar-thumb:hover,
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
+.header .header-content .navbar .ui-lang-toggle {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #fff;
+  height: 60px;
+  min-width: 48px;
+  margin: 0;
+  padding: 0 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  line-height: 1;
+  font-size: 16px;
+  font-family: inherit;
+  white-space: nowrap;
+  cursor: url("https://zhutix.com/wp-content/themes/b2/x2.cur"), pointer;
+  transition: background-color 0.3s;
+}
+.header .header-content .navbar .ui-lang-toggle i {
+  font-size: 18px;
+  line-height: 1;
+}
+.header .header-content .navbar .ui-lang-toggle span {
+  display: inline-block;
+  line-height: 1;
+}
+.header .header-content .navbar .ui-lang-toggle:hover {
+  background-color: rgba(0,0,0,0.2);
+}
 .header .blog-title {
   display: flex;
   justify-content: center;
@@ -1015,6 +1051,7 @@ pre:hover::-webkit-scrollbar-thumb:hover,
   }
 }
 .header-bg-color .header-content .navbar .menu .menu-item a,
+.header-bg-color .header-content .navbar .ui-lang-toggle,
 .header-bg-color .blog-title a {
   color: #fff;
 }
@@ -1045,6 +1082,13 @@ pre:hover::-webkit-scrollbar-thumb:hover,
 }
 @media (max-width: 551px) {
   .header #he-plugin-simple {
+    display: none;
+  }
+  .header .ui-lang-toggle {
+    min-width: 38px;
+    padding: 0 6px;
+  }
+  .header .ui-lang-toggle i {
     display: none;
   }
   .header .blog-title {

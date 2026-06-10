@@ -41,6 +41,41 @@
                 display: none;
             }
         }
+        .header .header-content .navbar .ui-lang-toggle {
+            -webkit-appearance: none;
+            appearance: none;
+            border: 0;
+            outline: 0;
+            background: transparent;
+            box-shadow: none;
+            color: #fff;
+            height: 60px;
+            min-width: 48px;
+            margin: 0;
+            padding: 0 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            font: inherit;
+            font-size: 16px;
+            line-height: 1;
+            white-space: nowrap;
+            cursor: pointer;
+            vertical-align: top;
+        }
+        .header .header-content .navbar .ui-lang-toggle:hover,
+        .header .header-content .navbar .ui-lang-toggle:focus {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        .header .header-content .navbar .ui-lang-toggle i {
+            font-size: 18px;
+            line-height: 1;
+        }
+        .header .header-content .navbar .ui-lang-toggle span {
+            display: inline-block;
+            line-height: 1;
+        }
     </style>
     
 
@@ -553,7 +588,7 @@ mjx-container[display="true"] + br {
         <h1>On a Moreau Envelope Wirelength Model for Analytical Global Placement</h1>
 <p>题外话：Peiyu 这篇文章 Bei Yu 自称是 DAC 2023 最强论文 --&gt; With Yibo Lin --&gt; Moreau Envelope Wirelength Model</p>
 <p>References --[zhihu](<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/579615273/answer/3124602071">Design Automation Conference (DAC)2023 现在进展如何? - 知乎</a>)</p>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VJQpbweAjoDUuqxsLETc5vQtnvb-1716629216534.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VJQpbweAjoDUuqxsLETc5vQtnvb-1716629216534.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VJQpbweAjoDUuqxsLETc5vQtnvb-1716629216534.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VJQpbweAjoDUuqxsLETc5vQtnvb-1716629216534.png"></p>
 <h1>Introduction</h1>
 <p>​		广泛采用的策略是线长驱动的全局布局，使整个电路线长最小化。分析型布局方法讲布局问题表达为一定合法约束的布线问题。</p>
 <p>​		计算能力和神经网络发展，数值优化方法(numerical optimization approaches)得到了极大关注。要求线长模型处处可微(differentiable)。但是由最大最小坐标的 HPWL 半周线长模型不是处处可微分的。所以，当代布局算法严重依赖于可微分的 HPWL 模型。主要有两种区别 --&gt; 二次近似(quadratic approximations)和非线性近似(nonlinear approximations)。</p>
@@ -565,7 +600,7 @@ mjx-container[display="true"] + br {
 </ul>
 </li>
 </ul>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Z7yPbpdVooqP5xxRcFdc36HmnBe-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Z7yPbpdVooqP5xxRcFdc36HmnBe-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Z7yPbpdVooqP5xxRcFdc36HmnBe-1716629216535.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Z7yPbpdVooqP5xxRcFdc36HmnBe-1716629216535.png"></p>
 <ul class="lvl-0">
 <li class="lvl-2">
 <p>非线性近似模型：通常非线性模型采用可微函数，比如对数、指数(log-sum-exp)，或者加权平均(weighted-average)。通过控制超参数 r 近似 HPWL 任意精度。</p>
@@ -601,30 +636,30 @@ mjx-container[display="true"] + br {
 <h1>Preliminaries</h1>
 <h2 id="Analytical-Global-Placement（分析全局布局）">Analytical Global Placement（分析全局布局）</h2>
 <p>​		电路布局一般包括三部分，global placement（全局布局），legalization（合法化），detailed placement（详细布局）。在全局布局 GP 阶段，目标找到总线长最小的放置位置，并且重叠控制在最低水平，典型的非线性全局布局表示为：</p>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/NHeGbs2avoOi2ZxJJT9cJgq2ncg-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/NHeGbs2avoOi2ZxJJT9cJgq2ncg-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/NHeGbs2avoOi2ZxJJT9cJgq2ncg-1716629216535.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/NHeGbs2avoOi2ZxJJT9cJgq2ncg-1716629216535.png"></p>
 <p>​		HPWL 模型定义为 We,表示为：</p>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VGtgbgf8UoxqArxZ7sGcELl2nkb-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VGtgbgf8UoxqArxZ7sGcELl2nkb-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VGtgbgf8UoxqArxZ7sGcELl2nkb-1716629216535.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VGtgbgf8UoxqArxZ7sGcELl2nkb-1716629216535.png"></p>
 <p>​		定义 HPWL 函数是凸和连续，但不是处处可微。</p>
 <h2 id="Nonlinear-Differentiable-Models（非线性微分模型）">Nonlinear Differentiable Models（非线性微分模型）</h2>
 <h3 id="log-sum-exp-LSE-model">log-sum-exp (LSE) model</h3>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZL3Ibal08ojE6xxopp6c9RV9nXb-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZL3Ibal08ojE6xxopp6c9RV9nXb-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZL3Ibal08ojE6xxopp6c9RV9nXb-1716629216535.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZL3Ibal08ojE6xxopp6c9RV9nXb-1716629216535.png"></p>
 <h3 id="weighted-average-WA-model">weighted average (WA) model</h3>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Z5zPbr7PRoTbq8xBT3Vcr4QLnxh-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Z5zPbr7PRoTbq8xBT3Vcr4QLnxh-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Z5zPbr7PRoTbq8xBT3Vcr4QLnxh-1716629216535.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Z5zPbr7PRoTbq8xBT3Vcr4QLnxh-1716629216535.png"></p>
 <p>​		参数 r 是控制精度和可微性权衡的超参数。r --&gt; 0+ ，近似任意接近于真实的 HPWL。通常在全局布局 GP 早期阶段，r 设置成一个比较大的值，使得目标变得平滑，随着迭代 step 增多而减小。</p>
 <h2 id="Moreau-Envelope">Moreau Envelope</h2>
 <p>（os：此处需要凸优化数学基础）</p>
 <p>一般的Moreau Envelope定义满足真实Hilbert空间上特定约束的函数。在布局应用中，我们只需考虑定义Rn中下界闭凸函数<em>h(x):</em></p>
 <p>Any t &gt; 0，</p>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/1.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/1.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/1.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/1.png"></p>
 <p>其中Moreau Envelope的ht定义为：</p>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/2.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/2.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/2.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/2.png"></p>
 <p>不要求ht为光滑函数。</p>
 <p>近似算子定义为：</p>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/3.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/3.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/3.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/3.png"></p>
 <p>由上公式得，Moreau Envelope的ht是自然可微，梯度是全局Lipschitz连续的。envelope theorem指出：</p>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/4.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/4.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/4.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/4.png"></p>
 <p>Since</p>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/5.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/5.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/5.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/5.png"></p>
 <p>t被认为是近似精度，类似LSE和WA中的r。</p>
 <hr>
 <p>在全局布线中，HPWL 中的 We 是一个干净直接公式。我们提出一种算法计算 Moreau Envelope 中的 We，使用 We + t 作为近似线长模型，使整个目标处处可微。</p>
@@ -634,24 +669,24 @@ mjx-container[display="true"] + br {
 <p>指数项对 x 坐标敏感，小的 r 导致数值溢出，LSE 和 WA 模型都必须面对这样问题。</p>
 <h3 id="Non-Convexity（非凸性）">Non-Convexity（非凸性）</h3>
 <p>没有理论和实验保证 WA 模型凸性。以一个 3pin 网表为例，水平轴（横轴）代表 pin 坐标，调整 r 参数绘制函数曲线。eg.图 1(a):</p>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/GE2BbOIvXoodfxxC5yycNcTznCf-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/GE2BbOIvXoodfxxC5yycNcTznCf-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/GE2BbOIvXoodfxxC5yycNcTznCf-1716629216535.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/GE2BbOIvXoodfxxC5yycNcTznCf-1716629216535.png"></p>
 <p>验证在不同 r 下，WA 模型函数凹凸性难保证。</p>
 <h2 id="Approximation-Error（近似误差）">Approximation Error（近似误差）</h2>
 <p>线长模型可能是高维，比较难分析。因此对平滑参数 r 和 t 进行实验。给定 X = Xmax - Xmin = 200，随机生成 3000 次不同平滑参数的水平坐标 x ，使用不同线长模型计算近似 x，取平均值。eg.图 1(b):</p>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Kdtpbx0GCoSUefx9kqocyModnRz-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Kdtpbx0GCoSUefx9kqocyModnRz-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Kdtpbx0GCoSUefx9kqocyModnRz-1716629216535.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Kdtpbx0GCoSUefx9kqocyModnRz-1716629216535.png"></p>
 <p>我们提出的模型在近似误差上取得了较好的效果。但是并不是说较低的近似误差就意味着更好的放置质量，这是个比较复杂的因素。除了误差，还有梯度也应该仔细考虑，详细见第四节。</p>
 <hr>
 <h1>Algorithm</h1>
 <p>采用 Moreau Envelope 模型比作 HPWL 近似可微，使用 Relu 作为激活函数。</p>
 <h2 id="The-Gradient-of-the-Moreau-Envelope（Moreau-Envelope-梯度）">The Gradient of the Moreau Envelope（Moreau Envelope 梯度）</h2>
 <p>HPWL 函数水平部分表示为</p>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/QkdbbMa0xoIAb9xNRHQcXK3bnDe-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/QkdbbMa0xoIAb9xNRHQcXK3bnDe-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/QkdbbMa0xoIAb9xNRHQcXK3bnDe-1716629216535.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/QkdbbMa0xoIAb9xNRHQcXK3bnDe-1716629216535.png"></p>
 <p>水平和垂直方向都是对称，我们只需要关注水平方向分析。</p>
 <p>Theorem 1 定理 1 陈述了近似算子的表示。Corollary 1 推论 1 推广了定理 1，告诉我们如何在给定参数 τ1 和 τ2 情况下计算梯度。</p>
 <h3 id="Theorem-1">Theorem 1</h3>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VkDXbd8iQoyQ5Wxglh1cfR48nPf-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VkDXbd8iQoyQ5Wxglh1cfR48nPf-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VkDXbd8iQoyQ5Wxglh1cfR48nPf-1716629216535.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VkDXbd8iQoyQ5Wxglh1cfR48nPf-1716629216535.png"></p>
 <h3 id="Corollary-1">Corollary 1</h3>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/GU7sbXo4wo3D1RxXAQDcCEBxnWh-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/GU7sbXo4wo3D1RxXAQDcCEBxnWh-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/GU7sbXo4wo3D1RxXAQDcCEBxnWh-1716629216535.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/GU7sbXo4wo3D1RxXAQDcCEBxnWh-1716629216535.png"></p>
 <h2 id="Water-filling-Algorithm（注水算法）">Water-filling Algorithm（注水算法）</h2>
 <p>（os：参考通信信道中关于注水算法解释</p>
 <ul class="lvl-0">
@@ -664,20 +699,20 @@ mjx-container[display="true"] + br {
 </ul>
 <p>公式 7 和公式 8 给了近似算子的显示表示，其中 τ1 和 τ2 不以封闭形式表示。所以需要先求出公式 8 中方程，获得 proxWe 的精确值。</p>
 <p>以 τ1 为例子，我们要求解方程：</p>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZS9GbiYdQoeCUFxbWOdcfJQjnhc-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZS9GbiYdQoeCUFxbWOdcfJQjnhc-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZS9GbiYdQoeCUFxbWOdcfJQjnhc-1716629216535.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZS9GbiYdQoeCUFxbWOdcfJQjnhc-1716629216535.png"></p>
 <p>假设有一个 4 pin 的网络，引脚坐标为 X1、X2、X3、X4，eg.图 2(a)：</p>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Zlz2b5GGioGrg1xBmdEcO0L0nle-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Zlz2b5GGioGrg1xBmdEcO0L0nle-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Zlz2b5GGioGrg1xBmdEcO0L0nle-1716629216535.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/Zlz2b5GGioGrg1xBmdEcO0L0nle-1716629216535.png"></p>
 <p>我们需要找到一个 τ1 值，使得蓝色面积为 t。–&gt; 获得 τ1 值的过程 --&gt; 通信中的 Water-filling 注水算法。eg.图 2(b)：</p>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ACYGbtYojoc1WwxA0tEcetVVnPd-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ACYGbtYojoc1WwxA0tEcetVVnPd-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ACYGbtYojoc1WwxA0tEcetVVnPd-1716629216535.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ACYGbtYojoc1WwxA0tEcetVVnPd-1716629216535.png"></p>
 <p>eg.算法 2：</p>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/AOd7b5i7qoy4A8xKm5Icw6Ecnwh-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/AOd7b5i7qoy4A8xKm5Icw6Ecnwh-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/AOd7b5i7qoy4A8xKm5Icw6Ecnwh-1716629216535.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/AOd7b5i7qoy4A8xKm5Icw6Ecnwh-1716629216535.png"></p>
 <p>​		Water-filling 算法是一个直观且高效的方法，解决近似算子中参数 τ1 和 τ2 计算问题，通过对引脚坐标进行排序，这个算法可以迅速地确定所需的参数，进而允许优化算法继续进行。</p>
 <h2 id="Nonlinear-Optimization（非线性优化）">Nonlinear Optimization（非线性优化）</h2>
 <p>​		r 在 WA 方法和 t 在我们方法对解的质量是重要的。</p>
 <p>​		eg.ePlace 方法中使用溢出(overflow)ϕ 来更新参数 r：</p>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/WRgqbpsr7o1zj7xr8mmcO0qcn8e-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/WRgqbpsr7o1zj7xr8mmcO0qcn8e-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/WRgqbpsr7o1zj7xr8mmcO0qcn8e-1716629216535.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/WRgqbpsr7o1zj7xr8mmcO0qcn8e-1716629216535.png"></p>
 <p>​		更高的溢出 ϕ 需要更大的 r 牺牲精度来保证可微性。为了更好适应线长模型，使用基于切线的更新方法：</p>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/6.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/6.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/6.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/6.png"></p>
 <ul class="lvl-0">
 <li class="lvl-2">
 <p>t0是初始值 --&gt; fix t0 = 4</p>
@@ -697,9 +732,9 @@ mjx-container[display="true"] + br {
 </ul>
 <hr>
 <p>对于起初的全局布局表示:</p>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/SlD7bBdZEo6wTuxTvJOcFq1enff-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/SlD7bBdZEo6wTuxTvJOcFq1enff-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/SlD7bBdZEo6wTuxTvJOcFq1enff-1716629216535.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/SlD7bBdZEo6wTuxTvJOcFq1enff-1716629216535.png"></p>
 <p>我们遵循 DREAMPlace3.0 和 elfPlace 中温和方案来迭代更新上述方程中的权重密度 λ：</p>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/7.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/7.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/7.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/7.png"></p>
 <ul class="lvl-0">
 <li class="lvl-2">
 <p>Dk表示第k次迭代的密度</p>
@@ -715,39 +750,39 @@ mjx-container[display="true"] + br {
 <h1>Wirelength Model Analysis</h1>
 <h2 id="Approximation-Bound（近似界）">Approximation Bound（近似界）</h2>
 <h3 id="Theorem-2">Theorem 2</h3>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/UefCbwnmnopJw6xDNw1ceh5qnBb-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/UefCbwnmnopJw6xDNw1ceh5qnBb-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/UefCbwnmnopJw6xDNw1ceh5qnBb-1716629216535.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/UefCbwnmnopJw6xDNw1ceh5qnBb-1716629216535.png"></p>
 <p>​		描述 Moreau Envelope 函数如何逼近原始函数，与 LSE 和 WA 类似，这里使用的 Moreau Envelope 也可以任意精度近似 HPWL，证明未给出。</p>
 <h2 id="Gradient-Properties（梯度属性）">Gradient Properties（梯度属性）</h2>
 <p>​		理想情况下，平滑参数趋于 0，任何可微分模型梯度都应趋于 We。</p>
 <h3 id="Theorem-3">Theorem 3</h3>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZCnAb3E1joe08CxfFrYcdJL9nCc-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZCnAb3E1joe08CxfFrYcdJL9nCc-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZCnAb3E1joe08CxfFrYcdJL9nCc-1716629216535.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZCnAb3E1joe08CxfFrYcdJL9nCc-1716629216535.png"></p>
 <h3 id="Theorem-4">Theorem 4</h3>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/K5l9bHQOdof27ixhdkDcVXfnnFg-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/K5l9bHQOdof27ixhdkDcVXfnnFg-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/K5l9bHQOdof27ixhdkDcVXfnnFg-1716629216535.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/K5l9bHQOdof27ixhdkDcVXfnnFg-1716629216535.png"></p>
 <h3 id="Theorem-5">Theorem 5</h3>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/KN3xb4ZoRo9wZpx8NmScWD2unig-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/KN3xb4ZoRo9wZpx8NmScWD2unig-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/KN3xb4ZoRo9wZpx8NmScWD2unig-1716629216535.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/KN3xb4ZoRo9wZpx8NmScWD2unig-1716629216535.png"></p>
 <h3 id="Corollary-2">Corollary 2</h3>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/OgCWb4grco6FAuxxZb2cbVIkngx-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/OgCWb4grco6FAuxxZb2cbVIkngx-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/OgCWb4grco6FAuxxZb2cbVIkngx-1716629216535.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/OgCWb4grco6FAuxxZb2cbVIkngx-1716629216535.png"></p>
 <h3 id="Theorem-6">Theorem 6</h3>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/F2hXbqVmcohLiKxiEQOceJ4Bncd-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/F2hXbqVmcohLiKxiEQOceJ4Bncd-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/F2hXbqVmcohLiKxiEQOceJ4Bncd-1716629216535.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/F2hXbqVmcohLiKxiEQOceJ4Bncd-1716629216535.png"></p>
 <h3 id="Corollary-3">Corollary 3</h3>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/CS6LbQOI6oKHmExADCncUjHSnlg-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/CS6LbQOI6oKHmExADCncUjHSnlg-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/CS6LbQOI6oKHmExADCncUjHSnlg-1716629216535.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/CS6LbQOI6oKHmExADCncUjHSnlg-1716629216535.png"></p>
 <hr>
 <h1>Result</h1>
 <h2 id="Benchmark">Benchmark</h2>
 <p>​		ISPD 2006 、ISPD 2019，eg.表 1：</p>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/AaJrbaN39oIa4Xx8OISctUsmnwe-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/AaJrbaN39oIa4Xx8OISctUsmnwe-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/AaJrbaN39oIa4Xx8OISctUsmnwe-1716629216535.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/AaJrbaN39oIa4Xx8OISctUsmnwe-1716629216535.png"></p>
 <p>​		Base on CUDA/C++ --&gt; DREAMPlace</p>
 <p>​		CPU: Intel Xeon 2.90GHz CPUs ; GPU: NVIDIA GeForce RTX 3090 GPU</p>
 <h2 id="HPWL-Runtime-in-ISPD-2006-and-ISPD-2019">HPWL &amp; Runtime in ISPD 2006 and ISPD 2019</h2>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VOAJbL8Tuoo8Kwx73O4cwqaTnQb-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VOAJbL8Tuoo8Kwx73O4cwqaTnQb-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZJogbBEbIoncUpxv1JJcREzvnIf-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZJogbBEbIoncUpxv1JJcREzvnIf-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/UULcb5CufowmxoxWHhqcXX3Jncb-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/UULcb5CufowmxoxWHhqcXX3Jncb-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/RnCwbIrawoYmCdxRYCwcW4mQn5b-1716629216535.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/RnCwbIrawoYmCdxRYCwcW4mQn5b-1716629216535.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VOAJbL8Tuoo8Kwx73O4cwqaTnQb-1716629216535.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/VOAJbL8Tuoo8Kwx73O4cwqaTnQb-1716629216535.png"></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZJogbBEbIoncUpxv1JJcREzvnIf-1716629216535.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/ZJogbBEbIoncUpxv1JJcREzvnIf-1716629216535.png"></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/UULcb5CufowmxoxWHhqcXX3Jncb-1716629216535.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/UULcb5CufowmxoxWHhqcXX3Jncb-1716629216535.png"></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/RnCwbIrawoYmCdxRYCwcW4mQn5b-1716629216535.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/RnCwbIrawoYmCdxRYCwcW4mQn5b-1716629216535.png"></p>
 <p>​		表格 II 显示了在 ISPD2006 基准测试后详细放置的线长改进超过 1%，特别是在具有大量可移动宏的 newblue1 上改进超过了 5%。</p>
 <p>​		表格 III 显示了在最新的 ISPD2019 基准测试上的线长改进超过了 1.5% 到接近 2%。</p>
 <h2 id="Wirelength-during-Global-placement（线长趋势）–-Ablation-Study（消融实验）">Wirelength during Global placement（线长趋势）–&gt; Ablation Study（消融实验）</h2>
 <p>​		选用 ISPD06 中 newblue1 &amp; ISPD2019 中 ispd19_test10。</p>
-<p><img src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/SZaJbNTKEop0jUx8ba5cCaoKntd-1716629216536.png" class="lazyload placeholder" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/SZaJbNTKEop0jUx8ba5cCaoKntd-1716629216536.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/SZaJbNTKEop0jUx8ba5cCaoKntd-1716629216536.png" data-srcset="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/SZaJbNTKEop0jUx8ba5cCaoKntd-1716629216536.png"></p>
 <p>​		与 WA 相比，在详细放置后，我们可以分别实现约 5.4% 和 1.6% 的改善。</p>
 <p>​		我们的模型获得的线长结果在相同密度溢出时更好。(密度溢出大致反映了整个单元格重叠) --&gt; 相同的密度溢出下，较小的线长意味着更好的布局质量。</p>
 
@@ -1578,7 +1613,7 @@ Introdu
       
         
           <div class="footer-copyright">
-            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> </p>
+            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a></p>
 
           </div>
         

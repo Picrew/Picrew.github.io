@@ -41,6 +41,41 @@
                 display: none;
             }
         }
+        .header .header-content .navbar .ui-lang-toggle {
+            -webkit-appearance: none;
+            appearance: none;
+            border: 0;
+            outline: 0;
+            background: transparent;
+            box-shadow: none;
+            color: #fff;
+            height: 60px;
+            min-width: 48px;
+            margin: 0;
+            padding: 0 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            font: inherit;
+            font-size: 16px;
+            line-height: 1;
+            white-space: nowrap;
+            cursor: pointer;
+            vertical-align: top;
+        }
+        .header .header-content .navbar .ui-lang-toggle:hover,
+        .header .header-content .navbar .ui-lang-toggle:focus {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        .header .header-content .navbar .ui-lang-toggle i {
+            font-size: 18px;
+            line-height: 1;
+        }
+        .header .header-content .navbar .ui-lang-toggle span {
+            display: inline-block;
+            line-height: 1;
+        }
     </style>
     
 
@@ -551,10 +586,10 @@ mjx-container[display="true"] + br {
     <article class="post post-detail">
       <div class="post-content">
         <h1>WireMask : Macro Placement by Wire-Mask-Guided Black-Box Optimization</h1>
-<p><img src="/2024/03/10/WireMask/Ssr0btqBvoxLuXxDooxcHV7rnIc-1716626478413.png" class="lazyload placeholder" data-srcset="/2024/03/10/WireMask/Ssr0btqBvoxLuXxDooxcHV7rnIc-1716626478413.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/10/WireMask/Ssr0btqBvoxLuXxDooxcHV7rnIc-1716626478413.png" data-srcset="/2024/03/10/WireMask/Ssr0btqBvoxLuXxDooxcHV7rnIc-1716626478413.png"></p>
 <h1>Introduction</h1>
 <p>​	EDA 努力优化 PPA(power, performance, and area)指标，布局分为两个部分，宏布局和标准单元布局。其中宏布局通常使用启发式算法或深度学习方法，标准布局通常使用分析办法。放置所有单元后，执行布线任务。图 1 为一般 flow。文章作者更关注宏布局结果，因为影响更大。</p>
-<p><img src="/2024/03/10/WireMask/KglFbLCZnoI077x4hDpc6FyjnAe-1716626478414.png" class="lazyload placeholder" data-srcset="/2024/03/10/WireMask/KglFbLCZnoI077x4hDpc6FyjnAe-1716626478414.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/10/WireMask/KglFbLCZnoI077x4hDpc6FyjnAe-1716626478414.png" data-srcset="/2024/03/10/WireMask/KglFbLCZnoI077x4hDpc6FyjnAe-1716626478414.png"></p>
 <p>​	早期的方法把宏布局任务比作矩形包装(rectangular packing)问题,其中有 sequence pair (SP) ， B∗-tree ， corner block list (CBL) ，等其他数据结构描表示，最后通过模拟退火(SA --&gt; simulated annealing)办法解决。这种办法一般有较差可扩展性。</p>
 <ul class="lvl-0">
 <li class="lvl-2">
@@ -575,12 +610,12 @@ mjx-container[display="true"] + br {
 <p>​	解决方案的表示方法有 sequence pair (SP) ， B∗-tree ， corner block list (CBL) ，其中 SA 是扰动形成新的后代解以解决此类 BBO 问题。</p>
 <p>​	divide-and-conquer idea（分而治之思想），标准单元用逻辑层次结构或者聚类算法成块，然后宏单元和混合标准单元块布局放置。最后，标准单元在块里面重新布局分配。虽然减小了问题规模，但是标准单元聚类成的块可能对最优解有阻碍或者影响。</p>
 <p>​	RL 决定选择扰动算子以及哪个宏应该被 SA 扰动，同时 CBL 建立 MDP，但并没有解决可扩展性差等本质问题。此外，在打包设置（就是宏单元聚类说法）下，每个宏的至少一个边缘必须连接到另一个宏或画布的边缘，这使得放置非常拥挤。图 2(a)为此布局 eg。拥挤的宏布局会限制标准布局空间，会导致布局性能不佳，eg 表 3。</p>
-<p><img src="/2024/03/10/WireMask/R8inbCjumoGdvXx1FtecKkzjn2f-1716626478414.png" class="lazyload placeholder" data-srcset="/2024/03/10/WireMask/R8inbCjumoGdvXx1FtecKkzjn2f-1716626478414.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
-<p><img src="/2024/03/10/WireMask/PxnBbOYWeoUiVsxFaBfcNiJ6nIw-1716626478414.png" class="lazyload placeholder" data-srcset="/2024/03/10/WireMask/PxnBbOYWeoUiVsxFaBfcNiJ6nIw-1716626478414.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/10/WireMask/R8inbCjumoGdvXx1FtecKkzjn2f-1716626478414.png" data-srcset="/2024/03/10/WireMask/R8inbCjumoGdvXx1FtecKkzjn2f-1716626478414.png"></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/10/WireMask/PxnBbOYWeoUiVsxFaBfcNiJ6nIw-1716626478414.png" data-srcset="/2024/03/10/WireMask/PxnBbOYWeoUiVsxFaBfcNiJ6nIw-1716626478414.png"></p>
 <h2 id="Analytical-Methods">Analytical Methods</h2>
 <p>分析方法同时放置宏单元和标准单元，将放置任务比作数学规划问题，eg：</p>
 <p>DREAMPlace ，将布局任务改写为 min WA（s，H）+ λ · Density（s，H），其中 WA 表示用于近似 HPWL 的平滑加权平均线长，Density 表示用于惩罚重叠的可微密度度量，λ 是权衡因子。用梯度下降等方法，完成高质量布局。图 2(b)所示。比图 2(a)效果更好，但是不能解决重叠 overlaps 问题。</p>
-<p><img src="/2024/03/10/WireMask/FsYcbkj2doF4qsxA3p0cp7Ktngh-1716626478414.png" class="lazyload placeholder" data-srcset="/2024/03/10/WireMask/FsYcbkj2doF4qsxA3p0cp7Ktngh-1716626478414.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/10/WireMask/FsYcbkj2doF4qsxA3p0cp7Ktngh-1716626478414.png" data-srcset="/2024/03/10/WireMask/FsYcbkj2doF4qsxA3p0cp7Ktngh-1716626478414.png"></p>
 <h2 id="Grid-based-RL-Methods">Grid-based RL Methods</h2>
 <p>​	随着宏数量增加，Packing-based Methods 遇到可扩展性问题，而 Analytical Methods 遇到可重叠问题，为满足需求，有了 RL 方法。eg，</p>
 <ul class="lvl-0">
@@ -594,14 +629,14 @@ mjx-container[display="true"] + br {
 <p>MaskPlace：上述方法到最后一步都没有外在reward，为了解决此问题，MaskPlace介绍dense reward RL pipeline，有收集全局信息的view mask，为了避免不重叠的position mask，用于评估当前宏放置结果的wire mask。wire mask提供了一个即时奖励，计算当前宏放置后HPWL增加。此方法可以在合理的时间给出一个高质量非重叠的布局结果。eg 图2©为结果，该示例优于图2（a）和2（b）中所示的填充和分析方法生成的示例。仅在几百次评估后就收敛，这意味着巨大的布局搜索空间可能仍然没有得到充分利用。</p>
 </li>
 </ul>
-<p><img src="/2024/03/10/WireMask/QtkrbPuaMoZ6bSxKAfKc7JaTn1g-1716626478414.png" class="lazyload placeholder" data-srcset="/2024/03/10/WireMask/QtkrbPuaMoZ6bSxKAfKc7JaTn1g-1716626478414.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/10/WireMask/QtkrbPuaMoZ6bSxKAfKc7JaTn1g-1716626478414.png" data-srcset="/2024/03/10/WireMask/QtkrbPuaMoZ6bSxKAfKc7JaTn1g-1716626478414.png"></p>
 <h1>Proposed Framework WireMask-BBO</h1>
 <h2 id="Wire-Mask-Guided-Problem-Formulation">Wire-Mask-Guided Problem Formulation</h2>
 <h3 id="Solution-representation">Solution representation</h3>
 <p>宏的坐标表示，_(Xi , Yi)。_eg 图 3 中的布局任务，存在三个宏 A、B 和 C，因此解决方案 s 由（x1，y1，x2，y2，x3，y3）表示。</p>
-<p><img src="/2024/03/10/WireMask/L24nbLKJJoLdShx3JfwcuibmnkM-1716626478414.png" class="lazyload placeholder" data-srcset="/2024/03/10/WireMask/L24nbLKJJoLdShx3JfwcuibmnkM-1716626478414.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/10/WireMask/L24nbLKJJoLdShx3JfwcuibmnkM-1716626478414.png" data-srcset="/2024/03/10/WireMask/L24nbLKJJoLdShx3JfwcuibmnkM-1716626478414.png"></p>
 <h3 id="Objective-evaluation">Objective evaluation</h3>
-<p><img src="/2024/03/10/WireMask/DCrvbhJI9oVsIhxitdjc9Dognug-1716626478414.png" class="lazyload placeholder" data-srcset="/2024/03/10/WireMask/DCrvbhJI9oVsIhxitdjc9Dognug-1716626478414.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/10/WireMask/DCrvbhJI9oVsIhxitdjc9Dognug-1716626478414.png" data-srcset="/2024/03/10/WireMask/DCrvbhJI9oVsIhxitdjc9Dognug-1716626478414.png"></p>
 <hr>
 <p>算法步骤:</p>
 <ol>
@@ -649,28 +684,28 @@ mjx-container[display="true"] + br {
 <p>​	对 EA 来说：选择简单的（1+1）-EA，它只保留一个解，并通过变异迭代地改进它。</p>
 <p>​	这三种方法均能超过以往的算法。</p>
 <p>​	WireMask-BBO --&gt; 基于网格离散化和 Wire Mask 引导的贪婪算法，有效地生成非重叠的高质量布局，解决了基于包装的方法的可扩展性差的问题以及分析方法的重叠问题。黑盒优化的使用增强了探索能力，使 WireMask-BBO 能够超越最先进的基于 RL 的方法 MaskPlace。eg 图 2。</p>
-<p><img src="/2024/03/10/WireMask/X7S3bJnTFoCBSQxj8O3ciDM9nug-1716626478414.png" class="lazyload placeholder" data-srcset="/2024/03/10/WireMask/X7S3bJnTFoCBSQxj8O3ciDM9nug-1716626478414.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/10/WireMask/X7S3bJnTFoCBSQxj8O3ciDM9nug-1716626478414.png" data-srcset="/2024/03/10/WireMask/X7S3bJnTFoCBSQxj8O3ciDM9nug-1716626478414.png"></p>
 <h1>Experiments</h1>
 <p>数据集是 ISPD05，里面缺少了 bigblue2 和 bigblue4（bigblue 2，它有超过 20000 个宏和 30000 个与宏相关的超边，评估花费超过一个小时）。</p>
 <h2 id="Main-results">Main results</h2>
 <p>HPWL 指标：</p>
-<p><img src="/2024/03/10/WireMask/UH77bXPcLo8z62xmIkrcWvz2nNe-1716626478414.png" class="lazyload placeholder" data-srcset="/2024/03/10/WireMask/UH77bXPcLo8z62xmIkrcWvz2nNe-1716626478414.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/10/WireMask/UH77bXPcLo8z62xmIkrcWvz2nNe-1716626478414.png" data-srcset="/2024/03/10/WireMask/UH77bXPcLo8z62xmIkrcWvz2nNe-1716626478414.png"></p>
 <p>WireMask-EA 为最优。</p>
 <h2 id="Running-time-analysis">Running time analysis</h2>
 <p>WireMask-BBO 的任何变体都比 MaskPlace 表现最好，MaskPlace 在之前的方法中排名最高。</p>
-<p><img src="/2024/03/10/WireMask/FUphbucqLocfHvxEBjkc0AJ6nub-1716626478414.png" class="lazyload placeholder" data-srcset="/2024/03/10/WireMask/FUphbucqLocfHvxEBjkc0AJ6nub-1716626478414.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/10/WireMask/FUphbucqLocfHvxEBjkc0AJ6nub-1716626478414.png" data-srcset="/2024/03/10/WireMask/FUphbucqLocfHvxEBjkc0AJ6nub-1716626478414.png"></p>
 <h2 id="Performance-on-congestion-metric">Performance on congestion metric</h2>
 <p>评估放置拥塞与 MaskPlace 和 SP-SA 比较。Base --&gt; WireMask-EA 的拥塞设置为 1.00 来规范化拥塞值。eg 表 2。</p>
-<p><img src="/2024/03/10/WireMask/B5HBbhkBtoOUaYxgSZUcz55dnso-1716626478414.png" class="lazyload placeholder" data-srcset="/2024/03/10/WireMask/B5HBbhkBtoOUaYxgSZUcz55dnso-1716626478414.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/10/WireMask/B5HBbhkBtoOUaYxgSZUcz55dnso-1716626478414.png" data-srcset="/2024/03/10/WireMask/B5HBbhkBtoOUaYxgSZUcz55dnso-1716626478414.png"></p>
 <h2 id="Full-placement-results">Full placement results</h2>
 <p>比较 PRNet and DREAMPlace。eg 表 3。</p>
-<p><img src="/2024/03/10/WireMask/JfqXbka39oHROhxSUOScEC1Rnae-1716626478414.png" class="lazyload placeholder" data-srcset="/2024/03/10/WireMask/JfqXbka39oHROhxSUOScEC1Rnae-1716626478414.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/10/WireMask/JfqXbka39oHROhxSUOScEC1Rnae-1716626478414.png" data-srcset="/2024/03/10/WireMask/JfqXbka39oHROhxSUOScEC1Rnae-1716626478414.png"></p>
 <h2 id="Fine-tuning-results">Fine-tuning results</h2>
 <p>微调结果 。通过 WireMask-EA 微调 1,000 分钟前后 SP-SA 和 MaskPlace 的 HPWL 结果，平均改善率分别为 53.93% 和 17.06% --&gt; eg 表 4。</p>
-<p><img src="/2024/03/10/WireMask/Oi5ZbBCWIooNizxSj8ScTwBjn0f-1716626478414.png" class="lazyload placeholder" data-srcset="/2024/03/10/WireMask/Oi5ZbBCWIooNizxSj8ScTwBjn0f-1716626478414.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/10/WireMask/Oi5ZbBCWIooNizxSj8ScTwBjn0f-1716626478414.png" data-srcset="/2024/03/10/WireMask/Oi5ZbBCWIooNizxSj8ScTwBjn0f-1716626478414.png"></p>
 <h2 id="Additional-results">Additional results</h2>
 <p>提出了一个后本地搜索过程(post local search procedure)，以进一步提高最终的安置结果。并且包括与两个并发的先进方法 --&gt; ChiPFormer &amp; Autoclave，WireMask-EA 仍然保持了上级性能。</p>
-<p><img src="/2024/03/10/WireMask/XX2EbXPy1oXOhkxU9xncGy4nnDh.png" class="lazyload placeholder" data-srcset="/2024/03/10/WireMask/XX2EbXPy1oXOhkxU9xncGy4nnDh.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt></p>
+<p><img class="lazyload" alt loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2024/03/10/WireMask/XX2EbXPy1oXOhkxU9xncGy4nnDh.png" data-srcset="/2024/03/10/WireMask/XX2EbXPy1oXOhkxU9xncGy4nnDh.png"></p>
 
       </div>
       <div class="post-tags-categories">
@@ -1500,7 +1535,7 @@ Introduction
       
         
           <div class="footer-copyright">
-            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> </p>
+            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a></p>
 
           </div>
         
