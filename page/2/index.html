@@ -42,16 +42,15 @@
             }
         }
     </style>
-    <script defer src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
-    <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+    
 
     
         <script src="/js/valine/index.js"></script>
     
     
     <!-- 依赖于jquery和vue -->
-    <script src="https://unpkg.com/jquery@3.5.1/dist/jquery.min.js"></script>
-    <script src="https://unpkg.com/vue@2.6.11/dist/vue.min.js"></script>
+    <script src="/js/jquery3.5.1.js"></script>
+    <script src="/js/vue2.6.11.js"></script>
 
     <!-- import link -->
     
@@ -81,10 +80,16 @@
 </div>
   <script>
     var endLoading = function () {
+      var loader = document.getElementById('loader');
+      if (!loader || loader.classList.contains('loaded')) return;
       document.body.style.overflow = 'auto';
-      document.getElementById('loader').classList.add("loaded");
+      loader.classList.add("loaded");
     }
-    window.addEventListener('DOMContentLoaded', endLoading);
+    window.addEventListener('DOMContentLoaded', function () {
+      requestAnimationFrame(endLoading);
+    });
+    window.addEventListener('load', endLoading);
+    window.setTimeout(endLoading, 1500);
   </script>
 
 
@@ -192,7 +197,7 @@
   </transition>
   <div class="drawer-box" :class="{'active': visible}">
     <div class="drawer-box-head bg-color">
-      <img class="drawer-box-head_logo lazyload placeholder" src="/medias/avatar.jpg" class="lazyload placeholder" data-srcset="/medias/avatar.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+      <img class="drawer-box-head_logo lazyload" alt="logo" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/medias/avatar.jpg" data-srcset="/medias/avatar.jpg">
       <h3 class="drawer-box-head_title"></h3>
       <h5 class="drawer-box-head_desc"></h5>
     </div>
@@ -262,7 +267,7 @@
     <div class="blog-title" id="author-avatar">
       
         <div class="avatar">
-          <img src="/medias/avatar.jpg" class="lazyload placeholder" data-srcset="/medias/avatar.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+          <img class="lazyload" alt="logo" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/medias/avatar.jpg" data-srcset="/medias/avatar.jpg">
         </div>
       
       <a href="/" class="logo"></a>
@@ -272,22 +277,31 @@
         
       </ul>
       
+        
+        
+        <button class="ui-lang-toggle" type="button" data-ui-lang-toggle data-current-lang="en" data-next-lang="zh" aria-label="切换到中文" title="切换到中文">
+          <i class="fas fa-language" aria-hidden="true"></i>
+          <span data-ui-lang-toggle-label>中</span>
+        </button>
+      
+
       
         <div id="appSearch">
-  <div class="search"  @click="showDialog()"><i class="fas fa-search" aria-hidden="true"></i></div>
+  <div class="search" title="Search" data-i18n-title="searchTitle" @click="showDialog()"><i class="fas fa-search" aria-hidden="true"></i></div>
   <transition name="fade">
     <div class="message-box_wrapper" style="display: none;" v-cloak v-show="dialogVisible" @click.self="cancelDialogVisible()">
       <div class="message-box animated bounceInDown">
         <h2>
           <span>
             <i class="fas fa-search" aria-hidden="true"></i>
-            <span class="title">Search</span>
+            <span class="title" data-i18n="searchTitle">Search</span>
           </span>
           <i class="fas fa-times close" pointer style="float:right;" aria-hidden="true" @click.self="cancelDialogVisible()"></i>
         </h2>
         <form class="site-search-form">
           <input type="text"
             placeholder="Please enter keywords"
+            data-i18n-placeholder="searchPlaceholder"
             id="local-search-input" 
             @click="getSearchFile()"
             class="st-search-input"
@@ -324,11 +338,14 @@
         // 防止页面滚动，只能让弹框滚动
         this.top = $(document).scrollTop()
         body.style.cssText = 'overflow: hidden;';
+        this.$nextTick(() => {
+          this.getSearchFile();
+          const input = document.getElementById('local-search-input');
+          input && input.focus();
+        });
       },
       getSearchFile() {
-        if (!this.searchInput) {
-          getSearchFile("/search.xml");
-        }
+        window.getSearchFile && window.getSearchFile("/search.xml");
       },
       cancelDialogVisible() {
         this.dialogVisible = false;
@@ -356,6 +373,7 @@
   
   
 </header>
+
         <!-- 内容区域 -->
         
   <!-- 首页轮播 -->
@@ -388,7 +406,7 @@
               </div>
               <div class="flag-text">
                 <div class="flag-text-content">
-                  <div class="title ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">欢迎来到 Jayden 个人博客</div>
+                  <div class="title ani animated" data-i18n="heroTitle" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">欢迎来到 Jayden 个人博客</div>
                   
                       <div class="excerpt ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s"></div>
                     
@@ -979,8 +997,10 @@
     
     <!-- 首页座右铭 -->
     
+
     <!-- 首页公告 -->
     
+
     <!-- 首页文章置顶 -->
     
 
@@ -1026,7 +1046,7 @@
           <div class="post-img-mobile">
             <a href="/2024/01/16/Docker/" style="background-size: cover; 
               background-position: center center;">
-              <img class="lazyload lazyload placeholder" src="https://i.postimg.cc/zXr9fZVH/IMG-202406276353-1440x810.jpg" class="lazyload placeholder" data-srcset="https://i.postimg.cc/zXr9fZVH/IMG-202406276353-1440x810.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              <img class="lazyload" alt="" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.postimg.cc/zXr9fZVH/IMG-202406276353-1440x810.jpg" data-srcset="https://i.postimg.cc/zXr9fZVH/IMG-202406276353-1440x810.jpg">
             </a>
           </div>
           <div class="post-content">
@@ -1038,14 +1058,14 @@
         </div>
         <div class="post-more">
           <a href="/2024/01/16/Docker/">
-            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
+            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多" data-i18n-title="readMore"></i>
           </a>
         </div>
       </div>
       <div class="post-img">
         <a href="/2024/01/16/Docker/" style="background-size: cover; 
           background-position: center center;">
-          <img class="lazyload lazyload placeholder" src="https://i.postimg.cc/zXr9fZVH/IMG-202406276353-1440x810.jpg" class="lazyload placeholder" data-srcset="https://i.postimg.cc/zXr9fZVH/IMG-202406276353-1440x810.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+          <img class="lazyload" alt="" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.postimg.cc/zXr9fZVH/IMG-202406276353-1440x810.jpg" data-srcset="https://i.postimg.cc/zXr9fZVH/IMG-202406276353-1440x810.jpg">
         </a>
       </div>
     </article>
@@ -1083,7 +1103,7 @@
           <div class="post-img-mobile">
             <a href="/2024/01/16/Git/" style="background-size: cover; 
               background-position: center center;">
-              <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              <img class="lazyload" alt="" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp">
             </a>
           </div>
           <div class="post-content">
@@ -1102,14 +1122,14 @@
         </div>
         <div class="post-more">
           <a href="/2024/01/16/Git/">
-            <i class="iconfont iconmore" pointer style="  " title="阅读更多"></i>
+            <i class="iconfont iconmore" pointer style="  " title="阅读更多" data-i18n-title="readMore"></i>
           </a>
         </div>
       </div>
       <div class="post-img">
         <a href="/2024/01/16/Git/" style="background-size: cover; 
           background-position: center center;">
-          <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+          <img class="lazyload" alt="" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp">
         </a>
       </div>
     </article>
@@ -1147,7 +1167,7 @@
           <div class="post-img-mobile">
             <a href="/2024/01/16/Pytorch/" style="background-size: cover; 
               background-position: center center;">
-              <img class="lazyload lazyload placeholder" src="https://i.postimg.cc/g2N95ScX/IMG-202406272072-1440x810.jpg" class="lazyload placeholder" data-srcset="https://i.postimg.cc/g2N95ScX/IMG-202406272072-1440x810.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              <img class="lazyload" alt="" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.postimg.cc/g2N95ScX/IMG-202406272072-1440x810.jpg" data-srcset="https://i.postimg.cc/g2N95ScX/IMG-202406272072-1440x810.jpg">
             </a>
           </div>
           <div class="post-content">
@@ -1158,14 +1178,14 @@
         </div>
         <div class="post-more">
           <a href="/2024/01/16/Pytorch/">
-            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
+            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多" data-i18n-title="readMore"></i>
           </a>
         </div>
       </div>
       <div class="post-img">
         <a href="/2024/01/16/Pytorch/" style="background-size: cover; 
           background-position: center center;">
-          <img class="lazyload lazyload placeholder" src="https://i.postimg.cc/g2N95ScX/IMG-202406272072-1440x810.jpg" class="lazyload placeholder" data-srcset="https://i.postimg.cc/g2N95ScX/IMG-202406272072-1440x810.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+          <img class="lazyload" alt="" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.postimg.cc/g2N95ScX/IMG-202406272072-1440x810.jpg" data-srcset="https://i.postimg.cc/g2N95ScX/IMG-202406272072-1440x810.jpg">
         </a>
       </div>
     </article>
@@ -1181,7 +1201,7 @@
     
       <a href="/"
          class="page-nav-pre">
-         <i class="fas fa-angle-left"></i><span class="ml-5">Prev</span>
+         <i class="fas fa-angle-left"></i><span class="ml-5" data-i18n="prevPage">Prev</span>
       </a>
     
     <div class="page-info">
@@ -1189,6 +1209,7 @@
     </div>
     
   </div>
+
 
   </div>
 
@@ -1200,7 +1221,7 @@
     
       
         <a class='avatar flat-box rectangle' href='/about/'>
-          <img src='https://i.postimg.cc/0NZhx9v1/avatar.jpg'/>
+          <img class="lazyload" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.postimg.cc/0NZhx9v1/avatar.jpg" data-srcset="https://i.postimg.cc/0NZhx9v1/avatar.jpg">
         </a>
       
     
@@ -1274,9 +1295,10 @@
         
     <section class="widget side_category">
       
+  
   <header>
     
-      <a style="color: " href='/blog/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+      <a style="color: " href='/blog/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name' data-i18n="sideCategories">文章分类</span></a>
     
   </header>
 
@@ -1309,9 +1331,10 @@
         
 <section class="widget side_tagcloud">
     
+  
   <header>
     
-      <a style="color: " href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+      <a style="color: " href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name' data-i18n="sideTags">热门标签</span></a>
     
   </header>
 
@@ -1326,9 +1349,10 @@
       
   <section class="widget side_recent_post">
     
+  
   <header>
     
-      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
+      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name' data-i18n="sideRecentPosts">最新文章</span></a>
     
   </header>
 
@@ -1347,7 +1371,7 @@
             <div class="post-img-box">
               <a href="https://picrew.github.io/LLM-Harness/" no-pjax class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://i.postimg.cc/fy41X1CF/IMG-202406275682-1440x810.jpg" class="lazyload placeholder" data-srcset="https://i.postimg.cc/fy41X1CF/IMG-202406275682-1440x810.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://i.postimg.cc/fy41X1CF/IMG-202406275682-1440x810.jpg" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1368,7 +1392,7 @@
             <div class="post-img-box">
               <a href="/2026/04/02/about/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://i.postimg.cc/X7ktGHCH/IMG-202406276438-1440x810.jpg" class="lazyload placeholder" data-srcset="https://i.postimg.cc/X7ktGHCH/IMG-202406276438-1440x810.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://i.postimg.cc/X7ktGHCH/IMG-202406276438-1440x810.jpg" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1389,7 +1413,7 @@
             <div class="post-img-box">
               <a href="https://picrew.github.io/constory-bench.github.io/" no-pjax class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1410,7 +1434,7 @@
             <div class="post-img-box">
               <a href="/2024/10/14/IncreMacro/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1431,7 +1455,7 @@
             <div class="post-img-box">
               <a href="/2024/09/11/think1/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://i.postimg.cc/LswWKGcX/IMG-202406278649-1440x810.jpg" class="lazyload placeholder" data-srcset="https://i.postimg.cc/LswWKGcX/IMG-202406278649-1440x810.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://i.postimg.cc/LswWKGcX/IMG-202406278649-1440x810.jpg" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1452,14 +1476,15 @@
       
   <section class="widget side_archives">
     
-    <header><a style="color: red" href='/archives/'><i class="fas fa-archive fa-fw" aria-hidden="true"></i><span class='name'>归档</span></a></header><div class="content"><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/05/"><span class="card-archive-list-date">May 2026</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/04/"><span class="card-archive-list-date">April 2026</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/03/"><span class="card-archive-list-date">March 2026</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">October 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">September 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">July 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">June 2024</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">May 2024</span><span class="card-archive-list-count">1</span></a></li></ul></div>
+    <header><a style="color: red" href='/archives/'><i class="fas fa-archive fa-fw" aria-hidden="true"></i><span class='name' data-i18n="sideArchives">归档</span></a></header><div class="content"><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/05/"><span class="card-archive-list-date">May 2026</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/04/"><span class="card-archive-list-date">April 2026</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/03/"><span class="card-archive-list-date">March 2026</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">October 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">September 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">July 2024</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">June 2024</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">May 2024</span><span class="card-archive-list-count">1</span></a></li></ul></div>
   </section>
 
       <section class="widget side_webinfo">
   
+  
   <header>
     
-      <i style="color: " class="fas fa-chart-line fa-fw" aria-hidden="true"></i><span class='name' style="color: ">站点信息</span>
+      <i style="color: " class="fas fa-chart-line fa-fw" aria-hidden="true"></i><span class='name' style="color: " data-i18n="sideWebinfo">站点信息</span>
     
   </header>
 
@@ -1468,14 +1493,14 @@
     <div class="webinfo">
       
         <div class="webinfo-item">
-          <div>文章数目：</div>
-          <div>23 篇</div>
+          <div data-i18n="webinfoArticles">文章数目：</div>
+          <div>23 <span data-i18n="unitPosts">篇</span></div>
         </div>
       
 
       
         <div class="webinfo-item">
-          <div>已运行时间：</div>
+          <div data-i18n="webinfoRuntime">已运行时间：</div>
           <div id="webinfo-runtime-count" publish_date="03/24/2020 21:34:09"></div>
         </div>
         <script>
@@ -1483,7 +1508,7 @@
           var today = new Date();
           var timeold = (today.getTime() - BirthDay.getTime());
           var daysold = Math.floor(timeold / (24 * 60 * 60 * 1000));
-          document.getElementById('webinfo-runtime-count').innerHTML = daysold + ' 天';
+          document.getElementById('webinfo-runtime-count').innerHTML = daysold + ' <span data-i18n="unitDays">天</span>';
         </script>
       
 
@@ -1492,28 +1517,28 @@
 
       
         <div class="webinfo-item">
-          <div>本站访客数：</div>
+          <div data-i18n="webinfoVisitors">本站访客数：</div>
           
-          <div><span id="busuanzi_value_site_uv"><i class="fas fa-fan fa-spin fa-fw" aria-hidden="true"></i></span> 人</div>
-          
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>本站总访问量：</div>
-          
-          <div><span id="busuanzi_value_site_pv"><i class="fas fa-fan fa-spin fa-fw" aria-hidden="true"></i></span> 次</div>
+          <div><span id="busuanzi_value_site_uv"><i class="fas fa-fan fa-spin fa-fw" aria-hidden="true"></i></span> <span data-i18n="unitPeople">人</span></div>
           
         </div>
       
 
       
         <div class="webinfo-item">
-          <div>最后活动时间：</div>
+          <div data-i18n="webinfoViews">本站总访问量：</div>
           
-            <div id="last-update" style="display: none;">Wed Jun 10 2026 16:57:53 GMT+0800 (China Standard Time)</div>
-            <div id="last-update-show">2026-06-10 日</div>
+          <div><span id="busuanzi_value_site_pv"><i class="fas fa-fan fa-spin fa-fw" aria-hidden="true"></i></span> <span data-i18n="unitViews">次</span></div>
+          
+        </div>
+      
+
+      
+        <div class="webinfo-item">
+          <div data-i18n="webinfoLastActivity">最后活动时间：</div>
+          
+            <div id="last-update" style="display: none;">Wed Jun 10 2026 23:04:13 GMT+0800 (China Standard Time)</div>
+            <div id="last-update-show">2026-06-10 <span data-i18n="unitDate">日</span></div>
           
         </div>
         
@@ -1563,7 +1588,7 @@
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2026-06-10 日';
+            document.getElementById('last-update-show').innerHTML = '2026-06-10 <span data-i18n="unitDate">日</span>';
           }
         </script>
         
@@ -1571,6 +1596,7 @@
     </div>
   </div>
 </section>
+
       
     
   </div>
@@ -1760,7 +1786,7 @@
       
         
           <div class="footer-copyright">
-            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a></p>
+            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> </p>
 
           </div>
         
@@ -1855,14 +1881,20 @@
     <script src="/js/utils/index.js"></script>
     <script src="/js/app.js"></script>
     
+      <script>
+        window.BLOG_UI_I18N_DEFAULT = 'en';
+      </script>
+      <script src="/js/ui-i18n.js"></script>
+    
+    
     <!-- 文章目录所需js -->
 <!-- <link href="/js/tocbot/tocbot.css" rel="stylesheet">
 <script src="/js/tocbot/tocbot.min.js"></script> -->
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.min.js"></script>
+<script src="/js/tocbot/tocbot.min.js"></script>
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.css">
+<link rel="stylesheet" href="/js/tocbot/tocbot.css">
 
 <script>
   var headerEl = 'h1, h2, h3, h4, h5',  //headers 
@@ -2186,30 +2218,73 @@
   
 
 <!-- 图片懒加载 -->
-<script defer src="https://unpkg.com/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
 <script>
-  // https://www.npmjs.com/package/vanilla-lazyload
-  // Set the options globally
-  // to make LazyLoad self-initialize
-  window.lazyLoadOptions = {
-    elements_selector: ".lazyload",
-    threshold: 0
-  };
-  // Listen to the initialization event
-  // and get the instance of LazyLoad
-  window.addEventListener(
-    "LazyLoad::Initialized",
-    function (event) {
-      window.lazyLoadInstance = event.detail.instance;
-    },
-    false
-  );
-  document.addEventListener('DOMContentLoaded', function () {
-    lazyLoadInstance.update();
-  });
-  document.addEventListener('pjax:complete', function () {
-    lazyLoadInstance.update();
-  });
+  (function () {
+    'use strict';
+
+    var selector = '.lazyload';
+    var observer = null;
+
+    function loadImage(image) {
+      if (!image || image.__lazyLoaded) return;
+
+      var src = image.getAttribute('data-src');
+      var srcset = image.getAttribute('data-srcset');
+
+      if (src) image.setAttribute('src', src);
+      if (srcset) image.setAttribute('srcset', srcset);
+
+      image.classList.remove('placeholder');
+      image.classList.add('loaded');
+      image.__lazyLoaded = true;
+
+      if (observer) observer.unobserve(image);
+    }
+
+    function updateLazyImages() {
+      var images = Array.prototype.slice.call(document.querySelectorAll(selector));
+
+      if (!('IntersectionObserver' in window)) {
+        images.forEach(loadImage);
+        return;
+      }
+
+      if (!observer) {
+        observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting || entry.intersectionRatio > 0) {
+              loadImage(entry.target);
+            }
+          });
+        }, {
+          rootMargin: '1200px 0px',
+          threshold: 0.01
+        });
+      }
+
+      images.forEach(function (image) {
+        if (image.__lazyLoaded) return;
+        observer.observe(image);
+      });
+    }
+
+    window.lazyLoadInstance = {
+      update: updateLazyImages
+    };
+
+    function scheduleUpdate() {
+      window.requestAnimationFrame ? window.requestAnimationFrame(updateLazyImages) : setTimeout(updateLazyImages, 0);
+    }
+
+    window.addEventListener('load', scheduleUpdate);
+    window.addEventListener('pageshow', scheduleUpdate);
+    window.addEventListener('resize', updateLazyImages);
+    document.addEventListener('pjax:complete', scheduleUpdate);
+
+    if (document.readyState === 'complete') {
+      scheduleUpdate();
+    }
+  })();
 </script>
 
 
@@ -2426,13 +2501,23 @@
   
     <div class="pjax-animate">
   
+  
     <div class="loading-circle"><div id="loader-circle"></div></div>
     <script>
+      var pjaxLoadingTimer = null;
+      var setPjaxLoadingVisible = function(visible) {
+        var loadingCircle = document.querySelector('.loading-circle');
+        if (!loadingCircle) return;
+        loadingCircle.style.display = visible ? 'block' : 'none';
+      };
       window.ShowLoading = function() {
-        $(".loading-circle").css("display", "block");
+        window.clearTimeout(pjaxLoadingTimer);
+        setPjaxLoadingVisible(true);
+        pjaxLoadingTimer = window.setTimeout(window.HideLoading, 6000);
       };
       window.HideLoading = function() {
-        $(".loading-circle").css("display", "none");
+        window.clearTimeout(pjaxLoadingTimer);
+        setPjaxLoadingVisible(false);
       }
     </script>
   
@@ -2444,6 +2529,9 @@
       window.ShowLoading();
     })
     document.addEventListener('pjax:error', function () {
+      window.HideLoading();
+    })
+    window.addEventListener('pageshow', function () {
       window.HideLoading();
     })
 	</script>

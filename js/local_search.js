@@ -1,155 +1,182 @@
-// A local search script with the help of [hexo-generator-search](https://github.com/PaicHyperionDev/hexo-generator-search)
-// Copyright (C) 2017
-// Liam Huang <http://github.com/Liam0205>
-// This library is free software; you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as
-// published by the Free Software Foundation; either version 2.1 of the
-// License, or (at your option) any later version.
-//
-// This library is distributed in the hope that it will be useful, but
-// WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// Lesser General Public License for more details.
-//
-// You should have received a copy of the GNU Lesser General Public
-// License along with this library; if not, write to the Free Software
-// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-// 02110-1301 USA
-//
+// Local search for the generated search.xml index.
+(function () {
+  'use strict';
 
-var searchFunc = function (path, search_id, content_id) {
-  // 0x00. environment initialization
-  "use strict";
-  var BTN =
-    "<i id='local-search-close' class='fas fa-times' aria-hidden='true'></i>";
-  var $input = document.getElementById(search_id);
-  var $resultContent = document.getElementById(content_id);
-  // $resultContent.innerHTML = BTN + "<ul><span class='local-search-empty'>首次搜索，正在载入索引文件，请稍后……<span></ul>";
-  $.ajax({
-    // 0x01. load xml file
-    url: path,
-    dataType: "xml",
-    success: function (xmlResponse) {
-      // 0x02. parse xml file
-      var datas = $("entry", xmlResponse)
-        .map(function () {
-          return {
-            title: $("title", this).text(),
-            content: $("content", this).text(),
-            url: $("url", this).text(),
-          };
-        })
-        .get();
-      $resultContent.innerHTML = "";
+  var state = {
+    path: '',
+    loading: false,
+    ready: false,
+    data: []
+  };
 
-      $input.addEventListener("input", function () {
-        // 0x03. parse query to keywords list
-        var str = '<ul class="search-result-list">';
-        var keywords = this.value
-          .trim()
-          .toLowerCase()
-          .split(/[\s\-]+/);
-        $resultContent.innerHTML = "";
-        if (this.value.trim().length <= 0) {
-          return;
-        }
-        // 0x04. perform local searching
-        datas.forEach(function (data) {
-          var isMatch = true;
-          var content_index = [];
-          if (!data.title || data.title.trim() === "") {
-            data.title = "Untitled";
-          }
-          var orig_data_title = data.title.trim();
-          var data_title = orig_data_title.toLowerCase();
-          var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
-          var data_content = orig_data_content.toLowerCase();
-          var data_url = data.url;
-          var index_title = -1;
-          var index_content = -1;
-          var first_occur = -1;
-          // only match artiles with not empty contents
-          if (data_content !== "") {
-            keywords.forEach(function (keyword, i) {
-              index_title = data_title.indexOf(keyword);
-              index_content = data_content.indexOf(keyword);
-
-              if (index_title < 0 && index_content < 0) {
-                isMatch = false;
-              } else {
-                if (index_content < 0) {
-                  index_content = 0;
-                }
-                if (i == 0) {
-                  first_occur = index_content;
-                }
-                // content_index.push({index_content:index_content, keyword_len:keyword_len});
-              }
-            });
-          } else {
-            isMatch = false;
-          }
-          // 0x05. show search results
-          if (isMatch) {
-            str +=
-              "<li><a href='" +
-              data_url +
-              "' class='search-result-title color-primary'>" +
-              orig_data_title +
-              "</a>";
-            var content = orig_data_content;
-            if (first_occur >= 0) {
-              // cut out 100 characters
-              var start = first_occur - 20;
-              var end = first_occur + 80;
-
-              if (start < 0) {
-                start = 0;
-              }
-
-              if (start == 0) {
-                end = 100;
-              }
-
-              if (end > content.length) {
-                end = content.length;
-              }
-
-              var match_content = content.substr(start, end);
-
-              // highlight all keywords
-              keywords.forEach(function (keyword) {
-                var regS = new RegExp(keyword, "gi");
-                match_content = match_content.replace(
-                  regS,
-                  '<span class="search-keyword">' + keyword + "</span>"
-                );
-              });
-
-              str += '<p class="search-result">' + match_content + "...</p>";
-            }
-            str += "</li>";
-          }
-        });
-        str += "</ul>";
-        if (str.indexOf("<li>") === -1) {
-          return ($resultContent.innerHTML =
-            "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>");
-          // return $resultContent.innerHTML = BTN + "<ul><span class='local-search-empty'>没有找到内容，请尝试更换检索词。<span></ul>";
-        }
-        $resultContent.innerHTML = str;
-        window.pjax && window.pjax.refresh($resultContent)
-        // $resultContent.innerHTML = BTN + str;
-      });
+  var messages = {
+    zh: {
+      loading: '正在加载搜索索引...',
+      ready: '输入关键词开始搜索。',
+      empty: '没有找到内容，请尝试更换检索词。',
+      failed: '搜索索引加载失败，请刷新后重试。'
     },
-  });
-  $(document).on("click", "#local-search-close", function () {
-    $("#local-search-input").val("");
-    $("#local-search-result").html("");
-  });
-};
+    en: {
+      loading: 'Loading search index...',
+      ready: 'Type keywords to search.',
+      empty: 'No results. Try different keywords.',
+      failed: 'Search index failed to load. Please refresh and try again.'
+    }
+  };
 
-var getSearchFile = function (path) {
-  // var path = "/search.xml";
-  searchFunc(path, "local-search-input", "local-search-result");
-};
+  function currentLang() {
+    return document.documentElement.getAttribute('data-ui-lang') === 'zh' ? 'zh' : 'en';
+  }
+
+  function t(key) {
+    return messages[currentLang()][key] || messages.en[key] || '';
+  }
+
+  function escapeHtml(value) {
+    return String(value || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function escapeRegExp(value) {
+    return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  function setStatus(resultEl, key) {
+    if (!resultEl) return;
+    resultEl.innerHTML = '<ul><span class="local-search-empty">' + escapeHtml(t(key)) + '</span></ul>';
+  }
+
+  function parseIndex(xmlResponse) {
+    return $('entry', xmlResponse).map(function () {
+      return {
+        title: $('title', this).text(),
+        content: $('content', this).text(),
+        url: $('url', this).text()
+      };
+    }).get();
+  }
+
+  function renderResults(inputEl, resultEl) {
+    var query = inputEl.value.trim().toLowerCase();
+    var keywords = query.split(/[\s\-]+/).filter(Boolean);
+
+    resultEl.innerHTML = '';
+    if (!keywords.length) {
+      setStatus(resultEl, state.ready ? 'ready' : 'loading');
+      return;
+    }
+
+    var html = '<ul class="search-result-list">';
+    var hasResult = false;
+
+    state.data.forEach(function (data) {
+      var title = (data.title || 'Untitled').trim();
+      var content = (data.content || '').trim().replace(/<[^>]+>/g, '');
+      var lowerTitle = title.toLowerCase();
+      var lowerContent = content.toLowerCase();
+      var firstOccur = -1;
+      var isMatch = keywords.every(function (keyword, index) {
+        var titleIndex = lowerTitle.indexOf(keyword);
+        var contentIndex = lowerContent.indexOf(keyword);
+
+        if (titleIndex < 0 && contentIndex < 0) {
+          return false;
+        }
+        if (index === 0) {
+          firstOccur = contentIndex >= 0 ? contentIndex : 0;
+        }
+        return true;
+      });
+
+      if (!isMatch) return;
+
+      hasResult = true;
+      html += '<li><a href="' + escapeHtml(data.url) + '" class="search-result-title color-primary">' + escapeHtml(title) + '</a>';
+
+      if (content) {
+        var start = Math.max(firstOccur - 20, 0);
+        var end = Math.min(firstOccur + 90, content.length);
+        var snippet = content.substring(start, end || 120);
+
+        keywords.forEach(function (keyword) {
+          snippet = snippet.replace(new RegExp(escapeRegExp(keyword), 'gi'), function (match) {
+            return '<span class="search-keyword">' + escapeHtml(match) + '</span>';
+          });
+        });
+
+        html += '<p class="search-result">' + snippet + '...</p>';
+      }
+      html += '</li>';
+    });
+
+    html += '</ul>';
+
+    if (!hasResult) {
+      setStatus(resultEl, 'empty');
+      return;
+    }
+
+    resultEl.innerHTML = html;
+    window.pjax && window.pjax.refresh(resultEl);
+  }
+
+  function bindInput(inputEl, resultEl) {
+    if (inputEl.__localSearchBound) return;
+    inputEl.__localSearchBound = true;
+    inputEl.addEventListener('input', function () {
+      if (!state.ready) {
+        setStatus(resultEl, state.loading ? 'loading' : 'failed');
+        return;
+      }
+      renderResults(inputEl, resultEl);
+    });
+  }
+
+  window.searchFunc = function (path, searchId, contentId) {
+    var inputEl = document.getElementById(searchId);
+    var resultEl = document.getElementById(contentId);
+
+    if (!inputEl || !resultEl) return;
+    bindInput(inputEl, resultEl);
+
+    if (state.ready && state.path === path) {
+      renderResults(inputEl, resultEl);
+      return;
+    }
+
+    if (state.loading) {
+      setStatus(resultEl, 'loading');
+      return;
+    }
+
+    state.path = path;
+    state.loading = true;
+    state.ready = false;
+    setStatus(resultEl, 'loading');
+
+    $.ajax({
+      url: path,
+      dataType: 'xml',
+      cache: true,
+      success: function (xmlResponse) {
+        state.data = parseIndex(xmlResponse);
+        state.loading = false;
+        state.ready = true;
+        renderResults(inputEl, resultEl);
+      },
+      error: function () {
+        state.loading = false;
+        state.ready = false;
+        setStatus(resultEl, 'failed');
+      }
+    });
+  };
+
+  window.getSearchFile = function (path) {
+    window.searchFunc(path, 'local-search-input', 'local-search-result');
+  };
+})();

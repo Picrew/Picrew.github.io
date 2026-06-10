@@ -42,16 +42,15 @@
             }
         }
     </style>
-    <script defer src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
-    <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+    
 
     
         <script src="/js/valine/index.js"></script>
     
     
     <!-- 依赖于jquery和vue -->
-    <script src="https://unpkg.com/jquery@3.5.1/dist/jquery.min.js"></script>
-    <script src="https://unpkg.com/vue@2.6.11/dist/vue.min.js"></script>
+    <script src="/js/jquery3.5.1.js"></script>
+    <script src="/js/vue2.6.11.js"></script>
 
     <!-- import link -->
     
@@ -81,10 +80,16 @@
 </div>
   <script>
     var endLoading = function () {
+      var loader = document.getElementById('loader');
+      if (!loader || loader.classList.contains('loaded')) return;
       document.body.style.overflow = 'auto';
-      document.getElementById('loader').classList.add("loaded");
+      loader.classList.add("loaded");
     }
-    window.addEventListener('DOMContentLoaded', endLoading);
+    window.addEventListener('DOMContentLoaded', function () {
+      requestAnimationFrame(endLoading);
+    });
+    window.addEventListener('load', endLoading);
+    window.setTimeout(endLoading, 1500);
   </script>
 
 
@@ -192,7 +197,7 @@
   </transition>
   <div class="drawer-box" :class="{'active': visible}">
     <div class="drawer-box-head bg-color">
-      <img class="drawer-box-head_logo lazyload placeholder" src="/medias/avatar.jpg" class="lazyload placeholder" data-srcset="/medias/avatar.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+      <img class="drawer-box-head_logo lazyload" alt="logo" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/medias/avatar.jpg" data-srcset="/medias/avatar.jpg">
       <h3 class="drawer-box-head_title"></h3>
       <h5 class="drawer-box-head_desc"></h5>
     </div>
@@ -262,7 +267,7 @@
     <div class="blog-title" id="author-avatar">
       
         <div class="avatar">
-          <img src="/medias/avatar.jpg" class="lazyload placeholder" data-srcset="/medias/avatar.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+          <img class="lazyload" alt="logo" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/medias/avatar.jpg" data-srcset="/medias/avatar.jpg">
         </div>
       
       <a href="/" class="logo"></a>
@@ -272,22 +277,31 @@
         
       </ul>
       
+        
+        
+        <button class="ui-lang-toggle" type="button" data-ui-lang-toggle data-current-lang="en" data-next-lang="zh" aria-label="切换到中文" title="切换到中文">
+          <i class="fas fa-language" aria-hidden="true"></i>
+          <span data-ui-lang-toggle-label>中</span>
+        </button>
+      
+
       
         <div id="appSearch">
-  <div class="search"  @click="showDialog()"><i class="fas fa-search" aria-hidden="true"></i></div>
+  <div class="search" title="Search" data-i18n-title="searchTitle" @click="showDialog()"><i class="fas fa-search" aria-hidden="true"></i></div>
   <transition name="fade">
     <div class="message-box_wrapper" style="display: none;" v-cloak v-show="dialogVisible" @click.self="cancelDialogVisible()">
       <div class="message-box animated bounceInDown">
         <h2>
           <span>
             <i class="fas fa-search" aria-hidden="true"></i>
-            <span class="title">Search</span>
+            <span class="title" data-i18n="searchTitle">Search</span>
           </span>
           <i class="fas fa-times close" pointer style="float:right;" aria-hidden="true" @click.self="cancelDialogVisible()"></i>
         </h2>
         <form class="site-search-form">
           <input type="text"
             placeholder="Please enter keywords"
+            data-i18n-placeholder="searchPlaceholder"
             id="local-search-input" 
             @click="getSearchFile()"
             class="st-search-input"
@@ -324,11 +338,14 @@
         // 防止页面滚动，只能让弹框滚动
         this.top = $(document).scrollTop()
         body.style.cssText = 'overflow: hidden;';
+        this.$nextTick(() => {
+          this.getSearchFile();
+          const input = document.getElementById('local-search-input');
+          input && input.focus();
+        });
       },
       getSearchFile() {
-        if (!this.searchInput) {
-          getSearchFile("/search.xml");
-        }
+        window.getSearchFile && window.getSearchFile("/search.xml");
       },
       cancelDialogVisible() {
         this.dialogVisible = false;
@@ -356,6 +373,7 @@
   
   
 </header>
+
         <!-- 内容区域 -->
         
 
@@ -393,7 +411,7 @@
 
 <div class="category">
   <div class="category-name">
-    <div class="name" style="background-color: #F9E79F;">EDA category</div>
+    <div class="name" style="background-color: #F9E79F;">EDA <span data-i18n="category">category</span></div>
   </div>
   <!-- 每一篇文章卡片 -->
   <!-- hash算法 -->
@@ -433,7 +451,7 @@
           <div class="post-img-mobile">
             <a href="/2024/10/14/IncreMacro/" style="background-size: cover; 
               background-position: center center;">
-              <img class="lazyload lazyload placeholder" src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              <img class="lazyload" alt="" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp">
             </a>
           </div>
           <div class="post-content">
@@ -443,14 +461,14 @@
         </div>
         <div class="post-more">
           <a href="/2024/10/14/IncreMacro/">
-            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
+            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多" data-i18n-title="readMore"></i>
           </a>
         </div>
       </div>
       <div class="post-img">
         <a href="/2024/10/14/IncreMacro/" style="background-size: cover; 
           background-position: center center;">
-          <img class="lazyload lazyload placeholder" src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+          <img class="lazyload" alt="" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp">
         </a>
       </div>
     </article>
@@ -488,7 +506,7 @@
           <div class="post-img-mobile">
             <a href="/2024/07/24/GPT4AIGChip/" style="background-size: cover; 
               background-position: center center;">
-              <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              <img class="lazyload" alt="" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp">
             </a>
           </div>
           <div class="post-content">
@@ -500,14 +518,14 @@
         </div>
         <div class="post-more">
           <a href="/2024/07/24/GPT4AIGChip/">
-            <i class="iconfont iconmore" pointer style="  " title="阅读更多"></i>
+            <i class="iconfont iconmore" pointer style="  " title="阅读更多" data-i18n-title="readMore"></i>
           </a>
         </div>
       </div>
       <div class="post-img">
         <a href="/2024/07/24/GPT4AIGChip/" style="background-size: cover; 
           background-position: center center;">
-          <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+          <img class="lazyload" alt="" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp">
         </a>
       </div>
     </article>
@@ -545,7 +563,7 @@
           <div class="post-img-mobile">
             <a href="/2024/06/25/EDA-LLM/" style="background-size: cover; 
               background-position: center center;">
-              <img class="lazyload lazyload placeholder" src="https://i.postimg.cc/mgbfmf4W/IMG-202406271492-1440x810.jpg" class="lazyload placeholder" data-srcset="https://i.postimg.cc/mgbfmf4W/IMG-202406271492-1440x810.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              <img class="lazyload" alt="" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.postimg.cc/mgbfmf4W/IMG-202406271492-1440x810.jpg" data-srcset="https://i.postimg.cc/mgbfmf4W/IMG-202406271492-1440x810.jpg">
             </a>
           </div>
           <div class="post-content">
@@ -561,14 +579,14 @@ ChipNeMo: Domain-Ada
         </div>
         <div class="post-more">
           <a href="/2024/06/25/EDA-LLM/">
-            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
+            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多" data-i18n-title="readMore"></i>
           </a>
         </div>
       </div>
       <div class="post-img">
         <a href="/2024/06/25/EDA-LLM/" style="background-size: cover; 
           background-position: center center;">
-          <img class="lazyload lazyload placeholder" src="https://i.postimg.cc/mgbfmf4W/IMG-202406271492-1440x810.jpg" class="lazyload placeholder" data-srcset="https://i.postimg.cc/mgbfmf4W/IMG-202406271492-1440x810.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+          <img class="lazyload" alt="" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.postimg.cc/mgbfmf4W/IMG-202406271492-1440x810.jpg" data-srcset="https://i.postimg.cc/mgbfmf4W/IMG-202406271492-1440x810.jpg">
         </a>
       </div>
     </article>
@@ -606,7 +624,7 @@ ChipNeMo: Domain-Ada
           <div class="post-img-mobile">
             <a href="/2024/06/17/Circuit-Graph/" style="background-size: cover; 
               background-position: center center;">
-              <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              <img class="lazyload" alt="" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" data-srcset="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg">
             </a>
           </div>
           <div class="post-content">
@@ -616,14 +634,14 @@ ChipNeMo: Domain-Ada
         </div>
         <div class="post-more">
           <a href="/2024/06/17/Circuit-Graph/">
-            <i class="iconfont iconmore" pointer style="  " title="阅读更多"></i>
+            <i class="iconfont iconmore" pointer style="  " title="阅读更多" data-i18n-title="readMore"></i>
           </a>
         </div>
       </div>
       <div class="post-img">
         <a href="/2024/06/17/Circuit-Graph/" style="background-size: cover; 
           background-position: center center;">
-          <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+          <img class="lazyload" alt="" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" data-srcset="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg">
         </a>
       </div>
     </article>
@@ -661,7 +679,7 @@ ChipNeMo: Domain-Ada
           <div class="post-img-mobile">
             <a href="/2024/06/05/AnalogCoder/" style="background-size: cover; 
               background-position: center center;">
-              <img class="lazyload lazyload placeholder" src="https://i.postimg.cc/QMHzzjnw/IMG-202406277714-1440x810.jpg" class="lazyload placeholder" data-srcset="https://i.postimg.cc/QMHzzjnw/IMG-202406277714-1440x810.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              <img class="lazyload" alt="" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.postimg.cc/QMHzzjnw/IMG-202406277714-1440x810.jpg" data-srcset="https://i.postimg.cc/QMHzzjnw/IMG-202406277714-1440x810.jpg">
             </a>
           </div>
           <div class="post-content">
@@ -674,14 +692,14 @@ Introduction
         </div>
         <div class="post-more">
           <a href="/2024/06/05/AnalogCoder/">
-            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
+            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多" data-i18n-title="readMore"></i>
           </a>
         </div>
       </div>
       <div class="post-img">
         <a href="/2024/06/05/AnalogCoder/" style="background-size: cover; 
           background-position: center center;">
-          <img class="lazyload lazyload placeholder" src="https://i.postimg.cc/QMHzzjnw/IMG-202406277714-1440x810.jpg" class="lazyload placeholder" data-srcset="https://i.postimg.cc/QMHzzjnw/IMG-202406277714-1440x810.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+          <img class="lazyload" alt="" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.postimg.cc/QMHzzjnw/IMG-202406277714-1440x810.jpg" data-srcset="https://i.postimg.cc/QMHzzjnw/IMG-202406277714-1440x810.jpg">
         </a>
       </div>
     </article>
@@ -719,7 +737,7 @@ Introduction
           <div class="post-img-mobile">
             <a href="/2024/05/26/EfficientPlace/" style="background-size: cover; 
               background-position: center center;">
-              <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              <img class="lazyload" alt="" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" data-srcset="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp">
             </a>
           </div>
           <div class="post-content">
@@ -732,14 +750,14 @@ Int
         </div>
         <div class="post-more">
           <a href="/2024/05/26/EfficientPlace/">
-            <i class="iconfont iconmore" pointer style="  " title="阅读更多"></i>
+            <i class="iconfont iconmore" pointer style="  " title="阅读更多" data-i18n-title="readMore"></i>
           </a>
         </div>
       </div>
       <div class="post-img">
         <a href="/2024/05/26/EfficientPlace/" style="background-size: cover; 
           background-position: center center;">
-          <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+          <img class="lazyload" alt="" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" data-srcset="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp">
         </a>
       </div>
     </article>
@@ -777,7 +795,7 @@ Int
           <div class="post-img-mobile">
             <a href="/2024/03/28/AutoDMP/" style="background-size: cover; 
               background-position: center center;">
-              <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              <img class="lazyload" alt="" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" data-srcset="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp">
             </a>
           </div>
           <div class="post-content">
@@ -789,14 +807,14 @@ Introduction
         </div>
         <div class="post-more">
           <a href="/2024/03/28/AutoDMP/">
-            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
+            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多" data-i18n-title="readMore"></i>
           </a>
         </div>
       </div>
       <div class="post-img">
         <a href="/2024/03/28/AutoDMP/" style="background-size: cover; 
           background-position: center center;">
-          <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+          <img class="lazyload" alt="" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" data-srcset="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp">
         </a>
       </div>
     </article>
@@ -834,7 +852,7 @@ Introduction
           <div class="post-img-mobile">
             <a href="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/" style="background-size: cover; 
               background-position: center center;">
-              <img class="lazyload lazyload placeholder" src="https://i.postimg.cc/KcL6Fvvy/IMG-202406276275-1440x810.jpg" class="lazyload placeholder" data-srcset="https://i.postimg.cc/KcL6Fvvy/IMG-202406276275-1440x810.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              <img class="lazyload" alt="" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.postimg.cc/KcL6Fvvy/IMG-202406276275-1440x810.jpg" data-srcset="https://i.postimg.cc/KcL6Fvvy/IMG-202406276275-1440x810.jpg">
             </a>
           </div>
           <div class="post-content">
@@ -844,14 +862,14 @@ Introduction
         </div>
         <div class="post-more">
           <a href="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/">
-            <i class="iconfont iconmore" pointer style="  " title="阅读更多"></i>
+            <i class="iconfont iconmore" pointer style="  " title="阅读更多" data-i18n-title="readMore"></i>
           </a>
         </div>
       </div>
       <div class="post-img">
         <a href="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/" style="background-size: cover; 
           background-position: center center;">
-          <img class="lazyload lazyload placeholder" src="https://i.postimg.cc/KcL6Fvvy/IMG-202406276275-1440x810.jpg" class="lazyload placeholder" data-srcset="https://i.postimg.cc/KcL6Fvvy/IMG-202406276275-1440x810.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+          <img class="lazyload" alt="" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.postimg.cc/KcL6Fvvy/IMG-202406276275-1440x810.jpg" data-srcset="https://i.postimg.cc/KcL6Fvvy/IMG-202406276275-1440x810.jpg">
         </a>
       </div>
     </article>
@@ -889,7 +907,7 @@ Introduction
           <div class="post-img-mobile">
             <a href="/2024/03/10/HubRouter/" style="background-size: cover; 
               background-position: center center;">
-              <img class="lazyload lazyload placeholder" src="https://i.postimg.cc/Jh0wWNtT/IMG-202406272780-1440x810.jpg" class="lazyload placeholder" data-srcset="https://i.postimg.cc/Jh0wWNtT/IMG-202406272780-1440x810.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              <img class="lazyload" alt="" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.postimg.cc/Jh0wWNtT/IMG-202406272780-1440x810.jpg" data-srcset="https://i.postimg.cc/Jh0wWNtT/IMG-202406272780-1440x810.jpg">
             </a>
           </div>
           <div class="post-content">
@@ -901,14 +919,14 @@ Introduction
         </div>
         <div class="post-more">
           <a href="/2024/03/10/HubRouter/">
-            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
+            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多" data-i18n-title="readMore"></i>
           </a>
         </div>
       </div>
       <div class="post-img">
         <a href="/2024/03/10/HubRouter/" style="background-size: cover; 
           background-position: center center;">
-          <img class="lazyload lazyload placeholder" src="https://i.postimg.cc/Jh0wWNtT/IMG-202406272780-1440x810.jpg" class="lazyload placeholder" data-srcset="https://i.postimg.cc/Jh0wWNtT/IMG-202406272780-1440x810.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+          <img class="lazyload" alt="" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.postimg.cc/Jh0wWNtT/IMG-202406272780-1440x810.jpg" data-srcset="https://i.postimg.cc/Jh0wWNtT/IMG-202406272780-1440x810.jpg">
         </a>
       </div>
     </article>
@@ -946,7 +964,7 @@ Introduction
           <div class="post-img-mobile">
             <a href="/2024/03/10/WireMask/" style="background-size: cover; 
               background-position: center center;">
-              <img class="lazyload lazyload placeholder" src="https://i.postimg.cc/vmNJ84VG/IMG-202406274992-1440x810.jpg" class="lazyload placeholder" data-srcset="https://i.postimg.cc/vmNJ84VG/IMG-202406274992-1440x810.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              <img class="lazyload" alt="" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.postimg.cc/vmNJ84VG/IMG-202406274992-1440x810.jpg" data-srcset="https://i.postimg.cc/vmNJ84VG/IMG-202406274992-1440x810.jpg">
             </a>
           </div>
           <div class="post-content">
@@ -958,14 +976,14 @@ Introduction
         </div>
         <div class="post-more">
           <a href="/2024/03/10/WireMask/">
-            <i class="iconfont iconmore" pointer style="  " title="阅读更多"></i>
+            <i class="iconfont iconmore" pointer style="  " title="阅读更多" data-i18n-title="readMore"></i>
           </a>
         </div>
       </div>
       <div class="post-img">
         <a href="/2024/03/10/WireMask/" style="background-size: cover; 
           background-position: center center;">
-          <img class="lazyload lazyload placeholder" src="https://i.postimg.cc/vmNJ84VG/IMG-202406274992-1440x810.jpg" class="lazyload placeholder" data-srcset="https://i.postimg.cc/vmNJ84VG/IMG-202406274992-1440x810.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+          <img class="lazyload" alt="" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.postimg.cc/vmNJ84VG/IMG-202406274992-1440x810.jpg" data-srcset="https://i.postimg.cc/vmNJ84VG/IMG-202406274992-1440x810.jpg">
         </a>
       </div>
     </article>
@@ -986,10 +1004,11 @@ Introduction
     
       <a href="/categories/EDA/page/2/"
          class="page-nav-next">
-          <span class="mr-5">Next</span><i class="fas fa-angle-right"></i>
+          <span class="mr-5" data-i18n="nextPage">Next</span><i class="fas fa-angle-right"></i>
       </a>
       
   </div>
+
 
 </div>
 
@@ -1169,7 +1188,7 @@ Introduction
       
         
           <div class="footer-copyright">
-            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a></p>
+            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> </p>
 
           </div>
         
@@ -1264,14 +1283,20 @@ Introduction
     <script src="/js/utils/index.js"></script>
     <script src="/js/app.js"></script>
     
+      <script>
+        window.BLOG_UI_I18N_DEFAULT = 'en';
+      </script>
+      <script src="/js/ui-i18n.js"></script>
+    
+    
     <!-- 文章目录所需js -->
 <!-- <link href="/js/tocbot/tocbot.css" rel="stylesheet">
 <script src="/js/tocbot/tocbot.min.js"></script> -->
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.min.js"></script>
+<script src="/js/tocbot/tocbot.min.js"></script>
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.css">
+<link rel="stylesheet" href="/js/tocbot/tocbot.css">
 
 <script>
   var headerEl = 'h1, h2, h3, h4, h5',  //headers 
@@ -1595,30 +1620,73 @@ Introduction
   
 
 <!-- 图片懒加载 -->
-<script defer src="https://unpkg.com/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
 <script>
-  // https://www.npmjs.com/package/vanilla-lazyload
-  // Set the options globally
-  // to make LazyLoad self-initialize
-  window.lazyLoadOptions = {
-    elements_selector: ".lazyload",
-    threshold: 0
-  };
-  // Listen to the initialization event
-  // and get the instance of LazyLoad
-  window.addEventListener(
-    "LazyLoad::Initialized",
-    function (event) {
-      window.lazyLoadInstance = event.detail.instance;
-    },
-    false
-  );
-  document.addEventListener('DOMContentLoaded', function () {
-    lazyLoadInstance.update();
-  });
-  document.addEventListener('pjax:complete', function () {
-    lazyLoadInstance.update();
-  });
+  (function () {
+    'use strict';
+
+    var selector = '.lazyload';
+    var observer = null;
+
+    function loadImage(image) {
+      if (!image || image.__lazyLoaded) return;
+
+      var src = image.getAttribute('data-src');
+      var srcset = image.getAttribute('data-srcset');
+
+      if (src) image.setAttribute('src', src);
+      if (srcset) image.setAttribute('srcset', srcset);
+
+      image.classList.remove('placeholder');
+      image.classList.add('loaded');
+      image.__lazyLoaded = true;
+
+      if (observer) observer.unobserve(image);
+    }
+
+    function updateLazyImages() {
+      var images = Array.prototype.slice.call(document.querySelectorAll(selector));
+
+      if (!('IntersectionObserver' in window)) {
+        images.forEach(loadImage);
+        return;
+      }
+
+      if (!observer) {
+        observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting || entry.intersectionRatio > 0) {
+              loadImage(entry.target);
+            }
+          });
+        }, {
+          rootMargin: '1200px 0px',
+          threshold: 0.01
+        });
+      }
+
+      images.forEach(function (image) {
+        if (image.__lazyLoaded) return;
+        observer.observe(image);
+      });
+    }
+
+    window.lazyLoadInstance = {
+      update: updateLazyImages
+    };
+
+    function scheduleUpdate() {
+      window.requestAnimationFrame ? window.requestAnimationFrame(updateLazyImages) : setTimeout(updateLazyImages, 0);
+    }
+
+    window.addEventListener('load', scheduleUpdate);
+    window.addEventListener('pageshow', scheduleUpdate);
+    window.addEventListener('resize', updateLazyImages);
+    document.addEventListener('pjax:complete', scheduleUpdate);
+
+    if (document.readyState === 'complete') {
+      scheduleUpdate();
+    }
+  })();
 </script>
 
 
@@ -1835,13 +1903,23 @@ Introduction
   
     <div class="pjax-animate">
   
+  
     <div class="loading-circle"><div id="loader-circle"></div></div>
     <script>
+      var pjaxLoadingTimer = null;
+      var setPjaxLoadingVisible = function(visible) {
+        var loadingCircle = document.querySelector('.loading-circle');
+        if (!loadingCircle) return;
+        loadingCircle.style.display = visible ? 'block' : 'none';
+      };
       window.ShowLoading = function() {
-        $(".loading-circle").css("display", "block");
+        window.clearTimeout(pjaxLoadingTimer);
+        setPjaxLoadingVisible(true);
+        pjaxLoadingTimer = window.setTimeout(window.HideLoading, 6000);
       };
       window.HideLoading = function() {
-        $(".loading-circle").css("display", "none");
+        window.clearTimeout(pjaxLoadingTimer);
+        setPjaxLoadingVisible(false);
       }
     </script>
   
@@ -1853,6 +1931,9 @@ Introduction
       window.ShowLoading();
     })
     document.addEventListener('pjax:error', function () {
+      window.HideLoading();
+    })
+    window.addEventListener('pageshow', function () {
       window.HideLoading();
     })
 	</script>

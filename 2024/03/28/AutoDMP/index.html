@@ -42,16 +42,15 @@
             }
         }
     </style>
-    <script defer src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
-    <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+    
 
     
         <script src="/js/valine/index.js"></script>
     
     
     <!-- 依赖于jquery和vue -->
-    <script src="https://unpkg.com/jquery@3.5.1/dist/jquery.min.js"></script>
-    <script src="https://unpkg.com/vue@2.6.11/dist/vue.min.js"></script>
+    <script src="/js/jquery3.5.1.js"></script>
+    <script src="/js/vue2.6.11.js"></script>
 
     <!-- import link -->
     
@@ -193,10 +192,16 @@ mjx-container[display="true"] + br {
 </div>
   <script>
     var endLoading = function () {
+      var loader = document.getElementById('loader');
+      if (!loader || loader.classList.contains('loaded')) return;
       document.body.style.overflow = 'auto';
-      document.getElementById('loader').classList.add("loaded");
+      loader.classList.add("loaded");
     }
-    window.addEventListener('DOMContentLoaded', endLoading);
+    window.addEventListener('DOMContentLoaded', function () {
+      requestAnimationFrame(endLoading);
+    });
+    window.addEventListener('load', endLoading);
+    window.setTimeout(endLoading, 1500);
   </script>
 
 
@@ -304,7 +309,7 @@ mjx-container[display="true"] + br {
   </transition>
   <div class="drawer-box" :class="{'active': visible}">
     <div class="drawer-box-head bg-color">
-      <img class="drawer-box-head_logo lazyload placeholder" src="/medias/avatar.jpg" class="lazyload placeholder" data-srcset="/medias/avatar.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+      <img class="drawer-box-head_logo lazyload" alt="logo" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/medias/avatar.jpg" data-srcset="/medias/avatar.jpg">
       <h3 class="drawer-box-head_title"></h3>
       <h5 class="drawer-box-head_desc"></h5>
     </div>
@@ -374,7 +379,7 @@ mjx-container[display="true"] + br {
     <div class="blog-title" id="author-avatar">
       
         <div class="avatar">
-          <img src="/medias/avatar.jpg" class="lazyload placeholder" data-srcset="/medias/avatar.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+          <img class="lazyload" alt="logo" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/medias/avatar.jpg" data-srcset="/medias/avatar.jpg">
         </div>
       
       <a href="/" class="logo"></a>
@@ -384,22 +389,31 @@ mjx-container[display="true"] + br {
         
       </ul>
       
+        
+        
+        <button class="ui-lang-toggle" type="button" data-ui-lang-toggle data-current-lang="en" data-next-lang="zh" aria-label="切换到中文" title="切换到中文">
+          <i class="fas fa-language" aria-hidden="true"></i>
+          <span data-ui-lang-toggle-label>中</span>
+        </button>
+      
+
       
         <div id="appSearch">
-  <div class="search"  @click="showDialog()"><i class="fas fa-search" aria-hidden="true"></i></div>
+  <div class="search" title="Search" data-i18n-title="searchTitle" @click="showDialog()"><i class="fas fa-search" aria-hidden="true"></i></div>
   <transition name="fade">
     <div class="message-box_wrapper" style="display: none;" v-cloak v-show="dialogVisible" @click.self="cancelDialogVisible()">
       <div class="message-box animated bounceInDown">
         <h2>
           <span>
             <i class="fas fa-search" aria-hidden="true"></i>
-            <span class="title">Search</span>
+            <span class="title" data-i18n="searchTitle">Search</span>
           </span>
           <i class="fas fa-times close" pointer style="float:right;" aria-hidden="true" @click.self="cancelDialogVisible()"></i>
         </h2>
         <form class="site-search-form">
           <input type="text"
             placeholder="Please enter keywords"
+            data-i18n-placeholder="searchPlaceholder"
             id="local-search-input" 
             @click="getSearchFile()"
             class="st-search-input"
@@ -436,11 +450,14 @@ mjx-container[display="true"] + br {
         // 防止页面滚动，只能让弹框滚动
         this.top = $(document).scrollTop()
         body.style.cssText = 'overflow: hidden;';
+        this.$nextTick(() => {
+          this.getSearchFile();
+          const input = document.getElementById('local-search-input');
+          input && input.focus();
+        });
       },
       getSearchFile() {
-        if (!this.searchInput) {
-          getSearchFile("/search.xml");
-        }
+        window.getSearchFile && window.getSearchFile("/search.xml");
       },
       cancelDialogVisible() {
         this.dialogVisible = false;
@@ -468,6 +485,7 @@ mjx-container[display="true"] + br {
   
   
 </header>
+
         <!-- 内容区域 -->
         
 <!-- prismjs 代码高亮 -->
@@ -499,13 +517,13 @@ mjx-container[display="true"] + br {
     
       
         <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> Published in：2024-03-28 |
+          <i class="fas fa-calendar"></i> <span data-i18n="publishedInLabel">Published in：</span>2024-03-28 |
         </span>
       
 
       
         <span class="post-detail-header_categories">
-          <i class="iconfont iconbookmark1"></i> category：
+          <i class="iconfont iconbookmark1"></i> <span data-i18n="categoryLabel">category：</span>
           
             <a href="/categories/EDA/" class="post-detail-header_category">
               EDA
@@ -848,11 +866,11 @@ eg.图 4：<img src="/2024/03/28/AutoDMP/VWlxbGk9Log5Q1xvOgrcqC5Sn3f-17166267401
   <div class="post-nav-prev post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+      <img class="lazyload" alt="" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" data-srcset="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp">
     </div>
     <a href="/2024/05/26/EfficientPlace/" class="post-nav-link">
       <div class="title">
-        <i class="fas fa-angle-left"></i> Prev:
+        <i class="fas fa-angle-left"></i> <span data-i18n="lastArticleLabel">Prev:</span>
         <div class="title-text">EfficientPlace</div>
       </div>
       
@@ -868,11 +886,11 @@ eg.图 4：<img src="/2024/03/28/AutoDMP/VWlxbGk9Log5Q1xvOgrcqC5Sn3f-17166267401
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://i.postimg.cc/KcL6Fvvy/IMG-202406276275-1440x810.jpg" class="lazyload placeholder" data-srcset="https://i.postimg.cc/KcL6Fvvy/IMG-202406276275-1440x810.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+      <img class="lazyload" src="" alt="" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.postimg.cc/KcL6Fvvy/IMG-202406276275-1440x810.jpg" data-srcset="https://i.postimg.cc/KcL6Fvvy/IMG-202406276275-1440x810.jpg">
     </div>
     <a href="/2024/03/25/On-a-Moreau-Envelope-Wirelength-Model-for-Analytical-Global-Placement/" class="post-nav-link">
       <div class="title">
-        Next: <i class="fas fa-angle-right"></i>
+        <span data-i18n="nextArticleLabel">Next:</span> <i class="fas fa-angle-right"></i>
         <div class="title-text">On_a_Moreau_Envelope_Wirelength_Model_for_Analytical_Global_Placement</div>
       </div>
       <!-- <div class="content">
@@ -1020,7 +1038,7 @@ eg.图 4：<img src="/2024/03/28/AutoDMP/VWlxbGk9Log5Q1xvOgrcqC5Sn3f-17166267401
     
       
         <a class='avatar flat-box rectangle' href='/about/'>
-          <img src='https://i.postimg.cc/0NZhx9v1/avatar.jpg'/>
+          <img class="lazyload" loading="lazy" decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i.postimg.cc/0NZhx9v1/avatar.jpg" data-srcset="https://i.postimg.cc/0NZhx9v1/avatar.jpg">
         </a>
       
     
@@ -1093,9 +1111,10 @@ eg.图 4：<img src="/2024/03/28/AutoDMP/VWlxbGk9Log5Q1xvOgrcqC5Sn3f-17166267401
       
 <section class="widget side_toc">
   
+  
   <header>
     
-      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
+      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: " data-i18n="sideToc">本文目录</span>
     
   </header>
 
@@ -1117,9 +1136,10 @@ eg.图 4：<img src="/2024/03/28/AutoDMP/VWlxbGk9Log5Q1xvOgrcqC5Sn3f-17166267401
       
   <section class="widget side_recent_post">
     
+  
   <header>
     
-      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
+      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name' data-i18n="sideRecentPosts">最新文章</span></a>
     
   </header>
 
@@ -1138,7 +1158,7 @@ eg.图 4：<img src="/2024/03/28/AutoDMP/VWlxbGk9Log5Q1xvOgrcqC5Sn3f-17166267401
             <div class="post-img-box">
               <a href="https://picrew.github.io/LLM-Harness/" no-pjax class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://i.postimg.cc/fy41X1CF/IMG-202406275682-1440x810.jpg" class="lazyload placeholder" data-srcset="https://i.postimg.cc/fy41X1CF/IMG-202406275682-1440x810.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://i.postimg.cc/fy41X1CF/IMG-202406275682-1440x810.jpg" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1159,7 +1179,7 @@ eg.图 4：<img src="/2024/03/28/AutoDMP/VWlxbGk9Log5Q1xvOgrcqC5Sn3f-17166267401
             <div class="post-img-box">
               <a href="/2026/04/02/about/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://i.postimg.cc/X7ktGHCH/IMG-202406276438-1440x810.jpg" class="lazyload placeholder" data-srcset="https://i.postimg.cc/X7ktGHCH/IMG-202406276438-1440x810.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://i.postimg.cc/X7ktGHCH/IMG-202406276438-1440x810.jpg" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1180,7 +1200,7 @@ eg.图 4：<img src="/2024/03/28/AutoDMP/VWlxbGk9Log5Q1xvOgrcqC5Sn3f-17166267401
             <div class="post-img-box">
               <a href="https://picrew.github.io/constory-bench.github.io/" no-pjax class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1201,7 +1221,7 @@ eg.图 4：<img src="/2024/03/28/AutoDMP/VWlxbGk9Log5Q1xvOgrcqC5Sn3f-17166267401
             <div class="post-img-box">
               <a href="/2024/10/14/IncreMacro/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1222,7 +1242,7 @@ eg.图 4：<img src="/2024/03/28/AutoDMP/VWlxbGk9Log5Q1xvOgrcqC5Sn3f-17166267401
             <div class="post-img-box">
               <a href="/2024/09/11/think1/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://i.postimg.cc/LswWKGcX/IMG-202406278649-1440x810.jpg" class="lazyload placeholder" data-srcset="https://i.postimg.cc/LswWKGcX/IMG-202406278649-1440x810.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://i.postimg.cc/LswWKGcX/IMG-202406278649-1440x810.jpg" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1629,7 +1649,7 @@ eg.图 4：<img src="/2024/03/28/AutoDMP/VWlxbGk9Log5Q1xvOgrcqC5Sn3f-17166267401
       
         
           <div class="footer-copyright">
-            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a></p>
+            <p>Copyright © 2024 <a target="_blank" rel="noopener" href="https://github.com/Picrew">Picrew</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> </p>
 
           </div>
         
@@ -1724,14 +1744,20 @@ eg.图 4：<img src="/2024/03/28/AutoDMP/VWlxbGk9Log5Q1xvOgrcqC5Sn3f-17166267401
     <script src="/js/utils/index.js"></script>
     <script src="/js/app.js"></script>
     
+      <script>
+        window.BLOG_UI_I18N_DEFAULT = 'en';
+      </script>
+      <script src="/js/ui-i18n.js"></script>
+    
+    
     <!-- 文章目录所需js -->
 <!-- <link href="/js/tocbot/tocbot.css" rel="stylesheet">
 <script src="/js/tocbot/tocbot.min.js"></script> -->
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.min.js"></script>
+<script src="/js/tocbot/tocbot.min.js"></script>
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.css">
+<link rel="stylesheet" href="/js/tocbot/tocbot.css">
 
 <script>
   var headerEl = 'h1, h2, h3, h4, h5',  //headers 
@@ -2055,30 +2081,73 @@ eg.图 4：<img src="/2024/03/28/AutoDMP/VWlxbGk9Log5Q1xvOgrcqC5Sn3f-17166267401
   
 
 <!-- 图片懒加载 -->
-<script defer src="https://unpkg.com/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
 <script>
-  // https://www.npmjs.com/package/vanilla-lazyload
-  // Set the options globally
-  // to make LazyLoad self-initialize
-  window.lazyLoadOptions = {
-    elements_selector: ".lazyload",
-    threshold: 0
-  };
-  // Listen to the initialization event
-  // and get the instance of LazyLoad
-  window.addEventListener(
-    "LazyLoad::Initialized",
-    function (event) {
-      window.lazyLoadInstance = event.detail.instance;
-    },
-    false
-  );
-  document.addEventListener('DOMContentLoaded', function () {
-    lazyLoadInstance.update();
-  });
-  document.addEventListener('pjax:complete', function () {
-    lazyLoadInstance.update();
-  });
+  (function () {
+    'use strict';
+
+    var selector = '.lazyload';
+    var observer = null;
+
+    function loadImage(image) {
+      if (!image || image.__lazyLoaded) return;
+
+      var src = image.getAttribute('data-src');
+      var srcset = image.getAttribute('data-srcset');
+
+      if (src) image.setAttribute('src', src);
+      if (srcset) image.setAttribute('srcset', srcset);
+
+      image.classList.remove('placeholder');
+      image.classList.add('loaded');
+      image.__lazyLoaded = true;
+
+      if (observer) observer.unobserve(image);
+    }
+
+    function updateLazyImages() {
+      var images = Array.prototype.slice.call(document.querySelectorAll(selector));
+
+      if (!('IntersectionObserver' in window)) {
+        images.forEach(loadImage);
+        return;
+      }
+
+      if (!observer) {
+        observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting || entry.intersectionRatio > 0) {
+              loadImage(entry.target);
+            }
+          });
+        }, {
+          rootMargin: '1200px 0px',
+          threshold: 0.01
+        });
+      }
+
+      images.forEach(function (image) {
+        if (image.__lazyLoaded) return;
+        observer.observe(image);
+      });
+    }
+
+    window.lazyLoadInstance = {
+      update: updateLazyImages
+    };
+
+    function scheduleUpdate() {
+      window.requestAnimationFrame ? window.requestAnimationFrame(updateLazyImages) : setTimeout(updateLazyImages, 0);
+    }
+
+    window.addEventListener('load', scheduleUpdate);
+    window.addEventListener('pageshow', scheduleUpdate);
+    window.addEventListener('resize', updateLazyImages);
+    document.addEventListener('pjax:complete', scheduleUpdate);
+
+    if (document.readyState === 'complete') {
+      scheduleUpdate();
+    }
+  })();
 </script>
 
 
@@ -2295,13 +2364,23 @@ eg.图 4：<img src="/2024/03/28/AutoDMP/VWlxbGk9Log5Q1xvOgrcqC5Sn3f-17166267401
   
     <div class="pjax-animate">
   
+  
     <div class="loading-circle"><div id="loader-circle"></div></div>
     <script>
+      var pjaxLoadingTimer = null;
+      var setPjaxLoadingVisible = function(visible) {
+        var loadingCircle = document.querySelector('.loading-circle');
+        if (!loadingCircle) return;
+        loadingCircle.style.display = visible ? 'block' : 'none';
+      };
       window.ShowLoading = function() {
-        $(".loading-circle").css("display", "block");
+        window.clearTimeout(pjaxLoadingTimer);
+        setPjaxLoadingVisible(true);
+        pjaxLoadingTimer = window.setTimeout(window.HideLoading, 6000);
       };
       window.HideLoading = function() {
-        $(".loading-circle").css("display", "none");
+        window.clearTimeout(pjaxLoadingTimer);
+        setPjaxLoadingVisible(false);
       }
     </script>
   
@@ -2313,6 +2392,9 @@ eg.图 4：<img src="/2024/03/28/AutoDMP/VWlxbGk9Log5Q1xvOgrcqC5Sn3f-17166267401
       window.ShowLoading();
     })
     document.addEventListener('pjax:error', function () {
+      window.HideLoading();
+    })
+    window.addEventListener('pageshow', function () {
       window.HideLoading();
     })
 	</script>
