@@ -1017,6 +1017,7 @@ Introduction
             <a href="/files/junjie_li.pdf"
               class="social fas fa-file-alt flat-btn"
               target="_blank"
+              no-pjax
               rel="external nofollow noopener noreferrer">
               
             </a>
@@ -1026,6 +1027,7 @@ Introduction
             <a href="mailto:lij850601@gmail.com"
               class="social fas fa-envelope flat-btn"
               target="_blank"
+              no-pjax
               rel="external nofollow noopener noreferrer">
               
             </a>
@@ -1035,6 +1037,7 @@ Introduction
             <a href="https://github.com/Picrew"
               class="social fab fa-github flat-btn"
               target="_blank"
+              no-pjax
               rel="external nofollow noopener noreferrer">
               
             </a>
@@ -1044,6 +1047,7 @@ Introduction
             <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=1839697295"
               class="social fab fa-qq flat-btn"
               target="_blank"
+              no-pjax
               rel="external nofollow noopener noreferrer">
               
             </a>
@@ -2357,7 +2361,7 @@ Introduction
 
   <script>
     var pjax = new Pjax({
-      elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([no-pjax])',   // 拦截正常带链接的 a 标签
+      elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([target="_blank"]):not([download]):not([no-pjax])',   // 仅拦截当前页面内的 HTML 导航；新窗口和下载资源使用浏览器原生行为
       selectors: ["#pjax-container","title"],                                   // 根据实际需要确认重载区域
       cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
       timeout: 5000
